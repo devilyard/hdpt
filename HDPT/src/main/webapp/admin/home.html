@@ -1,0 +1,87 @@
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>健康网</title>
+ 	<link href="../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+ 	<link href="../hdpt/js/easyui/themes/default/easyui.css" type="text/css" rel="stylesheet">
+	<link href="../hdpt/js/easyui/themes/icon.css" type="text/css" rel="stylesheet">
+	<script src="../hdpt/js/base/jquery.js" type="text/javascript"></script>
+	<script src="../hdpt/js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
+	<script src="../hdpt/js/base/json2.js" type="text/javascript"></script>
+	<script src="../hdpt/js/base/jquery.form.js" type="text/javascript"></script>
+	<script src="../hdpt/js/jmhd.js" type="text/javascript"></script>
+	<script>
+	var MODEL_IMG_PATH="";
+	var back_url = "../fetchModules.ehr";
+	   var MODEL_RULE_LENGTH=3;
+	   var maxRequest = 3;
+		$(function(){
+			$('#openwin').window({
+				title: '组织结构<font color="red">(鼠标双击选择下级)</font>',
+				width: 620,
+				collapsible:false,
+				minimizable:false,
+				maximizable:false,
+				modal: true,
+				shadow: false,
+				closed: true,
+				height: 350
+			}); 
+				$.jkw.load({//初始化管理员所拥有的菜单
+					"type" : 2,
+					"tabid": "home",
+					"back_url" : back_url,
+					"comeback" :function(data){
+							$(".layout-panel-center .panel-title").append(data.adminName);
+							 $("#tree").tree({
+									checkbox: false,
+									data: data.treeJsonData,
+									onClick:function(node){
+										if(node.attributes.actionname=='null'){
+											$(this).tree('toggle', node.target);
+										}else{
+											var namespace=node.attributes.actionmethod=='null'?'':node.attributes.actionmethod+"/";
+											$("#mainFrame").attr("src","../"+namespace+node.attributes.actionname+"?moduleCode="+node.attributes.modulecode);
+										}
+									}
+								});
+
+					},
+					"data" :{"tag":"4aa9ca92-073d-4180-9708-32720fab58be","success":true}
+				});
+		});
+	</script>
+	<style type="text/css">
+		.selectNode{background:url("../hdpt/js/easyui/themes/icons/ok.png") no-repeat top right;}
+		a{text-decoration: none;}
+	</style>
+</head>
+<body class="easyui-layout">
+	<div region="north" style="background:#009bfc;overflow:hidden;">
+		<div style="float:left;width:888px">
+			<img src="../hdpt/images/logo.png" width=50 height=50 style="float:left; margin:16px 0 0 16px;"/>
+			<h1 style="float:left; color:#fff; font-size:30px; line-height:42px;text-indent:10px;">居民健康互动平台管理系统</h1>
+		</div>
+		<div style="float:right;">
+ 			<div style="float:left;">
+ 				<table height="80px">
+ 					<tr>
+					  <td width="16" ><img src="../hdpt/images/pwd_edit.png" width="16" height="16" /></td>
+					  <td><a target="mainFrame" href="password-update.html" class="a2">修改密码</a></td>
+					  <td>&nbsp;</td>
+ 					  <td width="16" ><img src="../hdpt/images/exit.png" width="16" height="16" /></td>
+					  <td><a href="../adminlogout.ehr" class="a2">退出登陆</a></td><td>&nbsp;</td></tr>
+ 				</table>
+
+ 			</div>
+		</div>
+	</div>
+	<div region="west" split="true" title="模块菜单" style="width:230px; padding:1px; overflow:hidden;">
+		<ul id="tree" style="margin:10px 0 0 5px;overflow:auto;height: 98%"></ul>
+	</div>
+	<div region="center" title="当前用户：" id="contlist" style="overflow:hidden;">
+		<iframe width="100%" height="100%" marginheight="0" marginwidth="0" frameborder="0" name="mainFrame" src="task-main-list.html" id="mainFrame"></iframe>
+	</div>
+	<div id="openwin" class="easyui-window" title="My Window" iconCls="icon-save" style="width:500px; height:200px; padding:5px; background: #fafafa;"></div>
+</body>
+</html>

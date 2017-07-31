@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_SQ_SYSUSER" table="JMHD_SQ_SYSUSER">
+		<id name="USERID" type="java.lang.String">
+	    	<column name="USERID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="MPIID" type="java.lang.String" length="32" />
+		<property name="EMPIID" type="java.lang.String" length="32" />
+		<property name="SFZH" type="java.lang.String" length="32" />
+		<property name="LOGONNAME" type="java.lang.String" length="50" />
+		<property name="USERNAME" type="java.lang.String" length="50" />
+		<property name="GENDER" type="java.lang.String"  />
+		<property name="MANAUNITID" type="java.lang.String" length="20" />
+		<property name="JOBTITLE" type="java.lang.String" length="50" />
+		<property name="PASSWORD" type="java.lang.String" length="20" />
+		<property name="STATUS" type="java.lang.String"  />
+		<property name="LAYOUTCSS" type="java.lang.String" length="50" />
+		<property name="PYCODE" type="java.lang.String" length="50" />
+		<property name="REMARK" type="java.lang.String" length="200" />
+		<property name="REGIONCODE" type="java.lang.String" length="21" />
+		<property name="MAPSIGN" type="java.lang.String" length="10" />
+		<property name="LASTMODIFYUSER" type="java.lang.String" length="20" />
+		<property name="LASTMODIFYDATE" type="date"  />
+		<property name="REGIONCODE_TEXT" type="java.lang.String" length="100" />
+		<property name="USERVERSION" type="date"  />
+		<property name="INTRODUCTION" type="java.lang.String"  />
+		<property name="MOBILEPHONE" type="java.lang.String" length="20" />
+		<property name="CONTACTNUMBER" type="java.lang.String" length="20" />
+	</class>
+</hibernate-mapping>

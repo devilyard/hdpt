@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  	<title>健康网</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+   	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/easyui/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jquery-ui/js/jquery-ui-1.8.12.custom.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript">
+		var back_url = "../../jkzxFind.ehr";
+		var data={"tag":"b949abde-10d6-4334-86a4-7354afe6d8e4","success":true};
+		var maxRequest = 3;
+		var moduleCode;
+		//var manaunits=new Array();
+		//var manaunitshot=new Array();
+		$(document).ready(function(){
+			var id = Request("zxid");
+			
+			$("#xhedit").xheditor({tools:'full',skin:'vista',forcePtag:false,internalScript:false,internalStyle:false,width:550,height:200,
+			upImgUrl:"../../upload.ehr",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"../../upload.ehr",upFlashExt:"swf",upMediaUrl:"../../upload.ehr",upMediaExt:"avi"});
+            
+           	moduleCode = Request("moduleCode");
+           	
+			
+			$.jkw.submit({
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "ajaxForm"
+			});
+
+			$.jkw.load({
+				"type" : 2,
+				"back_url" : back_url+"?id="+id+"&moduleCode="+moduleCode,
+				"data" :data,
+				"comeback" :function(data){
+					for(var i=0;i<data.sublist.length;i++){
+						if(data.sublist[i].id==data.jkzx.type){
+							$("#type").append("<option selected='selected' value='"+data.sublist[i].id+"'>"+data.sublist[i].subjectname+"</option>");
+						}else{
+							$("#type").append("<option value='"+data.sublist[i].id+"'>"+data.sublist[i].subjectname+"</option>");
+						}
+					}
+					$("#zxid").val(data.jkzx.zxid);
+					$("#xhedit").val(data.jkzx.subject);
+					$("#titlefirst").val(data.jkzx.titlefirst);
+					$("#titlesecond").val(data.jkzx.titlesecond);
+					$("#author").val(data.jkzx.author);
+					$("#fromw").val(data.jkzx.fromw);
+					$("#mark").val(data.jkzx.mark);
+					$("[name=status][value="+data.jkzx.status+"]").attr("checked",true);
+				}
+			});
+			//$("input[id='orgName']").suggest(manaunits,{dataContainer:"#orgId",hot_list:manaunitshot,attachObject:"#suggest"});
+			$("input[type='button']").click(function(){
+				location.href="jkzx-list.html?moduleCode="+moduleCode;
+			})
+		});
+
+		function doResult(data){
+			alert(data.message);
+			location.href="jkzx-list.html?moduleCode="+moduleCode;
+		}
+
+	</script>
+		<style type="text/css">
+			body{margin:0;padding:0;font-family:"宋体";font-size:13px;}
+			h1{margin:0;padding:20px 0;font-size:16px;}
+			ol{padding-left:20px;line-height:130%;}
+			#box{width:600px;text-align:left;margin:0 auto;padding-top:80px;}
+			#suggest,#suggest2{width:230px;}
+			.gray{color:gray;}
+			.ac_results {background:#fff;border:1px solid #7f9db9;position: absolute;  z-index: 10000;display: none;}
+			.ac_results ul{margin:0;padding:0;list-style:none;}
+			.ac_results li a{white-space: nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+			.ac_results li{border:1px solid #fff;}
+			.ac_over,.ac_results li a:hover {background:#c8e3fc;}
+			.ac_results li a span{float:right;}
+			.ac_result_tip{border-bottom:1px dashed #666;padding:3px;}
+		</style>
+</head>
+
+  <body>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="jkzx-list.html">健康资讯维护</a> &gt;&gt; 审核文章</td>
+  			</tr>
+		</tbody></table>
+	<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody><tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   	<form id="ajaxForm" name="ajaxForm" action="../../jkzxReview.ehr" method="post">
+				   		<input name="zxid" id="zxid" type="hidden">
+				   		<table style="margin: 0 0 0 150px;">
+				   			<tbody>
+				   				<tr>
+				   					<td>标题:</td><td><input id="titlefirst" name="titlefirst" type="text"></td>
+				   				</tr>
+				   				<tr>
+				   					<td>副标题:</td><td><input id="titlesecond" name="titlesecond" type="text"></td>
+				   				</tr>
+				   				<tr>
+				   					<td>文章类别:</td>
+				   					<td>
+				   						<select name="type" id="type">
+				   							<option selected="selected" value="">--请选择--</option>
+				   						</select>
+				   					</td>
+				   				</tr>
+				   				<tr>
+				   					<td>作者:</td><td><input  id="author" name="author" type="text"></td>
+				   				</tr>
+				   				<tr>
+				   					<td>来源:</td><td><input  id="fromw" name="fromw" type="text"></td>
+				   				</tr>
+				   				<tr>
+				   					<td>标签:</td><td><input  id="mark" name="mark" type="text"></td>
+				   				</tr>
+				   				<tr>
+				   					<td>内容:</td><td><textarea name="subject" cols="" rows="" id="xhedit"></textarea>
+				   					</td>
+				   				</tr>
+				   				<tr>
+					   				<td>审核:</td>
+					   				<td>
+					   					<input name="status" id="status0" value="0" type="radio"><label for="status0">通过</label>
+										<input name="status" id="status1" value="1" type="radio"><label for="status1">不通过</label>
+	 								</td>
+ 								</tr>
+				   				<tr>
+				   					<td colspan="2">
+				   						<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+										<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" value="返回" role="button" type="button">
+									</td>
+								</tr>
+				   		</tbody></table>
+				   </form>
+		</td></tr></tbody></table></td></tr></tbody></table>
+</body></html>

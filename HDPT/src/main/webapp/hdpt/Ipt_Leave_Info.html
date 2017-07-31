@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>Ipt_LeaveRecord</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+<body>
+
+	<div id="W_Ipt_LeaveRecord" style="height: 100%">
+		<div class="widget-content nopadding nicescroll"
+			style="height: 100%;overflow: auto; " id="B_Ipt_LeaveRecord">
+			<div class="main" style="background:#f6f6f6;height:100%">
+				<p
+					style="height:28px; line-height:28px; font-size:14px; text-indent:5px; font-weight:bold;">住院记录</p>
+				<div id="if_div" style="zoom:1; position:relative;height: 100%;">
+					<div class="opears" style="height: 100%;">
+						<div align="center" id="loading" style=" margin-top: 200px ;display:block;height: 262px;width:100%;position: absolute; left: 0px">
+							<img src="images/loading.gif" alt="">
+						</div>
+						<iframe width="100%" height="800px" overflow-x="hidden"  scrolling="no" id="report" name= "report" frameborder="0" ></iframe>
+					</div>
+					<div>
+						<ul class="RTmeun YFDfolat">
+							<a  id="zyba" class="current">
+							<li><img src="images/binan.png"  style="cursor:pointer; "/>病案</li> </a>
+							<!-- 屏蔽入院记录、住院医嘱内容 -->
+<!-- 							<a id="ryjl"><li><img src="images/ruyuan.png" style="cursor:pointer; "/> -->
+<!-- 							<span id="lyIptNum" class="pull-right" style="right: 0px;top: 64px;">0</span>入院</li> -->
+<!-- 							</a> -->
+<!-- 							<a id="zyyz"><li><img src="images/yizhu.png"  style="cursor:pointer; "/> -->
+<!-- 							<span id="yzIptNum" class="pull-right" style="right: 0px;top: 124px;">0</span>医嘱</li> -->
+<!-- 							</a> -->
+							<a  id="zyjy" ><li><img src="images/jianyan.png" style="cursor:pointer; "/>
+							<span id="jyIptNum" class="pull-right" style="right: 0px;top: 64px;">0</span>检验</li>
+							</a>
+							<a id="zyjc"><li><img src="images/jiancha.png"  style="cursor:pointer; "/>
+							<span id="jcIptNum" class="pull-right" style="right: 0px;top: 120px;">0</span>检查</li>
+							</a>
+							<a id="zyss"><li><img src="images/shoushu.png"   style="cursor:pointer; "/>
+							<span id="ssIptNum" class="pull-right" style="right: 0px;top: 180px;">0</span>手术</li>
+							</a> 
+							<!-- <a id="zytw"><li><img src="images/tiwen.png"  style="cursor:pointer; "/>
+							<span id="twIptNum" class="pull-right" style="right: 0px;top: 240px;">0</span>体温</li>
+							</a> -->
+							<a id="zycy"><li><img src="images/chuyuan.png"  style="cursor:pointer; "/>出院</li>
+							</a>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(".opears").niceScroll("#report",{touchbehavior:false,cursoropacitymax:0.7,cursorwidth:6,cursorcolor:"#dddddd",autohidemode:"scroll"}); 
+				$(document).ready(function() {
+						//	$(".opears").niceScroll();
+							$("#if_div").height(function(index, oldheight) {
+								return oldheight - 32;
+							});
+							var url = host + '/iptRecordHome/getHtmlDocument?vk=UUID&visitId='+searchKey+'&authorOrganization='+Authororganization
+							templateView(url);
+							
+							//病案模板
+							$("#zyba").on('click', function(event) {
+									$(".current").removeClass("current");
+									$(this).addClass('current');
+									templateView(host + '/iptRecordHome/getHtmlDocument?vk=UUID&visitId='+searchKey+'&authorOrganization='+Authororganization);
+							})
+							//入院模板(屏蔽)
+// 							$("#ryjl").on('click', function(event) {
+// 									$(".current").removeClass("current");
+// 									$(this).addClass('current');
+// 									templateView(host + '/getHtml/Ipt_AdmissionNote&&' + searchKey + '/' + uuid + '.ehr');
+// 							})
+							//手术模板
+							$("#zyss").on('click', function(event) {
+									$(".current").removeClass("current");
+									$(this).addClass('current');
+									$("#report").attr("src","ssmb_info.html");
+							})
+							//出院模板
+							$("#zycy").on('click', function(event) {
+									$(".current").removeClass("current");
+									$(this).addClass('current');
+									
+									templateView(host + '/iptLeaveRecord/getHtmlDocument?vk=UUID&visitId='+searchKey+'&authorOrganization='+Authororganization);
+							})
+							//住院体温
+							$("#zytw").on('click', function(event) {
+									$("#report").attr("src","nodata.htm"); 
+							})
+							//住院检查
+							$("#zyjc").on('click', function(event) {
+									$(".current").removeClass("current");
+									$(this).addClass('current');
+									$("#report").attr("src","Pt_ExamReport_List.html");
+							})
+							//住院检验
+							$("#zyjy").on('click', function(event) {
+									$(".current").removeClass("current");
+									$(this).addClass('current');
+									$("#report").attr("src","Ipt_LabReport.html");
+							})
+							
+							//住院医嘱(屏蔽)
+// 							$("#zyyz").on('click', function(event) {
+// 									$(".current").removeClass("current");
+// 									$(this).addClass('current');
+// 									$("#report").attr("src","Ipt_AdviceDetail.html");  
+// 							})
+							
+// 							tmplNumPop("Ipt_AdmissionNote","lyIptNum");//(屏蔽)
+// 							htmlNumPop("Ipt_AdviceDetail","yzIptNum");//(屏蔽)
+							tmplNumPop("/examReport/getExamReportByVisitId","jyIptNum");
+							tmplNumPop("/checkReport/getCheckReportsByVisitId","jcIptNum");
+							tmplNumPop("/operation/getPtOperationsByVisitId","ssIptNum");
+						});
+			</script>
+		</div>
+	</div>
+</body>
+</html>

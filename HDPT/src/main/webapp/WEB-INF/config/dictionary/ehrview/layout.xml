@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dic id="layout" version="1363244404834"> 
+  <item key="default" layoutId="default" text="默认视图"/>  
+  <item key="MDCLayout" layoutId="layout1" text="慢性病视图"/>  
+  <item key="MHCLayout" layoutId="layout2" text="孕妇视图"/>  
+  <item key="CDHLayout" layoutId="layout3" text="儿童视图"/>  
+</dic>

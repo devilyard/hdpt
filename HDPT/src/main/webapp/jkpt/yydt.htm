@@ -1,0 +1,604 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>柳州卫生网</title>
+	<link href="css/gxlz_style.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2&services=true"></script>
+	<script type="text/javascript" src="js/jquery-1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<script type="text/javascript" src="js/json2.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/j.js"></script>
+	<script type="text/javascript" src="js/j.htm"></script>
+	<script type="text/javascript" src="js/jquery_002.js"></script>
+	<script type="text/javascript" src="js/jkw.js"></script>
+	<script type="text/javascript" src="js/WdatePicker.js"></script><link type="text/css" rel="stylesheet" href="css/WdatePicker.css">
+	<link href="css/pagination.css" type="text/css" rel="stylesheet">
+   	<script type="text/javascript" src="js/jquery_003.js"></script>
+
+<script>
+	$(function(){
+		$('#openwin').window({
+				title: '详细信息',
+				width: 620,
+				collapsible:false,
+				minimizable:false,
+				maximizable:false,
+				modal: true,
+				shadow: false,
+				closed: true,
+				height: 400
+			});
+	});
+
+	</script>
+	<style type="text/css">
+	.ac_results {background:#fff;border:1px solid #7f9db9;position: absolute;z-index: 10000;display: none;}
+	.ac_results ul{margin:0;padding:0;list-style:none;}
+	.ac_results li a{white-space: nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+	.ac_results li{border:1px solid #fff;}
+	.ac_over,.ac_results li a:hover {background:#c8e3fc;}
+	.ac_results li a span{float:right;}
+	.ac_result_tip{border-bottom:1px dashed #666;padding:3px;}
+	.jkzb{height: 30px;}
+	em{font-style: normal;cursor: pointer;}
+	em:hover{
+		color: #00567b;
+	}
+	.listcenter{
+		padding: 6px 0;
+	}
+	#openwin p{
+	text-indent: 15px;
+	}
+</style>
+</head>
+
+<body>
+
+
+<table width="1121" border="0" align="center" cellpadding="0" cellspacing="0" class="img">
+  
+  <tr valign="bottom">
+    <td align="center"></td>
+    <td align="center"></td>
+    <td width="333" height="18" align="center"></td>
+    <td width="27" align="center" class="img02"></td>
+    <td width="68" align="center"><span class="STYLE1"><a href="#">设为首页</a></span></td>
+    <td width="30" align="center" class="img03"></td>
+    <td width="58" align="center"><span class="STYLE1"><a href="#">收藏本站</a></span></td>
+    <td width="37" align="center"></td>
+  </tr>
+  <tr valign="bottom">
+    <td width="28" align="center"></td>
+    <td width="419" align="center"></td>
+    <td height="11" colspan="6" align="center"></td>
+  </tr>
+  <tr align="left" valign="bottom">
+    <td></td>
+    <td class="img01"></td>
+    <td height="98" colspan="6"></td>
+  </tr>
+  <tr valign="bottom">
+    <td align="center"></td>
+    <td align="center"></td>
+    <td height="21" colspan="6" align="center"> </td>
+  </tr>
+</table>
+<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" class="baitiao">
+  <tr>
+    <td width="24" class="baitiao"></td>
+    <td width="80" align="left" valign="middle"><span class="STYLE3">
+   
+2016年1月4日
+</span></td>
+    <td width="47" align="left" valign="middle"><span class="STYLE3">
+星期一</span></td>
+    <td width="36" align="left" valign="middle"><span class="STYLE3">柳州</span></td>
+    <td width="280" class="baitiao"></td>
+    <td width="259" align="left" valign="middle" nowrap="nowrap"><input name="textfield" type="text"   class="biaodan" id="biaodan"  onblur="if(this.value=='')value=' 请输入查询关键字 ';" onfocus="if(this.value==' 请输入查询关键字 ')value='';" value=" 请输入查询关键字 "  /></td>
+	<td width="90"><input class="anniu" type="button"  value="搜 索" /></td>
+  </tr>
+</table>
+<div id="nav">
+	<ul>
+		<li><a href="/jkw/user/welcome.do"><strong>  首页  </strong></a></li>
+		<li><a href="/jkw/user/yygh-hos-view.do"><strong>健康平台</strong></a></li>
+		<li><a href="/jkw/user/hos-list-view.do" herf="#"><strong>就医指南</strong></a></li>
+		<li><a href="/jkw/user/wszw.do"><strong>网上政务</strong></a></li>
+		<li><a href="/jkw/user/jkzx.do"><strong>健康资讯</strong></a></li>
+	</ul>	
+</div>
+<table width="1000" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="5"></td>
+  </tr>
+</table>
+<table width="1000" height="30" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="18">&nbsp;</td>
+    <td width="266" height="30" align="left" valign="baseline" class="STYLE23" style="position:relative; top:4px;">当前所在位置： 就医指南 <span class="STYLE53">&gt;&gt; 医疗机构查询</span></td>
+    <td width="716">&nbsp;</td>
+  </tr>
+</table>
+<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="12"></td>
+    <td width="242" valign="top"><table width="242" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="5" height="40" class="biankuang1"></td>
+        <td width="232" height="40" class="biankuang2"><table width="232" height="40" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="20">&nbsp;</td>
+            <td width="212" style="color:#FFFFFF; font-size:18px; font-family:'微软雅黑';">就医指南</td>
+          </tr>
+        </table></td>
+        <td width="5" class="biankuang3">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="3" valign="top"><table width="242" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="1" class="biankuang4"></td>
+            <td valign="top" class="left_menu"><table width="240" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="12" colspan="3"></td>
+              </tr>
+              <tr>
+                <td width="30" height="32"></td>
+                <td valign="middle">
+				<div id="zuodaohang">
+				   <ul>
+				      <li><a href="/jkw/user/hos-list-view.do" ><span class="STYLE53">>></span> 医疗机构查询</a></li>
+				   </ul>
+				</div>			    </td>
+                <td width="30"></td>
+              </tr>
+              <tr>
+                <td height="8" colspan="3"></td>
+              </tr>
+              <tr>
+                <td height="32"></td>
+                <td>
+				<div id="zuodaohang">
+					<ul>
+						<li><a href="/jkw/user/guide-front.do" class="work_bg"><span class="STYLE53">>></span> 医院电子地图</a></li>
+					</ul>
+				</div>				</td>
+                <td height="32"></td>
+              </tr>
+              
+            </table></td>
+            <td width="1" class="biankuang5"></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td height="6" colspan="3" class="biankuang6"></td>
+      </tr>
+    </table></td>
+    <td width="8"></td>
+    <td width="726" valign="top">
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="medical_kuang">
+    <tr>
+    <td>
+    <div style="float:left;width:500px">
+		<div style="width:100%;height:460px;border:1px solid gray" id="container"></div>
+	</div>
+<div style="float:right;width:200px; ">
+	<div id="Searchresult"></div>
+
+	<div id='suggest' class="ac_results"></div>
+	<table id="query" width="98%" border="0" cellpadding="0" cellspacing="1" >
+		<tr>
+			<td><input id="keyWord" name="keyWord" data-tips="中文" /><button id="bt-query" onClick="doQuery($('#keyWord').val())">查询</button></td>
+		</tr>
+		<tr>
+			<td class="jkzb" style="text-align:left"  align="left" id="list"></td>
+		</tr>
+		<tr>
+			<td class="jkzb" align="left"><div id="Pagination"></div></td>
+		</tr>
+	</table>
+</div>
+    </td>
+    <td>
+    
+    <div id="divResult" style="width:100%;height:340px;float:left;overflow: auto;"></div>
+    </td>
+    </tr>
+    
+    
+    </table>
+    </td>
+      </tr>
+      <tr>
+        <td>
+        
+        
+        </td>
+      </tr>
+    </table></td>
+    <td width="12"></td>
+  </tr>
+</table>
+<div id="openwin" class="easyui-window" title="My Window" iconCls="icon-save" style="width:500px;height:200px;padding:2px 5px;background: #fafafa;">
+	<div style="padding: 2px;">
+	<h3 style="text-align: center;"></h3>
+	<p></p>
+	</div>
+</div>
+
+
+<script type="text/JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+<table width="1000" height="10" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td></td>
+  </tr>
+</table>
+<table width="1000" height="32" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="15"></td>
+    <td width="5" style="background:url(../jkpt/images/liuzhou-index_54.jpg) no-repeat; width:5px;"></td>
+    <td width="960" style="background:url(../jkpt/images/liuzhou-index_56.jpg) repeat-x; width:960px;"><table width="960" height="32" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="184" valign="middle"><form name="form1" id="form1" style="width:184px; height:22px;">
+          <select name="menu1" style="width:184px; height:22px;" onchange="MM_jumpMenu('parent',this,0)">
+            <option  style="position:relative; margin:auto;">-------卫生信息网-------</option>
+            <option value="http://www.gxws.gov.cn/">广西卫生信息网</option>
+            <option value="http://www.nnws.gov.cn/CL0001/index.html">南宁卫生信息网</option>
+            <option value="http://www.glws.gov.cn/">桂林卫生信息网</option>
+            <option value="http://bhhb.gov.cn/">北海卫生信息网</option>
+            <option value="http://wsj.wuzhou.gov.cn/">梧州市卫生局</option>
+            <option value="http://www.fcgs.gov.cn/wsj/">防城港市卫生局</option>
+            <option value="http://www.lbswsjds.com/">来宾市卫生监督信息网</option>
+           </select>
+        </form>       </td>
+        <td width="10"></td>
+        <td width="184" valign="middle"><form name="form2" id="form2" style=" width:184px; height:22px;">
+          <select name="menu2"  style="width:184px; height:22px;" onchange="MM_jumpMenu('parent',this,0)">
+            <option>--------医疗机构--------</option>
+            <option value="http://www.lzry.com.cn/">柳州市人民医院</option>
+            <option value="http://www.lzzyy.com/">柳州市中医院</option>
+            <option value="http://www.lzsfy.com/">柳州市妇幼保健院</option>
+            <option value="http://www.gxlqsyy.com/">广西龙泉山医院</option>
+            <option value="http://www.lz3900000.com/">柳州华侨医院</option>
+            <option value="http://www.lzhszhyy.com/">柳州市红十字会医院</option>
+            <option value="http://www.lzgryy.com/">柳州市工人医院</option>
+            <option value="http://www.lzjmnk.com/">柳州健民男科医院</option>
+            <option value="http://www.lzsefy.com/">柳州市第二妇幼保健院</option>
+           </select>
+        </form>
+        </td>
+        <td width="10"></td>
+        <td width="184" valign="middle"><form name="form3" id="form3" style="width:184px; height:22px;">
+          <select name="menu3" onchange="MM_jumpMenu('parent',this,0)" style="width:184px; height:22px;">
+            <option>--------监督机构--------</option>
+            <option value="http://www.gxwsjd.com.cn/">广西卫生监督信息网</option>
+            <option value="http://wsjds.liuzhou.gov.cn/">柳州市卫生监督所</option>
+          </select>
+        </form>
+        </td>
+        <td width="10"></td>
+        <td width="184" valign="middle"><form name="form4" id="form4" style="width:184px; height:22px;">
+          <select name="menu4" onchange="MM_jumpMenu('parent',this,0)" style="width:184px; height:22px;">
+             <option>--------防病机构--------</option>
+            <option value="http://www.gxlzcdc.com/">柳州疾病控制中心</option>
+            <option value="http://www.sjxcdc.com/">三江县疾病预防控制中心</option>
+          </select>
+        </form>
+        </td>
+        <td width="10"></td>
+        <td width="184" valign="middle"><form name="form5" id="form5" style="width:184px; height:22px;">
+          <select name="menu5" onchange="MM_jumpMenu('parent',this,0)"  style="width:184px; height:22px;">
+             <option>--------其他机构--------</option>
+            <option value="http://www.liuzhou.gov.cn/">柳州市人民政府门户网站</option>
+            <option value="http://124.226.192.49/">柳州人口网</option>
+            <option value="http://rsj.liuzhou.gov.cn">柳州市人事局</option>
+            <option value="http://www.gxlzfda.gov.cn/">柳州市食品药品监督管理局</option>
+          </select>
+        </form>
+        </td>
+      </tr>
+    </table></td>
+    <td width="5" style="background:url(../jkpt/images/liuzhou-index_55.jpg) no-repeat; width:5px;"></td>
+    <td width="15"></td>
+  </tr>
+</table>
+<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="392">&nbsp;</td>
+    <td height="78" style="background:url(../jkpt/images/liuzhou-index_57.png) no-repeat; width:216px; height:78px;"></td>
+    <td width="392">&nbsp;</td>
+  </tr>
+</table>
+<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="300" rowspan="2">&nbsp;</td>
+    <td height="20"><div align="center" class="STYLE1"><a href="#" a visited style="color:#5a5b5b;">网站声明</a>｜<a href="#" a visited style="color:#5a5b5b;">网站地图</a>｜<a href="#" a visited style="color:#5a5b5b;">站间统计</a>｜<a href="#" a visited style="color:#5a5b5b;">联系我们</a></div></td>
+    <td width="300" rowspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="20"><div align="center" class="STYLE47">版权所有：柳州卫生网 copyright 2009-2013 </div></td>
+  </tr>
+</table>
+</body>
+</html>
+<script type="text/javascript">
+	var back_url = "/jkw/response.do";
+	var orgArr = new Array();
+	var queryArr = new Array();
+	var inputArr = new Array();
+	var orgId = '';
+	var orgFlag = false;
+	var curOrgName = null;
+	var curOrg = null;
+	var orgLib = {};
+	var queryFlag = false;
+	var map = new BMap.Map("container");            // 创建Map实例
+	var point = new BMap.Point(109.415588,24.342092);    // 创建点坐标
+	var circle = null;
+	var circleMarker = [];
+	var idx = 0 ;
+	var openInfoWinFuns = [];
+	map.setCurrentCity("广西壮族自治区");
+	map.centerAndZoom(point,14);                     // 初始化地图,设置中心点坐标和地图级别。
+	map.enableScrollWheelZoom();                  // 启用滚轮放大缩小。
+	//window.openInfoWinFuns = null;
+	function getOrgIdx(id){
+
+		var index = -1;
+		$.each(orgArr,function(idx,o){
+			if( id == o.id ){
+				index = idx;
+				return false;
+			}
+		});
+		return index;
+	};
+
+	function pageselectCallback(page_index, jq){
+        var items_per_page = 15;
+        var max_elem = Math.min((page_index+1) * items_per_page, queryArr.length);
+        var newcontent = '';
+        for(var i = page_index * items_per_page ; i < max_elem ; i++){
+            newcontent += '<div class="listcenter"><a title="'+queryArr[i].title+'" class="jkzb" href="javascript:;" onclick="doQuery(\'' + queryArr[i].title + '\')">' + queryArr[i].title.subReplace(15)+ '</a>&nbsp;<em onclick="doDetail(\'' + queryArr[i].id + '\')">[详细信息]</em></div>';
+        }
+
+        $('#list').html(newcontent);
+        return false;
+	}
+
+    function getSquareBounds(centerPoi,r){//圆心，半径//得到圆的内接正方形bounds
+        var a = Math.sqrt(2) * r; //正方形边长
+        mPoi = BMap.Projection.convertLL2MC(centerPoi);//转行为墨卡托坐标，便于精确计算
+        var x0 = mPoi.lng, y0 = mPoi.lat;
+
+        var x1 = x0 + a / 2 , y1 = y0 + a / 2;//东北点
+        var x2 = x0 - a / 2 , y2 = y0 - a / 2;//西南点
+        var ne = BMap.Projection.convertMC2LL( new BMap.Point(x1, y1) ); sw = BMap.Projection.convertMC2LL( new BMap.Point(x2, y2) );
+
+        return new BMap.Bounds(sw, ne);
+    }
+
+	//添加标注
+	function addMarker(point, index){
+		var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+	 		offset: new BMap.Size(10, 25),
+	 		imageOffset: new BMap.Size(0, 0 - index * 25)
+		});
+		var marker = new BMap.Marker(point,{icon: myIcon});
+		map.addOverlay(marker);
+
+		return marker;
+	}
+	//添加信息窗口
+	function addInfoWindow(marker,poi,index){
+
+		// infowindow的标题
+		var infoWindowTitle = '<div style="font-weight:bold;color:#CE5521;font-size:14px">'+poi.title+'</div>';
+		// infowindow的显示信息
+		var infoWindowHtml = "";
+		infoWindowHtml += '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>';
+		infoWindowHtml += '<tr>' ;
+		infoWindowHtml += '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">介绍</td>' ;
+		infoWindowHtml += '<td style="vertical-align:top;line-height:16px">{detail}</td>';
+		infoWindowHtml += '</tr>';
+		infoWindowHtml += '<tr>' ;
+		infoWindowHtml += '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">网址</td>';
+		infoWindowHtml += '<td style="vertical-align:top;line-height:16px">{url}</td>';
+		infoWindowHtml += '</tr>';
+		infoWindowHtml += '<tr>' ;
+		infoWindowHtml += '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">地址</td>';
+		infoWindowHtml += '<td style="vertical-align:top;line-height:16px">{address}</td>';
+		infoWindowHtml += '</tr>';
+		//infoWindowHtml += '<tr>' ;
+		//infoWindowHtml += '<td colspan="2" style="vertical-align:top;line-height:16px;"><h5>到这里去(公交)</h5></td>';
+		//infoWindowHtml += '</tr>';
+		//infoWindowHtml += '<tr>' ;
+		//infoWindowHtml += '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">起点</td>';
+		//infoWindowHtml += '<td style="vertical-align:top;line-height:16px"><input id="txtDest" type="text" value="请输入公交站点名称"  style="width:120px" onclick="javascript:this.select()"/>  <input type="button" value="查询" onclick="tSearch()" /></td>';
+		//infoWindowHtml += '</tr>';
+		infoWindowHtml += '</tbody></table>';
+
+		var openInfoWinFun = function(){
+			curOrg = poi;
+	   	 	curOrgName = poi.title;
+
+			var o = poi;
+
+			var description = o.description == undefined ? '' : o.description;
+			var siteUrl = o.orgUrl ? o.orgUrl : '';
+			var address = o.address ? o.address : '';
+			if(o){
+				infoWindowHtml = infoWindowHtml.replace("{detail}",$.trim(o.description).subReplace(30)).replace("{url}",$.trim(o.siteUrl)).replace("{address}",o.address);
+			}else{
+				infoWindowHtml = infoWindowHtml.replace("{detail}","").replace("{url}","").replace("{address}",poi.address);
+			}
+
+			var infoWindow = new BMap.InfoWindow(infoWindowHtml,{
+				title:infoWindowTitle
+			});
+			marker.openInfoWindow(infoWindow);
+
+		};
+
+	 	marker.addEventListener("click", openInfoWinFun);
+	 	//marker.getLabel().addEventListener("click", openInfoWinFun);
+
+	 	return openInfoWinFun;
+	}
+
+	//公交线路查询
+	function tSearch(){
+		map.clearOverlays();
+		var ts=new BMap.TransitRoute(map,{
+			renderOptions:{
+				map:map,
+				panel:"divResult"
+			},
+			onResultsHtmlSet : function(){
+				jkw.iframe.auto();
+			}
+		});
+
+		if( curOrgName!=null && curOrgName.length>0 ){
+			var dest=document.getElementById("txtDest").value;
+			ts.search(dest,curOrgName);
+		}
+	}
+
+/**
+ * 查询中心的具体信息
+ */
+	function doDetail(id){
+		$.jkw.send({
+			"target_url" : "/jkw/user/center-detail.do",
+			"args" : {
+				id : id
+			},
+			"back_url" : back_url,
+
+			"comeback" :function(data){
+				//alert(data.gisOrg.description);
+				var detail=data.gisOrg.description;
+				$('#openwin').find("p").html("");
+				$('#openwin').find("p").html(detail);
+				$('#openwin').find("h3").html("");
+				$('#openwin').find("h3").html(data.gisOrg.title);
+				$('#openwin').window('open');
+			}
+		});
+	}
+
+
+
+/**
+ * 查询中心及站
+ */
+	function doQuery(id){
+		openInfoWinFuns[getOrgIdx(id)];
+		ClearAll();
+		$.jkw.send({
+			"target_url" : "/jkw/user/guide-center.do",
+			"args" : {
+				id : id
+			},
+			"back_url" : back_url,
+
+			"comeback" :function(data){
+				var list = data.gisOrgs;
+				//queryArr = list;
+					$.each(list,function(i,o){
+						//inputArr[i] = new Array(o.title , o.title , "　" );
+		       			var point = new BMap.Point(o.lng,o.lat);
+		       			var marker=null;
+		       			//if(o.level==1){
+		       				marker= new BMap.Marker(point);
+		       			//}else{
+		       			// marker=addMarker(point,10);
+		       			//}
+						// = new BMap.Marker(point);
+						//marker.disableMassClear();
+						var openInfoWinFun = addInfoWindow(marker,o,n);
+						openInfoWinFuns.push(openInfoWinFun);
+						map.addOverlay(marker);
+						//if(o.level==1){
+							openInfoWinFun();
+							map.centerAndZoom(point,14);
+						//}
+		       			n++;
+		       		});
+
+                var n = 1;
+			}
+		});
+	};
+
+	map.addControl(new BMap.NavigationControl());
+
+	$(document).ready(function() {
+		$("#bt-query").bind('click',function(){
+			initCfg();
+ 		});
+		initCfg();
+	});
+
+	function initCfg(){
+
+
+		$.jkw.send({
+			"target_url" : "/jkw/user/guide-pagelist.do",
+			"args" : {
+				orgName : $('#keyWord').val()
+			},
+			"back_url" : back_url,
+
+			"comeback" :function(data){
+				var list = data.list;
+				queryArr = list;
+				if( orgArr.length == 0 ){
+					orgArr = list;
+					$.each(list,function(i,o){
+						inputArr[i] = new Array(o.id , o.title , "　");
+		       			var point = new BMap.Point(o.lng,o.lat);
+						var marker = new BMap.Marker(point);
+						//marker.disableMassClear();
+						var openInfoWinFun = addInfoWindow(marker,o,n);
+						openInfoWinFuns.push(openInfoWinFun);
+						map.addOverlay(marker);
+						if( orgId == $.trim(o.regOrgId)){
+							openInfoWinFun();
+							map.centerAndZoom(point,14);
+						}
+		       			n++;
+		       		});
+				}
+
+                var n = 1;
+
+	       		$("#Pagination").pagination(list.length,  {
+	       			prev_text : "上一页",
+	       			next_text : "下一页",
+	       			items_per_page : 15 ,
+	       			num_display_entries : 0,
+	       			num_edge_entries : 0 ,
+	       			callback: pageselectCallback
+				});
+
+	       		$("#keyWord").suggest(inputArr,{hot_list:[],attachObject:"#suggest"});
+			}
+		});
+
+	}
+
+	function ClearAll(){
+		map.clearOverlays();
+	}
+</script>

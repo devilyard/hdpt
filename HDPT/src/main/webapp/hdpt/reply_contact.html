@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js"></script>
+		<script type="text/javascript" src="js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+			var back_url = "../jmhdcontact/replyView.ehr";
+			var target_url = "../jmhdcontact/reply.ehr";
+			var maxRequest = 3;
+			var contact="";
+			var recid="";
+			$(document).ready(function(){
+				
+				var id;
+				var locurl = window.location.href; //获得页面的URL
+		        var startplace = locurl.indexOf("?"); //得到网址与参数分隔符的位置，一般都用“？”分隔
+		        if (startplace != -1) { //判断网址中有没有参数
+		            var params = locurl.substr(startplace + 1); //获得参数字符串，从分隔符位置+1处开始获取
+		            id = params.substr(3);
+		        }
+				
+				var wait_reply="<div id=\"replyarea\" style=\"border: 1px solid #eaf5fc;height: 20px;background:#d9e9fe;line-height: 20px;color: #666;font-size: 12px;\">我来回复    . . .</div>";
+				var reply_real_area="<textarea id='reply_real_area' style='width:99%'></textarea><div style='text-align:right; '><button id='reply' role='button'>回复</button>&nbsp;&nbsp;<button id='reply_cancel' role='button'>取消</button></div>";
+					$.jkw.load({
+						"back_url" : back_url+"?id="+id,
+						"comeback" : doReplyList,
+						"data" : {"tag":"843284be-5c2c-420b-8ddd-ea8f75d0d405","success":true}
+					});
+
+
+
+					$("#reply").live("click",function(){
+						$.jkw.send({
+							"back_url" : back_url,
+							"target_url" : target_url,
+							"args":{'remessage':$("#reply_real_area").val(),'contactId':contact,'reId':recid},
+							"comeback" : function(data){
+								if(data.success){
+									$("#reply_area_parent").html(wait_reply);
+									$("dd").remove(".reply_dd");
+									var delinfo="";
+									if(data.recontact.reId==undefined){
+										data.recontact.mpiid==data.mpiid?delinfo="|&nbsp;<em id='"+data.recontact.id+"' class='sub_to_del'>删除</em>":delinfo="";
+										$("#rec_list").append("<tr class='contactlist'><td><dl recid='"+data.recontact.id+"'><dt><div  style='color:#666;font-size:12px;'>"+data.recontact.createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;&nbsp;<em class='sub_to_reply'>回复</em>&nbsp;"+delinfo+"</div><div><font style='font-size:14px;'>我</font><font style='font-size:12px;'>("+data.name+")</font>:&nbsp;"+data.recontact.remessage+"</div></dt></td></tr>");
+									}else{
+										data.recontact.mpiid==data.mpiid?delinfo="&nbsp;<em id='"+data.recontact.id+"' class='sub_to_del'>删除</em>":delinfo="";
+										$("dl[recid='"+data.recontact.reId+"']").append("<dd><div  style='color:#666;font-size:12px;'>"+data.recontact.createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;"+delinfo+"</div><div><font style='font-size:14px;'>我</font><font style='font-size:12px;'>("+ data.name +")</font>:&nbsp;"+data.recontact.remessage+"</div></dd>");
+									}
+								}else{
+									alert("回复失败！");
+								}
+							}
+						});
+
+					});
+
+					$("#replyarea").live("click",function(){
+
+						contact="";
+						recid="";
+						$("dd").remove(".reply_dd");
+						$(this).parent("td").html(reply_real_area);
+						$("#reply_real_area").focus();
+						contact=$("#contact").attr("contactid");
+						$("[role='button']").button();
+					});
+
+					$("table[id!='reply_table']").click(function(){
+						//$(this.attr("id"))
+						if($("#replyarea").html()==null){
+							$("#reply_area_parent").html(wait_reply);
+						}
+					});
+
+					$("dd[class!='reply_dd'],dt").click(function(){
+						$("dd").remove(".reply_dd");
+					});
+
+
+
+
+					$("#reply_cancel").live("click",function(){
+						$("dd").remove(".reply_dd");
+						$("#reply_area_parent").html(wait_reply);
+					});
+
+					$(".sub_to_reply").live("click",function(){
+
+						contact="";
+						recid="";
+						$("dd").remove(".reply_dd");
+						$(this).parent("div").parent("dt").parent("dl").append("<dd class='reply_dd'>"+reply_real_area+"</dd>");
+						$("#reply_real_area").focus();
+						contact=$("#contact").attr("contactid");
+						recid=$(this).parent("div").parent("dt").parent("dl").attr("recid");
+						$("[role='button']").button();
+						//alert()
+					});
+
+					$(".sub_to_del").live("click",function(){
+						if(window.confirm("是否删除")){
+							$.jkw.send({
+								"back_url" : back_url,
+								"target_url" : "../jmhdcontact/recontactDelete.ehr",
+								"args":{'id':$(this).attr("id")},
+								"comeback" : function(data){
+									alert(data.message);
+									location.reload();
+								}
+							});
+						}
+
+					});
+
+			});
+
+
+
+			function doReplyList(data){
+				$("#contact").html("我的问题<font style='font-size:12px;'>("+data.contact.name+")</font>: "+data.contact.message);
+				$("#contact").attr("contactid",data.contact.id);
+				var replyperson="";
+				var delinfo="";
+				/*首先输出留言回复的第一级*/
+				for(var i=0;i<data.recontacts.length;i++){
+					if(data.recontacts[i].reId==undefined){
+						if(data.recontacts[i].doctorId==null){
+							delinfo="|&nbsp;<em id='"+data.recontacts[i].id+"' class='sub_to_del'>删除</em>";
+						}else{
+							delinfo="";
+						}
+						//data.recontacts[i].mpiid!=null?delinfo="|&nbsp;<em id='"+data.recontacts[i].id+"' class='sub_to_del'>删除</em>":delinfo="";
+						if(data.recontacts[i].doctorId!=null){
+							replyperson="<font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+						}else{
+							replyperson="<font style='font-size:14px;'>我</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+						}
+						//data.recontacts[i].mpiid==null?replyperson="<font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:":replyperson="<font style='font-size:14px;'>我</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+							$("#rec_list").append("<tr  class='contactlist'><td><dl recid='"+data.recontacts[i].id+"'><dt><div style='color:#666;font-size:12px;'>"+data.recontacts[i].createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;&nbsp;<em class='sub_to_reply'>回复</em>&nbsp;"+delinfo+"</div><div>"+replyperson+"&nbsp;"+data.recontacts[i].remessage+"</div></dt></td></tr>");
+					}
+				}
+				/*输出留言回复的第二级*/
+				for(var i=0;i<data.recontacts.length;i++){
+					if(data.recontacts[i].reId!=undefined){
+						if(data.recontacts[i].doctorId==null){
+							delinfo="&nbsp;<em id='"+data.recontacts[i].id+"' class='sub_to_del'>删除</em>";
+						}else{
+							delinfo="";
+						}
+						//data.recontacts[i].mpiid!=null?delinfo="&nbsp;<em id='"+data.recontacts[i].id+"' class='sub_to_del'>删除</em>":delinfo="";
+						if(data.recontacts[i].doctorId!=null){
+							replyperson="<font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+						}else{
+							replyperson="<font style='font-size:14px;'>我</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+						}
+						//data.recontacts[i].mpiid==null?replyperson="<font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:":replyperson="<font style='font-size:14px;'>我</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+						$("dl[recid='"+data.recontacts[i].reId+"']").append("<dd><div style='color:#666;font-size:12px;'>"+data.recontacts[i].createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;"+delinfo+"</div><div>"+replyperson+"&nbsp;"+data.recontacts[i].remessage+"</div></dd>");
+					}
+				}
+
+
+			}
+
+
+		</script>
+		<style>
+			*{
+			word-wrap: break-word;word-break:break-all;
+			font-size: 13px;
+			}
+			table{
+			border-collapse: collapse;
+			}
+
+			.contactlist{
+			padding: 3px 0 0 5px;
+			border-top: 3px solid #aad6f9;
+			}
+			dl{
+			width: 98%;
+			}
+			dl dt{
+			}
+			dl dd{
+			padding-left:40px;
+			background: #fff;
+			margin-bottom: 5px;
+			}
+			dl dd,dl dt{
+				padding: 5px;
+			}
+			em{
+			font-style: normal;
+			cursor: pointer;
+			}
+			em:hover{
+			color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+				<td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+    			<td align="left" class="set">
+				您目前所在的位置：
+					<a href="list_contact.html">健康咨询</a> &gt;&gt;
+					咨询回复
+				</td>
+  			</tr>
+		</table>
+
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft">
+  <tr>
+    <td class="title">回复列表</td>
+  </tr>
+  <tr>
+    <td  align="center" valign="top" bordercolor="" class="border_kong"><table width="100%" border="0" cellpadding="1" cellspacing="1">
+      <tr>
+        <td  align="left" valign="top" bgcolor="#eaf5fc">
+
+		<table id="rec_list" width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="border_content" style="overflow: auto;background: #eaf5fc;">
+		  <tr>
+		  	<td style="padding: 9px 0 9px 6px;font-size: 14px;" id="contact" contactid=""></td>
+		  </tr>
+		</table>
+		</td></tr></table></td></tr></table>
+
+		<table id="reply_table"  width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft">
+		  <tr>
+		 	 <td id="reply_area_parent" colspan="2" style="padding: 3px 5px;"><div id="replyarea" style="border: 1px solid #eaf5fc;height: 20px;background:#d9e9fe;line-height: 20px;color: #666;font-size: 12px;">我来回复    . . .</div></td>
+		  </tr>
+		</table>
+
+	</body>
+</html>

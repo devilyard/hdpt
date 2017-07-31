@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications title="开发版">
+	<args>
+		<arg id="version">1.0</arg>
+		<arg id="system">windows 2003</arg>
+		<arg id="browser">chrome</arg>
+	</args>
+
+	<app id="Lifecycle" text="生命周期" >
+		<module id="Lifecycle" title="生命周期" entryName="PT_Lifecycle" script="ehrview.widget.IndexInfo.Lifecycle"/>
+	</app>
+	<app id="PublicHealth" text="公共卫生信息" >
+		<module id="PublicHealthInfo" title="公共卫生信息"  entryName="EHR_PublicHealthInfo"  script="ehrview.widget.PublicHealthInfo"/>
+	</app>
+	<app id="LivingHabits" title="生活习惯" >
+		<module id="LivingHabitsInfo" title="生活习惯" entryName="EHR_HealthRecord" script="ehrview.widget.LivingHabitsInfo"/>
+	</app>
+	<app id="SignsIndexInfo" title="个人体征信息" tab="true">		
+		<module id="BloodPress" title="血压" entryName="SUMMARY_Sym_BloodPressHist" script="ehrview.widget.IndexInfo.BloodPress"/>			
+		<module id="GlucoseHist" title="血糖" entryName="SUMMARY_Sym_GlucoseHist" script="ehrview.widget.IndexInfo.GlucoseHist"/>
+		<module id="WHHist" title="BMI" entryName="SUMMARY_Sym_WHHist" script="ehrview.widget.IndexInfo.WHHist"/>
+		<module id="Unusual" title="近期检验异常指标" entryName="PT_ExamDetail_Unusual" script="ehrview.widget.IndexInfo.Unusual"/>
+		<module id="WHOLine" title="儿童年龄别体重曲线图" entryName="CDH_WhoAge" script="ehrview.widget.IndexInfo.WHOLine"/>
+	</app>
+	
+	<app id="PastHistory" title="既往史" tab="true">		
+		<module id="DiseaseHistoryList" title="疾病史" entryName="SUMMARY_Hist_Sick" script="ehrview.widget.pasthistory.DiseaseHistoryList"/>			
+		<module id="AllergyList" title="过敏史" entryName="SUMMARY_Hist_Allergy" script="ehrview.widget.pasthistory.AllergyList"/>
+		<module id="FamilyHistoryList" title="家族史" serviceName="family" script="ehrview.widget.pasthistory.FamilyHistoryList"/>
+		<module id="VccinationList" title="接种史" entryName="SUMMARY_Hist_Vaccination" script="ehrview.widget.pasthistory.VccinationList"/>
+		<module id="ReproductiveList" title="生育史" entryName="SUMMARY_Hist_Reproductive" script="ehrview.widget.pasthistory.ReproductiveList"/>
+	</app>
+	
+	<app id="VisitRecord" title="随访信息" tab="true">		
+		<module id="HypertensionVisit" title="高血压随访" entryName="MDC_HypertensionVisit" script="ehrview.widget.visitRecord.HypertensionVisit"/>			
+		<module id="DiabetesVisit" title="糖尿病随访" entryName="MDC_DiabetesVisit" script="ehrview.widget.visitRecord.DiabetesVisit"/>
+		<module id="PsychosisVisit" title="精神病随访" entryName="PSY_PsychosisVisit" script="ehrview.widget.visitRecord.PsychosisVisit"/>
+		<module id="FirstVisitRecord" title="孕妇随访" entryName="MHC_FirstVisitRecord" script="ehrview.widget.medical.FirstVisitRecord"/>
+	</app>
+	
+	<app id="HealthcareRecords" title="公共卫生服务记录" >
+		<module id="HealthcareRecordsInfo" title="公共卫生服务记录" entryName="SUMMARY_Hist_Visit" script="ehrview.widget.HealthcareRecords"/>
+	</app>
+	
+	<app id="PhysiqueInspectList" title="体检记录" >
+		<module id="PhysiqueInspectListInfo" title="体检记录" entryName="Cu_Register" script="ehrview.widget.PhysiqueInspectList"/>
+	</app>
+	
+	<app id="Medical" title="诊疗历史" tab="true">		
+		<module id="TreatmentRecord" title="住院" entryName="Ipt_Record" script="ehrview.widget.medical.TreatmentRecord"/>		
+		<module id="ClinicRecord" title="门诊" entryName="Opt_Record" script="ehrview.widget.medical.ClinicRecord"/>
+		<module id="MedicalRecord" title="用药" entryName="SUMMARY_Hist_Drug" script="ehrview.widget.medical.MedicalRecord"/>
+		<module id="LabRecord" title="检验" entryName="Pt_LabReport" script="ehrview.widget.medical.ExamRecord"/>
+		<module id="ExaminationRecord" title="检查" entryName="Pt_ExamReport" script="ehrview.widget.medical.CheckReport"/>
+		<module id="OperationRecord" title="手术" entryName="Pt_Operation" script="ehrview.widget.medical.OperationRecord"/>
+		<module id="TransfusionRecord" title="输血" entryName="Pt_Transfusion" script="ehrview.widget.medical.TransfusionRecord"/>
+	</app>
+
+	<app id="PersonalInfoList" title="个人基本信息" >
+		<module id="PersonalInfo" title="个人基本信息" titleBar="false" entryName="MPI_DEMOGRAPHICINFO" script="ehrview.widget.PersonalInfo"/>
+	</app>
+</applications>

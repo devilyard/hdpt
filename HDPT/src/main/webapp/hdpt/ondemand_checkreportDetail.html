@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript"  src="js/base/jquery.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	
+	$.ajax({
+		type: "post",
+		url : "../jmhdondemand/getCheckReport.ehr",
+		dataType:'xml',
+		async:false,
+		success: function(xml){
+			$("#personName").html($(xml).find('PersonName').text());
+			var sex = "男";
+			if($(xml).find('SexCode').text()=="2"){
+				sex = "女";
+			}
+			var nowdate = getNowFormatDate();
+			nowdate = nowdate.substr(0,4);
+			console.log(nowdate);
+			var age = nowdate-$(xml).find('Birthday').text().substr(0,4)+1;
+			
+			$("#sexCode_text").html(sex);
+			$("#age").html(age);
+			$("#JCXMMC").html($(xml).find('JCXMMC').text());
+			$("#JCRQ").html($(xml).find('JCRQ').text().substr(0,10));
+			$("#SQKSMC").html($(xml).find('SQKSMC').text());
+			$("#BCKSMC").html($(xml).find('BCKSMC').text());
+			$("#JCBW").html($(xml).find('JCBW').text());
+			$("#display").html($(xml).find('display').text());
+			$("#BCKGSJ").html($(xml).find('BCKGSJ').text());
+			$("#BCZGTS").html($(xml).find('BCZGTS').text());
+			$("#BGBZ").html($(xml).find('BGBZ').text());
+			$("#BGSJ").html($(xml).find('BGSJ').text().replace(/T/g, ' '));
+			}
+	});
+});
+	
+	function getNowFormatDate() {
+	    var date = new Date();
+	    var seperator1 = "-";
+	    var seperator2 = ":";
+	    var month = date.getMonth() + 1;
+	    var strDate = date.getDate();
+	    if (month >= 1 && month <= 9) {
+	        month = "0" + month;
+	    }
+	    if (strDate >= 0 && strDate <= 9) {
+	        strDate = "0" + strDate;
+	    }
+	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	            + " " + date.getHours() + seperator2 + date.getMinutes()
+	            + seperator2 + date.getSeconds();
+	    return currentdate;
+	} 
+</script>
+<title>检查报告</title>
+<style type="text/css">
+.jianyan {
+	padding-bottom: 10px;
+	border-bottom: 2px solid #000;
+}
+
+.jianyan2 {
+	padding-bottom: 10px;
+}
+
+.current {
+	background-color: #f4f4f3;
+}
+
+.jianyan th {
+	border-bottom: 1px solid #000;
+	height: 26px;
+	line-height: 26px;
+	text-align: left;
+	font-weight: bold;
+}
+
+.jianyan td,.bg_table td,.bg_table th,.jianyan2 td {
+	height: 24px;
+	line-height: 18px;
+	padding: 0 2px;
+}
+
+.jian_p {
+	display: block;
+	border-bottom: 1px solid #ccc;
+	height: 24px;
+	line-height: 24px;
+}
+
+.red {
+	color: red;
+	font-weight: bold;
+}
+
+.bg_table {
+	margin: 5px 0 10px 10px;
+	border-top: 1px solid #ccc;
+	border-bottom: #ccc solid 1px;
+	border-left: 1px solid #ccc;
+}
+
+.bg_table td {
+	border-right: 1px solid #ccc;
+	border-bottom: 1px dotted #ccc;
+}
+
+.bg_table th {
+	background-color: #CAE2F7;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.name {
+	padding: 5px 0;
+	float: left;
+	margin-left: 95px;
+}
+
+.name span {
+	padding: 2px 80px 2px 80px;
+	font-weight: bold;
+}
+</style>
+</head>
+<body style="font-size: 12px;">
+	<div style="font-family: 微软雅黑, 宋体; padding: 25px; list-style: none; color: #232323; text-decoration: none;">
+		<table border="0" cellpadding="0" cellspacing="0" width="880">
+			<tr>
+				<td style="padding-left: 20px; border: 1px #ccc solid; background: #FFF">
+					<div style="float: left;">
+						<table width="835" border="0" align="left" cellpadding="0" cellspacing="0" style="margin-bottom: 10px;">
+							<tr>
+								<td colspan="3" align="center" style="height: 40px; font-size: 24px; line-height: 120%;">检查报告</td>
+							</tr>
+							<tr>
+								<td align="left"></td>
+								<td align="right" valign="bottom" style="font-size: 16px;">
+									<strong>NO：</strong><u id="JCLSH"></u>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" height="5" style="border-bottom: 2px #ccc solid;"></td>
+							</tr>
+						</table>
+					</div>
+					<div style="float: left;">
+						<table width="835" border="0" align="center" cellpadding="0" cellspacing="0" class="jianyan2">
+							<tr>
+								<td width="25%"><strong>姓名：</strong>
+									<u id="personName"></u>
+								</td>
+								<td width="25%"><strong>性别：</strong>
+									<u id="sexCode_text"></u>
+								</td>
+								<td width="25%"><strong>年龄：</strong>
+									<u id="age"></u>
+								</td>
+							</tr>
+							<tr>
+								<td width="25%"><strong>检查项目：</strong><u id="JCXMMC"></u></td>
+								<td width="25%"><strong>检查日期：</strong><u id="JCRQ"></u></td>
+								<td width="25%"><strong>申请科室：</strong><u id="SQKSMC"></u></td>
+							</tr>
+							<tr>
+								<td><strong>检查科室：</strong><u id="BCKSMC"></u></td>
+								<td><strong>检查部位：</strong><u id="JCBW"></u></td>
+								<td><strong>阴&nbsp;阳&nbsp;性：</strong><u   id="display"></u></td>
+							</tr>
+						</table>
+					</div>
+					<div style="float: left; width: 835px;">
+						<strong class="jian_p">检查所见</strong>
+						<p>
+							<span id="BCKGSJ"></span>
+						</p>
+					</div>
+					<div style="float: left; width: 835px;">
+						<strong class="jian_p">诊断</strong>
+						<p>
+							<span id="BCZGTS"></span>
+						</p>
+					</div>
+					<div style="float: left; width: 835px;">
+						<strong class="jian_p">报告备注</strong>
+						<p>
+							<span id="BGBZ"></span>
+						</p>
+					</div>
+					<div style="float: left; margin-bottom: 10px;">
+						<table width="835" border="0" align="left" cellpadding="0"
+							cellspacing="0">
+							<tr>
+								<td width="70%" height="24" align="left"></td>
+								<td align="left"><strong>报告时间：</strong><u id="BGSJ"></u></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

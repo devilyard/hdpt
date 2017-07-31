@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>健康网</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="js/jmhd.js"></script>
+	<script type="text/javascript" src="js/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="js/user-tips-type.js"></script>
+	<script src="js/base/jquery.nicescroll.min.js" type="text/javascript"></script>
+	<style type="text/css">
+	#boxscroll {
+		height: 90px;
+		overflow: auto;
+	}
+   	</style>
+</head>
+<body>
+   <div class="box width490 mr10 fleft" style="height:272px;">
+      <ul class="list1 marb1">
+       <li class="current" id="tab1"><a href="#" onclick="switchTab('tab1','con1','tab','con')">健康宣教</a></li>
+       <!-- <li id="tab2"><a href="#" onclick="switchTab('tab2','con2','tab','con');">健康提醒</a></li> -->
+     </ul>
+     <ul class="list2" id="con1">
+     	<div id="healtheducation">
+        </div>
+        <a href="jkxj_list.html" class="more">更多</a>
+     </ul>
+      <ul class="list2" style="display: none" id="con2">
+        <a href="#" class="more">更多</a>
+     </ul>
+   </div>
+   
+   <div class="box2 redcolor fleft mb10" style="height:255px;">
+     <h3 style="position:relative">社区公告<a href="bulletin_list.html" class="title2" style="position:absolute;right:0;">更多</a></h3>
+<ul id="communitybulletin">
+<div id="communitybulletin2"></div>
+        <!-- <li style="display: none"><a {2}>{0}</a></li> -->
+      </ul>
+   </div>
+   <!-- <div class="box2 bluecolor fleft" style="height:122px;">
+     <h3 style="position:relative">社区介绍<a href="org_info.html" class="title2" style="position:absolute;right:0;">更多</a></h3>
+     <div id="boxscroll">
+   		<ul id="description">
+   			<div style="display: none"><p>{1}</p></div>
+   		</ul>
+   	 </div>
+   </div> -->
+   <div class="clear"></div>
+   <div class="box">
+     <ul class="list1 marb">
+       <li class="current" id="tabs1"><a href="#" onclick="switchTab('tabs1','cons1','tabs','cons')">血压</a></li>
+       <li id="tabs2"><a href="#" onclick="switchTab('tabs2','cons2','tabs','cons')">血糖</a></li>
+     </ul>
+     <div class="chart" id="cons1">
+     	<div id="container" style="width: 100%; height: 240px; margin: 0 auto"></div>
+     	数据来源：<input id="hospital" type="radio" name="radiobutton" value="hospital" onclick="radio_click(this)"/> 就诊　
+		       <input id="diary" type="radio" name="radiobutton" value="diary" onclick="radio_click(this)"/>日记
+     </div>
+     <div class="chart" id="cons2" style="display: none">
+     	<div id="bloodsugar" style="width: 100%; height: 240px; margin: 0 auto"></div>
+     	数据来源：<input id="hospital2" type="radio" name="radiobutton2" value="hospital" onclick="radio_click(this)"/> 就诊　
+		       <input id="diary2" type="radio" name="radiobutton2" value="diary" onclick="radio_click(this)"/>日记
+     </div>
+   </div>
+  <!--rtmain end-->		
+	<script type="text/javascript">
+		var chart;
+        var back_url = "../jmhduser/main.ehr";
+        var check_url = "../jmhduser/curve.ehr";
+        var titleSubLength;
+
+		$(document).ready(function() {
+			//$.jkw.load({"back_url" : back_url,
+				//"comeback" :loagResult,
+				//"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}});
+			
+			$.ajax({
+				type: "post",
+				url : "../jmhddocument/pagelist.ehr",
+				dataType:'json',
+				async:false,
+				data: {"cardtype":"202","status":"0"},
+				success: function(json){
+					var list = json.data.list;
+					$.each(list,function(i,value){
+						if(i>6){
+							return;
+						}
+						$("#healtheducation").append("<li>"+value.TITLE+"</li>");
+					})
+	   				}
+			});
+			
+            //社区公告
+            var docListReqUrl = "../documentList.ehr";
+            var data={"tag":"981fafdd-0e44-4066-b394-15e1bb9b88a6","success":true};
+            var reqParam = "?categoryName=sqgg&perPageSize=3&pageNum=1";
+            $.jkw.load({
+                "type" : 0,
+                "back_url" : docListReqUrl + reqParam,
+                "data" : data,
+                "comeback" : function(data){
+                	titleSubLength = 15;
+                    var list = data.list;
+                    if(list!= null && list.length>0){
+                        $("#communitybulletin2").empty();
+                        for(var i=0; i<list.length; i++){
+                            var doc = list[i];
+                            var title = doc.title;
+                            var id = doc.id;
+                            if(title.length > titleSubLength){
+                                title = title.substring(0, titleSubLength) + "...";
+                            }
+                            var myurl = "bulletin_info.html?docid="+id;
+                            $("#communitybulletin2").append("<li><a href='"+myurl+"'>"+title+"</a></li>");
+                        }
+                    }
+                }
+            });
+            
+          //健康宣教
+          reqParam = "?categoryName=jkxj&perPageSize=7&pageNum=1";
+            $.jkw.load({
+                "type" : 0,
+                "back_url" : docListReqUrl + reqParam,
+                "data" : data,
+                "comeback" : function(data){
+                	titleSubLength = 30;
+                    var list = data.list;
+                    if(list!= null && list.length>0){
+                        $("#healtheducation").empty();
+                        for(var i=0; i<list.length; i++){
+                            var doc = list[i];
+                            var title = doc.title;
+                            var id = doc.id;
+                            if(title.length > titleSubLength){
+                                title = title.substring(0, titleSubLength) + "...";
+                            }
+                            var myurl = "jkxj_info.html?docid="+id;
+                            $("#healtheducation").append("<li><a href='"+myurl+"'>"+title+"</a></li>");
+                        }
+                    }
+                }
+            });
+			
+			var hospital = document.getElementById("hospital");
+			radio_click(hospital);
+			
+		});
+
+
+		function loagResult(date){
+		    //bloodPressure(date.createdate,date.constriction,date.diastolic);//生成血压曲线
+		   // bloodSugar(date.createdate,date.fbs,date.pbs);//生成血糖曲线
+		    //showVisitplan(date.visitplan);//生成健康提醒	   
+		    showHealtheducation(date.list); //生成健康宣教	  
+		    showCommunitybulletin(date.communitybulletin,date.orgconfig);//生成社区公告
+		    //showUserdiary(date.userdiary);//生成用户日志
+		    $("#hospital").click();
+		    $("#boxscroll").niceScroll({cursoropacitymax:0.7,cursorwidth:6,cursorcolor:"#3399FF"}); 
+		};
+
+		function bloodPressure(createdate,constriction,diastolic){
+			var xArr = createdate;
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container',
+					defaultSeriesType: 'line'
+				},
+				credits: {
+			        enabled: false
+			    },
+				title: {
+					text: '血压曲线',
+					x: -20 //center
+				},
+				subtitle: {
+					text: '',
+					x: -20
+				},
+				xAxis: {
+					categories: xArr
+				},
+				yAxis: {
+					title: {
+						text: '血压值 (mmHg)'
+					},
+					tickInterval :20,
+					max:190,
+					min:60,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+			                return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +'：'+ this.y +'(mmHg)';
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'top',
+					x: -10,
+					y: 100,
+					borderWidth: 0
+				},
+				series: [{
+					name: '收缩压',
+					data: constriction
+				},{
+					name: '舒张压',
+					data: diastolic
+				}]
+			});
+		};
+
+		// 生成血糖--根据EHRVIEW
+		function bloodSugarByEhrview(createdate,fbs,pbs){
+			var xArr = createdate;
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'bloodsugar',
+					defaultSeriesType: 'line',
+					marginRight: 100,
+					marginBottom: 25
+				},
+				credits: {
+			        enabled: false
+			    },
+				title: {
+					text: '血糖曲线',
+					x: -20 //center
+				},
+				subtitle: {
+					text: '',
+					x: -20
+				},
+				xAxis: {
+					categories: xArr
+				},
+				yAxis: {
+					title: {
+						text: '血糖值 (mg/dL)'
+					},
+					tickInterval :20,
+					max:80,
+					min:10,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+			                return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +'：'+ this.y +'(mg/dL)';
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'top',
+					x: -10,
+					y: 100,
+					borderWidth: 0
+				},
+				series: [{
+					name: '空腹血糖',
+					data: fbs
+				},{
+					name: '餐后血糖',
+					data: pbs
+				}]
+			});
+			};
+			
+            // 生成血糖--根据日记
+			function bloodSugar(createdate,fbs,pbs){
+			var xArr = createdate;
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'bloodsugar',
+					defaultSeriesType: 'line',
+					marginRight: 100,
+					marginBottom: 25
+				},
+				credits: {
+			        enabled: false
+			    },
+				title: {
+					text: '血糖曲线',
+					x: -20 //center
+				},
+				subtitle: {
+					text: '',
+					x: -20
+				},
+				xAxis: {
+					categories: xArr
+				},
+				yAxis: {
+					title: {
+						text: '血糖值 (mg/dL)'
+					},
+					tickInterval :20,
+					max:80,
+					min:10,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+			                return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +'：'+ this.y +'(mg/dL)';
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'top',
+					x: -10,
+					y: 100,
+					borderWidth: 0
+				},
+				series: [{
+					name: '空腹血糖',
+					data: fbs
+				},{
+					name: '餐后血糖',
+					data: pbs
+				}]
+			});
+			};
+
+
+			function showHealtheducation(healtheducation){
+					var tabObj = $("#healtheducation");
+					var list = healtheducation;
+					var tempTr=$("#healtheducation li").eq(0);
+					var template = $(tempTr).html();
+					tabObj.empty().append(tempTr);
+					if(list!=null){
+						$.each(list,function(idx,o){
+						    var newTr = template;
+						    var newTrObj = $(tempTr).clone().show();
+						    newTr = newTr.replaceAll("{0}",subString({values:o.title,num:20}));
+							newTr = newTr.replaceAll("{1}",o.pubDate.formatDate("yyyy-MM-dd"));
+							newTr = newTr.replaceAll("{2}",o.link);
+							newTr = newTr.replaceAll("{3}",o.title);
+					        $(tabObj).append($(newTrObj).html(newTr));
+						});
+					}else{
+						tempTr.clone().appendTo(tabObj);
+					}
+			}
+
+			function showCommunitybulletin(communitybulletin,orgconfig){
+				//社区公告
+				if(orgconfig!=undefined&&orgconfig.noticeSet==2){
+					var tabObj = $("#communitybulletin");
+					var tempTr=$("#communitybulletin li").eq(1);
+					var template = $(tempTr).html();
+					tabObj.empty().append(tempTr);
+					var newTr = template;
+				    var newTrObj = $(tempTr).clone().show();
+				    newTr = newTr.replaceAll("{0}",orgconfig.orgUrl);
+				    $(tabObj).append($(newTrObj).html(newTr));
+					}else{
+						var tabObj = $("#communitybulletin");
+						var list = communitybulletin;
+						var tempTr=$("#communitybulletin li").eq(0);
+						var template = $(tempTr).html();
+						tabObj.empty().append(tempTr);
+							if(list!=null){
+								$.each(list,function(idx,o){
+								    var newTr = template;
+								    var newTrObj = $(tempTr).clone().show();
+								    newTr = newTr.replaceAll("{0}",subString({values:o.title,num:20}));
+								    if(orgconfig==undefined||orgconfig.noticeSet==0){
+								    	var link = "href='bulletin_info.html?docid="+o.id+"' title='"+getTitle({values:o.title,num:20})+"'";
+										newTr = newTr.replaceAll("{1}",o.filldate.formatDate("MM.dd"));
+										newTr = newTr.replaceAll("{2}",link);
+								    }else if(orgconfig.noticeSet==1){
+									    var link = "target='_blank' href='"+o.link+"' title='"+getTitle({values:o.title,num:20})+"'";
+								    	newTr = newTr.replaceAll("{1}",o.pubDate.formatDate("MM.dd"));
+										newTr = newTr.replaceAll("{2}",link);
+								    }
+							        $(tabObj).append($(newTrObj).html(newTr));
+								});
+							}else{
+								tempTr.clone().appendTo(tabObj);
+							}
+						}
+				//社区简介
+				if(orgconfig!=undefined){
+						var tabObj = $("#description");
+						var tempTr=$("#description div").eq(0);
+						var template = $(tempTr).html();
+						tabObj.empty().append(tempTr);
+						var newTr = template;
+					    var newTrObj = $(tempTr).clone().show();
+					    newTr = newTr.replaceAll("{1}",orgconfig.descrip);
+					    $(tabObj).append($(newTrObj).html(newTr));
+					} 
+			}
+
+			function radio_click(obj){
+				var cfg = {
+					"target_url" : check_url+"?curveid="+obj.value,
+					"back_url" : back_url,
+				    "comeback" :callbackFun
+				};
+				$("#"+obj.value).attr("checked","true");
+				$("#"+obj.value+"2").attr("checked","true");
+				$.jkw.send(cfg);
+			}
+			function callbackFun(date){
+				//console.log(date);
+			 	bloodPressure(date.blooddate,date.constriction,date.diastolic);//生成血压曲线
+			 	if($("#hospital").attr("checked")){
+			 		bloodSugarByEhrview(date.glucosedate,date.fbs,date.pbs);//生成血糖曲线
+			 	}else{
+			 		bloodSugar(date.glucosedate,date.fbs,date.pbs);//生成血糖曲线
+			 	}
+			    
+			}
+			
+			function switchTab(ProTag, ProBox,Tag,Box) {
+		            for (i = 1; i < 3; i++) {
+		                if (Tag + i == ProTag) {
+		                    document.getElementById(ProTag).className = "current";
+		                } else {
+		                    document.getElementById(Tag + i).className = "";
+		                }
+		                if (Box + i == ProBox) {
+		                    document.getElementById(ProBox).style.display = "";
+		                } else {
+		                    document.getElementById(Box + i).style.display = "none";
+		                }
+		            }
+        	}
+	</script>
+</body>
+</html>

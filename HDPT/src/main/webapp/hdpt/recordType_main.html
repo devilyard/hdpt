@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>健康网</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<script language="javascript" src="js/base/jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script type="text/JavaScript">
+	$(document).ready(function() {
+		var jkFlag=window.parent.jkNumArry
+		//门诊
+		if(jkFlag["clinic"]==1){
+			$("#clinic").show();
+			$("#clinic1").hide();
+		}
+		//住院
+		if(jkFlag["hospital"]==1){
+			$("#hospital").show();
+			$("#hospital1").hide();
+		}
+		
+		$("img[change]").bind("mouseover", function() {
+			var src = $(this).attr("src").replace("ico1", "ico2");
+			$(this).attr("src", src);
+		}).bind("mouseout", function() {
+			var src = $(this).attr("src").replace("ico2", "ico1");
+			$(this).attr("src", src);
+		});
+
+
+	});
+</script>
+</head>
+<body>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="26" align="center" class="set"><img
+				src="images/ico_set.jpg" width="10" /></td>
+			<td align="left" class="set">您目前所在的位置：
+			<a href="ehr_main.html">健康档案</a> &gt;&gt; 就诊信息 </td>
+			</td>
+		</tr>
+	</table>
+
+	<span class="kong25"><br /></span>
+	<div class="icon-menus">
+
+		<div id="clinic" style="display: none" class="icon-menu nav">
+			<a href="Opt_Record_List.html"><img change="true"
+				src="images/ico1_mzjl.jpg" name="Image16" width="112"
+				height="124" border="0" id="Image16" /></a>
+		</div>
+		<div id="clinic1" class="icon-menu nav">
+			<img src="images/ico3_mzjl.jpg" width="112" height="124" border="0" />
+		</div>
+
+		<div id="hospital" style="display: none" class="icon-menu nav">
+			<a href="#" onclick="window.open('Ipt_Leave_List.html','newwindow','height=600, width=1100, top='+(window.screen.availHeight-600)/2+', left='+(window.screen.availWidth-1050)/2+', toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')"><img change="true"
+				src="images/ico1_zyjl.jpg" name="Image16" width="112"
+				height="124" border="0" id="Image16" /></a>
+		</div>
+		<div id="hospital1" class="icon-menu nav">
+			<img src="images/ico3_zyjl.jpg" width="112" height="124" border="0" />
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height:99%;">
+<head>
+<title>Ipt_AdviceDetail</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="css/Ipt_Leave_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="height:99%;margin: 0px">
+	<div id="W_Ipt_AdviceDetail" style="height: 100%">
+		<div class="widget-content nopadding nicescroll"
+			style="height: 100%;overflow: auto; " id="B_Ipt_AdviceDetail">
+			<div class="main" style="height:100%">
+				<p style="height:28px; line-height:28px; font-size:14px; text-indent:5px; font-weight:bold;margin:0;">门诊处方</p>
+				<div id="if_div" style="zoom:1; position:relative;">
+					<div style="margin-top:3px; position:relative;">
+					<div align="center" id="loading" style=" margin-top: 200px ;display:block;height: 262px;width:100%;position: absolute; left: 0px">
+							<img src="images/loading.gif" alt="">
+						</div>
+						 <table width="99%" border="0" cellspacing="0" cellpadding="0" class="table01">
+				         <tbody>
+					         <tr>
+					            <th width="81px">开始时间</th>
+					            <th width="81px">停止时间</th>
+					            <th style="min-width: 120px;">医嘱内容</th>
+					            <th width="81px">药品规格</th>
+					            <th width="81px">服用剂量</th>
+					            <th width="81px">服用间隔</th>
+					            <th width="81px">给药途径</th>
+					            <th width="81px">医嘱类别</th>
+					         </tr>
+				      </tbody></table>
+						</div>
+						<!--opears end-->
+					</div>
+			</div>
+<!-- 			<script src="js/jquery-1.10.2.js"></script>  -->
+			<script language="javascript" src="../bootstrap/js/jquery.js"></script>
+			<script src="js/jquery-migrate-1.2.1.js"></script> 
+			<script src="js/jquery.nicescroll.js"></script>
+			<script src="js/common.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+							//$("#if_div").niceScroll();
+// 							$("#if_div").height(function(index, oldheight) {
+// 								return oldheight - 32;
+// 							});
+							var url = host + '/entryName/Ipt_AdviceDetail/' + parent.uuid +'?cnd='+parent.searchKey+'&order=SystemTime&content=1&decode=true&pageSize=1000'
+							var param = {
+								'url' : url
+							};
+							doAjax("getdata.px", param, "json", function(data,
+									textStatus) {
+								var jsonDatas = data.body;
+								if (data["code"] == 200) {
+										if(jsonDatas.length!=0){
+											for(i=0;i<jsonDatas.length;i++){
+												var jsonData =  jsonDatas[i];
+												var xml = $(createXml(jsonDatas[i].DOCCONTENT));
+												var html= html +'<tr><td>'+xml.find('ZXSJ').text().substring(0,10)+'</td><td>'+xml.find('ZZSJ').text().substring(0,10)+'</td>'
+																	            +'<td>'+xml.find('YZMXMC').text()+'</td><td>'+xml.find('YPGG').text()+'</td>'
+																	            +'<td>'+xml.find('SYJL').text()+'</td><td>'+xml.find('YYPD').attr("localText")+'</td>'
+																	            +'<td>'+xml.find('TJDM').attr("localText")+'<td>'+xml.find('YZBS').attr("localText")+'</td>'
+																	    +'</tr>'
+												}
+											$("tbody").append(html);
+										}
+									else{
+										$(".mainright").load("nodata.htm");
+									}
+								} else {
+									alert(data["x-response-msg"])
+								}
+								$("#loading").css({
+									'display' : 'none'
+								});
+							});
+						});
+			</script>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="../hdpt/css/style2.css" type="text/css" rel="stylesheet" />
+		<link href="../hdpt/js/jquery.pagination/pagination.css" type="text/css" rel="stylesheet" />
+		<link href="../o_resource/css/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="../hdpt/js/base/jquery.js"></script>
+		<script type="text/javascript" src="../hdpt/js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="../hdpt/js/jmhd.js"></script>
+		<script type="text/javascript" src="../hdpt/js/common.js"></script>
+		<script type="text/javascript">
+			var back_url = "../jmhdcontact/replyView.ehr";
+			var target_url = "../jmhdcontact/reply.ehr";
+			var maxRequest = 3;
+			var contact="";
+			var recid="";
+			
+			var DOCTOR_ID = Request("DOCTOR_ID");
+			var id = Request("id");
+				
+			$(document).ready(function(){
+	//			$("#ask-list").attr("href","contact_List_View.html?DOCTOR_ID="+DOCTOR_ID);
+				var wait_reply="<div id=\"replyarea\" style=\"border: 1px solid #eaf5fc;height: 20px;background:#d9e9fe;line-height: 20px;color: #666;font-size: 12px;\">我来回复    . . .</div>";
+				var reply_real_area="<textarea id='reply_real_area' style='width:99%'></textarea><div style='text-align:right; '><button id='reply' role='button'>回复</button>&nbsp;&nbsp;<button id='reply_cancel' role='button'>取消</button></div>";
+// 					$.jkw.load({
+// 						"back_url" : back_url+"?id="+id,
+// 						"comeback" : doReplyList,
+// 						"data" : {"tag":"843284be-5c2c-420b-8ddd-ea8f75d0d405","success":true}
+// 					});
+				doAjax(back_url+"?id="+id, null, "json", function(data, textStatus) {
+					doReplyList(data.data)
+				});
+	
+				$("#reply").live("click",function(){
+					var args = {'remessage':$("#reply_real_area").val(),'contactId':contact,'reId':recid,'doctorId':DOCTOR_ID};
+					doAjax(target_url, args, "json", function(data, textStatus) {
+							if(data.success){
+								$("#reply_area_parent").html(wait_reply);
+								$("dd").remove(".reply_dd");
+								var delinfo="";
+								if(data.data.recontact.reId==null){
+									data.data.recontact.doctorId!=null?delinfo="|&nbsp;<em id='"+data.data.recontact.id+"' class='sub_to_del'>删除</em>":delinfo="";
+									$("#rec_list").append("<tr class='contactlist'><td><dl recid='"+data.data.recontact.id+"'><dt><div  style='color:#666;font-size:12px;'>"+data.data.recontact.createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;&nbsp;<em class='sub_to_reply'>回复</em>&nbsp;"+delinfo+"</div><div><font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.data.recontact.name+")</font>:&nbsp;"+data.data.recontact.remessage+"</div></dt></td></tr>");
+								}else{
+									data.data.recontact.doctorId!=null?delinfo="|&nbsp;<em id='"+data.data.recontact.id+"' class='sub_to_del'>删除</em>":delinfo="";
+									$("dl[recid='"+data.data.recontact.reId+"']").append("<dd><div  style='color:#666;font-size:12px;'>"+data.data.recontact.createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;"+delinfo+"</div><div><font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+ data.data.recontact.name +")</font>:&nbsp;"+data.data.recontact.remessage+"</div></dd>");
+								}
+							}else{
+								alert("回复失败！");
+							}
+						})
+					});
+
+					$("#replyarea").live("click",function(){
+						contact="";
+						recid="";
+						$("dd").remove(".reply_dd");
+						$(this).parent("td").html(reply_real_area);
+						$("#reply_real_area").focus();
+						contact=$("#contact").attr("contactid");
+						//$("[role='button']").button();
+					});
+
+					$("table[id!='reply_table']").click(function(){
+						//$(this.attr("id"))
+						if($("#replyarea").html()==null){
+							$("#reply_area_parent").html(wait_reply);
+						}
+					});
+
+					$("dd[class!='reply_dd'],dt").click(function(){
+						$("dd").remove(".reply_dd");
+					});
+
+					$("#reply_cancel").live("click",function(){
+						$("dd").remove(".reply_dd");
+						$("#reply_area_parent").html(wait_reply);
+					});
+
+					$(".sub_to_reply").live("click",function(){
+						contact="";
+						recid="";
+						$("dd").remove(".reply_dd");
+						$(this).parent("div").parent("dt").parent("dl").append("<dd class='reply_dd'>"+reply_real_area+"</dd>");
+						$("#reply_real_area").focus();
+						contact=$("#contact").attr("contactid");
+						recid=$(this).parent("div").parent("dt").parent("dl").attr("recid");
+					//	$("[role='button']").button();
+						//alert()
+					});
+
+					$(".sub_to_del").live("click",function(){
+						if(window.confirm("是否删除")){
+							doAjax("../jmhdcontact/recontactDelete.ehr", {'id':$(this).attr("id")}, "json", function(data, textStatus) {
+									alert(data.data.message);
+									location.reload();
+								})
+							};
+							});
+					});
+
+			function doReplyList(data){
+				$("#contact").html("用户的问题<font style='font-size:12px;'>("+data.contact.name+")</font>: "+data.contact.message);
+				$("#contact").attr("contactid",data.contact.id);
+				var replyperson="";
+				var delinfo="";
+				/*首先输出留言回复的第一级*/
+				for(var i=0;i<data.recontacts.length;i++){
+					if(data.recontacts[i].reId==null){
+						data.recontacts[i].doctorId!=null?delinfo="|&nbsp;<em id='"+data.recontacts[i].id+"' class='sub_to_del'>删除</em>":delinfo="";
+						data.recontacts[i].mpiid==null?replyperson="<font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:":replyperson="<font style='font-size:14px;'>用户</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+							$("#rec_list").append("<tr  class='contactlist'><td><dl recid='"+data.recontacts[i].id+"'><dt><div style='color:#666;font-size:12px;'>"+data.recontacts[i].createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;&nbsp;<em class='sub_to_reply'>回复</em>&nbsp;"+delinfo+"</div><div>"+replyperson+"&nbsp;"+data.recontacts[i].remessage+"</div></dt></td></tr>");
+					}
+				}
+				/*输出留言回复的第二级*/
+				for(var i=0;i<data.recontacts.length;i++){
+					if(data.recontacts[i].reId!=null){
+						data.recontacts[i].doctorId!=null?delinfo="&nbsp;<em id='"+data.recontacts[i].id+"' class='sub_to_del'>删除</em>":delinfo="";
+						data.recontacts[i].mpiid==null?replyperson="<font style='font-size:14px;'>医生</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:":replyperson="<font style='font-size:14px;'>用户</font><font style='font-size:12px;'>("+data.recontacts[i].name+")</font>:";
+						$("dl[recid='"+data.recontacts[i].reId+"']").append("<dd><div style='color:#666;font-size:12px;'>"+data.recontacts[i].createTime.formatDate("yyyy-MM-dd hh:mm")+"&nbsp;&nbsp;&nbsp;"+delinfo+"</div><div>"+replyperson+"&nbsp;"+data.recontacts[i].remessage+"</div></dd>");
+					}
+				}
+
+
+			}
+
+
+		</script>
+		<style>
+			*{
+			word-wrap: break-word;word-break:break-all;
+			font-size: 13px;
+			}
+			table{
+			border-collapse: collapse;
+			}
+
+			.contactlist{
+			padding: 3px 0 0 5px;
+			border-top: 3px solid #aad6f9;
+			}
+			dl{
+			width: 98%;
+			}
+			dl dt{
+			}
+			dl dd{
+			padding-left:40px;
+			background: #fff;
+			margin-bottom: 5px;
+			}
+			dl dd,dl dt{
+				padding: 5px;
+			}
+			em{
+			font-style: normal;
+			cursor: pointer;
+			}
+			em:hover{
+			color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+				<td width="20" align="center" class="set"><img src="../hdpt/images/ico_set.jpg" width="10" /></td>
+    			<td align="left" class="set">
+				您目前所在的位置：
+					<a   href="javascript:history.back()" id="ask-list">医患互动</a> &gt;&gt;
+					咨询回复
+				</td>
+  			</tr>
+		</table>
+
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="border_content">
+  <tr>
+    <td class="nav_content">回复列表</td>
+  </tr>
+  <tr>
+    <td  align="center" valign="top" bordercolor="#0066FF" class="border_kong"><table width="100%" border="0" cellpadding="1" cellspacing="1">
+      <tr>
+        <td  align="left" valign="top" bgcolor="#eaf5fc">
+
+		<table id="rec_list" width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="border_content" style="overflow: auto;background: #eaf5fc;">
+		  <tr>
+		  	<td style="padding: 9px 0 9px 6px;font-size: 14px;" id="contact" contactid=""></td>
+		  </tr>
+		</table>
+		</td></tr></table></td></tr></table>
+
+		<table id="reply_table"  width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="border_content">
+		  <tr>
+		 	 <td id="reply_area_parent" colspan="2" style="background:#aad6f9;padding: 3px 5px;"><div id="replyarea" style="border: 1px solid #eaf5fc;height: 20px;background:#d9e9fe;line-height: 20px;color: #666;font-size: 12px;">我来回复    . . .</div></td>
+		  </tr>
+		</table>
+
+	</body>
+</html>

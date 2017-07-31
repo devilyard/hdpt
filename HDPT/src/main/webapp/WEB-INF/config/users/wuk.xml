@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<user id="wuk" name="吴凯" password="202cb962ac59075b964b07152d234b70">
+  <proptities>
+    <p name="id">1</p>
+    <p name="gender">1</p>
+    <p name="gender_text">男</p>
+    <p name="status">1</p>
+    <p name="status_text">禁用</p>
+    <p name="pyCode">wk</p>
+    <p name="remark"></p>
+    <p name="lastModifyUser">system</p>
+    <p name="lastModifyDate">2012-01-06</p>
+  </proptities>
+  <roles>
+    <role id="system" unit="A"/>
+  </roles>
+</user>

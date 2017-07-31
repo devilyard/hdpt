@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  	<title>角色列表</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+		var target_url ="../module/module-moduleTree.html";
+		var back_url = "../../moduleDel.ehr?moduleCode=";
+		var data={"tag":"52294c4a-c6c5-4c59-9171-4b25ecc51bf7","success":true};
+		var maxRequest = 3;
+
+		$(document).ready(function(){
+			var moduleCode = Request("moduleCode");
+			var cfg = {
+					"type" : 2,
+					"back_url" : back_url+moduleCode,
+					"comeback" :doResult,
+					"data" :data
+				};
+				$.jkw.load(cfg);
+		});
+
+		function doResult(data){
+			if (data.success) {
+				alert("删除成功");
+			} else {
+				alert("删除失败");
+			}
+			location.href = target_url;
+		}
+	</script>
+
+  </head>
+
+  <body>
+  </body>
+</html>

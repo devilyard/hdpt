@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>健康网</title>
+		<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+		<link href="../../hdpt/js/jquery.pagination/pagination.css" type="text/css" rel="stylesheet">
+		<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/My97DatePicker/WdatePicker.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../hdpt/js/My97DatePicker/skin/WdatePicker.css">
+		<script type="text/javascript" src="../../hdpt/js/jquery.pagination/jquery.pagination.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+		<script type="text/javascript">
+			var target_url = "../../adminUserList.ehr";
+			var back_url = "../../adminUserList.ehr";
+			var maxRequest = 3;
+			$(document).ready(function(){
+
+				var grid = $.jkw.loadGrid({
+					"type" : 2,
+					"target_url" : target_url,
+					"back_url" : back_url,
+					"tabid":"query",
+					"pager":"pager",
+					"data" : {"tag":"771fb50d-4ce1-4646-9fda-9ff7cdb8b27a","success":true},
+					"query":["adminName","loginName"],
+					"doGridRow":function(template,o){
+					    template = template.replaceAll("{0}",o.adminName);
+						template = template.replaceAll("{1}",o.loginName);
+						template = template.replaceAll("{2}",o.status=="0"?"启用":"停用");
+						template = template.replaceAll("{3}",o.adminId);
+						template = template.replaceAll("{4}",o.type);
+						return template;
+					},
+					"comeback" : function(){
+						//$.jkw.iframe();
+					}
+				});
+
+				$("#bt_query").bind('click',function(){
+					var pg = $('.pager');
+					grid.query();
+				});
+				
+				$("#bt_add").click(function(){
+					location.href="admin-user-add.html";
+				});
+
+			});
+
+		
+
+			function doDelete(id,login,type){
+				
+				
+				if(!window.confirm("确定要删除?")){
+					return ;
+				}
+				
+				$.jkw.send({
+					"type" : 2,
+					"target_url" : "../../adminUserDel.ehr",
+					"back_url" : back_url,
+				    "args" : {
+				    	"id" : id,
+				    	"loginName" :login,
+				    	"type" : type
+				    },
+				    "comeback" :function(data){
+						alert(data.message);
+						location.reload();
+				    }
+				});
+			}
+
+
+			function doReset(id){
+
+
+				if(!window.confirm("确定要重置密码?")){
+					return ;
+				}
+
+				$.jkw.send({
+					"type" : 2,
+					"target_url" : "../../adminUserPswReset.ehr",
+					"back_url" : back_url,
+					"args" : {
+						"id" : id
+					},
+					"comeback" :function(data){
+						alert(data.message);
+						location.reload();
+					}
+				});
+			}
+			
+
+		</script>
+	</head>
+	<body><a name="top" href="#"></a>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：用户管理 </td>
+  			</tr>
+		</tbody></table>
+
+		<span class="kong5"><br></span>
+
+		<table align="center" border="0" cellpadding="0" cellspacing="1" width="98%" bgcolor="#A7D7F5">
+		  <tbody><tr>
+		    <td align="center" height="40" bgcolor="#F0F9FD"><table border="0" cellpadding="0" cellspacing="0" width="98%">
+		      <tbody><tr>
+		        <td align="left" width="80%">
+		        <label for="title">用户名：</label>
+		        	<input id="adminName" name="adminName" class="form1">&nbsp;&nbsp;
+		         <label for="title">登录名：</label>
+		            <input id="loginName" name="loginName" class="form1">&nbsp;&nbsp;
+		        </td>
+		        <td align="left" width="20%">
+		            <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" id="bt_query"><span class="ui-button-text">查询</span></button>
+		           <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" id="bt_add" type="button"><span class="ui-button-text">新增</span></button>	
+		        </td>
+		      </tr>
+		    </tbody></table></td>
+		  </tr>
+		</tbody></table>
+
+		<span class="kong5"><br></span>
+
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td class="nav_content">用户列表</td>
+		  </tr>
+		  <tr>
+		    <td class="border_kong" align="center" valign="top">
+			    <table id="query" class="border_content" border="0" cellpadding="0" cellspacing="1" width="100%" bgcolor="#c9e9fe">
+			    <tbody><tr class="row">
+			        <td height="28" align="center" bgcolor="#daf0ff">&nbsp;<strong>用户名</strong></td>
+			        <td align="center" bgcolor="#daf0ff"><strong>登录名</strong></td>
+			        <td align="center" height="28" bgcolor="#daf0ff">&nbsp;<strong>状态</strong></td>
+			        <td align="center" bgcolor="#daf0ff"><strong>操作</strong></td>
+			    </tr>
+			    <tr id="list" bgcolor="#FFFFFF">
+			        <td class="jkzb">{0}</td>
+			          <td class="jkzb">{1}</td>
+			           <td class="jkzb">{2}</td>
+			        <td class="jkzb">
+			        	<a href="admin-user-update.html?id={3}&loginName={1}">更新</a> |
+			        	<a href="admin-user-roles.html?id={3}">角色设置</a> |
+					    <a href='javascript:doDelete("{3}","{1}","{4}")'>删除</a> |
+						<a href='javascript:doReset("{3}")'>重置密码</a>
+					</td>
+				</tr>
+				</tbody>
+				</table>
+			</td>
+		  </tr>
+		</tbody></table>
+
+		<table align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+  			<tbody><tr>
+  				<td align="center" height="40" valign="bottom" width="45%">
+    			</td>
+    			<td align="center" height="40" valign="bottom">
+    				<div class="pager" id="pager"></div>
+    			</td>
+  			</tr>
+		</tbody
+		</table>
+</body></html>

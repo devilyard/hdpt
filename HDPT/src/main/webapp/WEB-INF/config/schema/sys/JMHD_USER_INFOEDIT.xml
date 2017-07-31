@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_USER_INFOEDIT" alias="JMHD_USER_INFOEDIT">
+  <item id="UUID" alias="UUID" type="string" length="32" generator="assigned" pkey="true"/>
+  <item id="USER_ID" alias="USER_ID" length="12"/>
+  <item id="EMPIID" alias="EMPIID" type="string" length="32"/>
+  <item id="CONTACT" alias="CONTACT" type="string" length="20"/>
+  <item id="CONTACTPHONE" alias="CONTACTPHONE" type="string" length="20"/>
+  <item id="ADDRESS" alias="ADDRESS" type="string" length="100"/>
+  <item id="CREATE_TIME" alias="CREATE_TIME" type="date"/>
+  <item id="STATUS" alias="STATUS" type="string" length="1"/>
+  <item id="MPIID" alias="MPIID" type="string" length="32"/>
+  <item id="IDCARD" alias="IDCARD" type="string" length="18"/>
+  <item id="LASTMODIFYDATE" alias="LASTMODIFYDATE" type="date"/>
+  <item id="LASTMODIFYUSER" alias="LASTMODIFYUSER" type="string" length="32"/>
+  <item id="EMAIL" alias="EMAIL" type="string" length="100"/>
+  <item id="SEX" alias="SEX" type="string" length="10"/>
+  <item id="MANADOCTORID" alias="CREATE_USER" type="string" length="20"/>
+</entry>

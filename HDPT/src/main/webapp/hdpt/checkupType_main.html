@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>健康网</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<script language="javascript" src="js/base/jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script type="text/JavaScript">
+	$(document).ready(function() {
+		var jkFlag=window.parent.jkNumArry
+		//社区体检
+		if(jkFlag["checkup"]==1){
+			$("#checkup").show();
+			$("#checkup1").hide();
+		}
+		//医院体检
+		if(jkFlag["checkupH"]==1){
+			$("#checkupH").show();
+			$("#checkupH1").hide();
+		}
+		
+		$("img[change]").bind("mouseover", function() {
+			var src = $(this).attr("src").replace("ico1", "ico2");
+			$(this).attr("src", src);
+		}).bind("mouseout", function() {
+			var src = $(this).attr("src").replace("ico2", "ico1");
+			$(this).attr("src", src);
+		});
+
+	});
+</script>
+</head>
+<body>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="26" align="center" class="set"><img
+				src="images/ico_set.jpg" width="10" /></td>
+			<td align="left" class="set">您目前所在的位置：
+			<a href="ehr_main.html">健康档案</a> &gt;&gt; 体检报告 </td>
+			</td>
+		</tr>
+	</table>
+
+	<span class="kong25"><br /></span>
+	<div class="icon-menus">
+
+		<!-- 医院体检 -->
+		<div id="checkupH" style="display: none" class="icon-menu nav">
+			<a href="Cu_Register_List.html"><img change="true"
+				src="images/ico1_tjbg2.jpg" name="Image20" width="112"
+				height="124" border="0" id="Image20" /></a>
+		</div>
+		<div id="checkupH1" class="icon-menu nav">
+			<img src="images/ico3_tjbg2.jpg" width="112" height="124"
+				border="0" />
+		</div>
+
+		<!-- 社区体检 -->
+		<div id="checkup"  style="display: none" class="icon-menu nav">
+			<a href="PER_CheckUp_List.html"><img change="true" src="images/ico1_tjbg3.jpg"
+				name="Image20" width="112" height="124" border="0" id="Image20" />
+			</a>
+		</div>
+		<div id="checkup1" class="icon-menu nav">
+			<img src="images/ico3_tjbg3.jpg" width="112"
+				height="124" border="0" />
+		</div>
+	</div>
+</body>
+</html>

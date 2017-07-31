@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_USER_RECONTACT" alias="JMHD_USER_RECONTACT">
+  <item id="ID" alias="ID" length="12" generator="assigned" pkey="true"/>
+  <item id="USER_ID" alias="USER_ID" length="12"/>
+  <item id="EMPIID" alias="EMPIID" type="string" length="64"/>
+  <item id="DOCTOR_ID" alias="DOCTOR_ID" type="string" length="16"/>
+  <item id="REMESSAGE" alias="REMESSAGE" type="string"/>
+  <item id="CREATE_TIME" alias="CREATE_TIME" type="date"/>
+  <item id="RE_ID" alias="RE_ID" length="12"/>
+  <item id="CONTACT_ID" alias="CONTACT_ID" length="12"/>
+  <item id="DEL_STATUS" alias="DEL_STATUS" type="string"/>
+  <item id="MPIID" alias="MPIID" type="string" length="64"/>
+</entry>

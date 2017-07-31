@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_MEMBER" table="JMHD_MEMBER">
+		<id name="ID" type="java.lang.Long">
+	    	<column name="ID"/>
+	    	<generator class="sequence">
+				<param name="sequence">JMHD_MEMBER_SQ</param>
+			</generator>
+		</id>
+		<property name="MPIID" type="java.lang.String" length="32" />
+		<property name="USERNAME" type="java.lang.String" length="32" />
+		<property name="PASSWORD" type="java.lang.String" length="50" />
+		<property name="NAME" type="java.lang.String" length="50" />
+		<property name="EMAIL" type="java.lang.String" length="64" />
+		<property name="PASSQUESTION" type="java.lang.String" length="64" />
+		<property name="PASSANSWER" type="java.lang.String" length="64" />
+		<property name="CARDTYPE" type="java.lang.String" length="2" />
+		<property name="CARDNUM" type="java.lang.String" length="50" />
+		<property name="CERTIFICATETYPECODE" type="java.lang.String" length="2" />
+		<property name="CERTIFICATENO" type="java.lang.String" length="32" />
+		<property name="REGDATE" type="timestamp"  />
+		<property name="REGIP" type="java.lang.String" length="15" />
+		<property name="GENDER" type="java.lang.String"  />
+		<property name="STATUS" type="java.lang.String" length="20" />
+		<property name="HOMEADDRESS" type="java.lang.String" length="500" />
+		<property name="ZIPCODE" type="java.lang.String" length="6" />
+		<property name="PHONENUMBER" type="java.lang.String" length="20" />
+		<property name="CONTACT" type="java.lang.String" length="20" />
+		<property name="CONTACTPHONE" type="java.lang.String" length="20" />
+		<property name="REMARK" type="java.lang.String" length="255" />
+		<property name="INPUTDATE" type="timestamp"   insert="false" update="false" />
+		<property name="LASTMODIFYUSER" type="java.lang.String" length="32" />
+		<property name="LASTMODIFYDATE" type="timestamp"  />
+		<property name="LOGINTIME" type="timestamp"  />
+		<property name="USERVERSION" type="java.lang.String" length="40" />
+		<property name="SOURCE" type="java.lang.String"  />
+		<property name="EMPIID" type="java.lang.String" length="32" />
+		<property name="INPUTUSER" type="java.lang.String" length="20" />
+		<property name="OFFDATE" type="timestamp"  />
+		<property name="OFFDOC" type="java.lang.String" length="20" />
+		<property name="MANADOCTORID" type="java.lang.String" length="20" />
+		<property name="MANADOCTOR_TEXT" type="java.lang.String" length="50" />
+		<property name="MANAUNIT_TEXT" type="java.lang.String" length="200" />
+		<property name="MANAUNITID" type="java.lang.String" length="50" />
+		<property name="SALT" type="java.lang.String" length="20" />
+	</class>
+</hibernate-mapping>

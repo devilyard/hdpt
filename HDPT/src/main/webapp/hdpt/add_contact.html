@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js"></script>
+		<script type="text/javascript" src="js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+			var target_url = "list_contact.html";
+			var back_url = "/response.do";
+			var maxRequest = 5;
+			
+			$(document).ready(function(){
+				
+				$.jkw.load({"back_url" : "../jmhdcontact/creatView.ehr",
+					"comeback" :function(data){
+						$("#name").html(data.name);
+						$("#manadoctorname").html(data.manadoctorname);
+						$("#doctor").html(data.manadoctorname);
+					},
+					"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}});
+					
+					
+				var cfg = {
+					"back_url" : back_url,
+					"comeback" :doResult,
+					"formid" : "ajaxForm"
+				};
+				$.jkw.submit(cfg);
+			});
+			function onSubmit(){
+				if($("#message").val().length>=5){
+					$("#ajaxForm").submit();
+				}else {
+					return;
+				}
+			}
+
+			function doResult(data){
+				alert(data.message);
+				location.href=target_url;
+			}
+		</script>
+		<style type="text/css">
+			body {
+				background-color: #FFF;
+			}
+		</style>
+	</head>
+	<body>
+	<form id="ajaxForm" name="ajaxForm" action="../jmhdcontact/askContact.ehr" method="post" >
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="20" align="center" class="set">
+					<img src="images/ico_set.jpg" width="10" />
+				</td>
+				<td align="left" class="set">
+					您目前所在的位置：
+					<a href="list_contact.html">医患互动</a> &gt;&gt;
+					新增咨询
+				</td>
+			</tr>
+		</table>
+		<table width="98%" border="0" align="center" cellpadding="0"
+			cellspacing="0" class="box mr10 fleft">
+			<tr>
+				<td class="title">
+					咨询平台
+					-------<a href="list_contact.html" style="color: yellow;">聊天列表</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top" class="border_kong">
+					<table width="100%" border="0" cellpadding="1" cellspacing="1"
+						bgcolor="#5999D6">
+						<tr>
+							<td align="center" valign="top" bgcolor="#FFFFFF">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="15%" height="52" align="center" bgcolor="#c9e9fe">
+											<table width="50%" border="0" cellspacing="0" cellpadding="0">
+												 <tr>
+													<td width="21%">
+														<img src="images/pic.jpg" width="16" height="16" />
+													</td>
+													<td width="79%" align="center" id="name">
+													</td>
+												</tr>
+											</table>
+										</td> 
+										<td width="85%" align="center" valign="top">
+											<table width="98%" border="0" align="center" cellpadding="0"
+												cellspacing="0">
+												<tr>
+													<td height="30" align="left" class="bot_bk">
+														我的问题
+													</td>
+												</tr>
+												<tr>
+													<td align="left" class="hg">
+														&nbsp;
+													</td>
+												</tr>
+												<tr>
+													<td align="left">
+														<label>
+															<textarea id="message" name="message" cols="50"  rows="8"></textarea>
+														</label>
+													</td>
+												</tr>
+												<tr>
+													<td height="40" align="left">
+														<label>
+															<input id="Submit" name="Submit" type="button" role="button" onclick="onSubmit()"
+																value="提 交" />
+																<font color='red'>提交文字不能少于5个</font>
+														</label>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+
+
+
+
+	</body>
+</html>

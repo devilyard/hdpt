@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dic class="CustomDictionary" id="schemalist" version="1362636764142" isRemote="true" domain="configuration"> 
+  <arg name="class">ctd.configure.SchemaConfig</arg>  
+  <arg name="method">dic</arg> 
+</dic>

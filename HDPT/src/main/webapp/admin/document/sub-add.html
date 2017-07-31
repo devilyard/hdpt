@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>健康网</title>
+    <link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+   	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+		var back_url = "../../getModule.ehr?moduleCode=106";
+		var data={"tag":"b7c6aa4f-0f0a-42ef-ad49-fbb2b50d49e0","success":true};
+		var maxRequest = 3;
+		$(document).ready(function(){
+			
+			$.jkw.load({
+				"type" : 2,
+				"back_url" : back_url,
+				"data" :data,
+				"comeback" :function(data){
+					for(var i=0;i<data.modules.length;i++){
+						$("#moduleCode").append("<option value='"+data.modules[i].moduleCode+"'>"+data.modules[i].moduleName+"</option>");
+					}
+				}
+			});
+		
+			 $("#moduleCode").change(function(){ 
+			 	$("#moduleName").val($(this).find("option:selected").text());
+			 })	
+
+			$.jkw.submit({
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "ajaxForm",
+				"before":function() {
+					if($("#moduleCode").val()==''){
+						alert("请选择栏目名称！");
+						return false;
+					}
+					if($("#subjectname").val()==''){
+						alert("请填写类别名称！");
+						return false;
+					}
+					return true;
+				}
+			});
+		});
+
+		function doResult(data){
+			alert(data.message);
+			location.href="sub-list.html";
+		}
+	</script>
+  </head>
+
+  <body>
+  	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="sub-list.html">类别维护</a> &gt;&gt; 添加类别</td>
+  			</tr>
+		</tbody></table>
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody>
+		      <tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   	<form id="ajaxForm" name="ajaxForm" action="../../subAdd.ehr" method="post">
+				   		<input type="hidden"  name="moduleName" id="moduleName"/>
+				   		<table style="margin: 0 0 0 150px;">
+				   			<tbody>
+				   				<tr>
+						   			<td>栏目名称<font color="red">(*)</font>:</td>
+						   			<td>
+						   				<select id="moduleCode" name="moduleCode">
+						   					<option selected="selected" value="">--请选择--</option>
+						   				</select>
+									</td>
+					   			</tr>
+					   			<tr>
+						   			<td>类别名称<font color="red">(*)</font>:</td>
+						   			<td><input id="subjectname" name="subjectname" type="text"></td>
+					   			</tr>
+					   			<!-- <tr>
+					   				<td>类别编号:</td><td><input name="code" type="text"></td>
+					   			</tr>
+					   			<tr>
+					   				<td>前台显示条数<font color="red">(*)</font>:</td><td><input name="topnum" type="text">
+					   				</td>
+					   			</tr> -->
+					   			<tr>
+					   				<td>拼音简写:</td><td><input id="description" name="description" type="text"></td>
+					   			</tr>
+					   			<tr>
+						   			<td colspan="2">
+						   				<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+										<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" value="重置" role="button" type="reset">
+									</td>
+								</tr>
+				   			</tbody>
+				   		</table>
+				   </form>
+ 				</td>
+ 			 </tr>
+ 			</tbody>
+ 		</table>
+	 	</td>
+	 </tr>
+	</tbody>
+ </table>
+</body></html>

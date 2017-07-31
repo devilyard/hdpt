@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>健康网</title>
+		<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+		<link href="../../hdpt/js/jquery.pagination/pagination.css" type="text/css" rel="stylesheet">
+		<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/My97DatePicker/WdatePicker.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../hdpt/js/My97DatePicker/skin/WdatePicker.css">
+		<script type="text/javascript" src="../../hdpt/js/jquery.pagination/jquery.pagination.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+		<script type="text/javascript">
+			var target_url = "../../jkzxlist.ehr";
+			var back_url = "../../jkzxlist.ehr";
+			var data={"tag":"981fafdd-0e44-4066-b394-15e1bb9b88a6","success":true};
+			var maxRequest = 3;
+			$(document).ready(function(){
+				var moduleCode = Request("moduleCode");
+				var datafield;
+				
+				$.jkw.load({
+					"type" : 2,
+					"back_url" : "../../getAdminUserDataField.ehr",
+					"data" :data,
+					"comeback" :function(data){
+						// 3为卫生局权限
+						datafield =  data.datafield;
+					}
+				});
+			
+				var grid = $.jkw.loadGrid({
+					"type" : 2,
+					"target_url" : target_url,
+					"back_url" : back_url,
+					"tabid":"query",
+					"pager":"pager",
+					"data" : {"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+					"query":["titlefirst","beginDate","endDate"],
+					"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{1}",o.createdate.formatDate("yyyy-MM-dd"));
+						template = template.replaceAll("{2}",o.zxid);
+						template = template.replaceAll("{3}",moduleCode);
+						template = template.replaceAll("{4}",o.status==null ? "未审核" : (o.status=="0" ? "审核通过" : "审核未通过"));
+						if(datafield=="3"){
+							template = template.replaceAll("display: none", "");
+						}
+						return template;
+					},
+					"comeback" : function(){
+						//$.jkw.iframe();
+					}
+				});
+
+				$("#bt_query").bind('click',function(){
+					var pg = $('.pager');
+					//pg.trigger('setPage', [-1]);
+					grid.query();
+				});
+
+				$("#bt_add").click(function(){
+					location.href="jkzx-add.html?moduleCode="+moduleCode;
+				})
+			});
+
+			function  doDelete(zxid){
+				$.jkw.send({
+					"type" : 2,
+					"target_url" : "../../jkzxDel.ehr",
+					"back_url" : back_url,
+				    "args" : {
+				    	"id" : zxid
+				    },
+				    "comeback" :function(data){
+						alert(data.message);
+						location.reload();
+				    }
+				});
+			}
+		</script>
+	</head>
+	<body><a name="top" href="#"></a>
+		<span class="kong5"><br></span>
+
+		<table align="center" border="0" cellpadding="0" cellspacing="1" width="98%" bgcolor="#A7D7F5">
+		  <tbody><tr>
+		    <td align="center" height="40" bgcolor="#F0F9FD"><table border="0" cellpadding="0" cellspacing="0" width="98%">
+		      <tbody><tr>
+		        <td align="left" width="80%">
+		        	<label for="title">标题：</label>
+		        	<input id="titlefirst" class="form1">
+		        	<label for="title">发布时间：</label>
+		        	<input id="beginDate" name="beginDate" class="form2" onclick="WdatePicker()">&nbsp;至&nbsp;<input id="endDate" name="endDate" class="form2" onclick="WdatePicker()">
+		        </td>
+		        <td align="left" width="20%">
+		            <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" id="bt_query" type="button"><span class="ui-button-text">查询</span></button>
+		             <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" id="bt_add" type="button"><span class="ui-button-text">新增</span></button>
+		        </td>
+		      </tr>
+		    </tbody></table></td>
+		  </tr>
+		</tbody></table>
+
+		<span class="kong5"><br></span>
+
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td class="nav_content">健康资讯维护</td>
+		  </tr>
+		  <tr>
+		    <td class="border_kong" align="center" valign="top">
+		    <table id="query" class="border_content" border="0" cellpadding="0" cellspacing="1" width="100%" bgcolor="#c9e9fe">
+		    <tbody>
+		    <tr class="row">
+				<td align="center" height="28" bgcolor="#daf0ff">&nbsp;<strong>标题</strong></td>
+				<td align="center" bgcolor="#daf0ff"><strong>发布时间</strong></td>
+				<td align="center" bgcolor="#daf0ff">&nbsp;<strong>状态</strong></td>
+		        <td align="center" bgcolor="#daf0ff"><strong>操作</strong></td>
+		    </tr>
+		    <tr id="list" bgcolor="#FFFFFF">
+				<td class="jkzb" align="left">{0}</td>
+				<td class="jkzb" align="left">{1}</td>
+				<td class="jkzb" align="left">{4}</td>
+		        <td class="jkzb">
+		        	<a href="jkzx-update.html?zxid={2}&moduleCode={3}">修改</a>|
+		         	<a href="javascript:doDelete({2})">删除</a>
+		         	<span style="display: none">| <a href="jkzx-review.html?zxid={2}&moduleCode={3}">审核</a></span>
+				</td>
+			</tr>
+			</tbody>
+			</table></td>
+		  </tr>
+		</tbody></table>
+		<table align="center" border="0" cellpadding="0" cellspacing="0">
+  			<tbody><tr>
+    			<td style="height:30px" valign="bottom">
+					<div id="pager"></div>
+    			</td>
+  			</tr>
+		</tbody>
+		</table>
+</body></html>

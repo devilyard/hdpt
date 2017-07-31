@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<link href="js/jquery.pagination/pagination.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js"></script>
+		<script type="text/javascript" src="js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/jquery.pagination/jquery.pagination.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+			var target_url = "../diary/pagelist.ehr";
+			var back_url = "../diary/pagelist.ehr";
+			var maxRequest = 3;
+
+			$(document).ready(function(){
+
+				var grid = $.jkw.loadGrid({
+
+					"target_url" : target_url,
+					"back_url" : back_url,
+					"tabid":"query",
+					"pager":"pager",
+					"data" : {"tag":"b5829f92-96b5-41fb-b90b-49869376450f","success":true},
+					"query":["title","beginDate","endDate"],
+					"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.title);
+						template = template.replaceAll("{1}",o.createTime.formatDate("yyyy-MM-dd"));
+						var cacheStr = "";
+						template = template.replaceAll("{2}",o.cacheJson?showCache(JSON.parse(o.cacheJson).indicator):"");
+						template = template.replaceAll("{3}",o.id);
+						return template;
+					},
+					"comeback" : function(){
+						$.jkw.iframe();
+					}
+				});
+
+				$("#bt_query").bind('click',function(){
+					var pg = $('.pager');
+					//pg.trigger('setPage', [-1]);
+					grid.query();
+				});
+
+				$("#writeDiray").click(function(){
+					window.location.href="diary_create.html";
+				});
+
+			});
+
+			function showCache(list){
+				var str = "";
+				$.each(list,function(idx,obj){
+					str += obj.name + ":" + obj.val;
+					if(obj.units){
+						str += "(" + (obj.units?obj.units:"") + ")";
+					}
+				});
+				return str;
+			}
+
+			function doDelete(id){
+				$.jkw.send({
+					"target_url" : "../diary/delete.ehr",
+					"back_url" : back_url,
+				    "args" : {
+				    	"id" : id
+				    },
+				    "comeback" :function(data){
+						alert(data.message);
+						location.reload();
+				    }
+				});
+			}
+
+			function doUpdate(id){
+				window.location.href="diary_update.html?id="+id
+			}
+		</script>
+
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+				<td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+    			<td align="left" class="set">您目前所在的位置：<a href="user_self.html">自我管理</a> &gt;&gt; 健康日记 </td>
+  			</tr>
+		</table>
+
+		<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1" class="marb1 border_content">
+		  <tr>
+		    <td height="40" align="center" bgcolor="#c9e9fe"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td width="80%" align="left">
+		        	<label for="title">标题：</label>
+		        	<input id="title" name="title"  class="form1"/>&nbsp;&nbsp;
+		        	<label for="title">创建时间：</label>
+		        	<input id="beginDate" name="beginDate" class="form2"  onClick="WdatePicker()" />&nbsp;至&nbsp;<input id="endDate" name="endDate" class="form2" onClick="WdatePicker()"/>
+		        </td>
+		        <td width="20%" align="left">
+		            <button role="button" id="bt_query" >查询</button>
+		            <button role="button" id="writeDiray" >写日记</button>
+		        </td>
+		      </tr>
+		    </table></td>
+		  </tr>
+		</table>
+
+		<span class="kong5"><br /></span>
+
+		<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft">
+		  <tr>
+		    <td class="title">健康日记</td>
+		  </tr>
+		  <tr>
+		    <td align="center" valign="top" class="border_kong">
+		    <table id="query" width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9e9fe" class="border_content">
+		    <tr>
+				<td height="28" align="left" class="current">&nbsp;<strong>日记标题</strong></td>
+		        <td align="center" class="current"><strong>创建日期</strong></td>
+		        <td align="center" class="current"><strong>操作</strong></td>
+		    </tr>
+			<tr id="list" bgcolor="#FFFFFF">
+				<td class="jkzb" align="left">{0}</td>
+		        <td class="jkzb">{1}</td>
+		        <td class="jkzb">
+		        	<a href='javascript:doUpdate({3})'>更新</a> |
+					<a href='javascript:doDelete({3})'>删除</a></td>
+			</tr>
+		    </table></td>
+		  </tr>
+		  <tr>
+    			<td height="40" align="center" valign="bottom">
+    				<div class="pager" id="pager"></div>
+    			</td>
+  			</tr>
+		</table>
+	</body>
+</html>

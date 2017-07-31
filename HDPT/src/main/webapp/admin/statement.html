@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>健康网</title>
+<link rel="stylesheet" type="text/css" href="../hdpt/css/style2.css">
+<link rel="stylesheet" type="text/css"
+	href="../o_resource/css/jquery-ui-1.8.12.custom.css">
+<script src="../hdpt/js/base/jquery.js" type="text/javascript"></script>
+<script src="../o_resource/js/jquery-ui-1.8.12.custom.min.js"
+	type="text/javascript"></script>
+<script src="../hdpt/js/common.js" type="text/javascript"></script>
+<script src="../bootstrap/js/jquery.PrintArea.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#idcard").text(Request("idcard"));
+		$("#pwd").text(Request("pwd"));
+
+	});
+	function Print(){
+		$("#printarea") .printArea();
+	}
+</script>
+<style media="print">
+.Noprint {
+	DISPLAY: none;
+}
+
+.PageNext {
+	PAGE-BREAK-AFTER: always;
+}
+
+#12288 ; pre {
+	font-size: 16px;
+}
+</style>
+<style type="text/css">
+* {
+	padding: 0;
+	margin: 0;
+}
+</style>
+</head>
+
+<body>
+	<button
+		class="Noprint ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+		onclick="Print();" role="button" style="float: right;">
+		<span class="ui-button-text">打印</span>
+	</button>
+	<div style="padding:20px 0; width: 90%;" id="printarea">
+		<p
+			style="width:100%;font-size:24px; font-weight: bold;font-style: normal;text-align: center;"
+			size="4">健康网服务条款与免责声明</p>
+		<br> <pre style="margin-left:20px;font-size: 16px;">    欢迎申请使用健康网服务，请您仔细阅读以下全部内容。如您不同意本服
+务条款的任何内容，请不要注册和使用健康互动平台服务，如果您勾选“我同意居民健康
+互动平台服务条款与免责声明”，即表示您已经详细阅读并自愿接受《健康网
+服务条款与免责声明》的所有内容。<br>
+    一、健康网是我市政府为民办实事项目--“推进城区社区卫生服务机构信
+息化建设，建立居民健康信息电子档案”的重要建设内容。居民健康互动平台是一个面向居民的
+基于电子健康档案的医疗卫生公共服务平台。通过这个平台，您可以获取和您的社区责任医师交
+流咨询、查询自己在不同医疗卫生机构就诊保健过程中的健康信息等服务内容。本平台完全是免
+费的、非营利性质的。
+    二、您同意免费将您在不同医疗卫生机构获取医疗保健服务过程中产生的本人健康资料存放
+在各级卫生行政部门主管的卫生数据中心，并成为本人的终身电子健康档案。
+    三、您同意在您获取医疗卫生机构医疗保健服务过程中医生有权调阅您的电子健康档案。
+    四、您同意按照相应的法律规定要求或健康网合法服务程序需要向政府行
+政部门提供健康信息共享。
+    五、请您妥善保管您登陆健康网的账号和密码，您对通过用户账号进行的
+所有活动和事件负法律责任。由于您的原因导致您的账号或密码泄露和丢失时，由此引发的一切
+后果和法律责任均由您本人承担。
+    六、本平台所有信息仅供参考，不作为诊断、用药和治疗的根据。本平台致力于提供正确、
+完整的健康信息，但不保证信息的正确性和完整性，且不对因信息的不正确或遗漏导致的任何损
+失或损害承担责任。本平台所提供的任何健康保健和诊疗建议，仅供参考，不能替代医生和其他
+医务人员的建议。为了您的身体健康，请您到专业医院就诊，切勿自行用药。擅自用药可能给您
+带来不良后果，本平台对此不负法律责任。
+    七、本平台汇总的资料数据巨大，难以一一加以核实。所以如果本平台资料发生偏差，本平
+台概不负责，亦不承担任何法律责任。请您及时向我们提出，我们将予以纠正。本平台的咨询功
+能是为您提供和您的社区责任医师进行网上沟通和交流的一个渠道，问题的回答仅依据提问者描
+述的症状，回答仅提供建议，不能作为诊断及治疗的依据，咨询服务是您的社区责任医师在国家
+规定工作时间外的义务劳动，不能及时响应您的咨询请谅解，不得投诉。 
+    八、本平台可能通过网页上链接向用户提供来自其它网站的内容及服务。本网站对这些网站
+及其内容不进行控制，也不负任何责任。请用户在使用该类网站所提供的服务时注意浏览这些网
+站的相关规定，并自行判断可能带来的结果和风险，以决定是否使用这些网站提供的内容或服务。
+    九、本平台因正常的系统维护、系统升级，或者因网络拥塞而导致平台不能访问，本平台不
+承担任何责任。
+    十、本平台之声明以及其修改权、更新权及最终解释权均属平台网站管理者所有。平台网站
+管理者有权随时修改服务条款和免责声明。<br>
+<font size="3" style="font-weight: bold;">用户声明：</font>
+□  自愿免费将本人健康档案资料存放在卫生行政部门主管的卫生数据中心，成为用户本人的
+终身电子健康档案。
+□  知悉并同意《健康网服务条款与免责声明》的所有内容。
+<br> <font size="3" style="font-weight: bold;">网站地址: http://www.hzws.gov.cn →便民窗口→居民健康互动平台 </font><br> <font
+				size="3" style="font-weight: bold;">您的用户名： <span id="idcard"></span></font>
+ <font size="3" style="font-weight: bold;">密码:<span id="pwd"></span>（请登陆系统后及时修改）</font> <div style="width: 100%;font-size: 16px;text-align: right;"><div style="padding-right: 80px;margin-bottom: 20px">用户签字：</div><div>年    月    日  &nbsp;&nbsp;&nbsp;&nbsp;</div></div>
+</pre>
+
+	</div>
+</body>
+</html>

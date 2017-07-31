@@ -1,0 +1,158 @@
+<html style="height: 100%"><head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		<title>健康网</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body style="height: 100%"><div id="loading" style="display: none;">加载中...</div>
+		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+  			<tbody><tr>
+				<td width="20" align="center" class="set"><img width="10" src="images/ico_set.jpg"></td>
+    			<td align="left" class="set">您目前所在的位置：<a href="ehr_main.html">健康档案</a> &gt;&gt; 个人信息 </td>
+  			</tr>
+		</tbody></table>
+		<table width="100%" align="center" cellspacing="0" cellpadding="0" border="0" class="border_content">
+		  <tbody><tr>
+		    <td width="95%" class="title">个人信息</td>
+		  </tr>
+		  <tr>
+		    <td valign="top" align="center"  colspan="2"><table width="100%" height="100%" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+		      <tbody><tr>
+		        <td valign="top" align="center" bgcolor="#c9e9fe" ><table width="98%" cellspacing="0" cellpadding="0" border="0" class="text">
+		          <tbody><tr>
+		            <td>姓    名：<span id="personName"></span></td>
+		            <td>性    别：<span id="sexCode_text"></span></td>
+		            <td>出生年月：<span id="birthday"></span></td>
+		          </tr>
+		          <tr>
+		            <td>地    址：<span id="address"></span> </td>
+		            <td>身份证号：<span id="idCard"></span></td>
+		            <td>市民卡号：<span id="cardNo"></span></td>
+		          </tr>
+		          <tr>
+		            <td>国    籍：<span id="nationalityCode_text"></span></td>
+		            <td>民    族：<span id="nationCode_text"></span></td>
+		            <td>家庭电话：<span id="phonenumber"></span></td>
+		          </tr>
+		          <tr>
+		            <td>邮    编：<span id="postalCode"></span></td>
+		            <td>联系方式：<span id="mobilenumber"></span></td>
+		            <!-- <td>市民邮箱：<span> -->
+		            
+		             </span></td>
+		          </tr>
+		          <tr>
+		            <td>责任医生姓名：<span id="MANADOCTOR_TEXT"></span></td>
+		            <td>医保类型：<span id="insuranceCode_text"></span></td>
+		             <!-- <td>保险类别：<span id="insurancecode"></span></td> -->
+		          </tr>
+		          <tr>
+		           
+		            <td>联 系 人：<span id="contact"></span></td>
+		            <td>联系人电话：<span id="contactNo"></span></td>
+		          </tr>
+		        </tbody></table></td>
+		      </tr>
+		    </tbody></table></td>
+		  </tr>
+		</tbody></table>
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+				$.jkw.load(
+					{
+						"back_url" : "../getSessionValue.ehr",
+						"comeback" :comeback,
+						"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}
+					}
+				);
+				function comeback(date){
+					
+					$.each(date,function(key,o){
+						var obj = $("#"+key);
+						$(obj).html(o)
+					});
+					if(date.birthday != null){
+						$("#birthday").html(date.birthday.substring(0,10));
+					}
+					
+					
+					if(date.mpiId != null){
+						//获得基本信息
+						var url = host+'/mpi/getBaseInfo?vk=UUID';
+						console.log(url);
+						param = {
+								'url' : url
+						};
+					   	doAjax("getdata.px",param, "json",function(data, textStatus) {
+					   		var jsonData = data.body;
+					   		console.log(jsonData);
+					   		if (data["code"] == 201 || jsonData==null) {
+					   			//var rs = '../logon.html';
+					   			//top.location.href = rs;
+					   			return;
+					   		}
+					   	 	doResult(data)
+						   	$("#birthday").html(jsonData.birthday.substring(0,10));
+						   	//if(jsonData.cardTypeCode=="02"){
+						   		$("#cardNo").html(jsonData.cardNo);
+						   	//}else{
+						   		//$("#cardNo").html("");
+						   	//}
+						   	$("#contact").html(jsonData.contactName);
+						   	$("#contactNo").html(jsonData.contactNo);
+						   	$("#phonenumber").html(jsonData.phonenumber);
+						   	$("#MANADOCTOR_TEXT").html(jsonData.manaDoctor_text);
+					   	 
+						});
+					}else{
+						userInfoResult();
+						
+					}
+						
+				}
+				
+				
+			});
+			
+			//获得数据
+			function userInfoResult() {
+			     $.ajax({
+		            type: 'post',  
+		            url: "../check_Userinfo.ehr" ,  
+		            dataType : "json", 
+		            success: function(data){
+		            	if (data["code"] == 200) {
+		        			var jsonData = data.body;
+		        			var length = jsonData.length;
+		        			if(length==0){
+		        				return;
+		        			}
+		        			else{
+		        				$("#address").html(jsonData.address);
+		        				$("#mobilenumber").html(jsonData.phoneno);
+		        			}
+		            	}
+		            	else{
+		            		alert(data["x-response-msg"] );  
+		            		return;
+		            	}
+		            },  
+		            cache : "false", 
+		            error: function(XmlHttpRequest, textStatus, errorThrown){  
+		                alert( "提交失败!!");  
+		            }  
+		        }); 
+			}
+			
+			function doResult(data){
+				$.each(data.body,function(key,o){
+						var obj = $("#"+key);
+						$(obj).html(o)
+				});					
+			}
+		</script>
+		
+</body></html>

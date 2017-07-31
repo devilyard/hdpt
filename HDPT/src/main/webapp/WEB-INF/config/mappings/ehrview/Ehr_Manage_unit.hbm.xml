@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dc.domain.main.EhrManageunit" table="EHR_MANAGEUNIT">
+        <id name="manaunitid" type="java.lang.String">
+            <column name="MANAUNITID" length="16" />
+            <generator class="assigned" />
+        </id>
+        <property name="manaunitname" type="java.lang.String">
+            <column name="MANAUNITNAME" length="60" />
+        </property>
+        <property name="introduction" type="java.lang.String">
+            <column name="INTRODUCTION" />
+        </property>
+        <property name="orderno" type="java.math.BigDecimal">
+            <column name="ORDERNO" precision="22" scale="0" />
+        </property>
+        <property name="createuser" type="java.lang.String">
+            <column name="CREATEUSER" length="20" />
+        </property>
+        <property name="createdate" type="java.util.Date">
+            <column name="CREATEDATE" length="7" />
+        </property>
+        <property name="lastmodifyuser" type="java.lang.String">
+            <column name="LASTMODIFYUSER" length="20" />
+        </property>
+        <property name="lastmodifydate" type="java.util.Date">
+            <column name="LASTMODIFYDATE" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

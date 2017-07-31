@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="../hdpt/js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js"></script>
+		<script type="text/javascript" src="js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="js/base/jquery.validate.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+			var idx = 0;
+			var iGroupIdx = 0;
+			var indicators = [];
+			var indicators = null;
+			var back_url = "../diary/createView.ehr";
+			var sel = {};
+			var old='';
+
+			$(document).ready(function(){
+				
+				$("#diaryForm").validate({
+					rules: {
+						"diary.title":"required"
+					},
+					messages: {
+					}
+				});
+
+				$("#diaryForm").on("blur","#szy",function(){
+					var v=$(this);
+					if(v.val()!=''){
+						var val = $("#szy").val();
+						if(isTrue(val) == false || v.val()<20||v.val()>150){
+							alert("舒张压值不正常!");
+							v.select();
+						}
+					}
+				});
+				$("#diaryForm").on("blur","#ssy",function(){
+					var v=$(this);
+					if(v.val()!=''){
+						var val = $("#ssy").val();
+						if(isTrue(val) == false || v.val()<50||v.val()>250){
+							alert("收缩压值不正常!");
+							v.select();
+						}
+					}
+
+				});
+				$("#diaryForm").on("blur","#sg",function(){
+					var v=$(this);
+					if(v.val()!=''){
+						var val = $("#sg").val();
+						if(isTrue(val) == false || val<=0 || val>5.00){
+							alert("身高格式不正确!");
+							v.select();
+						}
+					}
+				});
+				$("#diaryForm").on("blur","#tz",function(){
+					var v=$(this);
+					if(v.val()!=''){
+						var val = $("#tz").val();
+						if(isTrue(val) == false || val<=0 || val>1000){
+							alert("体重格式不正确!");
+							v.select();
+						}
+					}
+				});
+				$("#diaryForm").on("blur","#kfxt",function(){
+					var v=$(this);
+					if(v.val()!=''){
+						var val = $("#kfxt").val();
+						if(isTrue(val) == false || val>80 || val<10){
+							alert("空腹血糖不正确!");
+							v.select();
+						}
+					}
+				});
+				$("#diaryForm").on("blur","#chxt",function(){
+					var v=$(this);
+					if(v.val()!=''){
+						var val = $("#chxt").val();
+						if(isTrue(val) == false || val>80 || val<10){
+							alert("餐后血糖不正确!");
+							v.select();
+						}
+					}
+				});
+				//$("#chxt").live("blur",function(){
+				//	var v=$(this);
+				//	if(v.val()!=''){
+				//		var val = $("#chxt").val();
+				//		if(isTrue(val) == false || val>80 || val<10){
+				//			alert("餐后血糖不正确!");
+				//			v.select();
+				//		}
+				//	}
+				//});
+
+
+				$.jkw.load({
+					"back_url":back_url,
+					"data" : {"tag":"50ea19cd-83fe-4b70-b640-9d44a9190797","success":true},
+					"comeback" :function(data){
+						indicators = data.list;
+						var doctorid = data.manadoctorid;
+						if(doctorid==null){
+							$("#doctor").hide();
+						}else{
+							$("#doctor").show();
+						}
+						$.each(indicators,function(idx,o){
+							if(o.pid==0){
+								$("#indicatorInput").append("<option value='"+o.id+"'>"+o.name+"</option>");
+							}
+						});
+						
+						$("#indicatorInput").change(function(){
+							addIndicator();
+						});
+					}
+				});
+
+				$.jkw.submit({
+					"back_url" : "../diary/create.ehr",
+					"comeback" :function(data){
+						alert(data.message);
+						location.href = "diary_update.html?id=" + data.diary.id;
+					},
+					"formid" : "diaryForm"
+				});
+				
+				$("#indicators").empty();
+				var idx = 0;
+
+				$("span[data]").each(function(i,o){
+					var spanObj = $(this);
+					var list ;
+					var itemJson = $(spanObj).html();
+					if(itemJson!=""){
+						$(spanObj).empty();
+						objJson = JSON.parse(itemJson);
+						$.each(objJson.indicator,function(j,item){
+							$(spanObj).append(item.name+"（" + item.val + (item.units?item.units:"") +"） ");
+							$(spanObj).show();
+						});
+					}
+				});
+			});
+
+			//数字格式验证
+			function isTrue(num){
+				var reg = /^\d+(.\d{1,2})?$/;
+				if(reg.test(num)){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			
+			function addIndicator(){
+				var isfill=true;
+
+				//var selVal = $("#indicatorInput option:selected").val();
+				var selVal = $("#indicatorInput").val();
+				if(!selVal){
+					alert("请选择您要维护的指标！");
+					$("#indicatorInput").focus();
+					return ;
+				}
+				if(sel[selVal]){
+					alert("请不要重复选择");
+					return ;
+				}
+				var type=selVal;
+
+				//alert($("#single div:last :text").length)
+				$("#single div:last :text").each(function(){
+					if($(this).val()!=''&&$(this).val()!=""){
+						isfill=false;
+					}
+				});
+
+				if(isfill&&$("#single div:last :text").length!=0){
+					$("#single div:last").remove();
+					sel[old] = null;
+				}
+
+				sel[selVal] = selVal;
+				old=selVal;
+				var html = "<div>";
+				var obj = findIndicatorDim(selVal);
+
+				//$("#single").empty();
+				if(obj!=null){
+					iGroupIdx++;
+					if(obj.assemble==1){
+						html += getTemplate(obj,false,0,type);
+						//$("#single").append(getTemplate(obj,false));
+						$.each(eval(obj.exp),function(i,o){
+							html += getTemplate(o,true,1,type);
+							//$("#single").append(getTemplate(o,true));
+						});
+					}else{
+						html += getTemplate(obj,true,0,type);
+						//$("#single").append(getTemplate(obj,true));
+					}
+				};
+				html += "&nbsp;<a href='#' onclick=\"javascript:dremove(this,"+selVal+");\">删除</a><hr/></div>";
+				$("#single").append(html);
+			}
+
+			function dremove(obj,val){
+				sel[val]=null;
+				$(obj).parent().remove();
+			}
+
+			function getTemplate(obj,show,factor,type){
+				var curIdx = idx++;
+				var html = obj.name + "：";
+				var txtid="";
+				if(obj.name=="舒张压"){
+					txtid="id='szy'";
+				}else if(obj.name=="收缩压"){
+					txtid="id='ssy'";
+				}else if(obj.name=="身高"){
+					txtid="id='sg'";
+				}else if(obj.name=="体重"){
+					txtid="id='tz'";
+				}else if(obj.name=="空腹血糖"){
+					txtid="id='kfxt'";
+				}else if(obj.name=="餐后血糖"){
+					txtid="id='chxt'";
+				}else{
+					txtid="";
+				}
+				var attr = "type='text'";
+
+				if(!show){
+					attr = "type='hidden' value='"+(curIdx+1)+"," + (curIdx+2)+"''";
+					html +="<br/>";
+				}
+				html += "<input "+txtid+" class='form1' "+attr+" name='indicators["+ curIdx +"].val' />" + (show?getUnits(obj.id):"");
+				html += "<input type='hidden' name='indicators["+ curIdx +"].indicatorId' value='" + obj.id + "'/>";
+				html += "<input type='hidden' name='indicators["+ curIdx +"].isFactor' value='" + factor + "'/>";
+				html += "<input type='hidden' name='indicators["+ curIdx +"].groupNo' value='" + iGroupIdx + "'/>";
+				html += "<input type='hidden' name='indicators["+ curIdx +"].type' value='" + type + "'/>";
+
+				return html;
+			}
+
+			function getUnits(id){
+				var units = "";
+				$.each(indicators,function(i,o){
+
+					if( id == o.id ){
+
+						units = (typeof(o.units)!= "undefined")?o.units:"";
+						return false;
+					}
+				});
+				return "&nbsp;"+units + "&nbsp;";
+			}
+
+			function findIndicatorDim(id){
+				var obj = null;
+				$.each(indicators,function(i,o){
+					if( id == o.id ){
+						obj = o;
+						return false;
+					}
+				});
+				return obj;
+			}
+			
+			function onSubmit(){
+				var szy = $("#szy").val();
+				var ssy = $("#ssy").val();
+				var sg = $("#sg").val();
+				var tz = $("#tz").val();
+				var kfxt = $("#kfxt").val();
+				var chxt = $("#chxt").val();
+				if(document.getElementById("szy")!=null && (isTrue(szy) == false || szy<20||szy>150)){
+					//alert("舒张压值不正常!");
+					return;
+				}
+				if(document.getElementById("ssy")!=null && (isTrue(ssy) == false || ssy<50||ssy>250)){
+					//alert("收缩压值不正常!");
+					return;
+				}
+				if(document.getElementById("sg")!=null && (isTrue(sg) == false || sg<=0 || sg>5.00)){
+					//alert("身高格式不正确!");
+					return;
+				}
+				if(document.getElementById("tz")!=null && (isTrue(tz) == false || tz<=0 || tz>1000)){
+					//alert("体重格式不正确!");
+					return;
+				}
+				if(document.getElementById("kfxt")!=null && (isTrue(kfxt) == false || kfxt>80 || kfxt<10)){
+					//alert("空腹血糖不正确!");
+					return;
+				}
+				if(document.getElementById("chxt")!=null && (isTrue(chxt) == false || chxt>80 || chxt<10)){
+					//alert("餐后血糖不正确!");
+					return;
+				}
+				$("#diaryForm").submit();
+			}
+		</script>
+
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+				<td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+    			<td align="left" class="set">您目前所在的位置：<a href="user_self.html">自我管理</a> &gt;&gt; <a href="diary_list.html">健康日记</a> &gt;&gt; 写日记</td>
+  			</tr>
+		</table>
+
+        <div style="height:606px; overflow-y:auto;">
+		<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft">
+		  <tr>
+		    <td class="title">健康日记</td>
+		  </tr>
+		  <tr>
+		    <td align="center" valign="top" class="border_kong"><table width="100%" cellpadding="0" cellspacing="0">
+		      <tr>
+		        <td align="center" valign="top" bgcolor="#FFFFFF" class="border_text">
+		        	<form id="diaryForm" name="diaryForm" action="../diary/create.ehr" method="post">
+		        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			          <tr>
+			            <td width="48%" height="25" align="left">标题：
+			            	<input type="text" name="diary.title" id="diary.title" class="form3"/><font color="red">*</font>
+			            </td>
+			          </tr>
+			            <tr>
+			              <td align="left">&nbsp;</td>
+			          </tr>
+			           <tr>
+						<td align="left">
+							<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9e9fe">
+					        	<tr>
+					            	<td class="jz_title"><label for="diary.message">健康指标：(此模块请用IE6以上浏览器版本)</label></td>
+					            </tr>
+					        </table>
+					        <span class="kong5"><br /></span>
+							指标名称：
+			            	<select id="indicatorInput">
+								<option value="">-请选择-</option>
+							</select>
+
+							<span class="kong5"><br /></span>
+							<div id="single"></div>
+							<div id="indicators"></div>
+						</td>
+			          </tr>
+			           <tr>
+			              <td align="left">&nbsp;</td>
+			          </tr>
+			          <tr>
+			            <td height="25" align="left">
+			            	<label for="diary.message">日记内容：</label>
+			            </td>
+			          </tr>
+			          <tr>
+						<td align="left">
+			            	<textarea id="diary.message" name="diary.message" rows="10" style="width:98%"></textarea>
+						</td>
+			          </tr>
+			          <tr>
+			              <td align="left" id="doctor">是否发送给责任医生:<input type="checkbox" name="isend" value="send" /></td>
+			          </tr>
+
+			          <tr>
+			            <td height="35" align="left">
+			            	<input id="savesubmit" onclick="onSubmit()" type="button" value="保存" />
+			            </td>
+			          </tr>
+			        </table>
+			        </form>
+				</td>
+		      </tr>
+		    </table></td>
+		  </tr>
+		</table>
+		</div>
+	</body>
+</html>

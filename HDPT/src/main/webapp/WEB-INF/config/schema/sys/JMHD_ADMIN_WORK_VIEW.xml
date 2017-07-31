@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_ADMIN_WORK_VIEW" alias="JMHD_ADMIN_WORK_VIEW">
+  <item id="DOCTOR_ID" alias="DOCTOR_ID" type="string" length="16"/>
+  <item id="WTYPE" alias="WTYPE" type="string" length="30"/>
+  <item id="CNT" alias="CNT" type="string" length="10"/>
+</entry>

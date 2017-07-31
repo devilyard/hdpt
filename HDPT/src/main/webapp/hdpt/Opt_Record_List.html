@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script language="javascript"  src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/layer/layer.min.js"></script>	
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/base/jquery.nicescroll.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<style>
+			#diva{
+				height: 480px; 
+				overflow-y: auto; 
+			}
+	    </style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#beginDate").val("")
+				$("#endDate").val("")
+				var first=1
+				var url = host + '/medical/ClinicRecord?vk=UUID&limit=100'
+				getList(url,first)
+				first=0
+				
+				//查询
+				$("#bt_query").click(function(){
+					var bd=$("#beginDate").val()
+					var ed=$("#endDate").val()
+					var jgdm=$("#jgdm").val()
+					var Key
+					
+					if(bd=="" && ed=="" && jgdm==""){
+						var url = host + '/medical/ClinicRecord?vk=UUID&limit=100'
+						getList(url,first)
+					}else{
+						//日期查询不做限制
+						if(bd!=""&&ed=="") {
+							if(jgdm==""){
+								Key ='[\"ge\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]]'
+							}else{
+								Key ='["and",[\"ge\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]],[\"eq\",[\"$\",\"AuthorOrganization\"],[\"s\",\"'+jgdm+'\"]]]'
+							}
+						}
+						if(bd==""&&ed!=""){
+							if(jgdm==""){
+		 						Key ='[\"le\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]]'
+							}else{
+								Key ='["and",[\"le\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]],[\"eq\",[\"$\",\"AuthorOrganization\"],[\"s\",\"'+jgdm+'\"]]]'
+							}
+						}
+						
+						if(bd!=""&&ed!=""&&jgdm==""){
+		 					Key ='["and",[\"ge\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]],[\"le\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]]]'
+						}
+						if(bd==""&&ed==""&&jgdm!=""){
+		 					Key ='[\"eq\",[\"$\",\"AuthorOrganization\"],[\"s\",\"'+jgdm+'\"]]'
+						}
+						if(bd!=""&&ed!=""&&jgdm!=""){
+							Key ='["and",["and",[\"ge\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]],[\"le\",[\"$\",\"str(JZRQ,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]]],[\"eq\",[\"$\",\"AuthorOrganization\"],[\"s\",\"'+jgdm+'\"]]]'
+						}
+						if(bd==""&&ed==""&&jgdm==""){
+							Key=""
+						}
+						
+							
+					    url = host + '/entryName/queryRecord?vk=UUID&recordClassifying=Opt_Record&args='+Key
+					    getList(url,first)
+					}
+					
+				})
+				
+			});
+
+			function getList(url,first){
+				$("#loading").css({'display':'block'})
+				var param = {'url':url}	
+				
+				$.jkw.query(
+					{
+						"target_url" : "getdata.px",
+						"comeback" :comeback,
+						"args":param,
+						"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}
+					}
+				);
+				function comeback(data){
+				
+					if (data["code"] == 200) {
+						if(data.body && data.body.length>0){
+							var jsonDatas = data.body;
+							var length = jsonDatas.length;
+							//下拉框填充
+							if(first==1){
+								var select=document.getElementById("jgdm");
+								var childs = select.childNodes;
+								for(var i=childs.length-1; i>0; i--){
+									select.removeChild(childs[i]);
+								}
+								var selHash={}
+								for(var i=0;i<length;i++){
+									var a=jsonDatas[i].AuthorOrganization
+									var b=jsonDatas[i].AuthorOrganization_text
+									selHash[a]=b
+								}
+								for(var o in selHash){
+									select.add(new Option(selHash[o],o));
+								}
+							}
+							
+							createTR('就诊日期','就诊机构','科室名称','疾病诊断')
+							var tar
+							for(var i=0;i<length;i++){
+								var dcid = encodeURI(jsonDatas[i].DCID)
+								var jzrq=jsonDatas[i].JZRQ
+								var authororganization=jsonDatas[i].AuthorOrganization_text
+								var authororganizationcode = jsonDatas[i].AuthorOrganization
+								var jzksmc=jsonDatas[i].JZKSMC
+								var zdmc=jsonDatas[i].ZDMC
+								var jzlsh=jsonDatas[i].JZLSH
+								tar="Opt_Record_Info.html?jzlsh="+jzlsh+"&jzrq="+jzrq+"&authororganizationcode="+authororganizationcode+"&authororganization="+authororganization+"&zdmc="+zdmc
+								html+='<tr class="row"><td class="jkzb"><a href='+tar+'>'+jzrq+'</a></td>'
+										+'<td class="jkzb"><a href='+tar+'>'+authororganization+'</a></td>'
+										+'<td class="jkzb"><a href='+tar+'>'+jzksmc+'</a></td>'
+										+'<td class="jkzb"><a href='+tar+'>'+zdmc+'</a></td></tr>'
+							}
+							$("#query").html(html)
+							$("#diva").niceScroll({cursorcolor:"#c9e9fe"})
+						}else{
+							$("#query").html("<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>")
+						}
+						$("#loading").css({'display':'none'})
+						
+					}else if(data["code"] == 201){
+						var rs = '../logon.html';
+						top.location.href = rs;
+						return;
+					}
+					
+				}
+				
+			}
+		</script>
+
+	</head>
+	<body>
+		<div style="display: none;" id="loading">加载中...</div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+				<td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+    			<td align="left" class="set">您目前所在的位置：<a href="ehr_main.html">健康档案</a> &gt;&gt; <a href="recordType_main.html">就诊信息</a> &gt;&gt; 门诊记录 </td>
+  			</tr>
+		</table>
+
+		<table width="98%"  align="center" cellpadding="0" cellspacing="1" class="marb1 border_content">
+		  <tr>
+		    <td height="40" align="center" bgcolor="#c9e9fe"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td width="90%" align="left">
+		        	<label for="title">就诊时间：</label>
+		        	<input id="beginDate" name="beginDate" class="form2"  onClick="WdatePicker()" />&nbsp;至&nbsp;<input id="endDate" name="endDate" class="form2" onClick="WdatePicker()"/>
+		        	<label for="jgdm">就诊机构：</label>
+		        	<select name="jgdm" id="jgdm"><option value="">-------------请选择-------------</option></select>
+		        </td>
+		        <td width="10%" align="left">
+		       		 <button role='button' id="bt_query" type="button">查询</button>
+		        </td>
+		      </tr>
+		    </table></td>
+		  </tr>
+		</table>
+
+		<span class="kong5"><br /></span>
+
+		<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft">
+		  <tr>
+		    <td class="title">就诊信息&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">本站提供的市民健康信息仅供参考，不具法律效力</font></td>
+		  </tr>
+		  <tr>
+		    <td align="center" valign="top" class="border_kong">
+		    <div class="fixhead" id="diva">
+		    <table id="query" width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9e9fe" class="border_content">
+		
+		    </table>
+		    </div>
+		    </td>
+		  </tr>
+		</table>
+
+	</body>
+</html>

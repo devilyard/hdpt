@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>角色列表</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/dtree/checkboxdtree.js"></script>
+	<script type="text/javascript">
+	var MODEL_RULE_LENGTH=3;
+	var back_url = "../../toRoleModule.ehr?id=";
+	var data={"tag":"b049c90b-cbea-4226-bec0-27be808023b0","success":true};
+	var MODEL_IMG_PATH="../../hdpt";
+	var maxRequest = 3;
+	$(document).ready(function(){
+		var id = Request("id");
+		$("#sysRoleId").val(id);
+		var cfg = {
+			"type" : 2,
+			"back_url" : back_url+id,
+			"comeback" :doResult,
+			"data" :data
+		};
+		$.jkw.load(cfg);
+		
+		var cfg2 = {
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doBack,
+				"formid" : "ajaxForm"
+			};
+			$.jkw.submit(cfg2);
+	});
+
+	function doBack(data){
+		alert(data.message);
+		location.href="role-list.html";
+	}
+	
+	function doResult(data){
+		 d = new dTree('d');
+		 d.add('0','-1','模块管理');
+		for(var i=0;i<data.roleModules.length;i++){
+			var module=data.roleModules[i];
+				dTreeAddNode(d,module);
+		}
+		$("#dtree").html(d.toString());
+	}
+	
+	
+	function dTreeAddNode(tree,module){
+		if(module.MLEV==1){
+			if(module.RID!=null&&module.RID!='undefined'&&module.RID!=''){
+				d.add(module.MCODE, '0', module.MNAME,'','','','','','',module.MID,'moduleString',true);
+			}else{
+				d.add(module.MCODE, '0', module.MNAME,'','','','','','',module.MID,'moduleString',false);
+			}
+		}else{
+		  var code=module.MCODE.substring(0,(module.MLEV-1)*MODEL_RULE_LENGTH);
+		  if(module.RID!=null&&module.RID!='undefined'&&module.RID!=''){
+			  d.add(module.MCODE,code,module.MNAME,'', '', '', '', '','',module.MID,'moduleString',true);
+			}else{
+			  d.add(module.MCODE,code,module.MNAME,'', '', '', '', '','',module.MID,'moduleString',false);
+			}
+		}
+	}
+	
+	</script>
+<style type="text/css">
+*{
+	font-size: 12px;
+}
+a{
+font-size: 12px;
+text-decoration: none;
+color: #000;
+}
+</style>
+  </head>
+  
+  <body>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tbody>
+			<tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+	   			<td class="set" align="left">您目前所在的位置：<a href="role-list.html">角色维护</a> &gt;&gt; 模块设置</td>
+	 		</tr>
+		</tbody>
+	</table>
+	<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+	<tbody>
+		<tr>
+		   <td colspan="2" class="border_kong" align="left" valign="top">
+		   <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		     <tbody>
+		     	<tr>
+			       	<td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				  	<form id="ajaxForm" name="ajaxForm" action="../../roleSetModule.ehr" method="post">
+				  		<input name="roleId"  id="sysRoleId" type="hidden">
+				   		<div id="dtree"></div>
+					   	<input class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="设置" role="button" type="submit">
+					 </form>
+					</td>
+				</tr>
+			</tbody>
+			</table></td>
+		</tr>
+	</tbody>
+  </table>
+</body>
+</html>

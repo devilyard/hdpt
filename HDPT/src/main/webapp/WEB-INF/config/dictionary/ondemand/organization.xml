@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dic id="CVX_JGDM" alias="">
+  <item text="市一医院" type="A" pyCode="syyy" key="47011661433010211A1001"/>
+  <item text="市二医院" type="A" pyCode="seyy" key="47011662233010511A1001"/>
+  <item text="市三医院" type="A" pyCode="ssyy" key="47011663033010211A1001"/>
+  <item text="肿瘤医院" type="A" pyCode="zlyy" key="5714674933010211A5142"/>
+  <item text="市七医院" type="A" pyCode="sqyy" key="47011667333010611A5201"/>
+  <item text="儿童医院" type="A" pyCode="etyy" key="58989630433010311A5191"/>
+  <item text="市中医院" type="A" pyCode="szyy" key="47011668133010611A2101"/>
+  <item text="红会医院" type="A" pyCode="hhyy" key="47011665733010311A3001"/>
+  <item text="西溪医院" type="A" pyCode="xxyy" key="47011666533010311A5211"/>
+  <item text="五云山疗养院" type="A" pyCode="xxyy" key="47011681733010611A6001"/>
+  <item text="下城区平台" type="A" pyCode="xcqyy" key="330103">
+    <item ref="47024048X33010311A3001" text="杭州市下城区中西医结合医院" type="A" pyCode="hzsxcqzxyjhyy" key="47024048X33010311A3001"/>
+    <item ref="47018036833010311B1001" text="下城区文晖街道社区卫生服务中心" type="A" pyCode="xcqwhjdsqwsfwzx" key="47018036833010311B1001"/>
+    <item ref="47024033233010311B1001" text="下城区石桥街道社区卫生服务中心" type="A" pyCode="xcqsqjdsqwsfwzx" key="47024033233010311B1001"/>
+    <item ref="47018085133010311B1001" text="下城区朝晖街道社区卫生服务中心" type="A" pyCode="xcqchjdsqwsfwzx" key="47018085133010311B1001"/>
+    <item ref="47018176633010311B1001" text="杭州下城区东新社区卫生服务中心" type="A" pyCode="hzxcqdxsqwsfwzx" key="47018176633010311B1001"/>
+    <item ref="47018037633010311B1001" text="下城区长庆潮鸣街道社区卫生服务中心" type="A" pyCode="xcqzqcmjdsqwsfwzx" key="47018037633010311B1001"/>
+    <item ref="47018083533010311B1001" text="下城区天水武林街道社区卫生服务中心" type="A" pyCode="xcqtswljdsqwsfwzx" key="47018083533010311B1001"/>
+  </item>
+  <item text="余杭区平台" type="A" pyCode="yhqyy" key="330110">
+    <item ref="330110023" text="余杭区第一人民医院" type="A" pyCode="yhqdyrmyy" key="330110023"/>
+    <item ref="330110024" text="余杭区第二人民医院" type="A" pyCode="yhqdermyy" key="330110024"/>
+    <item ref="330110026" text="余杭区中医院" type="A" pyCode="yhqzyy" key="330110026"/>
+    <item ref="330110027" text="余杭区第五人民医院" type="A" pyCode="yhqdwrmyy" key="330110027"/>
+    <item ref="330110025" text="余杭区第三人民医院" type="A" pyCode="yhqdsrmyy" key="330110025"/>
+    <item ref="330110033" text="余杭区良渚医院" type="A" pyCode="yhqlzyy" key="330110033"/>
+    <item ref="330110028" text="余杭妇幼保健院" type="A" pyCode="yhfybjy" key="330110028"/>
+  </item>
+  <item text="萧山区平台" type="A" pyCode="xsqyy" key="330181">
+    <item ref="470453493" text="萧山区第一人民医院" type="A" pyCode="xsqdyrmyy" key="470453493"/>
+    <item ref="47045332X" text="萧山区中医院" type="A" pyCode="xsqzyy" key="47045332X"/>
+    <item ref="470454533" text="萧山区第四人民医院" type="A" pyCode="xsqdsrmyy" key="470454533"/>
+    <item ref="470452095" text="萧山区第六人民医院" type="A" pyCode="xsqdlrmyy" key="470452095"/>
+    <item ref="330181008" text="衙前镇社区卫生服务中心" type="A" pyCode="yqzsqwsfwzx" key="330181008"/>
+    <item ref="330181017" text="益农镇社区卫生服务中心" type="A" pyCode="ynzsqwsfwzx" key="330181017"/>
+    <item ref="330181002" text="义桥镇社区卫生服务中心" type="A" pyCode="yqzsqwsfwzx" key="330181002"/>
+    <item ref="330181014" text="蜀山街道社区卫生服务中心" type="A" pyCode="ssjdsqwsfwzx" key="330181014"/>
+    <item ref="330181015" text="城厢街道社区卫生服务中心" type="A" pyCode="cxjdsqwsfwzx" key="330181015"/>
+    <item ref="330181027" text="宁围镇社区卫生服务中心" type="A" pyCode="nwzsqwsfwzx" key="330181027"/>
+    <item ref="330181016" text="所前镇社区卫生服务中心" type="A" pyCode="sqzsqwsfwzx" key="330181016"/>
+    <item ref="330181007" text="临浦镇社区卫生服务中心" type="A" pyCode="lpzsqwsfwzx" key="330181007"/>
+    <item ref="330181004" text="河上镇社区卫生服务中心" type="A" pyCode="hszsqwsfwzx" key="330181004"/>
+    <item ref="330181009" text="新塘街道社区卫生服务中心" type="A" pyCode="xtjdsqwsfwzx" key="330181009"/>
+    <item ref="330181013" text="闻堰镇社区卫生服务中心" type="A" pyCode="wyzsqwsfwzx" key="330181013"/>
+  </item>
+  <item ref="330185" text="临安市平台" type="A" pyCode="laspt" key="330185">
+    <item ref="470362276" text="临安市中医院" type="A" pyCode="laszyy" key="470362276"/>
+    <item ref="47036225X" text="临安市人民医院" type="A" pyCode="lasrmyy" key="47036225X"/>
+  </item>
+  <item ref="330183" text="富阳市平台" type="A" pyCode="fyspt" key="330183">
+    <item ref="470332560" text="富阳市中医骨伤医院" type="A" pyCode="fyszygsyy" key="470332560"/>
+    <item ref="470331293" text="富阳市第二人民医院" type="A" pyCode="fysdermyy" key="470331293"/>
+    <item ref="470331277" text="富阳市人民医院" type="A" pyCode="fysrmyy" key="470331277"/>
+    <item ref="729091015" text="富阳市中医医院" type="A" pyCode="fyszyyy" key="729091015"/>
+    <item ref="470331285" text="富阳市妇幼保健院" type="A" pyCode="fysfybjy" key="470331285"/>
+    <item ref="PDY110040" text="龙门镇社区卫生服务中心" type="A" pyCode="lmzsqwsfwzx" key="PDY110040"/>
+    <item ref="470332499" text="富阳市第三人民医院" type="A" pyCode="fysdsrmyy" key="470332499"/>
+    <item ref="PDY110016" text="新登镇社区卫生服务中心" type="A" pyCode="xdzsqwsfwzx" key="PDY110016"/>
+    <item ref="759521549" text="上官乡社区卫生服务中心" type="A" pyCode="sgxsqwsfwzx" key="759521549"/>
+    <item ref="470333627" text="湖源乡社区卫生服务中心" type="A" pyCode="hyxsqwsfwzx" key="470333627"/>
+    <item ref="470333520" text="场口社区卫生服务中心" type="A" pyCode="cksqwsfwzx" key="470333520"/>
+    <item ref="470333299" text="鹿山街道社区卫生服务中心" type="A" pyCode="lsjdsqwsfwzx" key="470333299"/>
+    <item ref="470333248" text="环山乡社区卫生服务中心" type="A" pyCode="hsxsqwsfwzx" key="470333248"/>
+    <item ref="470332923" text="大源社区卫生服务中心" type="A" pyCode="dysqwsfwzx" key="470332923"/>
+    <item ref="470332640" text="常绿镇社区卫生服务中心" type="A" pyCode="clzsqwsfwzx" key="470332640"/>
+    <item ref="470332608" text="常安镇社区卫生服务中心" type="A" pyCode="cazsqwsfwzx" key="470332608"/>
+    <item ref="470331269" text="万市社区卫生服务中心" type="A" pyCode="wssqwsfwzx" key="470331269"/>
+    <item ref="74101504X" text="永昌镇社区卫生服务中心" type="A" pyCode="yczsqwsfwzx" key="74101504X"/>
+    <item ref="74054672X" text="东洲街道社区卫生服务中心" type="A" pyCode="dzjdsqwsfwzx" key="74054672X"/>
+    <item ref="47033024X" text="高桥镇社区卫生服务中心" type="A" pyCode="gqzsqwsfwzx" key="47033024X"/>
+    <item ref="741033862" text="渔山乡社区卫生服务中心" type="A" pyCode="ysxsqwsfwzx" key="741033862"/>
+    <item ref="741018195" text="春建乡社区卫生服务中心" type="A" pyCode="cjxsqwsfwzx" key="741018195"/>
+    <item ref="741011823" text="新桐乡社区卫生服务中心" type="A" pyCode="xtxsqwsfwzx" key="741011823"/>
+    <item ref="741009889" text="里山镇社区卫生服务中心" type="A" pyCode="lszsqwsfwzx" key="741009889"/>
+    <item ref="470331250" text="胥口镇社区卫生服务中心" type="A" pyCode="xkzsqwsfwzx" key="470331250"/>
+    <item ref="741009088" text="灵桥镇社区卫生服务中心" type="A" pyCode="lqzsqwsfwzx" key="741009088"/>
+    <item ref="741002492" text="渌渚镇社区卫生服务中心" type="A" pyCode="lzzsqwsfwzx" key="741002492"/>
+    <item ref="737751028" text="受降镇社区卫生服务中心" type="A" pyCode="sjzsqwsfwzx" key="737751028"/>
+    <item ref="733192468" text="春江街道社区卫生服务中心" type="A" pyCode="cjjdsqwsfwzx" key="733192468"/>
+    <item ref="571474867" text="富春街道社区卫生服务中心" type="A" pyCode="fcjdsqwsfwzx" key="571474867"/>
+    <item ref="470333838" text="洞桥镇社区卫生服务中心" type="A" pyCode="dqzsqwsfwzx" key="470333838"/>
+  </item>
+  <item ref="330127" text="淳安县平台" type="A" pyCode="caxpt" key="330127">
+    <item ref="47042156-3" text="淳安县中医院" type="A" pyCode="caxzyy" key="47042156-3"/>
+    <item ref="47042154-7" text="淳安县第一人民医院" type="A" pyCode="caxdyrmyy" key="47042154-7"/>
+    <item ref="47042078-X" text="淳安县妇幼保健院" type="A" pyCode="caxfybjy" key="47042078-X"/>
+    <item ref="47042200-5" text="淳安县第二人民医院" type="A" pyCode="caxdermyy" key="47042200-5"/>
+    <item ref="47042059-5" text="石林卫生院" type="A" pyCode="slwsy" key="47042059-5"/>
+    <item ref="47042076-3" text="安阳乡卫生院" type="A" pyCode="ayxwsy" key="47042076-3"/>
+    <item ref="47042184-6" text="淳安县梓桐镇卫生院" type="A" pyCode="caxztzwsy" key="47042184-6"/>
+    <item ref="47042158-X" text="大墅卫生院" type="A" pyCode="dswsy" key="47042158-X"/>
+    <item ref="47042157-1" text="枫树岭镇卫生院" type="A" pyCode="fslzwsy" key="47042157-1"/>
+    <item ref="47042063-2" text="富文卫生院" type="A" pyCode="fwwsy" key="47042063-2"/>
+    <item ref="47042074-7" text="姜家中心卫生院" type="A" pyCode="jjzxwsy" key="47042074-7"/>
+    <item ref="73320641-X" text="界首卫生院" type="A" pyCode="jswsy" key="73320641-X"/>
+    <item ref="47042068-3" text="金峰卫生院" type="A" pyCode="jfwsy" key="47042068-3"/>
+    <item ref="47042180-3" text="鸠坑乡卫生院" type="A" pyCode="jkxwsy" key="47042180-3"/>
+    <item ref="47042196-9" text="浪川卫生院" type="A" pyCode="lcwsy" key="47042196-9"/>
+    <item ref="47042065-9" text="里商卫生院" type="A" pyCode="lswsy" key="47042065-9"/>
+    <item ref="47042155-5" text="临岐中心卫生院" type="A" pyCode="lqzxwsy" key="47042155-5"/>
+    <item ref="47042199-3" text="屏门卫生院" type="A" pyCode="pmwsy" key="47042199-3"/>
+    <item ref="55791034-3" text="千岛湖卫生院" type="A" pyCode="qdhwsy" key="55791034-3"/>
+    <item ref="47042062-4" text="左口卫生院" type="A" pyCode="zkwsy" key="47042062-4"/>
+    <item ref="47042195-0" text="瑶山卫生院" type="A" pyCode="yswsy" key="47042195-0"/>
+    <item ref="47042073-9" text="王阜卫生院" type="A" pyCode="wfwsy" key="47042073-9"/>
+    <item ref="47042072-0" text="威坪中心卫生院" type="A" pyCode="wpzxwsy" key="47042072-0"/>
+    <item ref="47042197-7" text="宋村卫生院" type="A" pyCode="scwsy" key="47042197-7"/>
+    <item ref="47042070-4" text="文昌镇卫生院" type="A" pyCode="wczwsy" key="47042070-4"/>
+    <item ref="47042160-0" text="中洲镇卫生院" type="A" pyCode="zzzwsy" key="47042160-0"/>
+  </item>
+  <item ref="330182" text="建德市平台" type="A" pyCode="jdspt" key="330182">
+    <item ref="470483633" text="建德市中医院" type="A" pyCode="jdszyy" key="470483633"/>
+    <item ref="470483748" text="建德市三都镇中心卫生院" type="A" pyCode="jdssdzzxwsy" key="470483748"/>
+    <item ref="470483879" text="建德市中西医结合医院" type="A" pyCode="jdszxyjhyy" key="470483879"/>
+    <item ref="470483801" text="建德市大同镇中心卫生院" type="A" pyCode="jdsdtzzxwsy" key="470483801"/>
+    <item ref="470483641" text="建德市大慈岩镇卫生院" type="A" pyCode="jdsdcyzwsy" key="470483641"/>
+    <item ref="470483684" text="建德市大洋镇卫生院" type="A" pyCode="jdsdyzwsy" key="470483684"/>
+    <item ref="470483764" text="建德市寿昌镇卫生院" type="A" pyCode="jdssczwsy" key="470483764"/>
+    <item ref="470483617" text="建德市杨村桥镇卫生院" type="A" pyCode="jdsycqzwsy" key="470483617"/>
+    <item ref="470483780" text="建德市第四人民医院" type="A" pyCode="jdsdsrmyy" key="470483780"/>
+    <item ref="470483932" text="建德市航头镇卫生院" type="A" pyCode="jdshtzwsy" key="470483932"/>
+    <item ref="754400692" text="建德市横山医院" type="A" pyCode="jdshsyy" key="754400692"/>
+    <item ref="47048365X" text="建德市梅城医院" type="A" pyCode="jdsmcyy" key="47048365X"/>
+    <item ref="47048373X" text="建德市李家镇卫生院" type="A" pyCode="jdsljzwsy" key="47048373X"/>
+    <item ref="470483609" text="建德市妇幼保健院" type="A" pyCode="jdsfybjy" key="470483609"/>
+    <item ref="470483844" text="建德市大洋镇麻车卫生院" type="A" pyCode="jdsdyzmcwsy" key="470483844"/>
+    <item ref="470483836" text="建德市大同镇劳村卫生院" type="A" pyCode="jdsdtzlcwsy" key="470483836"/>
+    <item ref="470483721" text="建德市乾潭镇中心卫生院" type="A" pyCode="jdsqtzzxwsy" key="470483721"/>
+    <item ref="470483756" text="建德市下涯镇马目卫生院" type="A" pyCode="jdsxyzmmwsy" key="470483756"/>
+    <item ref="470483860" text="建德市下涯镇卫生院" type="A" pyCode="jdsxyzwsy" key="470483860"/>
+  </item>
+  <item ref="330104" text="江干区平台" type="A" pyCode="jgqpt" key="330104">
+    <item ref="470211064" text="江干区人民医院" type="A" pyCode="jgqrmyy" key="470211064"/>
+  </item>
+</dic>

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dic entry="SYS_DOMAIN" keyField="ID" textField="DomainName" queryOnly="false" filter="['eq',['$','Status'],['s','1']]" id="domain" version="1362636764127" isRemote="true" domain="configuration"></dic>

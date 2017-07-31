@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <head>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+ 	 <script language="javascript"  src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="js/base/jquery.nicescroll.min.js" type="text/javascript"></script>	
+	<style type="text/css">
+		#boxscroll {
+			height: 430px;
+			width: 840px;
+		}
+		.active{color: #FF6600}
+    </style>
+  </head>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		$("#boxscroll").niceScroll("#mdcinfo",{touchbehavior:false,cursoropacitymax:0.7,cursorwidth:6,cursorcolor:"#dddddd",autohidemode:"scroll"}); 
+  		//随访
+  		if(MDC_htm=="MDC_OldPeopleVisit"){
+  			var url = host + '/oldPeopleVisit/getOldPeopleVisit?vk=UUID&limit=100'
+  			param = {
+  				'url' : url
+  			};
+  			$("#dsfsj").show()
+			$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				var jsonDatas=data.body
+  				if (data["code"] == 200) {
+  					var html=""
+  	  				var td=""
+  	    			var tdnum=9
+  	    			var first=1
+  					for(i=0;i<jsonDatas.length;i++){
+  						var jsonData = jsonDatas[i];
+  						var dcid=encodeURI(jsonData.DCID)
+  						time=jsonData.EffectiveTime.split('-')
+  						var systime=time[0]+'/'+time[1]+'/'+time[2].split(' ')[0]
+  						td+='<td><a href="#" class="aa" onclick=opendiv("'+dcid+'","oldPeopleVisit","mdcinfo")>'+systime+'</a>&nbsp;&nbsp;&nbsp;</td>'
+  						//固定列数
+  						if(i!=0&&i%tdnum==0){
+	  						html+='<tr>'+td+'</tr>'
+	  						td=""
+	  					}
+  						if(first==1){
+  							opendiv(dcid,"oldPeopleVisit","mdcinfo")
+  							first=0
+  	  					}
+  					}
+  					html+='<tr>'+td+'</tr>'
+  					$("#sfsj").append(html)
+  					////设置首个时间颜色
+					$("#sfsj tr:eq(0) td:eq(0)>a").addClass('active')
+  				}
+  				//设置选中时间颜色
+  				$(".aa").on('click', function(event) {
+  					$(".active").removeClass("active");
+  					$(this).addClass('active');
+  				});
+  			});
+  		}
+  		
+  		if(MDC_htm=="MDC_OldPeopleRecord"){
+  			$("#boxscroll").css({"height":"95%"})
+  			var url = host + '/oldPeopleRecord/getHtmlDocument?vk=UUID&dcId='+dcid
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				htmreport(data,"mdcinfo")
+  			});
+  		}
+  	});
+  
+  </script>
+  <body>	
+	<div id="dsfsj" style="padding:5px 5px 0 25px;height:49px;display:none;overflow-y:auto;border-bottom:1px solid #dddddd;font-size:14px;">
+		<table id="sfsj" height="50px"></table>
+	</div>
+	<div align="center" id="info_loading" style=" top: 220px ;left:600px;display:block;position:absolute;"><img src="images/loading.gif" alt=""></div>
+	<div id="boxscroll" width="100%" style="text-align:center;">
+		<iframe align="center" id="mdcinfo"  name="mdcinfo" width="840px" height="480px" overflow-x="hidden" scrolling="no"></iframe>
+	</div>
+  </body>
+</html>

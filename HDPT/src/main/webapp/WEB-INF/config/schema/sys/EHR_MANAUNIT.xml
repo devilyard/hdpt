@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="EHR_MANAUNIT" alias="EHR_MANAUNIT">
+  <item id="MANAUNITID" alias="MANAUNITID" type="string" length="16" generator="assigned" pkey="true"/>
+  <item id="MANAUNITNAME" alias="MANAUNITNAME" type="string" length="150"/>
+  <item id="PYCODE" alias="PYCODE" type="string" length="50"/>
+</entry>

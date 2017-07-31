@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic> 
+  <item key="system" layout="MDCLayout" mCode="2"/>
+  <item key="03" layout="CDHLayout" mCode="3"/>
+  <item key="00" layout="MDCLayout" mCode="4"/>
+</dic>

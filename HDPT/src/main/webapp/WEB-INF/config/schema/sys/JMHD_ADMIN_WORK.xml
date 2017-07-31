@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_ADMIN_WORK" alias="JMHD_ADMIN_WORK">
+  <item id="WID" alias="WID" length="12" generator="assigned" pkey="true"/>
+  <item id="DOCTOR_ID" alias="DOCTOR_ID" type="string" length="16"/>
+  <item id="STATUS" alias="STATUS" type="string"/>
+  <item id="TASKID" alias="TASKID" type="string" length="32"/>
+  <item id="WTYPE" alias="WTYPE" type="string" length="30"/>
+  <item id="WURL" alias="WURL" type="string" length="500"/>
+  <item id="WTYPENAME" alias="WTYPENAME" type="string" length="50"/>
+  <item id="SQTASKID" alias="SQTASKID" type="string" length="32"/>
+</entry>

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="css/style.css" type="text/css" rel="stylesheet" />
+	<script language="javascript"  src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/layer/layer.min.js"></script>
+	<script src="js/base/jquery.nicescroll.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jmhd.js"></script>
+	<style>
+	#diva{
+		height: 480px; 
+		overflow-y: auto; 
+	}
+    </style>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#beginDate").val("")
+		$("#endDate").val("")
+		var first=1
+		var url = host + '/summary/getMedicalRecord?vk=UUID&limit=100'
+		getList(url,first)
+		first=0
+	
+		//查询
+		$("#bt_query").click(function(){
+			var bd=$("#beginDate").val()
+			var ed=$("#endDate").val()
+			//药品名称
+			var name='%'+$("#labName").val()+'%'
+			var Key
+			
+			//日期查询不做限制
+			if(bd!=""&&ed=="") {
+				if(name==""){
+					Key ='[\"ge\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]]'
+				}else{
+					Key ='["and",[\"ge\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]],[\"like\",[\"$\",\"MedicineName\"],[\"s\",\"'+name+'\"]]]'
+				}
+			}
+			if(bd==""&&ed!=""){
+				if(name==""){
+						Key ='[\"le\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]]'
+				}else{
+					Key ='["and",[\"le\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]],[\"like\",[\"$\",\"MedicineName\"],[\"s\",\"'+name+'\"]]]'
+				}
+			}
+			
+			if(bd!=""&&ed!=""&&name==""){
+					Key ='["and",[\"ge\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]],[\"le\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]]]'
+			}
+			if(bd==""&&ed==""&&name!=""){
+					Key ='[\"like\",[\"$\",\"MedicineName\"],[\"s\",\"'+name+'\"]]'
+			}
+			if(bd!=""&&ed!=""&&name!=""){
+				Key ='["and",["and",[\"ge\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+bd+'\"]],[\"le\",[\"$\",\"str(PrescribeDate,\'yyyy-MM-dd\')\"],[\"s\",\"'+ed+'\"]]],[\"like\",[\"$\",\"MedicineName\"],[\"s\",\"'+name+'\"]]]'
+			}
+			if(bd==""&&ed==""&&name==""){
+				Key=""
+			}
+			
+			url = host + '/entryName/queryRecord?vk=UUID&recordClassifying=SUMMARY_Hist_Drug&args='+ encodeURI(encodeURI(Key))
+		    getList(url,first)
+		})
+		
+	});
+	
+	function getList(url,first){
+		$("#loading").css({'display':'block'})
+		var param = {
+				'url' : url
+			};
+			
+		$.jkw.query(
+			{
+				"target_url" : "getdata.px",
+				"comeback" :comeback,
+				"args":param,
+				"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}
+			}
+		);	
+			
+		//获得索引列表
+		function comeback(data){
+			var jsonDatas = data.body;
+			if (data["code"] == 200) {
+				html = "";
+				createTR("药品名称","发放数量","服用方法","开药日期","发放单位")
+				var fir=1
+				if(jsonDatas.length!=0){
+					//tbody 滚动条
+// 					html+='<tbody id="tby" overfolw="auto">'
+					for(i=0;i<jsonDatas.length;i++){
+						var jsonData = jsonDatas[i];
+						var mname=jsonData.MedicineName
+						var dismount=jsonData.DispensingAmount
+						var mway=jsonData.MedicineWay
+						var bgrq=jsonData.PrescribeDate
+						if(bgrq != null && bgrq.length>10){
+							bgrq = bgrq.substring(0,10)
+						}
+						var atuhtxt=jsonData.AuthorOrganization_Text
+						createBTR(mname,dismount,mway,bgrq,atuhtxt)
+					}
+// 				html+='</tbody>'
+ 				$("#query").html(html)
+				$("#loading").css({'display':'none'})
+				$("#diva").niceScroll({cursorcolor:"#c9e9fe",autohidemode:"scroll"})
+// 				var top=$("#query").offset().top;
+// 				$("#diva").scroll(function(){
+// 				    $("#query tr:eq(0) td").offset({top:top});
+// 				});
+			//	fixhead()
+				}
+			}
+			$("#loading").css({'display':'none'})
+		}
+	}
+	
+	</script>
+	</head>
+	<body><a name="top" href="#"></a><div style="display: none;" id="loading">加载中...</div>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="ehr_main.html">健康档案</a> &gt;&gt; 用药信息 </td>
+  			</tr>
+		</tbody></table>
+
+		<span class="kong5"><br></span>
+
+		<table class="marb1 border_content" cellpadding="0" cellspacing="1" align="center" bgcolor="#A7D7F5" border="0" width="98%">
+		  <tbody><tr>
+		    <td align="center" bgcolor="#c9e9fe" height="40"><table cellpadding="0" cellspacing="0" border="0" width="98%">
+		      <tbody><tr>
+		        <td align="left" width="80%">
+		        	<label for="title">发药日期：</label>
+		        	<input id="beginDate" name="beginDate" class="form2" onclick="WdatePicker()">&nbsp;至&nbsp;<input id="endDate" name="endDate" class="form2" onclick="WdatePicker()">
+		         <label for="labName">药品名称：</label>
+		        <input id="labName" class="form2" name="labName" style="width: 200px">
+		        </td>
+		        <td rowspan="3" align="left" width="20%">
+		       		 <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" id="bt_query" type="button"><span class="ui-button-text">查询</span></button>
+		        </td>
+		        </tr><tr><td></td></tr>
+		        
+		    </tbody></table></td>
+		  </tr>
+		</tbody></table>
+
+		<span class="kong5"><br></span>
+
+		<table class="box mr10 fleft" class="border_content" cellpadding="0" cellspacing="0" align="center" border="0" width="98%">
+		  <tbody><tr>
+		    <td class="title">用药信息&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">本站提供的市民健康信息仅供参考，不具法律效力</font></td>
+		  </tr>
+		  <tr>
+		    <td class="border_kong" align="center" valign="top">
+		    <div class="fixhead" id="diva">
+			    <table  id="query" class="border_content" cellpadding="0" cellspacing="1" bgcolor="#c9e9fe" border="0" width="100%">
+				</table>
+			</div>
+			</td>
+		  </tr>
+		</tbody></table>
+</body>
+</html>

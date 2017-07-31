@@ -1,0 +1,506 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>健康网</title>
+<link href="css/style2.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<table width="1004" align="center" cellspacing="0" cellpadding="0"
+		border="0">
+		<tbody>
+			<tr>
+				<td><table width="992"
+						align="center" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td>
+								<div class="header clear">
+							        <div class="header-top">
+							    	<img src="images/logo-img.png" class="topfleft"/>
+							    	<h1 class="toptextfleft">居民健康网</h1>
+							    	</div>
+							    </div>
+								</td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+			<tr>
+				<td height="6" bgcolor="eaf7ff"></td>
+			</tr>
+			<tr>
+				<td valign="top" align="center" bgcolor="eaf7ff" class="padding"><table
+						width="992" align="center" cellspacing="0" cellpadding="0"
+						border="0">
+						<tbody>
+							<tr>
+								<td valign="top" align="center" bgcolor="#FFFFFF"
+									class="border2">
+									<table width="100%" cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td width="20" align="center" class="set"><img
+													width="10" src="images/ico_set.jpg"></td>
+												<td align="left" class="set">您目前所在的位置：<a href="../logon.html">首页</a> &gt;&gt;个人注册</td>
+											</tr>
+										</tbody>
+									</table> <span class="kong15"><br> </span>
+									<table width="95%" cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td valign="middle" height="40" class="STYLE1">个人基本信息</td>
+											</tr>
+											<tr>
+												<td valign="middle" height="1" bgcolor="#9cc0e4"
+													class="STYLE1"></td>
+											</tr>
+										</tbody>
+									</table> <span class="kong5"><br></span>
+									<form method="post" action="" name="creatForm"
+										id="creatForm">
+										<table width="95%" height="40" cellspacing="0" cellpadding="0"
+											border="0">
+											<tbody align="center">
+												<tr>
+													<td height="28" width="30%" align="right">手机号码：</td>
+													<td align="left" width="50%"><input name="phoneno"
+														id="phoneno" maxlength="18"><font
+															color="red">*</font><span id="phonenovar"/></td>
+													<td></td>
+												</tr>
+												<!-- <tr>
+													<td height="28" align="right">验 证 码：</td>
+													<td align="left"><input name="verify"
+														id="verify" maxlength="6">
+														<a id="sendverify" class="btn" onclick="sendverify()" href="javascript:void(0);">
+															<span id="seconds">获取验证码</span>
+														</a>
+														<span id="verifyCheck"/>
+													</td>
+													<td></td>
+												</tr> -->
+												<tr>
+													<td height="28" align="right">姓名：</td>
+													<td align="left"><input name="username" id="username"><font
+														color="red">*</font></td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td height="28" align="right">性别：</td>
+													<td align="left"><select id="sex" name="sex">
+															<option value="1">男</option>
+															<option value="2">女</option>
+													</select></td>
+													<td>&nbsp;</td>
+												</tr>
+												
+												<tr>
+													<td height="28" align="right">证件类型：</td>
+													<td align="left"><select
+														id="cardtype"
+														name="cardtype">
+															<option value="01">身份证</option>
+															<option value="03">护照</option>
+															<option value="06">港澳通行证</option>
+															<option value="07">台湾通行证</option>
+													</select><font color="red">*</font></td>
+													<td></td>
+												</tr>
+												
+												<tr>
+													<td height="28" align="right">证件号码:</td>
+													<td align="left"><input type="text"
+														id="idcard" name="idcard" onblur="getBirthday()"><font
+														color="red">*</font>
+													</td>
+													<td></td>
+												</tr>
+												
+												<tr>
+													<td height="28" align="right">出生日期：</td>
+													<td align="left"><input type="text" id="birthday"
+														onclick="WdatePicker()" readonly="readonly" value=""
+														name="birthday"><font color="red">*</font></td>
+													<td></td>
+												</tr>
+												
+												<tr>
+													<td height="28" align="right">登录密码：</td>
+													<td align="left"><input type="password" name="password"
+														id="password"><font color="red">*</font></td>
+													<td align="left"></td>
+												</tr>
+												
+												<tr>
+													<td height="28" align="right">确认密码：</td>
+													<td align="left"><input type="password" name="password_again"
+														id="password2"><font color="red">*</font></td>
+													<td align="right"></td>
+													
+												</tr>
+												
+												<tr>
+													<td height="28" align="right">国籍：</td>	
+													<td align="left"><select
+														id="creatForm_ehr_nationalitycode"
+														name="nationality">
+															<option value="1">中国大陆</option>
+															<option value="2">中国港澳</option>
+															<option value="3">中国台湾</option>
+															<option value="9">海外同胞</option>
+													</select><font color="red">*</font></td>
+													<td>&nbsp;</td>
+												</tr>
+												 
+												
+												<tr>
+													<td height="50" colspan="3"><label> <input
+															type="submit" value="确 定" class="ico" name="Submit" id="Submit">
+													</label></td>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="1004" align="center" cellspacing="0" cellpadding="0"
+		border="0">
+		<tbody>
+			<tr>
+				<td align="center" class="bot">版权所有 卫生和计划生育局   承建单位 创业软件股份有限公司</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript" src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/ChinaIDCard.js"></script>
+	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/base/j.suggest.js" ></script>
+	<script type="text/javascript" src="js/base/jquery.form.js" ></script>
+	<script type="text/javascript" src="js/base/jquery.validate.js"></script>
+	<script type="text/javascript" src="js/jmhd.js"></script>
+	<script type="text/javascript">
+
+		var check_url="../checkuser.ehr"
+
+		var exist = false;
+		
+		function checkForm() {
+			return true
+		}
+		
+		//检查是否申请
+		function regcheckIDCardREG() {
+			var v = $("#idcard").val()
+			
+		}
+		$("#idcard").blur(function (){regcheckIDCardREG()});
+
+	
+		//存在的处理
+		function doMouseoutResult(data) {
+			$("#verifyCheck").html("");
+			if (data.code == 200) {
+				$("#phonenovar").empty();
+				$("#sendverify").attr("onclick","sendverify()");
+				exist = false
+			} else {
+				$("#phonenovar").html("<span class='red'>该手机号码已被申请</span>");
+				$("#sendverify").attr("onclick","");
+				exist= true
+			}
+		}
+		
+		function trim(s) {
+            return s.replace(/^\s+|\s+$/g, "");
+        }
+
+        
+        //验证身份证号并获取出生日期
+        function getBirthday() {
+        	$("#birthday").val("");
+            var tmpStr = "";
+            var idDate = "";
+            var tmpInt = 0;
+            var strReturn = "";
+
+            if ($("#cardtype").val() == '01') {
+                var iIdNo = trim($("#idcard").val());
+                if (!isChinaIDCard(iIdNo)) {
+                    return;
+                }
+                if (iIdNo.length == 15) {
+                    tmpStr = iIdNo.substring(6, 12);
+                    tmpStr = "19" + tmpStr;
+                    tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6);
+                    $("#birthday").val(tmpStr);
+                }
+                else {
+                    tmpStr = iIdNo.substring(6, 14);
+                    tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6);
+                    $("#birthday").val(tmpStr);
+                }
+            }
+        }
+		
+       /*
+      //检查手机号格式
+        function checkPhoneno(){
+        	var phoneno = $("#phoneno").val();
+        	var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+        	if(!myreg.test(phoneno)) 
+        	{ 
+        		$("#phonenovar").html("<span class='red'>手机号码格式不正确！</span>");
+        	    return false; 
+        	} 
+        	return true;
+        }
+*/
+		//绑定提交事件
+		function ajaxSubmit() {
+             var args = {"phoneno": $("input[id='phoneno']").val()};
+             $.jkw.query({
+                  "target_url" : check_url,
+                  "args" : args,
+                  "comeback" :function(data){
+        	          if(data.code == 200){
+        	         	 $("#creatForm").ajaxSubmit({  
+     	                     type: 'post',  
+     	                     url: "../register.ehr" ,  
+     	                     dataType : "json", 
+     	                     success: function(data){  
+     	                     	if (data["code"] == 200) {
+     	            	         	alert( "提交成功!!"); 
+     	            	         	location.href = "../logon.html";
+     	            	          	return;
+     	                     	}
+     	            	         else{
+     	            	         	alert(data["x-response-msg"] );  
+     	            	         	return;
+     	                     	}
+     	                     },  
+     	                    cache : "false", 
+     	                    error: function(XmlHttpRequest, textStatus, errorThrown){  
+     	                         alert( "提交失败!!");  
+     	                    }  
+     	                 }); 
+        	          }else{
+        		          alert("请勿重复提交！");
+        	           }
+                   },
+                   "type" : 0
+              }); 
+		}
+		
+		//初始处理
+		$(document).ready(function() {
+		
+			
+			$("#phoneno").val("");
+			$("#verify").val("");
+			$("#username").val("");
+			$("#idcard").val("");
+			$("#birthday").val("");
+/* 				//身份证验证插件
+			   jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+			        return this.optional(element) || isChinaIDCard(value);
+			    }, "请正确输入您的证件号码"); */
+			    
+				//身份证验证
+				jQuery.validator.addMethod("isIdCard", function(value, element) {
+                    if ($("#cardtype").val() === '01') {
+                        var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+                        return this.optional(element) || (re.test(value)); 
+                    } else {
+                        return true;
+                    } 
+                }, "身份证格式不正确");
+				
+				//护照验证
+				   jQuery.validator.addMethod("isPassport", function(value, element) {
+					   if ($("#cardtype").val() === '03') {
+					       var re1 = /^[a-zA-Z]{5,17}$/;
+					       var re2 = /^[a-zA-Z0-9]{5,17}$/;
+					       return this.optional(element) || (re2.test(value)) || re1.test(value);
+					   } else {
+					       return true;
+					   }
+				   }, "护照格式不正确");
+				
+			   //港澳通行证验证
+			   jQuery.validator.addMethod("isHKMacao", function(value, element) {
+               if ($("#cardtype").val() === '06') {
+                   var re = /^[A-Z]{1}([0-9]{9})$/;
+                   return this.optional(element) || (re.test(value));
+               } else {
+                   return true;
+               }
+               }, "港澳通行证格式不正确");
+			   
+			   //台湾通行证验证
+               jQuery.validator.addMethod("isTaiwan", function(value, element) {
+                   if ($("#cardtype").val() == "07") {
+                       var re1 = /^[0-9]{8}$/;
+                       var re2 = /^[0-9]{10}$/;
+                       return this.optional(element) || (re1.test(value)) || (re2.test(value))
+                   } else {
+                       return true;
+                   }
+               }, "台湾通行证格式不正确");
+			   
+			   jQuery.validator.addMethod("regexPassword", function(value, element) {  
+    				return this.optional(element) || /^(((?=.*[a-zA-Z])(?=.*\d))|((?=.*[a-zA-Z])(?=.*[_]))|((?=.*\d)(?=.*[_])))[a-zA-Z\d_]{6,20}$/.test(value);  
+				}, "密码由6-20个字母、数字、下划线至少两种混合组成");
+			   
+			   jQuery.validator.addMethod("isPhoneno", function(value, element) {  
+   				return this.optional(element) || /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value);  
+				}, "手机号码格式不正确");
+
+			//页面校验
+			$("#creatForm").validate({
+				rules : {
+					//"idcard" : {required : true,	minlength: 18,maxlength: 18,isIdCardNo:true},
+					"idcard" : {required : true,	isIdCard:true,isPassport:true,isHKMacao:true,isTaiwan:true},
+					"verify" : {required : true,	minlength: 6,maxlength: 6},
+					"birthday":{date : true},
+					"username" : "required",
+					"birthday" : "required",
+					"password": {required: true,regexPassword: true},
+				    "password_again": {
+				      equalTo: "#password"
+				    },
+					"phoneno" : {
+						minlength: 11,
+						maxlength: 11,
+						required : true,
+						digits : true,
+						isPhoneno : true
+					}
+				},
+				messages : {
+					"password":  
+	                {  
+	                    required: '请输入密码',  
+	                    regexPassword: '请输入6-20个字符（字母、数字、下划线至少两种混合）',
+	                    isPhoneno: '手机号码格式不正确'
+	                }
+				
+				},
+				// specifying a submitHandler prevents the default submit, good for the demo  
+                submitHandler: function() {
+                	if(!exist){
+                		//setTimeout(ajaxSubmit, 7000);
+                		ajaxSubmit();
+               			return false;  
+                	}  
+                	
+                },  
+                errorElement: "em",  
+                success: function(label) { 
+                }
+			});
+			
+			 $("input[id='phoneno']").bind("blur",function(){
+                var args = {"phoneno": $("input[id='phoneno']").val()};
+				$.jkw.query({
+					"target_url" : check_url,
+				    "args" : args,
+				    "comeback" :doMouseoutResult,
+				    "type" : 0
+				});
+			});
+			
+		})
+		
+		//发送验证码
+		var t;
+		function sendverify(){
+			$("#verifyCheck").html("");
+			var phoneno = $("#phoneno").val();
+		    if(phoneno==null || phoneno.length==0){
+		     	alert('手机号码不能为空！');
+		        return false;
+			}  
+			
+			t = getCookieValue("secondsremained"+phoneno) ? getCookieValue("secondsremained"+phoneno):0 ;//获取cookie值
+			if(t>0){
+				$("#verifyCheck").append("等待60秒后重新获取");
+				return;
+			}
+			
+			$("#verifyCheck").html("");
+		   	$("#seconds").html("");
+		   	$("#seconds").html("(<a id='sec'>60</a>秒后重新获取)");
+		   	$("#sendverify").attr("onclick","");
+			addCookie("secondsremained"+phoneno,60,60);//添加cookie记录,有效时间60s
+			
+		 	$.ajax({
+		 		   async : false,
+        		   cache : false,
+                   type: "POST",
+                   url: "../sendmsg.ehr",
+                   data: {
+                       "phoneno": phoneno
+                   },
+                   dataType: "JSON",
+                   success: function (data) {
+                       if (data['x-response-msg'] == 'error') {
+                           alert('发送短信失败！', '提示');
+                       } 
+                   }
+             });
+            clearTimeout(t);
+			lazyGo();
+		}
+		
+		function lazyGo() {
+			var sec = $("#sec").text();
+			$("#sec").text(--sec);
+			if (sec > 0){
+				t = setTimeout("lazyGo();", 1000);
+			}else{
+				init();
+			}
+		}
+		
+		function init(){
+			clearTimeout(t);
+			$("#seconds").html("");
+		   	$("#seconds").html("获取短信验证码");
+		   	$("#sendverify").attr("onclick","sendverify()");
+		}
+		
+		//发送验证码时添加cookie
+		function addCookie(name,value,expiresHours){ 
+		    var cookieString=name+"="+escape(value); 
+		    //判断是否设置过期时间,0代表关闭浏览器时失效
+		    if(expiresHours>0){ 
+		        var date=new Date(); 
+		        date.setTime(date.getTime()+expiresHours*1000); 
+		        cookieString=cookieString+";expires=" + date.toUTCString(); 
+		    } 
+		        document.cookie=cookieString; 
+		}
+		
+		//根据名字获取cookie的值
+		function getCookieValue(name){ 
+		      var strCookie=document.cookie; 
+		      var arrCookie=strCookie.split("; "); 
+		      for(var i=0;i<arrCookie.length;i++){ 
+		        var arr=arrCookie[i].split("="); 
+		        if(arr[0]==name){
+		          return unescape(arr[1]);
+		          break;
+		        } 
+		      } 
+		       
+		}
+	</script>
+</body>
+</html>

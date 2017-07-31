@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>角色列表</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+   	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+        var err_url = "../../addOrUpdate.ehr"
+		var target_url = "../../addOrUpdate.ehr";
+		var back_url = "../../addOrUpdate.ehr";
+		var maxRequest = 3;
+
+		$(document).ready(function(){
+			
+			var cfg = {
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "ajaxForm"
+			};
+			$.jkw.submit(cfg);
+		});
+
+		function doResult(data){
+			if (data.success) {
+				alert(data.message);
+			} else {
+				alert(data.message);
+			}
+			location.href="role-list.html";
+		}
+		function changeIframeSize(){
+			initContAreaStyle();
+		}
+	</script>
+
+  </head>
+
+  <body>
+  	 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="role-list.html">角色维护</a> &gt;&gt; 新增角色</td>
+  			</tr>
+		</tbody></table>
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody><tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   <form id="ajaxForm" name="ajaxForm" action="../../addOrUpdate.ehr" method="post">
+				   <table style="margin-left: 50px;">
+				   	<tbody>
+				   	<tr>
+				   		<td>角色名称<font color="red">(*)</font>:</td>
+				   		<td><input name="roleName" type="text"></td>
+				   	</tr>
+				   	<tr>
+				   		<td>角色类型:</td>
+				   		<td><input name="roleType" value="2" checked="checked" type="radio">系统管理员
+				   			<input name="roleType" value="1" type="radio">机构
+				   		</td>
+				   	</tr>
+				   	<tr>
+				   		<td>社区角色类型:</td>
+				   		<td>
+					   		<select name="sqrole" id="ajaxForm_sysRole_sqrole">
+							    <option selected="selected" value="00">请选择</option>
+							    <option value="01">责任医生</option>
+							    <option value="02">责任护士</option>
+							    <option value="03">公卫医生</option>
+							    <option value="04">中心主任</option>
+							    <option value="05">团队长</option>
+							    <option value="06">网络管理员</option>
+							    <option value="07">儿保医生</option>
+							    <option value="08">妇保医生</option>
+							    <option value="09">市妇幼</option>
+							    <option value="10">区妇幼</option>
+							    <option value="11">市CDC</option>
+							    <option value="12">区CDC</option>
+							    <option value="13">市区卫生局</option>
+							    <option value="14">防保科长</option>
+							</select>
+						</td>
+					</tr>
+				   	<tr>
+				   		<td>角色状态:</td>
+				   		<td>
+				   			<input name="status" id="ajaxForm_sysRole_status0" checked="checked" value="0" type="radio"><label for="ajaxForm_sysRole_status0">启用</label>
+							<input name="status" id="ajaxForm_sysRole_status1" value="1" type="radio"><label for="ajaxForm_sysRole_status1">停用</label>
+						</td>
+					</tr>
+				    <tr>
+				    	<td>备注</td><td><textarea name="remarks"></textarea></td>
+				    </tr>
+				    <tr>
+				    	<td colspan="2">
+				    		<input class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+							<input class="ui-button ui-widget ui-state-default ui-corner-all" value="重置" role="button" type="reset">
+						</td>
+					</tr>
+				   </tbody>
+				   </table>
+				   </form>
+				</td>
+			  </tr>
+			 </tbody></table>
+		 </td>
+		 </tr>
+		 </tbody></table>
+</body></html>

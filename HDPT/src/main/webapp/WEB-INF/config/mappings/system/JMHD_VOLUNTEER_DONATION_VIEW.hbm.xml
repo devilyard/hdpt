@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_VOLUNTEER_DONATION_VIEW" table="JMHD_VOLUNTEER_DONATION_VIEW">
+		<id name="DONATEID" type="java.lang.String">
+	    	<column name="DONATEID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="EMPIID" type="java.lang.String" length="32" />
+		<property name="PERSONNAME" type="java.lang.String" length="30" />
+		<property name="SEXCODE" type="java.lang.String"  />
+		<property name="NATIONCODE" type="java.lang.String" length="2" />
+		<property name="BIRTHDAY" type="date"  />
+		<property name="WORKCODE" type="java.lang.String" length="3" />
+		<property name="BLOODTYPECODE" type="java.lang.String"  />
+		<property name="RHBLOODCODE" type="java.lang.String"  />
+		<property name="CERTIFICATETYPECODE" type="java.lang.String" length="2" />
+		<property name="ZIPCODE" type="java.lang.String" length="6" />
+		<property name="EMAIL" type="java.lang.String" length="30" />
+		<property name="ADDRESS" type="java.lang.String" length="100" />
+		<property name="CERTIFICATENO" type="java.lang.String" length="30" />
+		<property name="WORKPLACE" type="java.lang.String" length="50" />
+		<property name="MOBILENUMBER" type="java.lang.String" length="20" />
+		<property name="BLOODFLAG" type="java.lang.String"  />
+		<property name="LASTDONATEBLOODDATE" type="date"  />
+		<property name="TDONATEBLOODCOUNT" type="java.lang.String"  />
+		<property name="ALLBLOODCOUNT" type="java.lang.String"  />
+		<property name="CREATEDATE" type="date"  />
+		<property name="CREATEUNIT" type="java.lang.String" length="16" />
+		<property name="CREATEUSER" type="java.lang.String" length="20" />
+		<property name="COMMPONENBLOODCOUNT" type="java.lang.String"  />
+		<property name="CANCELLATIONUSER" type="java.lang.String" length="20" />
+		<property name="CANCELLATIONDATE" type="date"  />
+		<property name="CANCELLATIONUNIT" type="java.lang.String" length="16" />
+		<property name="CANCELLATIONREASON" type="java.lang.String" length="100" />
+		<property name="STATUS" type="java.lang.String"  />
+		<property name="LASTMODIFYUNIT" type="java.lang.String" length="16" />
+		<property name="LASTMODIFYDATE" type="date"  />
+		<property name="LASTMODIFYUSER" type="java.lang.String" length="20" />
+		<property name="WORKPLACENUMBER" type="java.lang.String" length="20" />
+		<property name="QQNUMBER" type="java.lang.String" length="20" />
+		<property name="NOTES" type="java.lang.String" length="2000" />
+		<property name="DEADREASON" type="java.lang.String" length="100" />
+		<property name="CARDTYPE" type="java.lang.String" length="10" />
+	</class>
+</hibernate-mapping>

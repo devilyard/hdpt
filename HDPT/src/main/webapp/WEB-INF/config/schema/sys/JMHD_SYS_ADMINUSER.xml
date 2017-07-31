@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_SYS_ADMINUSER" alias="JMHD_SYS_ADMINUSER">
+  <item id="ADMIN_ID" alias="ADMIN_ID" length="8" generator="assigned" pkey="true"/>
+  <item id="ADMIN_NAME" alias="ADMIN_NAME" type="string" length="50"/>
+  <item id="LOGIN_NANE" alias="LOGIN_NANE" type="string" length="20"/>
+  <item id="PASSWORD" alias="PASSWORD" type="string" length="32"/>
+  <item id="ORG_ID" alias="ORG_ID" type="string" length="16"/>
+  <item id="REMARKS" alias="REMARKS" type="string" length="255"/>
+  <item id="STATUS" alias="STATUS" type="string"/>
+  <item id="TYPE" alias="TYPE" type="string"/>
+  <item id="DATAFIELD" alias="DATAFIELD" type="string"/>
+</entry>

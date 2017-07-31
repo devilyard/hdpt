@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dc.domain.volunteer.JmhdVolunteerDonation" table="JMHD_VOLUNTEER_DONATION">
+        <id name="donateid" type="java.lang.Long">
+            <column name="DONATEID" length="16" />
+            <generator class="sequence">
+             <param name="sequence">JMHD_VOLUNTEER_DONATION_SQ</param>
+            </generator>
+        </id>
+        <property name="empiid" type="java.lang.String">
+            <column name="EMPIID" length="32" />
+        </property>
+        <property name="personname" type="java.lang.String">
+            <column name="PERSONNAME" length="30" />
+        </property>
+        <property name="sexcode" type="java.lang.String">
+            <column name="SEXCODE" length="1" />
+        </property>
+        <property name="nationcode" type="java.lang.String">
+            <column name="NATIONCODE" length="2" />
+        </property>
+        <property name="birthday" type="java.util.Date">
+            <column name="BIRTHDAY" length="7" />
+        </property>
+        <property name="workcode" type="java.lang.String">
+            <column name="WORKCODE" length="3" />
+        </property>
+        <property name="bloodtypecode" type="java.lang.String">
+            <column name="BLOODTYPECODE" length="1" />
+        </property>
+        <property name="rhbloodcode" type="java.lang.String">
+            <column name="RHBLOODCODE" length="1" />
+        </property>
+        <property name="certificatetypecode" type="java.lang.String">
+            <column name="CERTIFICATETYPECODE" length="2" />
+        </property>
+        <property name="zipcode" type="java.lang.String">
+            <column name="ZIPCODE" length="6" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" length="30" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" length="100" />
+        </property>
+        <property name="certificateno" type="java.lang.String">
+            <column name="CERTIFICATENO" length="30" />
+        </property>
+        <property name="workplace" type="java.lang.String">
+            <column name="WORKPLACE" length="50" />
+        </property>
+        <property name="mobilenumber" type="java.lang.String">
+            <column name="MOBILENUMBER" length="20" />
+        </property>
+        <property name="bloodflag" type="java.lang.String">
+            <column name="BLOODFLAG" length="1" />
+        </property>
+        <property name="lastdonateblooddate" type="java.util.Date">
+            <column name="LASTDONATEBLOODDATE" length="7" />
+        </property>
+        <property name="tdonatebloodcount" type="java.math.BigDecimal">
+            <column name="TDONATEBLOODCOUNT" precision="22" scale="0" />
+        </property>
+        <property name="allbloodcount" type="java.math.BigDecimal">
+            <column name="ALLBLOODCOUNT" precision="22" scale="0" />
+        </property>
+        <property name="createdate" type="java.util.Date">
+            <column name="CREATEDATE" length="7" />
+        </property>
+        <property name="createunit" type="java.lang.String">
+            <column name="CREATEUNIT" length="16" />
+        </property>
+        <property name="createuser" type="java.lang.String">
+            <column name="CREATEUSER" length="20" />
+        </property>
+        <property name="commponenbloodcount" type="java.math.BigDecimal">
+            <column name="COMMPONENBLOODCOUNT" precision="22" scale="0" />
+        </property>
+        <property name="cancellationuser" type="java.lang.String">
+            <column name="CANCELLATIONUSER" length="20" />
+        </property>
+        <property name="cancellationdate" type="java.util.Date">
+            <column name="CANCELLATIONDATE" length="7" />
+        </property>
+        <property name="cancellationunit" type="java.lang.String">
+            <column name="CANCELLATIONUNIT" length="16" />
+        </property>
+        <property name="cancellationreason" type="java.lang.String">
+            <column name="CANCELLATIONREASON" length="100" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="lastmodifyunit" type="java.lang.String">
+            <column name="LASTMODIFYUNIT" length="16" />
+        </property>
+        <property name="lastmodifydate" type="java.util.Date">
+            <column name="LASTMODIFYDATE" length="7" />
+        </property>
+        <property name="lastmodifyuser" type="java.lang.String">
+            <column name="LASTMODIFYUSER" length="20" />
+        </property>
+        <property name="workplacenumber" type="java.lang.String">
+            <column name="WORKPLACENUMBER" length="20" />
+        </property>
+        <property name="qqnumber" type="java.lang.String">
+            <column name="QQNUMBER" length="20" />
+        </property>
+        <property name="notes" type="java.lang.String">
+            <column name="NOTES" length="2000" />
+        </property>
+        <property name="deadreason" type="java.lang.String">
+            <column name="DEADREASON" length="100" />
+        </property>
+        <property name="cardtype" type="java.lang.String">
+            <column name="CARDTYPE" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

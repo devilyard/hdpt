@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dc.domain.contact.JmhdUserRecontact" table="JMHD_USER_RECONTACT">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+             <param name="sequence">JMHD_USER_RECONTACT_SQ</param>
+            </generator>
+        </id>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" precision="12" scale="0" />
+        </property>
+        <property name="empiid" type="java.lang.String">
+            <column name="EMPIID" length="64" />
+        </property>
+        <property name="doctorId" type="java.lang.String">
+            <column name="DOCTOR_ID" length="16" />
+        </property>
+        <property name="remessage" type="java.lang.String">
+            <column name="REMESSAGE" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="reId" type="java.lang.Long">
+            <column name="RE_ID" precision="12" scale="0" />
+        </property>
+        <property name="contactId" type="java.lang.Long">
+            <column name="CONTACT_ID" precision="12" scale="0" />
+        </property>
+        <property name="delStatus" type="java.lang.String">
+            <column name="DEL_STATUS" length="1" />
+        </property>
+        <property name="mpiid" type="java.lang.String">
+            <column name="MPIID" length="64" />
+        </property>
+    </class>
+</hibernate-mapping>

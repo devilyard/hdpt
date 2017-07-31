@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <HEAD>
+<!--   <TITLE>健康网</TITLE> -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="js/ztree/css/demo.css" type="text/css">
+  <link rel="stylesheet" href="js/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <script language="javascript"  src="js/base/jquery.js"></script>
+  <script type="text/javascript" src="js/ztree/jquery.ztree.core-3.5.js"></script>
+  <script type="text/javascript" src="js/layer/layer.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/jmhd.js"></script>
+  <SCRIPT LANGUAGE="JavaScript">
+   var zTreeObj
+   var MDC_htm
+   var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			view: {
+				showLine: false
+			},
+			callback: {
+				onClick: onClick
+			}
+  };
+   
+   var zNodes = [
+   		{id:"lnrda",name:"老年人档案",open:true,icon:"js/ztree/css/zTreeStyle/img/diy/8.png"},
+        {id:"lnrsf",name:"老年人随访",open:true,icon:"js/ztree/css/zTreeStyle/img/diy/8.png"}
+   ];
+   
+   function onClick(event, treeId, treeNode){
+		$("#mdcdetail").html("")
+		if(treeNode.name=="老年人档案"){
+			MDC_htm="MDC_OldPeopleRecord"
+		}
+		if(treeNode.name=="老年人随访"){
+			MDC_htm="MDC_OldPeopleVisit"
+		}
+		$("#mdcdetail").load("MDC_OldPeople_Info.html")
+   }
+   
+   
+   $(document).ready(function(){
+   
+   		var url = host + '/oldPeopleRecord/getOldPeopleRecord?vk=UUID'
+		var param = {
+			'url' : url
+		};
+
+		var first=1
+
+		$.jkw.query(
+			{
+				"target_url" : "getdata.px",
+				"comeback" :comeback,
+				"args":param,
+				"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}
+			}
+		);
+	    
+		function comeback(data){
+			var jsonDatas = data.body;
+			if (data["code"] == 200) {
+				var html = "";
+				if(jsonDatas.length!=0){
+					zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes);
+				}
+				if(first==1){
+					$("#mdcdetail").html("")
+					var zTree_Menu = $.fn.zTree.getZTreeObj("tree");
+					var curMenu = zTree_Menu.getNodes()[0];
+					zTree_Menu.selectNode(curMenu);
+					MDC_htm="MDC_OldPeopleVisit"
+					dcid = encodeURI(jsonDatas.DCID)
+					$("#mdcdetail").load("MDC_OldPeople_Info.html")
+					first=0
+				}
+			}
+		}
+      
+   });
+   
+   
+   $(document).ready(function(){
+		zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes);
+		$("#mdcdetail").html("")
+		//MDC_htm="MDC_OldPeopleVisit"
+		MDC_htm="MDC_OldPeopleRecord";
+		$("#mdcdetail").load("MDC_OldPeople_Info.html")
+
+   });
+  </SCRIPT>
+  
+ </HEAD>
+<BODY>
+	 <div class="box fleft" style="margin-left:12px;width:180px; height:500px;">
+	   <ul id="tree" class="ztree"></ul>
+	 </div>
+	<div class="box fleft" style="width:840px; height:500px;"
+	 id="mdcdetail">
+	 </div>
+</BODY>
+</HTML>

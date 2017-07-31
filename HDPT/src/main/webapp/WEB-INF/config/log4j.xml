@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="INFO" />
+		<param name="Target" value="System.out" />
+		<param name="Encoding" value="GBK" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd HH\:mm\:ss,SSS} %-5p] %F\:%L - %m%n" />
+		</layout>
+	</appender>
+	<appender name="A1" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${HZ_MTC.root}/WEB-INF/logs/server.log" />
+		<param name="Threshold" value="INFO" />
+		<param name="Encoding" value="GBK" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH\:mm\:ss,SSS}][%p][%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+
+	<appender name="DATABASE" class="org.apache.log4j.jdbc.JDBCAppender">
+		<param name="Threshold" value="warn" />
+		<param name="URL"
+			value="jdbc:mysql://172.16.171.251/ssdev?useUnicode=true&amp;characterEncoding=utf-8" />
+		<param name="driver" value="com.mysql.jdbc.Driver" />
+		<param name="user" value="root" />
+		<param name="password" value="bsoft" />
+		<param name="BufferSize" value="20" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="INSERT INTO sys_log4j(Level,Date,Class,RowNumber,Message) VALUES ('%p','%d{yyyy-MM-dd HH\:mm\:ss}','%C','%L','%m')" />
+		</layout>
+	</appender>
+
+	<appender name="DBpool" class="ctd.util.log.JDBCPoolAppender">
+		<param name="Threshold" value="error" />
+<!-- 		<param name="BufferSize" value="10" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="INSERT INTO sys_log4j(Level,Date,Class,RowNumber,Message,Type,User) VALUES ('%p','%d{yyyy-MM-dd HH\:mm\:ss}','%C','%L','%m','1','%X{userId}')" />
+		</layout>
+	</appender>
+	
+	<appender name="DBpool1" class="ctd.util.log.JDBCPoolAppender">
+		<param name="Threshold" value="error" />
+<!-- 		<param name="BufferSize" value="10" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="INSERT INTO sys_log4j(Level,Date,Class,RowNumber,Message,Type,User) VALUES ('%p','%d{yyyy-MM-dd HH\:mm\:ss}','%C','%L','%m','2','%X{userId}')" />
+		</layout>
+	</appender>
+
+<!-- 	<category name="ctd.dao" additivity="false"> -->
+<!-- 		<level value="error" /> -->
+<!-- 		<appender-ref ref="DBpool" /> -->
+<!-- 		<appender-ref ref="CONSOLE" /> -->
+<!-- 	</category> -->
+
+<!-- 	<category name="ctd.service.dao" additivity="false"> -->
+<!-- 		<level value="error" /> -->
+<!-- 		<appender-ref ref="DBpool1" /> -->
+<!-- 		<appender-ref ref="CONSOLE" /> -->
+<!-- 	</category> -->
+
+	<category name="com.mchange.v2" additivity="false">
+		<level value="off" />
+	</category>
+
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="A1" />
+		<!-- <appender-ref ref="DBpool" /> -->
+	</root>
+
+
+</log4j:configuration>

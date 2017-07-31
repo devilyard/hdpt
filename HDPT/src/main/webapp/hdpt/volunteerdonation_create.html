@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>健康网</title>
+		<link href="css/style2.css" type="text/css" rel="stylesheet" />
+		<link href="../o_resource/css/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js"></script>
+		<script type="text/javascript" src="js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="js/base/jquery.validate.js"></script>
+		<script type="text/javascript" src="js/base/j.suggest.js"></script>
+		<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+        var check_url="../volunteers/checkVolunteers.ehr"
+		var target_url = "../volunteers/checkVolunteers.ehr";
+		var back_url = "/response.do";
+		var maxRuestion = 3;
+		$(document).ready(function(){
+
+		    $("#creatForm").validate({
+			rules: {
+				"certificateno":"required",
+				"personname":"required",
+				"nationcode": "required",
+				"birthday": "required",
+				"address": "required",
+				"mobilenumber": {
+					required: true,
+					digits: true
+				},
+				"lastdonateblooddate":"required",
+				"tdonatebloodcount":{
+					required: true,
+					digits: true
+				},
+				"allbloodcount":{
+					required: true,
+					digits: true
+				},
+				"commponenbloodcount":{
+					required: true,
+					digits: true
+				}
+				},
+				messages: {
+				}
+			});
+		    $("input[id='certificateno']").bind("blur",function(){
+                var args = {"certificateno": $("input[id='certificateno']").val()};
+				$.jkw.send({
+					"target_url" : check_url,
+					"back_url" : back_url,
+				    "args" : args,
+				    "comeback" :doMouseoutResult,
+				    "type" : 0
+				});
+			});
+		    var cfg = {
+					"back_url" : back_url,
+					"comeback" :submitResult,
+					"formid" : "creatForm",
+					"before" : before,
+					"type" : 0
+				};
+		    $.jkw.submit(cfg);
+		});
+		
+		function before(){
+			if($("#certificatenovar").html() == ''){
+				return true;
+			}else{
+				alert("证件号码已经被申请,请重新输入!");
+				return false;
+			}
+		}
+
+        function doMouseoutResult(data){
+           if (data.success) {
+			  $("#certificatenovar").empty();
+			} else {
+				$("#certificatenovar").html("该身份证号码已被申请");
+			}
+        }
+
+
+		function submitResult(data){
+			if (data.success) {
+			    alert("登记成功!感谢您的登记!");
+			    window.close();
+				location.href = target_url;
+			} else {
+				alert(data.message);
+			}
+		}
+	</script>
+</head>
+	<body>
+		<table width="1004" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td background="images/banner_bj.jpg"><table width="992" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="90" align="right" valign="middle" background="images/banner.jpg"><table width="63%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="71%" height="65" align="right"></td>
+          </tr>
+        </table>
+        <table width="63%" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+            <td width="68%" height="25" class="top_user"></td>
+            <td colspan="4" class="top_user"></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="6" bgcolor="eaf7ff"></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" bgcolor="eaf7ff" class="padding"><table width="992" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="center" valign="top" bgcolor="#FFFFFF" class="border2">
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+              <td align="left" class="set">您目前所在的位置：献血志愿者登记</td>
+            </tr>
+          </table>
+		  <span class="kong15"><br>
+		  </span>
+		  <table width="95%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td height="40" valign="middle" class="STYLE1">献血志愿者登记</td>
+            </tr>
+            <tr>
+              <td height="1" valign="middle" bgcolor="#9cc0e4" class="STYLE1"></td>
+            </tr>
+          </table>
+
+          <div class="ui-widget" style="margin: 10px ;text-align:left" >
+			<div style="padding: 0px 0.7em; margin-top: 20px ;" class="ui-state-highlight ui-corner-all">
+				<p>
+					<span style="margin-right: 0.3em; float: left;" class="ui-icon ui-icon-info"></span>
+					<strong>说明</strong> 为积极做好无偿献血志愿者名库的建设工作，希望有意向加入中山市无偿献血志愿者名库，愿意在血液紧张时参加无偿献血的用户认真填写《中山市无偿献血志愿者名库登记表》。
+				</p>
+			</div>
+		</div>
+
+		  <span class="kong5"><br></span>
+		  <form id="creatForm" name="creatForm" action="../volunteers/createVolunteers.ehr" method="post">
+		  <table width="95%" height="40" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+           	  <td width="10%" height="28" align="right">
+           	  	<select name="cardtype">
+           	  		<option value="1">身份证</option>
+           	  		<option value="2">护照</option>
+           	  		<option value="3">学生证</option>
+           	  		<option value="4">驾驶证</option>
+           	  		<option value="5">其他</option>
+           	  	</select>：
+           	   </td>
+              <td width="30%" align="left"><input id="certificateno" name="certificateno" /><font color="red">*</font><span id="certificatenovar"></span></td>
+              <td width="12%" align="right">姓名：</td>
+              <td width="20%" align="left"><input id="personname" name="personname" /><font color="red">*</font></td>
+              <td width="10%" align="right">&nbsp;</td>
+              <td width="18%" align="left">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="28" align="right">性别：</td>
+              <td align="left"><input type="radio" name="sexcode" id="sexcode1" checked="checked" value="1"/><label for="sexcode1">男</label>
+<input type="radio" name="sexcode" id="sexcode2" value="2"/><label for="sexcode2">女</label>
+</td>
+              <td align="right">民族：</td>
+              <td align="left"><select name="nationcode" id="nationcode">
+    <option value="01">汉族</option>
+    <option value="02">蒙古族</option>
+    <option value="03">回族</option>
+    <option value="04">藏族</option>
+    <option value="05">维吾尔族</option>
+    <option value="06">苗族</option>
+    <option value="07">彝族</option>
+    <option value="08">壮族</option>
+    <option value="09">布依族</option>
+    <option value="10">朝鲜族</option>
+    <option value="11">满族</option>
+    <option value="12">侗族</option>
+    <option value="13">瑶族</option>
+    <option value="14">白族</option>
+    <option value="15">土家族</option>
+    <option value="16">哈尼族</option>
+    <option value="17">哈萨克族</option>
+    <option value="18">傣族</option>
+    <option value="19">黎族</option>
+    <option value="20">傈僳族</option>
+    <option value="21">佤族</option>
+    <option value="22">畲族</option>
+    <option value="23">高山族</option>
+    <option value="24">拉祜族</option>
+    <option value="25">水族</option>
+    <option value="26">东乡族</option>
+    <option value="27">纳西族</option>
+    <option value="28">景颇族</option>
+    <option value="29">柯尔克孜族</option>
+    <option value="30">土族</option>
+    <option value="31">达斡尔族</option>
+    <option value="32">仫佬族</option>
+    <option value="33">羌族</option>
+    <option value="34">布朗族</option>
+    <option value="35">撒拉族</option>
+    <option value="36">毛南族</option>
+    <option value="37">仡佬族</option>
+    <option value="38">锡伯族</option>
+    <option value="39">阿昌族</option>
+    <option value="40">普米族</option>
+    <option value="41">塔吉克族</option>
+    <option value="42">怒族</option>
+    <option value="43">乌孜别克族</option>
+    <option value="44">俄罗斯族</option>
+    <option value="45">鄂温克族</option>
+    <option value="46">德昂族</option>
+    <option value="47">保安族</option>
+    <option value="48">裕固族</option>
+    <option value="49">京族</option>
+    <option value="50">塔塔尔族</option>
+    <option value="51">独龙族</option>
+    <option value="52">鄂伦春族</option>
+    <option value="53">赫哲族</option>
+    <option value="54">门巴族</option>
+    <option value="55">珞巴族</option>
+    <option value="56">基诺族</option>
+
+
+</select>
+</td>
+              <td align="right">邮箱:</td>
+              <td align="left"><input id="email" name="email" /></td>
+            </tr>
+            <tr>
+              <td height="28" align="right">出生日期：</td>
+              <td align="left"><input type="text" name="birthday" value="" id="birthday" style="width:150px" onClick="WdatePicker()"/><font color="red">*</font></td>
+              <td align="right">职业类别：</td>
+              <td align="left"><select name="workcode" id="workcode">
+    <option value="0">国家机关、党群组织、企业、事业单位负责人</option>
+    <option value="1">专业技术人员</option>
+    <option value="3">办事人员和有关人员</option>
+    <option value="4">商业、服务业人员</option>
+    <option value="5"> 农、林、牧、渔、水利业生产人员</option>
+    <option value="7">生产、运输设备操作人员及有关人员</option>
+    <option value="X">军人</option>
+    <option value="Y">不便分类的其他从业人员</option>
+
+
+</select>
+</td>
+              <td align="right">&nbsp;</td>
+              <td align="left">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="28" align="right">ABO血型：</td>
+              <td align="left"><select name="bloodtypecode" id="bloodtypecode">
+    <option value="1">A型</option>
+    <option value="2">B型</option>
+    <option value="0">O型</option>
+    <option value="3">AB型</option>
+    <option value="5">不详</option>
+
+
+</select>
+</td>
+              <td align="right">RH血型：</td>
+              <td align="left"><select name="rhbloodcode" id="rhbloodcode">
+    <option value="2">RH阳性</option>
+    <option value="1">RH阴性</option>
+    <option value="3">不详</option>
+
+
+</select>
+</td>
+              <td align="right">&nbsp;</td>
+              <td align="left">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="28" align="right">QQ号：</td>
+              <td align="left"><input id="qqnumber" name="qqnumber"/></td>
+              <td align="right">通讯地址：</td>
+              <td align="left"><input id="address" name="address"/><font color="red">*</font></td>
+              <td align="right">邮编：</td>
+              <td align="left"><input id="zipcode" name="zipcode"/></td>
+            </tr>
+            <tr>
+              <td height="28" align="right">手机号码：</td>
+              <td align="left"><input id="mobilenumber" name="mobilenumber"/><font color="red">*</font></td>
+              <td align="right">工作单位：</td>
+              <td align="left"><input id="workplace" name="workplace"/></td>
+              <td align="right">单位电话：</td>
+              <td align="left"><input id="workplacenumber" name="workplacenumber"/></td>
+            </tr>
+            <tr>
+              <td height="28" align="right">是否献过血：</td>
+              <td align="left"><input type="radio" name="bloodflag" id="bloodflag1" checked="checked" value="1"/><label for="bloodflag1">是</label>
+<input type="radio" name="bloodflag" id="bloodflag2" value="2"/><label for="bloodflag2">否</label>
+</td>
+              <td align="right">最近献血日期：</td>
+              <td align="left"><input type="text" name="lastdonateblooddate" value="" id="lastdonateblooddate" style="width:150px" onClick="WdatePicker()"/><font color="red">*</font></td>
+              <td align="right">献血次数：</td>
+              <td align="left"><input id="tdonatebloodcount" name="tdonatebloodcount"/><font color="red">*</font></td>
+            </tr>
+            <tr>
+              <td height="28" align="right">全血次数：</td>
+              <td align="left"><input id="allbloodcount" name="allbloodcount"/><font color="red">*</font></td>
+              <td align="right">成分血次数：</td>
+              <td align="left"><input id="commponenbloodcount" name="commponenbloodcount"/><font color="red">*</font></td>
+              <td align="right">&nbsp;</td>
+              <td align="left">&nbsp;</td>
+            </tr>
+              <tr>
+              <td height="28" align="right">备注：</td>
+              <td align="left" colspan="5"><textarea rows="5" cols="60" name="notes"></textarea></td>
+
+            </tr>
+            <tr>
+              <td height="50" align="right">&nbsp;</td>
+              <td colspan="5" align="center">                <label>
+                  <input name="Submit" type="submit" class="ico" value="确 定" />
+                  </label>              </td>
+              </tr>
+          </table>
+          </form>
+
+
+
+
+		  </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<table width="1004" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td align="center"><!-- 主管单位：中山市卫生局<br>
+　主办及维护单位：中山市卫生信息中心 <br>
+地址：中山市长江路70号　邮编：528400 <br>
+ 承办单位：创业软件 <br>
+ 备案证编号：浙ICP备 05079099  -->
+  </td></tr>
+  
+</table>
+	</body>
+</html>
+

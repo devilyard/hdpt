@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic> 
+  <item  key="MDCCrowd" text="慢性病人群" entryName="MDC,MDC_Hypertension"/>
+  <item  key="MHCCrowd" text="孕妇人群" entryName="MHC"/>
+  <item  key="CDHCrowd" text="儿童人群" entryName="CDH"/>
+  <item  key="OldCrowd" text="老年人人群" entryName="Old"/>
+</dic>

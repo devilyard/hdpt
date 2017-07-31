@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <HEAD>
+<!--   <TITLE>健康网</TITLE> -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="js/ztree/css/demo.css" type="text/css">
+  <link rel="stylesheet" href="js/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link rel="stylesheet" href="js/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <script language="javascript"  src="js/base/jquery.js"></script>
+  <script type="text/javascript" src="js/ztree/jquery.ztree.core-3.5.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <SCRIPT LANGUAGE="JavaScript">
+   var zTreeObj
+   var Hist_htm
+   var selId
+   var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			view: {
+				showLine: false
+			},
+			callback: {
+				onClick: onClick
+			}
+   };
+   
+   var zNodes = [
+        {id:"jws",name:"既往史",open:true,icon:"js/ztree/css/zTreeStyle/img/diy/8.png"},
+        {id:"jbs",pId:"jws",name:"疾病史", icon:"js/ztree/css/zTreeStyle/img/diy/7.png"},
+      	{id:"gms",pId:"jws",name:"过敏史", icon:"js/ztree/css/zTreeStyle/img/diy/7.png"}, 
+        {id:"jzs",pId:"jws",name:"家族史", icon:"js/ztree/css/zTreeStyle/img/diy/7.png"},
+        {id:"jzs",pId:"jws",name:"接种史", icon:"js/ztree/css/zTreeStyle/img/diy/7.png"}, 
+        {id:"sys",pId:"jws",name:"生育史", icon:"js/ztree/css/zTreeStyle/img/diy/7.png"} 
+   ];
+   function onClick(event, treeId, treeNode){
+		var isParent = treeNode.isParent;
+		selId=treeNode.id
+		if(!isParent){
+			$("#query").html("")
+			if(treeNode.name=="疾病史"){
+				Hist_htm="SUMMARY_Hist_Sick"
+			}
+			if(treeNode.name=="过敏史"){
+				Hist_htm="SUMMARY_Hist_Allergy"
+			}
+			if(treeNode.name=="家族史"){
+				Hist_htm="family"
+			}
+			if(treeNode.name=="接种史"){
+				Hist_htm="SUMMARY_Hist_Vaccination"
+			}
+			if(treeNode.name=="生育史"){
+				Hist_htm="SUMMARY_Hist_Reproductive"
+			}
+			getList()
+		}
+   }
+   
+   var curMenu = null, zTree_Menu = null;
+   $(document).ready(function(){
+    	zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes);
+    	var first=1
+    	if(first==1){
+    		$("#query").html("")
+    		zTree_Menu = $.fn.zTree.getZTreeObj("tree");
+			curMenu = zTree_Menu.getNodes()[0].children[0];
+			zTree_Menu.selectNode(curMenu);
+    		Hist_htm="SUMMARY_Hist_Sick"
+    		getList()
+    		first=0
+    	}
+   });
+   
+   function getList(){
+	   var url = host + '/summary/getDiseaseHistoryList?vk=UUID'
+ 		//疾病史
+ 		if(Hist_htm=="SUMMARY_Hist_Sick"){
+			$(".nav_content").html("疾病史")
+			createTR('诊断','诊断日期','诊断机构')
+		}
+ 		//过敏史
+ 		if(Hist_htm=="SUMMARY_Hist_Allergy"){
+ 			url = host + '/summary/getAllergyList?vk=UUID'
+ 			$(".nav_content").html("过敏史")
+			createTR('诊断','诊断日期','诊断机构')
+		}
+		//家族史		
+		if(Hist_htm=="family"){
+			url = host + '/summary/getFamilyHistoryList?vk=UUID'
+ 			$(".nav_content").html("家族史")
+			createTR('成员','诊断','诊断日期','诊断机构')
+		}
+		//接种史
+ 		if(Hist_htm=="SUMMARY_Hist_Vaccination"){
+ 			url = host + '/summary/getVccinationList?vk=UUID'
+ 	  		$(".nav_content").html("接种史")
+			createTR('疫苗','接种次数','接种日期','接种机构')
+		}
+		//生育史
+ 		if(Hist_htm=="SUMMARY_Hist_Reproductive"){
+ 			url = host + '/summary/getReproductiveList?vk=UUID'
+ 	  	  	$(".nav_content").html("生育史")
+			createTR('分娩','胎数','妊娠终止时间','分娩机构')
+		}
+		param = {
+			'url' : url
+		};
+		doAjax("getdata.px", param, "json", function(data, textStatus) {
+			var jsonDatas=data.body
+			if (data["code"] == 200) {
+				//返回200,无数据
+				if(jsonDatas==null||jsonDatas.length==0){
+					html+='<tr><td align="center" bgcolor="#FFFFFF" colspan="0">没有数据</td></tr>'
+				}else{
+					//家族史
+					if(Hist_htm=="family"){
+						var fath=jsonDatas.FATHERID[0]
+						if(fath!=null && fath!=""){
+							var fzd=fath.Diagnosis
+							var fzdrq=fath.DiagnosisDate
+							var fzdjg=fath.DiagnosisUnit_Text
+							createBTR('父',fzd,fzdrq,fzdjg)
+						}
+						
+						var math=jsonDatas.MOTHERID[0]
+						if(math!=null && math!=""){
+							var mzd=math.Diagnosis
+							var mzdrq=math.DiagnosisDate
+							var mzdjg=math.DiagnosisUnit_Text
+							createBTR('母',mzd,mzdrq,mzdjg)
+						}
+						
+						var hubd=jsonDatas.HUSBAND
+						var wife=jsonDatas.WIFE
+						if((wife==null || wife=="")&&hubd!=null){
+							var hbd=hubd[0]
+							if(hbd!=null && hbd!=""){
+								var hzd=hbd.Diagnosis
+								var hzdrq=hbd.DiagnosisDate
+								var hzdjg=hbd.DiagnosisUnit_Text
+								createBTR('丈夫',hzd,hzdrq,hzdjg)
+							}
+						}else{
+							var wif=wife[0]
+							if	(wif!=null ){
+								var wzd=wif.Diagnosis
+								var wzdrq=wif.DiagnosisDate
+								var wzdjg=wif.DiagnosisUnit_Text
+								createBTR('妻子',wzd,wzdrq,wzdjg)
+							}
+						}
+						//返回200,无数据
+						if(fath==null&&math==null&&hubd==null&&wife==null){
+							html+='<tr><td align="center" bgcolor="#FFFFFF" colspan="0">没有数据</td></tr>'
+						}
+					}else{
+						for(i=0;i<jsonDatas.length;i++){
+							var jsonData = jsonDatas[i];
+							//疾病史
+							if(Hist_htm=="SUMMARY_Hist_Sick"){
+								var zd=jsonData.Diagnosis
+								var zdrq=jsonData.DiagnosisDate
+								var zdjg=jsonData.DiagnosisUnit_Text
+								createBTR(zd,zdrq,zdjg)
+							}
+							//过敏史
+							if(Hist_htm=="SUMMARY_Hist_Allergy"){
+								var zd=jsonData.AllergenName
+								var zdrq=jsonData.SystemTime
+								var zdjg=jsonData.AuthorOrganization_Text
+								createBTR(zd,zdrq,zdjg)
+							}
+							//接种史
+							if(	Hist_htm=="SUMMARY_Hist_Vaccination"){
+								var zd=jsonData.VaccineName
+								var times=jsonData.Times
+								var zdrq=jsonData.SystemTime
+								var zdjg=jsonData.AuthorOrganization_Text
+								createBTR(zd,times,zdrq,zdjg)
+							}
+							//生育史
+							if(Hist_htm=="SUMMARY_Hist_Reproductive"){
+								var zd=jsonData.WayStop
+								var twins=jsonData.Twins
+								var zdrq=jsonData.StopDate
+								var zdjg=jsonData.AuthorOrganization_Text
+								createBTR(zd,twins,zdrq,zdjg)
+							}
+						}
+					}
+				}
+				
+			}else{
+				html+='<tr><td align="center" bgcolor="#FFFFFF" colspan="0">没有数据</td></tr>'
+			}
+			$("#query").html(html)
+		});
+   }
+   
+  </SCRIPT>
+ </HEAD>
+<BODY>
+	   <div class="box fleft" style="margin-left:12px;swidth:180px; height:500px;">
+	  	 <ul id="tree" class="ztree"></ul>
+	   </div>
+	   		<div class="box fleft" style="width:840px; height:500px;" id="jwsdetail">
+		 	<table width="100%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft">
+			  <tr>
+			    <td class="title">既往史</td>
+			  </tr>
+			  <tr>
+			    <td align="center" valign="top" class="border_kong">
+			    <table id="query" width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9e9fe" class="border_content">
+			    </table></td>
+			  </tr>
+			</table>
+	   </div>
+</BODY>
+</HTML>

@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>健康网</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+   	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/easyui/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jquery-ui/js/jquery-ui-1.8.12.custom.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+
+	<script type="text/javascript">
+		var back_url = "../../documentFind.ehr";
+		var data={"tag":"8d63e679-b11f-48b1-9a2d-cd23d1e4ad31","success":true};
+		var maxRequest = 3;
+		var moduleCode;
+		//var manaunits=new Array();
+		//var manaunitshot=new Array();
+		$(document).ready(function(){
+		
+			$("#xhedit").xheditor({tools:'full',skin:'vista',forcePtag:false,internalScript:false,internalStyle:false,width:550,height:200,
+			upImgUrl:"../../upload.ehr",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"../../upload.ehr",upFlashExt:"swf",upMediaUrl:"../../upload.ehr",upMediaExt:"avi"});
+            
+           	moduleCode = Request("moduleCode");
+			
+			$.jkw.submit({
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "ajaxForm"
+			});
+			var id = Request("id");
+			$.jkw.load({
+				"type" : 2,
+				"back_url" : back_url+"?id="+id+"&moduleCode="+moduleCode,
+				"data" :data,
+				"comeback" :function(data){
+					/*var list = data.manaunits;
+		       		$.each(list,function(i,o){
+		       			manaunits[i]=new Array(o.manaunitid,o.manaunitname,o.pycode);
+		       			if(o.manaunitid==data.jkwdoc.orgId){
+		       				$("#orgName").val(o.manaunitname);
+		       			}
+		       		});*/
+		       		
+		       		for(var i=0;i<data.sublist.length;i++){
+						if(data.sublist[i].id==data.jkwdoc.category){
+							$("#category").append("<option selected='selected' value='"+data.sublist[i].id+"'>"+data.sublist[i].subjectname+"</option>");
+						}else{
+							$("#category").append("<option value='"+data.sublist[i].id+"'>"+data.sublist[i].subjectname+"</option>");
+						}
+					}
+					$("#docId").val(data.jkwdoc.id);
+					$("#xhedit").val(data.jkwdoc.content);
+					$("#title").val(data.jkwdoc.title);
+					$("#subtitle").val(data.jkwdoc.subtitle);
+					$("#author").val(data.jkwdoc.author);
+					$("#source").val(data.jkwdoc.source);
+					$("#tags").val(data.jkwdoc.tags);
+					$("#creator").val(data.jkwdoc.creator);
+					$("#photonews").val(data.jkwdoc.photonews);
+					$("#orgId").val(data.jkwdoc.orgId);
+					$("[name=status][value="+data.jkwdoc.status+"]").attr("checked",true);
+				}
+			});
+			//$("input[id='orgName']").suggest(manaunits,{dataContainer:"#orgId",hot_list:manaunitshot,attachObject:"#suggest"});
+			$("input[type='button']").click(function(){
+				location.href="doc-list.html?moduleCode="+moduleCode;
+			})
+		});
+
+		function doResult(data){
+			alert(data.message);
+			location.href="doc-list.html?moduleCode="+moduleCode;
+		}
+
+	</script>
+		<style type="text/css">
+			body{margin:0;padding:0;font-family:"宋体";font-size:13px;}
+			h1{margin:0;padding:20px 0;font-size:16px;}
+			ol{padding-left:20px;line-height:130%;}
+			#box{width:600px;text-align:left;margin:0 auto;padding-top:80px;}
+			#suggest,#suggest2{width:230px;}
+			.gray{color:gray;}
+			.ac_results {background:#fff;border:1px solid #7f9db9;position: absolute;  z-index: 10000;display: none;}
+			.ac_results ul{margin:0;padding:0;list-style:none;}
+			.ac_results li a{white-space: nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+			.ac_results li{border:1px solid #fff;}
+			.ac_over,.ac_results li a:hover {background:#c8e3fc;}
+			.ac_results li a span{float:right;}
+			.ac_result_tip{border-bottom:1px dashed #666;padding:3px;}
+		</style>
+  </head>
+
+  <body>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  		<tbody>
+  			<tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="doc-list.html">文章维护</a> &gt;&gt; 更新文章</td>
+  			</tr>
+		</tbody>
+	</table>
+	<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody>
+		      <tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   	<form id="ajaxForm" name="ajaxForm" action="../../documentReview.ehr" method="post">
+				   		<input name="id" id="docId" type="hidden">
+				   		<table style="margin: 0 0 0 150px;">
+				   			<tbody>
+				   			<tr>
+				   				<td>标题:</td><td><input id="title" name="title" type="text"></td>
+				   			</tr>
+				   			<tr>
+				   				<td>副标题:</td><td><input id="subtitle" name="subtitle" type="text"></td>
+				   			</tr>
+				   			<tr>
+				   				<td>文章类别:</td>
+				   				<td>
+					   				<select name="category" id="category">
+					   					<option value="">--请选择--</option>
+					   				</select>
+				   				</td></tr>
+				   			<!-- <tr><td>所属机构:</td><td><input type="text" id="orgName" />
+							<div id='suggest' class="ac_results"></div></td></tr> -->
+				   			<tr>
+				   				<td>作者:</td><td><input id="author" name="author" type="text"></td>
+				   			</tr>
+				   			<tr>
+				   				<td>来源:</td><td><input id="source" name="source" type="text"></td>
+				   			</tr>
+				   			<tr>
+				   				<td>标签:</td><td><input id="tags" name="tags" type="text"></td>
+				   			</tr>
+				   		<!-- 	<tr><td>上传图片:</td><td><input role="button" type="file" name="uploadFiles"/> </td></tr> -->
+				   			<tr>
+				   				<td>内容:</td>
+				   				<td>
+				   					<textarea  name="content" cols="" rows="" id="xhedit"></textarea>
+				   				</td>
+				   			</tr>
+				   			<tr>
+				   				<td>审核:</td>
+				   				<td>
+				   					<input name="status" id="status0" value="0" type="radio"><label for="status0">通过</label>
+									<input name="status" id="status1" value="1" type="radio"><label for="status1">不通过</label>
+ 								</td>
+							</tr>
+				   			<tr>
+				   				<td colspan="2">
+					   				<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+									<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" value="返回" role="button" type="button">
+								</td>
+							</tr>
+				   			</tbody>
+				   		</table>
+				  	</form>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		</td>
+		</tr>
+		</tbody>
+	</table>
+</body>
+</html>

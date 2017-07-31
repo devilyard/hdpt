@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic> 
+  <item key="gerontic" text="老年期"/>
+  <item key="middleAge" text="中年期"/>
+  <item key="adolescence" text="青年期"/>
+  <item key="boyhood" text="少年期"/>
+  <item key="childhood" text="儿童期"/>
+  <item key="babyhood" text="婴儿期"/>
+</dic>

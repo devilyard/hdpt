@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:ssdev="http://www.bsoft.com.cn/schema/ssdev"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.bsoft.com.cn/schema/ssdev
+	http://www.bsoft.com.cn/schema/ssdev/ssdev.xsd">
+
+	<ssdev:applicationDomain name="JMHD"
+		registryAddress="zookeeper://127.0.0.1:2181" rpcServerWorkUrl="hessian://127.0.0.1:8082/hdpt/rpc/"  enableLogger="true"/>
+<!-- 	zookeeper://172.16.171.248:2381 -->
+	<ssdev:reference id="configuration.domainLoader" interface="ctd.service.remote.base.DomainLoader" />
+	<ssdev:reference id="configuration.configLoader" interface="ctd.service.remote.base.ConfigLoader" />
+	<ssdev:reference id="configuration.userLoader" interface="ctd.service.remote.base.UserLoader" />
+	<!--mpi处理   begin -->
+	<ssdev:reference id="mpi.mpiProvider" interface="com.bsoft.mpi.server.rpc.IMPIProvider" />
+	<ssdev:reference id="ehr.ptLabReport" interface="com.bsoft.xds.ILabReportRetrieveService" />
+	<ssdev:service id="doSendMessage" ref="ProxySendMessage"/>
+	
+	<bean id="openHealthRecordService" class="dc.service.openhealthrecord.OpenHealthRecordService" />
+	<ssdev:service id="openHealthRecord" ref="openHealthRecordService"/>
+	
+</beans>

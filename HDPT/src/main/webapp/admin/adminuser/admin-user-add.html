@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>健康网</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet" />
+   	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/easyui/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jquery-ui/js/jquery-ui-1.8.12.custom.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript">
+		var back_url = "../../fetchTopManaunit.ehr";
+		var target_url ="../../fetchTopManaunit.ehr";
+		var maxRequest = 3;
+		$(document).ready(function(){
+			var orgname="";
+			var orgId="";
+			
+			$("#org").focus(function(){
+				parent.$('#openwin').window('open');
+
+				$.jkw.send({
+					"type" : 2,
+					"target_url" : target_url,
+					"back_url" : back_url,
+					"comeback" :function(data){
+						if(data.success){
+							parent.$("#openwin").html("");
+							var orgmenu="";
+
+							for(var i=0;i<data.orglist.length;i++){
+								orgmenu+="<li id='"+data.orglist[i].MANAUNITID+"' class='ogrmenu' style='border: 1px solid rgb(153, 187, 232);padding:8px 0 4px 2px;cursor: pointer;'>"+data.orglist[i].MANAUNITNAME+"</li>";
+							}
+
+							parent.$("#openwin").html("<div id='orgtop'style='font-size: 13px;width:25%;float:left;'><ul style='list-style:none;float:left; padding: 13px 0 0 0;margin: 0'>"+orgmenu+"</ul></div>"+
+							"<div id='orgcont' style='font-size: 13px; width:72%;float:left;'><div id='orgnav' style='width:100%;'><dl><dt style='float:left;padding:0;margin:0;'>导航:</dt></dl><div class='clear'></div></div><div id='orgsubs' style='clear:both;height:250px;'></div><div style='text-align: right;'><input id='orgbutton' type='button' role='button' value='确定'/></div></div>");
+
+
+							parent.$("#orgbutton").bind("click",function(){
+								$("#org").val(orgname)
+								$("#orgId").val(orgId);
+								parent.$("#openwin").html("");
+								parent.$("#openwin").window('close');
+							})
+							parent.$(".ogrmenu").bind("dblclick",regSubItem);
+							parent.$(".ogrmenu").bind("click",function(){
+								orgname=$(this).html();
+								orgId=$(this).attr("id");
+								parent.$(".orgsubItem").removeClass("selectNode");
+								parent.$(".ogrmenu").removeClass("selectNode");
+								$(this).addClass("selectNode");
+							});
+							parent.$(".ogrmenu").hover(function(){
+
+								$(this).css({"background-color": '#e4edfe'});
+							},function(){
+								$(this).css({"background-color": ''});
+							});
+
+						}
+					}
+				});
+
+			});
+
+			function regSubItem(){
+					if($(this).attr("id").length==6&&parent.$("#orgnav dl dd").length==0){
+					   parent.$("#orgnav dl").append("<dd style='float:left;padding:2px 0 0 5px;margin:0;'>"+$(this).html()+"</dd>");
+					}else if($(this).attr("id").length==6&&parent.$("#orgnav dl dd").length>0){
+						parent.$("#orgnav dl dd:eq(0)").html($(this).html());
+						parent.$("#orgnav dl dd:gt(0)").html("");
+					}else if($(this).attr("id").length==8&&parent.$("#orgnav dl dd").length==1){
+						parent.$("#orgnav dl").append("<dd style='float:left;padding:2px 0 0 5px;margin:0;'>"+$(this).html()+"</dd>");
+					}else if($(this).attr("id").length==8&&parent.$("#orgnav dl dd").length>1){
+						parent.$("#orgnav dl dd:eq(1)").html($(this).html());
+						parent.$("#orgnav dl dd:gt(1)").html("");
+					}else if($(this).attr("id").length==10&&parent.$("#orgnav dl dd").length==2){
+						parent.$("#orgnav dl").append("<dd style='float:left;padding:2px 0 0 5px;margin:0;'>"+$(this).html()+"</dd>");
+					}else if($(this).attr("id").length==10&&parent.$("#orgnav dl dd").length>2){
+						parent.$("#orgnav dl dd:eq(2)").html($(this).html());
+						parent.$("#orgnav dl dd:gt(2)").html("");
+					}else if($(this).attr("id").length==11&&parent.$("#orgnav dl dd").length==3){
+						parent.$("#orgnav dl").append("<dd style='float:left;padding:2px 0 0 5px;margin:0;'>"+$(this).html()+"</dd>");
+					}else if($(this).attr("id").length==11&&parent.$("#orgnav dl dd").length>3){
+						parent.$("#orgnav dl dd:eq(3)").html($(this).html());
+						parent.$("#orgnav dl dd:gt(3)").html("");
+					}
+					$.jkw.send({
+						"type" : 2,
+						"target_url" : "../../fetchSubsManaunit.ehr?orgparentid="+$(this).attr("id"),
+						"back_url" : back_url,
+						"comeback" :function(subdata){
+
+							if(subdata.success){
+								parent.$("#orgsubs").html("");
+								var subItems="<table style='border-collapse: collapse;margin-top:7px;font-size: 14px;'>";
+								var odd=0;
+								for(var i=0;i<subdata.orglist.length;i++){
+									odd++;
+									if(odd!=0&&odd%2==0){
+										subItems+="<td style='cursor: pointer;border: 1px solid #99bbe8;padding:5px 6px;' class='orgsubItem' id='"+subdata.orglist[i].MANAUNITID+"'>"+subdata.orglist[i].MANAUNITNAME+"</td></tr>";
+									}else{
+										subItems+="<tr><td style='cursor: pointer;border: 1px solid #99bbe8;padding:5px 6px;' class='orgsubItem' id='"+subdata.orglist[i].MANAUNITID+"'>"+subdata.orglist[i].MANAUNITNAME+"</td>";
+									}
+								}
+								subItems+="</table>";
+								parent.$("#orgsubs").html(subItems);
+
+
+								parent.$(".orgsubItem").hover(function(){
+									//alert(color)
+									$(this).css({"background-color": '#e4edfe'})
+								},function(){
+									$(this).css({"background-color": ''})
+								});
+
+								parent.$(".orgsubItem").bind("dblclick",regSubItem);
+								parent.$(".orgsubItem").bind("click",function(){
+									orgname=$(this).html();
+									orgId=$(this).attr("id");
+									parent.$(".orgsubItem").removeClass("selectNode");
+									parent.$(".ogrmenu").removeClass("selectNode");
+									$(this).addClass("selectNode");
+								});
+
+							}else{
+							//	alert("已经是最低层组织!请双击选择");
+							}
+						}
+					});
+			}
+
+			$.jkw.submit({
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "ajaxForm"
+			});
+		});
+
+		function doResult(data){
+			if (data.success==1) {
+				alert(data.message);
+				location.href = "admin-user-list.html";
+			} else if(data.success==-1){
+				alert(data.message);
+			}else{
+				alert(data.message);
+				$("#loginName").css({"border":"1px solid red"});
+				$("#loginName").select();
+			}
+		}
+		
+		function onSubmit(){
+			var adminname = $("#adminName").val();
+			var loginname = $("#loginName").val();
+			var password = $("#password").val();
+			var org = $("#org").val();
+			if(adminname=="" || loginname=="" || password=="" || org==""){
+				return;
+			}else{
+				$("#ajaxForm").submit();
+			}
+		}
+	</script>
+  </head>
+
+  <body>
+  	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="admin-user-list.html">用户维护</a> &gt;&gt; 添加用户</td>
+  			</tr>
+		</tbody></table>
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody><tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   	<form id="ajaxForm" name="ajaxForm" action="../../adminUserAdd.ehr" method="post">
+					    <input name="orgId" id="orgId" type="hidden">
+				   		<input name="type" value="0" id="ajaxForm_adminuser_type" type="hidden">
+				   		<table style="margin: 0 0 0 150px;">
+				   			<tbody>
+				   			<tr>
+					   			<td>管理员姓名<font color="red">(*)</font>:</td>
+					   			<td><input id="adminName" name="adminName" type="text" /></td>
+				   			</tr>
+				   			<tr>
+				   				<td>登陆名称<font color="red">(*)</font>:</td>
+				   				<td><input id="loginName" name="loginName" type="text" /></td>
+				   			</tr>
+				   			<tr>
+				   				<td>登陆密码<font color="red">(*)</font>:</td>
+				   				<td><input id="password" name="password" type="password" /></td>
+				   			</tr>
+				   			 <tr>
+				   				<td>组织结构<font color="red">(*)</font>:</td>
+				   				<td><input id="org" type="text" /></td>
+				   			</tr>
+				   			<tr>
+				   				<td>管理区域:</td>
+				   				<td>
+				   					<select name="datafield" id="dataf">
+									    <option selected="selected" value="0">--请选择--</option>
+									    <option value="1">社区团队</option>
+									    <option value="2">医院</option>
+									    <option value="3">卫生局</option>
+									</select>
+				   				</td>
+				   			</tr>
+				   			<tr>
+				   				<td>是否启用</td>
+				   				<td>
+				   					<input name="status" id="ajaxForm_adminuser_status0" checked="checked" value="0" type="radio"><label for="ajaxForm_adminuser_status0">启用</label>
+									<input name="status" id="ajaxForm_adminuser_status1" value="1" type="radio"><label for="ajaxForm_adminuser_status1">停用</label>
+								</td>
+							</tr>
+				   			<tr>
+				   				<td>备注</td>
+				   				<td><textarea name="remarks"></textarea></td>
+				   			</tr>
+				   			<tr>
+				   				<td colspan="2">
+				   					<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="button" onclick="onSubmit()" />
+									<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" value="重置" role="button" type="reset">
+								</td>
+							</tr>
+				   			</tbody>
+				   		</table>
+				   </form>
+   				</td>
+   				</tr>
+   				</tbody>
+   			</table>
+   		</td>
+   		</tr>
+   	</tbody>
+</table>
+</body></html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionaries>
+	<dic id="lifeCycle" alias="生命周期年龄段" file="ehrview/lifeCycle.xml" class="dc.ssdev.extend.dic.CXMLDictionary"/>
+	<dic id="lifeCycleTable" alias="生命周期关联表" file="ehrview/lifeCycleTable.xml" class="dc.ssdev.extend.dic.CXMLDictionary"/>
+	<dic id="pregnantIndex" alias="孕妇指标" file="ehrview/pregnantIndex.xml" class="dc.ssdev.extend.dic.CXMLDictionary"/>
+	<dic id="certificateTypeCode" alias="证件类型" file="mpi/certificateTypeCode.xml" class="dc.ssdev.extend.dic.CXMLDictionary"/>
+</dictionaries>

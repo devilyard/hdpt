@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		#boxscroll {
+			height: 430px;
+			width: 840px;
+		}
+		.active{color: #FF6600}
+    </style>
+  </head>
+  <link href="css/jquery.jqplot.min.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="js/jqplot/jqplotmin.js"></script>
+  <script type="text/javascript" src="js/jqplot/excanvasmin.js"></script>
+  <script type="text/javascript" src="js/jqplot/chart/highlighter.js"></script>
+  <script type="text/javascript" src="js/jqplot/chart/cursor.js"></script>
+  <script type="text/javascript" src="js/jqplot/chart/dateAxisRenderer.js"></script>
+  <script type="text/javascript" src="js/jqplot/chart/canvasTextRenderer.js"></script>
+  <script type="text/javascript" src="js/jqplot/chart/canvasAxisLabelRenderer.js"></script>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		$("#boxscroll").niceScroll("#mhcinfo",{touchbehavior:false,cursoropacitymax:0.7,cursorwidth:6,cursorcolor:"#dddddd",autohidemode:"scroll"}); 
+  		// 随访信息
+  		if(MHC_htm=="MHC_VisitRecord"){
+  			var url = host + '/pregnantVisit/getVisitRecord?vk=UUID&pregnantId='+pregnantId
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				if (data["code"] == 200) {
+  					if(data.body.visitData && data.body.visitData.length>0){
+  						var jsonDatas=data.body.visitData
+  						console.info(jsonDatas);
+	  					var html=""
+	  					var td=""
+	  					var tdnum=9
+	  					var first=1
+	  					for(i=0;i<jsonDatas.length;i++){
+	  						var jsonData = jsonDatas[i];
+	  						var dcid=encodeURI(jsonData.DCID)
+	  						time=jsonData.SystemTime.split('-')
+	  						var systime=time[0]+'/'+time[1]+'/'+time[2].split(' ')[0]
+	  						td+='<td><a font-size="24px" href="#" class="aa" onclick=opendiv("'+dcid+'","pregnantVisit","mhcinfo")>'+systime+'</a>&nbsp;&nbsp;&nbsp;</td>'
+	  						//固定列数
+	  						if(i!=0&&i%tdnum==0){
+		  						html+='<tr>'+td+'</tr>'
+		  						td=""
+		  					}
+	  						if(first==1){
+	  							opendiv(dcid,"pregnantVisit","mhcinfo")
+	  							first=0
+	  	  					}
+	  					}
+	  					html+='<tr>'+td+'</tr>'
+	  					$("#sfsj").html(html)
+	  					$("#dsfsj").show()
+						$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					//设置首个时间颜色
+						$("#sfsj tr:eq(0) td:eq(0)>a").addClass('active')
+						//设置选中时间颜色
+		  				$(".aa").click(function() {
+		  					$(".active").removeClass("active");
+		  					$(this).addClass('active');
+		  				});
+  					}else{
+  						$("#sfsj").html("")
+	  					$("#dsfsj").show()
+	  					$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					$("#info_loading").css({
+					   	    'display' : 'none'
+					   	}); 
+					   	var data = {"body":"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>"}
+					   	htmreport(data,"mhcinfo");
+  					}
+  					
+  				}
+  			});
+  		// 妊娠图
+  		}else if(MHC_htm=="Pregnogram"){
+  			$("#boxscroll").css({"height":"95%"})
+  			var Key = '[\"eq\",[\"$\",\"a.PregnantID\"],[\"s\",\"'+pregnantId+'\"]]'	
+  			var url = host + '/pregnantVisit/getVisitRecord?vk=UUID&pregnantId='+pregnantId
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				var jsonDatas=data.body
+  				console.log(jsonDatas);
+  				if (data["code"] == 200) {
+  					var week = [];
+  					for (var j = 0; j < jsonDatas.week.length; j++) {
+  						var o = jsonDatas.week[j];
+  						week[j] = parseInt(o.WEEK);
+  					}
+  					var tenth = [];
+					var fiveth = [];
+					var nineth = [];
+					var HeightFundusUterus = [];
+  					var pregnancyStandardData = data.body.pregnancyStandardData
+  					var visitData = data.body.visitData
+					for (var j = 0; j < pregnancyStandardData.length; j++) {
+						var o = pregnancyStandardData[j];
+						//week[j] = o.WEEK+"";
+						tenth[j] = [
+							parseInt(o.WEEK), o.TENTH
+						];
+						fiveth[j] = [
+							parseInt(o.WEEK), o.FIVETH
+						];
+						nineth[j] = [
+							parseInt(o.WEEK), o.NINETH
+						];
+					}
+			
+					for (var i = 0; i < visitData.length; i++) {
+						var bodyItem = visitData[i];
+						HeightFundusUterus[i] = [parseInt(bodyItem.CheckWeek), bodyItem.HeightFundusUterus];
+					}
+  					fuh({"week":week,"tenth":tenth,"fiveth":fiveth,"nineth":nineth,"HeightFundusUterus":HeightFundusUterus});
+  				}else{
+  					top.location.href = '../logon.html';
+					return;
+  				}
+  			});
+  		// 首次随访
+  		}else if(MHC_htm=="MHC_FirstVisitRecord"){
+  			var url = host + '/postnatal/getFirstVisitRecord?vk=UUID&pregnantId='+pregnantId
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				if (data["code"] == 200) {
+  					if(data.body && data.body.length>0){
+  						var jsonDatas=data.body
+	  					var html=""
+	  					var td=""
+	  					var tdnum=9
+	  					var first=1
+	  					for(i=0;i<jsonDatas.length;i++){
+	  						var jsonData = jsonDatas[i];
+	  						var dcid=encodeURI(jsonData.DCID)
+	  						time=jsonData.SystemTime.split('-')
+	  						var systime=time[0]+'/'+time[1]+'/'+time[2].split(' ')[0]
+	  						td+='<td><a font-size="24px" href="#" class="aa" onclick=opendiv("'+dcid+'","pregnantFirstVisit","mhcinfo")>'+systime+'</a>&nbsp;&nbsp;&nbsp;</td>'
+	  						//固定列数
+	  						if(i!=0&&i%tdnum==0){
+		  						html+='<tr>'+td+'</tr>'
+		  						td=""
+		  					}
+	  						if(first==1){
+	  							opendiv(dcid,"pregnantFirstVisit","mhcinfo")
+	  							first=0
+	  	  					}
+	  					}
+	  					html+='<tr>'+td+'</tr>'
+	  					$("#sfsj").html(html)
+	  					$("#dsfsj").show()
+						$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					//设置首个时间颜色
+						$("#sfsj tr:eq(0) td:eq(0)>a").addClass('active')
+						//设置选中时间颜色
+		  				$(".aa").click(function() {
+		  					$(".active").removeClass("active");
+		  					$(this).addClass('active');
+		  				});
+  					}else{
+  						$("#sfsj").html("")
+	  					$("#dsfsj").show()
+	  					$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					$("#info_loading").css({
+					   	    'display' : 'none'
+					   	}); 
+					   	var data = {"body":"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>"}
+					   	htmreport(data,"mhcinfo");
+  					}
+  					
+  				}else{
+  					top.location.href = '../logon.html';
+					return;
+  				}
+  			});	 
+  		// 产后随访
+  		}else if(MHC_htm=="MHC_PostnatalVisitInfo"){
+  			
+  			var url = host + '/postnatal/getVisitRecord?vk=UUID&pregnantId='+pregnantId
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				if (data["code"] == 200) {
+  					if(data.body && data.body.length>0){
+  						var jsonDatas=data.body
+	  					var html=""
+	  					var td=""
+	  					var tdnum=9
+	  					var first=1
+	  					for(i=0;i<jsonDatas.length;i++){
+	  						var jsonData = jsonDatas[i];
+	  						var dcid=encodeURI(jsonData.DCID)
+	  						time=jsonData.SystemTime.split('-')
+	  						var systime=time[0]+'/'+time[1]+'/'+time[2].split(' ')[0]
+	  						td+='<td><a font-size="24px" href="#" class="aa" onclick=opendiv("'+dcid+'","postnatal","mhcinfo")>'+systime+'</a>&nbsp;&nbsp;&nbsp;</td>'
+	  						//固定列数
+	  						if(i!=0&&i%tdnum==0){
+		  						html+='<tr>'+td+'</tr>'
+		  						td=""
+		  					}
+	  						if(first==1){
+	  							opendiv(dcid,"postnatal","mhcinfo")
+	  							first=0
+	  	  					}
+	  					}
+	  					html+='<tr>'+td+'</tr>'
+	  					$("#sfsj").html(html)
+	  					$("#dsfsj").show()
+						$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					//设置首个时间颜色
+						$("#sfsj tr:eq(0) td:eq(0)>a").addClass('active')
+						//设置选中时间颜色
+		  				$(".aa").click(function() {
+		  					$(".active").removeClass("active");
+		  					$(this).addClass('active');
+		  				});
+  					}else{
+  						$("#sfsj").html("")
+	  					$("#dsfsj").show()
+	  					$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					$("#info_loading").css({
+					   	    'display' : 'none'
+					   	}); 
+					   	var data = {"body":"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>"}
+					   	htmreport(data,"mhcinfo");
+  					}
+  					
+  				}else{
+  					top.location.href = '../logon.html';
+					return;
+  				}
+  			});
+  			
+  		// 产后检查	
+  		}else if(MHC_htm=="MHC_Postnatal42DayRecord"){
+  		
+  			var url = host + '/postnatal42Day/getRecord?vk=UUID&pregnantId='+pregnantId
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				if (data["code"] == 200) {
+  					if(data.body && data.body.length>0){
+  						var jsonDatas=data.body
+	  					var html=""
+	  					var td=""
+	  					var tdnum=9
+	  					var first=1
+	  					for(i=0;i<jsonDatas.length;i++){
+	  						var jsonData = jsonDatas[i];
+	  						var dcid=encodeURI(jsonData.DCID)
+	  						time=jsonData.SystemTime.split('-')
+	  						var systime=time[0]+'/'+time[1]+'/'+time[2].split(' ')[0]
+	  						td+='<td><a font-size="24px" href="#" class="aa" onclick=opendiv("'+dcid+'","postnatal42Day","mhcinfo")>'+systime+'</a>&nbsp;&nbsp;&nbsp;</td>'
+	  						//固定列数
+	  						if(i!=0&&i%tdnum==0){
+		  						html+='<tr>'+td+'</tr>'
+		  						td=""
+		  					}
+	  						if(first==1){
+	  							opendiv(dcid,"postnatal42Day","mhcinfo")
+	  							first=0
+	  	  					}
+	  					}
+	  					html+='<tr>'+td+'</tr>'
+	  					$("#sfsj").html(html)
+	  					$("#dsfsj").show()
+						$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					//设置首个时间颜色
+						$("#sfsj tr:eq(0) td:eq(0)>a").addClass('active')
+						//设置选中时间颜色
+		  				$(".aa").click(function() {
+		  					$(".active").removeClass("active");
+		  					$(this).addClass('active');
+		  				});
+  					}else{
+  						$("#sfsj").html("")
+	  					$("#dsfsj").show()
+	  					$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					$("#info_loading").css({
+					   	    'display' : 'none'
+					   	}); 
+					   	var data = {"body":"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>"}
+					   	htmreport(data,"mhcinfo");
+  					}
+  					
+  				}else{
+  					top.location.href = '../logon.html';
+					return;
+  				}
+  			});
+  		
+  		// 新生儿随访	
+  		}else if(MHC_htm=="MHC_BabyVisitRecord"){	
+  			
+  			var url = host + '/postnatal/getBabyVisit?vk=UUID&pregnantId='+pregnantId
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				if (data["code"] == 200) {
+  					if(data.body && data.body.length>0){
+  						var jsonDatas=data.body
+	  					var html=""
+	  					var td=""
+	  					var tdnum=9
+	  					var first=1
+	  					for(i=0;i<jsonDatas.length;i++){
+	  						var jsonData = jsonDatas[i];
+	  						var dcid=encodeURI(jsonData.DCID)
+	  						time=jsonData.SystemTime.split('-')
+	  						var systime=time[0]+'/'+time[1]+'/'+time[2].split(' ')[0]
+	  						td+='<td><a font-size="24px" href="#" class="aa" onclick=opendiv("'+dcid+'","babyVisit","mhcinfo")>'+systime+'</a>&nbsp;&nbsp;&nbsp;</td>'
+	  						//固定列数
+	  						if(i!=0&&i%tdnum==0){
+		  						html+='<tr>'+td+'</tr>'
+		  						td=""
+		  					}
+	  						if(first==1){
+	  							opendiv(dcid,"babyVisit","mhcinfo")
+	  							first=0
+	  	  					}
+	  					}
+	  					html+='<tr>'+td+'</tr>'
+	  					$("#sfsj").html(html)
+	  					$("#dsfsj").show()
+						$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					//设置首个时间颜色
+						$("#sfsj tr:eq(0) td:eq(0)>a").addClass('active')
+						//设置选中时间颜色
+		  				$(".aa").click(function() {
+		  					$(".active").removeClass("active");
+		  					$(this).addClass('active');
+		  				});
+  					}else{
+  						$("#sfsj").html("")
+	  					$("#dsfsj").show()
+	  					$("#dsfsj").niceScroll({cursorcolor:"#dddddd"})
+	  					$("#info_loading").css({
+					   	    'display' : 'none'
+					   	}); 
+					   	var data = {"body":"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>"}
+					   	htmreport(data,"mhcinfo");
+  					}
+  					
+  				}else{
+  					top.location.href = '../logon.html';
+					return;
+  				}
+  			});
+  			
+  			
+  		// 其他类型	
+  		}else{
+  			$("#boxscroll").css({"height":"95%"})
+  			var url = host + '/pregnantRecord/getHtmlDocument?vk=UUID&dcId='+dcid
+  			param = {
+  				'url' : url
+  			};
+  			doAjax("getdata.px", param, "json", function(data, textStatus) {
+  				htmreport(data,"mhcinfo")
+  			});
+  		}
+  	});
+  	
+  	// Highcharts模式
+  	function fuh2(data){
+		var xArr = data.week;
+		console.log(data.HeightFundusUterus);
+		console.log(data.tenth);
+		console.log(data.week);
+		var aa=[];
+		aa[0]= ["16", 20.8];
+		aa[1]= ["21", 21];
+		aa[2]= [24, 22];
+		aa[3]= [28, 22.1];
+		aa[4]= [29, 22.3];
+		var chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'boxscroll',
+				defaultSeriesType: 'line',
+				marginRight: 100,
+				marginBottom: 25
+			},
+			credits: {
+		        enabled: false
+		    },
+			title: {
+				text: '宫高曲线',
+				x: -20 //center
+			},
+			subtitle: {
+				text: '',
+				x: -20
+			},
+			xAxis: {
+				categories: xArr
+			},
+			yAxis: {
+				title: {
+					text: ''
+				},
+				tickInterval :1,
+				max:38,
+				min:15,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				formatter: function() {
+		                return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +'周'+ this.y +'';
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'top',
+				x: -10,
+				y: 100,
+				borderWidth: 0
+			},                                                                     
+			series: [{
+				name: '宫高',
+				//data: data.HeightFundusUterus
+				data: aa
+			},{
+				name: '10th',
+				data: data.tenth
+			},{
+				name: '50th',
+				data: data.fiveth
+			},{
+				name: '90th',
+				data: data.nineth
+			}]
+		});
+	};
+	
+	// jqplot模式
+	function fuh(data){
+		var plot1 = $.jqplot('boxscroll', [data.tenth, data.fiveth, data.nineth, data.HeightFundusUterus], {
+			title: '妊娠图',
+			axes: {
+				xaxis: {
+					labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+				},
+				yaxis: {
+					labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+				}
+			},
+			highlighter: {
+				show: true,
+				sizeAdjust: 7.5
+			},
+			cursor: {
+				show: false
+			},
+			legend: {
+				show: true,
+				labels: ["tenth", "fiveth", "nineth", "宫高"]
+			}
+		});
+	}
+  </script>
+  <body>
+	<div id="dsfsj" style="height:49px;display:none;overflow-y:auto;padding:5px 0px 0 25px;border-bottom:1px solid #dddddd;font-size:14px;">
+		<table id="sfsj" height="50px"></table>
+	</div>
+	<div align="center" id="info_loading" style=" top: 220px ;left:600px;display:block;position:absolute;"><img src="images/loading.gif" alt=""></div>
+	<div id="boxscroll" width="100%" style="text-align:center;">
+		<iframe align="center" id="mhcinfo" name="mhcinfo" width="840px" height="480px" overflow-x="hidden"  scrolling="no"></iframe>
+	</div>
+  </body>
+</html>

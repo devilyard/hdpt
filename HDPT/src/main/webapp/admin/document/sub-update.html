@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>健康网</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+		var back_url = "../../subFind.ehr?id=";
+		var data={"tag":"981fafdd-0e44-4066-b394-15e1bb9b88a6","success":true};
+		var maxRequest = 3;
+		$(document).ready(function(){
+			var id = Request("id");
+			
+			$.jkw.query({
+				"type" : 2,
+				"target_url" : "../../getModule.ehr?moduleCode=106",
+				"data" :data,
+				"comeback" :function(data){
+					for(var i=0;i<data.data.modules.length;i++){
+						$("#moduleCode").append("<option value='"+data.data.modules[i].moduleCode+"'>"+data.data.modules[i].moduleName+"</option>");
+					}
+				}
+			}); 
+		
+			 $("#moduleCode").change(function(){ 
+			 	$("#moduleName").val($(this).find("option:selected").text());
+			 })	
+			
+			$.jkw.load({
+					"type" : 2,
+					"back_url" : back_url+id,
+					"data" :data,
+					"comeback" :function(data){
+						if(data.success){
+							var cmssub=data.cmssub;
+							$("#subid").val(cmssub.id);
+							$("#subjectname").val(cmssub.subjectname);
+							$("#description").val(cmssub.description);
+							$("#moduleCode").val(cmssub.moduleCode);
+							$("#moduleName").val(cmssub.moduleName);
+						}else{
+							alert(data.message);
+						}
+					}
+				});
+
+
+			$.jkw.submit({
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "ajaxForm"
+			});
+		});
+
+		function doResult(data){
+			alert(data.message);
+			location.href="sub-list.html";
+		}
+	</script>
+  </head>
+
+  <body>
+  	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	 	<tbody>
+	 		<tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+	   			<td class="set" align="left">您目前所在的位置：<a href="sub-list.html">类别维护</a> &gt;&gt; 更新类别</td>
+	 		</tr>
+		</tbody>
+   	</table>
+	<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+	  <tbody>
+		  <tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody>
+		      <tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   	<form id="ajaxForm" name="ajaxForm" action="../../subUpdate.ehr" method="post">
+				   		<input name="id" id="subid" type="hidden">
+				   		<input type="hidden"  name="moduleName" id="moduleName"/>
+				   		<table style="margin: 0 0 0 150px;">
+				   			<tbody>
+				   				<tr>
+						   			<td>栏目名称<font color="red">(*)</font>:</td>
+						   			<td>
+						   				<select id="moduleCode" name="moduleCode">
+						   					<option selected="selected" value="">--请选择--</option>
+						   				</select>
+									</td>
+					   			</tr>
+				   				<tr>
+				   					<td>类别名称<font color="red">(*)</font>:</td>
+				   					<td><input id="subjectname" name="subjectname" type="text"></td>
+				   				</tr>
+				   				<!--<tr>
+				   					<td>类别编号:</td><td><input name="code" id="code" type="text"></td>
+				   				</tr>
+				   				 <tr>
+				   					<td>前台显示条数<font color="red">(*)</font>:</td><td><input value="6" id="topnum" name="topnum" type="text"></td>
+				   				</tr> -->
+				   				<tr>
+					   				<td>拼音简写:</td><td><input id="description" name="description" type="text"></td>
+				   				</tr>
+				   				<tr>
+				   					<td colspan="2">
+				   						<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+										<input aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all ui-state-hover" value="重置" role="button" type="reset">
+									</td>
+								</tr>
+				   			</tbody>
+				   		</table>
+				   </form>
+		 		</td> 
+		 		</tr>
+		 		</tbody>
+		 	</table>
+		 	</td>
+		  </tr>
+	 	</tbody>
+	 </table>
+	</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js""></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+			var back_url = "../jmhduser/orgInfo.ehr";
+			var maxRequest = 3;
+			$(document).ready(function(){
+				var cfg = {
+						"back_url" : back_url,
+						"comeback" :doResult,
+						"data" : {"tag":"4f1bfc5f-5789-47a2-bfc3-db25ac563458","success":true}
+					};
+				$.jkw.load(cfg);
+			});
+
+			function doResult(data){
+
+				if(!data.success){
+					$("#descrip").html("社区信息正在维护中......");
+					return  false;
+				}
+
+			//	var template = $("#map").attr("href");
+				//alert()
+				//template = template.replace("{0}",data.orgConfig.regOrgId);
+				//$("#map").attr("href",template);
+
+				$.each(data.orgConfig,function(key,o){
+					var obj = $("#"+key);
+					if(obj){
+						$(obj).html(o);
+					}
+				});
+				var org = data.orgConfig;
+				$("#orgUrl").html("<a target='_blank' href='" + org.orgUrl + "'>" + org.orgUrl +"</a>");
+				$("#manaunitname").html(data.manaunitname);
+				//var url=$("#manimg").attr("src");
+				//url=url.replaceAll("%manid%",data.manaunit.manaunitid);
+				//$("#manimg").attr("src",url);
+				//$("#manimg").show();
+			}
+
+		</script>
+
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+				<td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+    			<td align="left" class="set">您目前所在的位置：<a href="main.html">首页</a> &gt;&gt; 社区介绍 </td>
+  			</tr>
+		</table>
+
+		<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0" class="box mr10 fleft" >
+		  <tr>
+		    <td width="95%" class="title">社区介绍</td>
+		    <td class="title"></td>
+		  </tr>
+		  <tr>
+		    <td colspan="2" align="center" valign="top" class="border_kong" >
+			    <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+			      <tr>
+			        <td align="center" valign="top"><table width="98%" border="0" cellpadding="0" cellspacing="0" class="text">
+			          <tr>
+			            <td colspan="2" align="center"><strong><span id="manaunitname" style="font-size:18px;"></span></strong></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2" >
+			         <!--  <div style="width: 100%;text-align: center;"><img id="manimg" style="display: none;" src="<s:url value="/communityimages/%manid%.jpg"/>" width="500" /></div>
+			            <span id="descrip"></span>-->
+			            <div id="descrip" style="width: 100%;text-align: left;"></div>
+			            </td>
+			          </tr>
+			        <!--   <tr>
+			            <td colspan="2">地址：<span id="address"></span><a id="map" href="<s:url action="guide-index" namespace="/user"></s:url>?orgid={0}"><img border="0" style="vertical-align:middle;" src="${templatePath}images/map.png" alt="地图" /></a></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2">网址：<span id="orgUrl"></span></td>
+			          </tr> -->
+			        </table></td>
+			      </tr>
+			    </table>
+		    </td>
+		  </tr>
+		</table>
+	</body>
+</html>

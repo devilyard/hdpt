@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健教宣传详情</title>
+<script src="Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
+<script src="Scripts/common.js" type="text/javascript"></script>
+<link href="css.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../hdpt/js/common.js"></script>
+<script type="text/javascript" src="../hdpt/js/jmhd.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var back_url = "../jkzxInfo4Page.ehr";
+		var id = Request("id");
+		var data={"tag":"981fafdd-0e44-4066-b394-15e1bb9b88a6","success":true};
+		$.jkw.load({
+			"type" : 0,
+			"back_url" : back_url+"?id="+id,
+			"data" : data,
+			"comeback" : function(data){
+				var flag = data.success;
+				if(flag == true){
+					$("#title").html(data.jkzxInfo.titlefirst);
+					$("#content").html(data.jkzxInfo.subject);
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+		
+	});
+</script>
+</head>
+
+<body class="nrBox">
+<!--内容-->
+	<p class="nrtitle f20">健教宣传</p>
+		<article>
+			<h1 id="title" class="f24"></h1>
+            <p id="content" class="xinwen"></p>
+		</article>
+</body>
+</html>

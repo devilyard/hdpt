@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_USER_RECONTACT" table="JMHD_USER_RECONTACT">
+		<id name="ID" type="java.lang.String">
+	    	<column name="ID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="USER_ID" type="java.lang.String" length="12" />
+		<property name="EMPIID" type="java.lang.String" length="64" />
+		<property name="DOCTOR_ID" type="java.lang.String" length="16" />
+		<property name="REMESSAGE" type="java.lang.String"  />
+		<property name="CREATE_TIME" type="date"  />
+		<property name="RE_ID" type="java.lang.String" length="12" />
+		<property name="CONTACT_ID" type="java.lang.String" length="12" />
+		<property name="DEL_STATUS" type="java.lang.String"  />
+		<property name="MPIID" type="java.lang.String" length="64" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,167 @@
+.changyong4 {
+	COLOR: #FF6600;
+	TEXT-DECORATION: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	font-weight: bold;
+}
+.changyong5 {
+	COLOR: #FF6600;
+	TEXT-DECORATION: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: normal;
+	font-weight: bold;
+}
+.changyong {
+
+	COLOR: #666666;
+	TEXT-DECORATION: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 23px;
+}
+.changyong3
+{
+ font-weight: bold;
+	COLOR: #666666;
+	TEXT-DECORATION: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 23px;
+}
+HTML {
+	HEIGHT: 100%
+}
+BODY {
+	HEIGHT: 100%
+}
+BODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; COLOR: #626262; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+DIV {
+	TEXT-ALIGN: left; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; COLOR: #626262; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+P {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; COLOR: #626262; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+UL {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; COLOR: #626262; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+LI {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; COLOR: #626262; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+UL {
+	LIST-STYLE-TYPE: none
+}
+LI {
+	LIST-STYLE-TYPE: none
+}
+IMG {
+	BORDER-RIGHT-WIDTH: 0px; DISPLAY: block; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+B {
+	BORDER-RIGHT-WIDTH: 0px; DISPLAY: block; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+.ML_But A {
+	BACKGROUND: url(http://mimg.126.com/index/bg_x.jpg) no-repeat
+}
+.MR_But INPUT {
+	CURSOR: hand
+}
+.ML_Recom B {
+	CURSOR: hand
+}
+.ML_But INPUT {
+	CURSOR: hand
+}
+#Top_catchword_pic {
+	CURSOR: hand
+}
+#Top_catchword_words {
+	CURSOR: hand
+}
+#J_intr A {
+	BACKGROUND: url(http://mimg.126.com/index/icon_j.gif) no-repeat
+}
+.ge {
+	LINE-HEIGHT: 0px; HEIGHT: 1px; CLEAR: both; FONT-SIZE: 0px
+}
+.MR_pinp INPUT {
+	BORDER-BOTTOM: #a1bca3 1px solid; BORDER-LEFT: #a1bca3 1px solid; PADDING-BOTTOM: 4px; PADDING-LEFT: 2px; WIDTH: 160px; PADDING-RIGHT: 2px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FLOAT: left; MARGIN-LEFT: 0px; FONT-SIZE: 14px; BORDER-TOP: #a1bca3 1px solid; FONT-WEIGHT: bold; BORDER-RIGHT: #a1bca3 1px solid; PADDING-TOP: 4px
+}
+.MR_pinp A {
+	MARGIN: 4px 0px 0px 9px; DISPLAY: block; FLOAT: left
+}
+.MR_pinp SELECT {
+	TEXT-ALIGN: center; WIDTH: 166px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FLOAT: left; MARGIN-LEFT: 0px
+}
+.m126 {
+	MARGIN: 4px 0px 0px 6px; WIDTH: 87px; DISPLAY: block; BACKGROUND-POSITION: -120px -25px; FLOAT: left; HEIGHT: 18px
+}
+.MR_check {
+	MARGIN-TOP: 16px; pavertical-align: middle
+}
+.LH2 {
+	MARGIN-TOP: 2px
+}
+.MR_But {
+	MARGIN-TOP: 18px; CLEAR: both
+}
+.inp_L1 {
+	LINE-HEIGHT: 23px; BORDER-RIGHT-WIDTH: 0px; WIDTH: 82px; BACKGROUND-POSITION: -4px -55px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 23px; COLOR: #464646; BORDER-LEFT-WIDTH: 0px
+}
+.inp_L2 {
+	LINE-HEIGHT: 23px; BORDER-RIGHT-WIDTH: 0px; WIDTH: 82px; BACKGROUND-POSITION: -4px -80px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 23px; COLOR: #464646; BORDER-LEFT-WIDTH: 0px
+}
+.MR_check SPAN {
+	COLOR: #fff
+}
+.MR_But SPAN {
+	COLOR: #fff
+}
+.wy {
+	WIDTH: 34px; DISPLAY: block
+}
+.MR_But INPUT {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 9px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.MR_check INPUT {
+	MARGIN: 0px 0px 0px 5px; HEIGHT: 14px
+}
+UNKNOWN {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 9px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+#UN {
+	POSITION: absolute; MARGIN-TOP: -39px; WIDTH: 100%; HEIGHT: 145px; CLEAR: both; TOP: 100%; LEFT: 0px
+}
+A.sub06:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.sub06:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.sub06:hover {
+	COLOR: #ff6600; TEXT-DECORATION: underline
+}
+.changyong5 {
+	LINE-HEIGHT: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #0a8745; FONT-SIZE: 14px; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.changyong2 {
+	LINE-HEIGHT: 18px; COLOR: #666666
+}
+.kuang6 {
+	BORDER-BOTTOM: #a8b194 1px solid; BORDER-LEFT: #d8d8d8 1px solid; BACKGROUND-COLOR: #e5f5c4; MARGIN-TOP: 5px; WIDTH: 100px; HEIGHT: 22px; COLOR: #333333; FONT-SIZE: 12px; BORDER-TOP: #e3e3e3 1px solid; BORDER-RIGHT: #a8b194 1px solid
+}
+.err_msg{
+	color: red;
+	line-height: 22px;
+	float: left;
+	font-size: 12px;
+}
+.highlight2 {
+    border: 1px solid #FF0000;
+    color: #FF0000;
+    outline: 1px solid #FFC1C1;
+}

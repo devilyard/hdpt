@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_APPLY_EHR" alias="JMHD_APPLY_EHR">
+  <item id="ID" alias="ID" type="string" length="32" generator="assigned" pkey="true"/>
+  <item id="MANAUNITID" alias="MANAUNITID" type="string" length="16"/>
+  <item id="PASSWORD" alias="PASSWORD" type="string" length="32"/>
+  <item id="CARDNO" alias="CARDNO" type="string" length="50"/>
+  <item id="IDCARD" alias="IDCARD" type="string" length="30"/>
+  <item id="PERSONNAME" alias="PERSONNAME" type="string" length="20"/>
+  <item id="SEXCODE" alias="SEXCODE" type="string"/>
+  <item id="BIRTHDAY" alias="BIRTHDAY" type="date"/>
+  <item id="WORKPLACE" alias="WORKPLACE" type="string" length="50"/>
+  <item id="MOBILENUMBER" alias="MOBILENUMBER" type="string" length="20"/>
+  <item id="PHONENUMBER" alias="PHONENUMBER" type="string" length="20"/>
+  <item id="CONTACT" alias="CONTACT" type="string" length="20"/>
+  <item id="CONTACTPHONE" alias="CONTACTPHONE" type="string" length="20"/>
+  <item id="NATIONALITYCODE" alias="NATIONALITYCODE" type="string" length="3"/>
+  <item id="NATIONCODE" alias="NATIONCODE" type="string" length="2"/>
+  <item id="BLOODTYPECODE" alias="BLOODTYPECODE" type="string"/>
+  <item id="RHBLOODCODE" alias="RHBLOODCODE" type="string"/>
+  <item id="EDUCATIONCODE" alias="EDUCATIONCODE" type="string" length="2"/>
+  <item id="WORKCODE" alias="WORKCODE" type="string" length="3"/>
+  <item id="MARITALSTATUSCODE" alias="MARITALSTATUSCODE" type="string"/>
+  <item id="INSURANCECODE" alias="INSURANCECODE" type="string" length="2"/>
+  <item id="INSURANCETYPE" alias="INSURANCETYPE" type="string" length="2"/>
+  <item id="ZIPCODE" alias="ZIPCODE" type="string" length="6"/>
+  <item id="ADDRESS" alias="ADDRESS" type="string" length="100"/>
+  <item id="EMAIL" alias="EMAIL" type="string" length="30"/>
+  <item id="STARTWORKDATE" alias="STARTWORKDATE" type="date"/>
+  <item id="REGISTEREDPERMANENT" alias="REGISTEREDPERMANENT" type="string" length="2"/>
+  <item id="CREAREDATE" alias="CREAREDATE" type="date"/>
+  <item id="MPIID" alias="MPIID" type="string" length="32"/>
+  <item id="MANAUNITNAME" alias="MANAUNITNAME" type="string" length="150"/>
+  <item id="STATUS" alias="STATUS" type="string" length="20"/>
+</entry>

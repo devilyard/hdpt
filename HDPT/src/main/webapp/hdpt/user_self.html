@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+
+		<script type="text/JavaScript">
+			$(document).ready(function() {
+
+				$("img[change]").bind("mouseover",function(){
+					var src = $(this).attr("src").replace("ico1","ico2");
+					$(this).attr("src",src);
+				}).bind("mouseout",function(){
+					var src = $(this).attr("src").replace("ico2","ico1");
+					$(this).attr("src",src);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <td width="20" align="center" class="set"><img src="images/ico_set.jpg" width="10" /></td>
+		    <td align="left" class="set">您目前所在的位置：<a href="user_self.html">自我管理</a>  </td>
+		  </tr>
+		</table>
+
+		<span class="kong25"><br /></span>
+
+		<div class="icon-menus">
+			<div class="icon-menu nav"><a href="edit_userinfo.html"><img change="true" src="images/ico1_xxxg.jpg" width="112" height="124" border="0" /></a></div>
+			<div class="icon-menu nav"><a href="diary_list.html"><img change="true" src="images/ico1_jkrj.jpg" width="112" height="124" border="0" /></a></div>
+			<!-- <div class="icon-menu nav"><a target="_blank" href="volunteerdonation_create.html"><img change="true" src="images/ico1_zyz.jpg" width="112" height="124" border="0" /></a></div> -->
+		</div>
+
+	</body>
+</html>

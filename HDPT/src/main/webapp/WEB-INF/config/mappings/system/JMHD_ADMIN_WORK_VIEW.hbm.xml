@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_ADMIN_WORK_VIEW" table="JMHD_ADMIN_WORK_VIEW">
+	<id name="WID" type="java.lang.String">
+	    	<column name="WID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="DOCTOR_ID" type="java.lang.String" length="16" />
+		<property name="WTYPE" type="java.lang.String" length="30" />
+		<property name="CNT" type="java.lang.String" length="10" />
+	</class>
+</hibernate-mapping>

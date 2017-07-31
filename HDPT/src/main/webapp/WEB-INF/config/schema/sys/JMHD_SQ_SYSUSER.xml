@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_SQ_SYSUSER" alias="社区用户表">
+  <item id="USERID" alias="USERID" type="string" length="30" generator="assigned" pkey="true"/>
+  <item id="MPIID" alias="MPIID" type="string" length="32"/>
+  <item id="EMPIID" alias="EMPIID" type="string" length="32"/>
+  <item id="SFZH" alias="SFZH" type="string" length="32"/>
+  <item id="LOGONNAME" alias="LOGONNAME" type="string" length="50"/>
+  <item id="USERNAME" alias="USERNAME" type="string" length="50"/>
+  <item id="GENDER" alias="GENDER" type="string"/>
+  <item id="MANAUNITID" alias="MANAUNITID" type="string" length="20"/>
+  <item id="JOBTITLE" alias="JOBTITLE" type="string" length="50"/>
+  <item id="PASSWORD" alias="PASSWORD" type="string" length="20"/>
+  <item id="STATUS" alias="STATUS" type="string"/>
+  <item id="LAYOUTCSS" alias="LAYOUTCSS" type="string" length="50"/>
+  <item id="PYCODE" alias="PYCODE" type="string" length="50"/>
+  <item id="REMARK" alias="REMARK" type="string" length="200"/>
+  <item id="REGIONCODE" alias="REGIONCODE" type="string" length="21"/>
+  <item id="MAPSIGN" alias="MAPSIGN" type="string" length="10"/>
+  <item id="LASTMODIFYUSER" alias="LASTMODIFYUSER" type="string" length="20"/>
+  <item id="LASTMODIFYDATE" alias="LASTMODIFYDATE" type="date"/>
+  <item id="REGIONCODE_TEXT" alias="REGIONCODE_TEXT" type="string" length="100"/>
+  <item id="USERVERSION" alias="USERVERSION" type="date"/>
+  <item id="INTRODUCTION" alias="INTRODUCTION" type="string"/>
+  <item id="MOBILEPHONE" alias="MOBILEPHONE" type="string" length="20"/>
+  <item id="CONTACTNUMBER" alias="CONTACTNUMBER" type="string" length="20"/>
+</entry>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic> 
+  <item  key="and" text="并且"/>
+  <item  key="or" text="或者"/>
+  <item  key="not" text="非"/>
+</dic>

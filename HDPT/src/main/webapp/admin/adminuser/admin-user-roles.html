@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>健康网</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+   	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/easyui/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jquery-ui/js/jquery-ui-1.8.12.custom.min.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+	var back_url = "../../findAdminUserRoles.ehr?id=";
+	var data={"tag":"a1514dfa-ed73-456c-9fc6-b6e56ae6f58c","success":true};
+	var maxRequest = 3;
+	$(document).ready(function(){
+		var id = Request("id");
+		var cfg = {
+			"type" : 2,
+			"back_url" : back_url+id,
+			"comeback" :doResult,
+			"data" :data
+		};
+		$.jkw.load(cfg);
+		
+		var cfg2 = {
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doBack,
+				"formid" : "ajaxForm"
+			};
+			$.jkw.submit(cfg2);
+		
+	});
+
+	function doBack(data){
+		alert(data.message)
+		location.href = "admin-user-list.html";
+	}
+	function doResult(data){
+		
+		var roleModulesString ="";
+		for(var i=0;i<data.userRoles.length;i++){
+			//alert(data.userRoles[i].rolename)
+			var checked="";
+			var disabled="";
+			if(data.userRoles[i].ADMINID!=undefined){
+				checked=" checked='checked'";
+			}
+			console.info(data.userRoles[i].USID);
+			if(data.userRoles[i].USID==undefined){
+				//disabled=" style='display:none'";
+			}
+			roleModulesString+="<tr "+disabled+"><td>"
+					  +data.userRoles[i].ROLENAME
+					  +"</td><td><input type='checkbox' name='roleString' value='"+data.userRoles[i].ROLEID+"'"+checked+"/></td></tr>";
+		}
+		//alert(roleModulesString)
+		
+		$("#rolelist").html(roleModulesString);
+		$("#adminuserId").val(data.adminuserId);
+		$("#userinfo").html(data.adminuser.adminName);
+	}
+
+	
+	</script>
+
+  </head>
+  
+  <body>
+  	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="admin-user-list.html">用户维护</a> &gt;&gt; 角色设置</td>
+  			</tr>
+		</tbody></table>
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody>
+		      <tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+			  		当前用户:<span id="userinfo"></span>
+			 		<form id="ajaxForm" name="ajaxForm" action="../../setAdminUserRole.ehr" method="post">
+			  			<input name="adminId" id="adminuserId" type="hidden">
+			  	 		<table id="rolelist"></table>
+			   			<input class="ui-button ui-widget ui-state-default ui-corner-all ui-state-focus" id="ajaxForm_0" value="设置" role="button" type="submit">
+			  		</form>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+			</td>
+			</tr>
+		  </tbody>
+		</table>
+</body>
+</html>

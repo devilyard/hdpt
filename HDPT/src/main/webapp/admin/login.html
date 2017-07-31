@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>健康网</title>
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+input[type="text"],input[type="password"] {
+	margin-bottom: 0px;
+	height: 28px;
+}
+</style>
+<script src="../hdpt/js/base/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="../bootstrap/js/common.js"></script>
+<script type="text/javascript" src="../hdpt/js/jmhd.js"></script>
+<script type="text/javascript" src="../hdpt/js/base/jquery.form.js"></script>
+<script type="text/javascript">
+	//登录
+	function adminlogon() {
+		var loginName = $("#loginName").val();
+		var password = $('#password').val();
+		param = {
+			'loginName' : loginName,
+			'password' : password
+		};
+		u = '../adminlogon.ehr';
+		doAjax(u, param, adminlogondeallogin);
+	}
+	
+	var back_url = "../adminlogon.ehr";
+	
+	$(document).ready(function(){
+			if (self != top) {
+				top.location.href = location.href;
+				return;
+			};
+			var cfg = {
+				"type" : 0,
+				"back_url" : back_url,
+			    "comeback" :adminlogondeallogin,
+			    "formid" : "loginForm"
+			};
+			$.jkw.submit(cfg);
+
+		});
+	
+	
+	//登录处理
+	function adminlogondeallogin(data) {
+		if (data.success) {
+			var rs = 'home.html';
+			top.location.href = rs;
+			return;
+		} else {
+			alert("您输入的账户名和密码不匹配!");
+		}
+	}
+</script>
+
+</head>
+<body>
+
+
+	<div>
+		<form id="loginForm" name="loginForm" action="../adminlogon.ehr" method="post">
+		<table width="100%" align="center" cellspacing="0" cellpadding="0"
+			border="0">
+			<tbody>
+				<tr>
+					<td height="640" background="../hdpt/images/login1_bj.jpg"
+						align="center"><table width="578" height="365"
+							cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td valign="top" background="../hdpt/images/login1_bj1.jpg"
+										align="center"><table width="100%" cellspacing="0"
+											cellpadding="0" border="0">
+											<tbody>
+												<tr>
+													<td height="86" colspan="3">&nbsp;</td>
+												</tr>
+												<tr>
+													<td width="31%" height="35" align="right">账&#12288;号：</td>
+													<td width="37%" align="left"><input type="text"
+														style="width:180px" class="form" id="loginName" name="loginName"></td>
+													<td align="left" colspan="5" rowspan="2" valign="bottom">
+														<input type="image" name="imageField" src="../hdpt/images/dl.png" />
+													</td>
+												</tr>
+												<tr>
+													<td height="35" align="right">密&#12288;码：</td>
+													<td align="left"><input type="password"
+														style="width:180px" class="form" id="password"
+														name="password"></td>
+												</tr>
+												<!--
+          <tr>
+            <td height="35" align="right">验证码：</td>
+            <td align="left"><input name="textfield3" type="text" class="form" style="width:180px" /></td>
+          </tr>
+           -->
+											</tbody>
+										</table></td>
+								</tr>
+							</tbody>
+						</table></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		<div>
+</body>
+</html>

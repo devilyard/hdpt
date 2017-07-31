@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link href="css/Ipt_Leave_style.css" rel="stylesheet" type="text/css" />
+	<script language="javascript" src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+  </head>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		var dcid=Request("key")
+		var url = host + '/examReport/getHtmlDocument?vk=UUID&dcId='+encodeURI(dcid)
+		param = {
+			'url' : url
+		};
+		doAjax("getdata.px", param, "json", function(data, textStatus) {
+			if(data.body){
+				$("#jybgdetail").html(data.body)
+			}else{
+				$("#jybgdetail").html("<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>")
+			}
+			
+		});
+		
+  	});
+  
+  </script>
+  <body>
+  	<div>
+		<dl class="jiancha">
+			<dd id="jybgdetail"></dd>
+		</dl>
+	</div>
+  </body>
+</html>

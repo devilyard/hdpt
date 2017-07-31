@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_USER_CONTACT_VIEW" table="JMHD_USER_CONTACT_VIEW">
+		<id name="ID" type="java.lang.String">
+	    	<column name="ID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="USER_ID" type="java.lang.String" length="12" />
+		<property name="EMPIID" type="java.lang.String" length="64" />
+		<property name="MESSAGE" type="java.lang.String"  />
+		<property name="QTIME" type="date"  />
+		<property name="ATIME" type="date"  />
+		<property name="REPLY_STATUS" type="java.lang.String"  />
+		<property name="DOCTOR_ID" type="java.lang.String" length="16" />
+		<property name="DEL_STATUS" type="java.lang.String"  />
+		<property name="END_STATUS" type="java.lang.String"  />
+		<property name="MPIID" type="java.lang.String" length="64" />
+		<property name="NAME" type="java.lang.String" length="50" />
+	</class>
+</hibernate-mapping>

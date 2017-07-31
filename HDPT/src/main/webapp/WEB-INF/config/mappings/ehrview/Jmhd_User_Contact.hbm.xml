@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dc.domain.contact.JmhdUserContact" table="JMHD_USER_CONTACT">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+             <param name="sequence">JMHD_USER_CONTACT_SQ</param>
+            </generator>
+        </id>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" precision="12" scale="0" />
+        </property>
+        <property name="empiid" type="java.lang.String">
+            <column name="EMPIID" length="64" />
+        </property>
+        <property name="message" type="java.lang.String">
+            <column name="MESSAGE" />
+        </property>
+        <property name="qtime" type="java.util.Date">
+            <column name="QTIME" length="7" />
+        </property>
+        <property name="atime" type="java.util.Date">
+            <column name="ATIME" length="7" />
+        </property>
+        <property name="replyStatus" type="java.lang.String">
+            <column name="REPLY_STATUS" length="1" />
+        </property>
+        <property name="doctorId" type="java.lang.String">
+            <column name="DOCTOR_ID" length="16" />
+        </property>
+        <property name="delStatus" type="java.lang.String">
+            <column name="DEL_STATUS" length="1" />
+        </property>
+        <property name="endStatus" type="java.lang.String">
+            <column name="END_STATUS" length="1" />
+        </property>
+        <property name="mpiid" type="java.lang.String">
+            <column name="MPIID" length="64" />
+        </property>
+    </class>
+</hibernate-mapping>

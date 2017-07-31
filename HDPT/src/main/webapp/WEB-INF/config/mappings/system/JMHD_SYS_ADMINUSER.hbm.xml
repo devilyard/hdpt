@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_SYS_ADMINUSER" table="JMHD_SYS_ADMINUSER">
+		<id name="ADMIN_ID" type="java.lang.String">
+	    	<column name="ADMIN_ID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="ADMIN_NAME" type="java.lang.String" length="50" />
+		<property name="LOGIN_NAME" type="java.lang.String" length="20" />
+		<property name="PASSWORD" type="java.lang.String" length="32" />
+		<property name="ORG_ID" type="java.lang.String" length="16" />
+		<property name="REMARKS" type="java.lang.String" length="255" />
+		<property name="STATUS" type="java.lang.String"  />
+		<property name="TYPE" type="java.lang.String"  />
+		<property name="DATAFIELD" type="java.lang.String"  />
+	</class>
+</hibernate-mapping>

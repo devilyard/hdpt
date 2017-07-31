@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<applications title="开发版" version="1334212926068" id="CTRL_CFG_appCfg" filename="D:\Program Files\apache-tomcat-7.0.22\webapps\configServer\WEB-INF\config\applications.xml"> 
+	<args> 
+		<arg id="system">windows 2003</arg>
+		<arg id="browser">chrome</arg>
+		<arg id="version">2.0</arg>
+	</args>  
+
+
+	<app id="WELCOME" title="首页" type="index">
+		<module id="WELCOME01" title="个人信息" script="app.viewport.NotifyList" iconCls="S02"/>
+		<module id="WELCOME02" title="浏览历史" script="app.biz.ehrview.BrowsingList" iconCls="S02">
+			<initArgs> 
+				<arg name="entryName">SYS_BrowsingHist</arg>  
+				<arg name="listServiceId">showBrowsingHist</arg> 
+				<arg name="winState">{'pos':[0,0]}</arg> 
+			</initArgs>
+		</module> 
+	</app>
+ 	
+	<app id="EHR" title="健康档案">
+		<catalog id="EHRCATA" title="健康档案">
+			<module id="MPI01" title="健康档案检索" script="app.biz.ehrview.MPIBaseList"> 
+				<initArgs> 
+					<arg name="entryName">MPI_DemographicInfo</arg>  
+					<arg name="listServiceId">mpiQueryService</arg> 
+					<arg name="winState">{'pos':[0,0]}</arg> 
+				</initArgs>  
+				<action id="ehrview" name="查看EHR" iconCls="read"/> 
+			</module> 
+			<!--module id="EHR08" title="健康档案浏览" script="app.biz.mpi.MpiInterface" iconCls="A01">
+				<initArgs>
+				</initArgs>
+			</module-->
+		</catalog>
+	</app>
+
+	<app id="CONF" title="配置管理">
+		<catalog id="CONFCATA" title="配置管理">
+			<module id="CONF01" title="浏览模板配置" script="app.biz.ehrview.LayoutConfigView" iconCls="D01"> 
+				<initArgs> 
+				</initArgs> 
+			</module>  
+			<module id="CONF02" title="浏览规则配置" script="app.biz.ehrview.TemplateEditForm" iconCls="L02"> 
+				<initArgs> 
+					<arg name="winState" type="jo">{'pos':[50,50]}</arg> 
+				</initArgs> 
+			</module>  
+		</catalog>
+	</app> 
+</applications>

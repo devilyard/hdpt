@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="JMHD_APPLY_EHR" table="JMHD_APPLY_EHR">
+		<id name="ID" type="java.lang.String">
+	    	<column name="ID"/>
+	    	<generator class="assigned" />
+		</id>
+		<property name="MANAUNITID" type="java.lang.String" length="16" />
+		<property name="PASSWORD" type="java.lang.String" length="32" />
+		<property name="CARDNO" type="java.lang.String" length="50" />
+		<property name="IDCARD" type="java.lang.String" length="30" />
+		<property name="PERSONNAME" type="java.lang.String" length="20" />
+		<property name="SEXCODE" type="java.lang.String"  />
+		<property name="BIRTHDAY" type="date"  />
+		<property name="WORKPLACE" type="java.lang.String" length="50" />
+		<property name="MOBILENUMBER" type="java.lang.String" length="20" />
+		<property name="PHONENUMBER" type="java.lang.String" length="20" />
+		<property name="CONTACT" type="java.lang.String" length="20" />
+		<property name="CONTACTPHONE" type="java.lang.String" length="20" />
+		<property name="NATIONALITYCODE" type="java.lang.String" length="3" />
+		<property name="NATIONCODE" type="java.lang.String" length="2" />
+		<property name="BLOODTYPECODE" type="java.lang.String"  />
+		<property name="RHBLOODCODE" type="java.lang.String"  />
+		<property name="EDUCATIONCODE" type="java.lang.String" length="2" />
+		<property name="WORKCODE" type="java.lang.String" length="3" />
+		<property name="MARITALSTATUSCODE" type="java.lang.String"  />
+		<property name="INSURANCECODE" type="java.lang.String" length="2" />
+		<property name="INSURANCETYPE" type="java.lang.String" length="2" />
+		<property name="ZIPCODE" type="java.lang.String" length="6" />
+		<property name="ADDRESS" type="java.lang.String" length="100" />
+		<property name="EMAIL" type="java.lang.String" length="30" />
+		<property name="STARTWORKDATE" type="date"  />
+		<property name="REGISTEREDPERMANENT" type="java.lang.String" length="2" />
+		<property name="CREAREDATE" type="timestamp"  />
+		<property name="MPIID" type="java.lang.String" length="32" />
+		<property name="MANAUNITNAME" type="java.lang.String" length="150" />
+		<property name="STATUS" type="java.lang.String" length="20" />
+	</class>
+</hibernate-mapping>

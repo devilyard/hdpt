@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dic class="CustomDictionary" id="positionDic" version="1362539435142" isRemote="true" domain="ehrview"> 
+  <arg name="class">ctd.configure.ManageUnitConfig</arg>  
+  <arg name="method">dic</arg> 
+</dic>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_VOLUNTEER_DONATION_VIEW" alias="JMHD_VOLUNTEER_DONATION_VIEW">
+  <item id="EMPIID" alias="EMPIID" type="string" length="32"/>
+  <item id="DONATEID" alias="DONATEID" length="12" generator="assigned" pkey="true"/>
+  <item id="PERSONNAME" alias="PERSONNAME" type="string" length="30"/>
+  <item id="SEXCODE" alias="SEXCODE" type="string"/>
+  <item id="NATIONCODE" alias="NATIONCODE" type="string" length="2"/>
+  <item id="BIRTHDAY" alias="BIRTHDAY" type="date"/>
+  <item id="WORKCODE" alias="WORKCODE" type="string" length="3"/>
+  <item id="BLOODTYPECODE" alias="BLOODTYPECODE" type="string"/>
+  <item id="RHBLOODCODE" alias="RHBLOODCODE" type="string"/>
+  <item id="CERTIFICATETYPECODE" alias="CERTIFICATETYPECODE" type="string" length="2"/>
+  <item id="ZIPCODE" alias="ZIPCODE" type="string" length="6"/>
+  <item id="EMAIL" alias="EMAIL" type="string" length="30"/>
+  <item id="ADDRESS" alias="ADDRESS" type="string" length="100"/>
+  <item id="CERTIFICATENO" alias="CERTIFICATENO" type="string" length="30"/>
+  <item id="WORKPLACE" alias="WORKPLACE" type="string" length="50"/>
+  <item id="MOBILENUMBER" alias="MOBILENUMBER" type="string" length="20"/>
+  <item id="BLOODFLAG" alias="BLOODFLAG" type="string"/>
+  <item id="LASTDONATEBLOODDATE" alias="LASTDONATEBLOODDATE" type="date"/>
+  <item id="TDONATEBLOODCOUNT" alias="TDONATEBLOODCOUNT"/>
+  <item id="ALLBLOODCOUNT" alias="ALLBLOODCOUNT"/>
+  <item id="CREATEDATE" alias="CREATEDATE" type="date"/>
+  <item id="CREATEUNIT" alias="CREATEUNIT" type="string" length="16"/>
+  <item id="CREATEUSER" alias="CREATEUSER" type="string" length="20"/>
+  <item id="COMMPONENBLOODCOUNT" alias="COMMPONENBLOODCOUNT"/>
+  <item id="CANCELLATIONUSER" alias="CANCELLATIONUSER" type="string" length="20"/>
+  <item id="CANCELLATIONDATE" alias="CANCELLATIONDATE" type="date"/>
+  <item id="CANCELLATIONUNIT" alias="CANCELLATIONUNIT" type="string" length="16"/>
+  <item id="CANCELLATIONREASON" alias="CANCELLATIONREASON" type="string" length="100"/>
+  <item id="STATUS" alias="STATUS" type="string"/>
+  <item id="LASTMODIFYUNIT" alias="LASTMODIFYUNIT" type="string" length="16"/>
+  <item id="LASTMODIFYDATE" alias="LASTMODIFYDATE" type="date"/>
+  <item id="LASTMODIFYUSER" alias="LASTMODIFYUSER" type="string" length="20"/>
+  <item id="WORKPLACENUMBER" alias="WORKPLACENUMBER" type="string" length="20"/>
+  <item id="QQNUMBER" alias="QQNUMBER" type="string" length="20"/>
+  <item id="NOTES" alias="NOTES" type="string" length="2000"/>
+  <item id="DEADREASON" alias="DEADREASON" type="string" length="100"/>
+  <item id="CARDTYPE" alias="CARDTYPE" type="string" length="10"/>
+</entry>

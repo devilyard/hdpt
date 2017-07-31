@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>健康网</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<!-- <link href="css/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" /> -->
+<script language="javascript" src="js/base/jquery.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/jmhd.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script> -->
+<script type="text/javascript" src="js/common.js"></script>
+
+<script type="text/JavaScript">
+	$(document).ready(function() {
+		parent.$("#main").attr("scrolling","no")
+		var first=window.parent.jkFirst
+		var jkFlag=window.parent.jkNumArry
+		if(first==1){
+			//视图
+			var url = host + '/entryName/Check_Record_Count_View?vk=UUID'
+			var param = {
+				'url' : url
+			};
+			doAjax("getdata.px", param, "json", function(data, textStatus) {
+				var jsonDatas = data.body;
+				if (data["code"] == 200) {
+					for(var i=0;i<jsonDatas.length;i++){
+						var recordclass=jsonDatas[i].recordclassifying
+						//就诊(门诊)
+						if(recordclass=='Opt_Record'){
+							if (jsonDatas[i].cnt>0){
+								$("#jzxx").show();
+								$("#jzxx1").hide();
+								jkFlag["clinic"]=1
+							}
+						}
+						//就诊(住院)
+						if(recordclass=='Ipt_LeaveRecord'){
+							if (jsonDatas[i].cnt>0){
+								$("#jzxx").show();
+								$("#jzxx1").hide();
+								jkFlag["hospital"]=1
+							}
+						}
+						//检验
+						if(recordclass=='Pt_LabReport'){
+							if (jsonDatas[i].cnt>0){
+								$("#clniclab").show();
+								$("#clniclab1").hide();
+								jkFlag["clniclab"]=1
+							}
+						}
+						//孕产期档案
+						if(recordclass=='MHC_PregnantRecord'){
+							if (jsonDatas[i].cnt>0){
+								$("#mhcvisit").show();
+								$("#mhcvisit1").hide();
+								jkFlag["mhcvisit"]=1
+							}
+						}
+						//社区体检 医院体检
+						if(recordclass=='PER_CheckUpRegister'){
+							if (jsonDatas[i].cnt>0){
+								$("#checkupType").show();
+								$("#checkupType1").hide();
+								jkFlag["checkup"]=1
+							}
+						}
+						if(recordclass=='Cu_Register'){
+							if (jsonDatas[i].cnt>0){
+								$("#checkupType").show();
+								$("#checkupType1").hide();
+								jkFlag["checkupH"]=1
+							}
+						}
+						//高血压档案
+						if(recordclass=='MDC_HypertensionRecord'){
+							if (jsonDatas[i].cnt>0){
+								$("#hypertensionvisit").show();
+								$("#hypertensionvisit1").hide();
+								jkFlag["hypertensionvisit"]=1
+							}
+						}
+						//儿童保健档案
+						if(recordclass=='CDH_HealthCard'){
+							if (jsonDatas[i].cnt>0){
+								$("#childhealth").show();
+								$("#childhealth1").hide();
+								jkFlag["childhealth"]=1
+							}
+						}
+						//糖尿病档案
+						if(recordclass=='MDC_DiabetesRecord'){
+							if (jsonDatas[i].cnt>0){
+								$("#diabetesvisit").show();
+								$("#diabetesvisit1").hide();
+								jkFlag["diabetesvisit"]=1
+							}
+						}
+						//既往史
+						//家族史(个人健康档案)
+						if (recordclass == 'EHR_HealthRecord') {
+							if (jsonDatas[i].cnt > 0) {
+								$("#histsick").show();
+								$("#histsick1").hide();
+								jkFlag["histFamily"]=1
+							}
+						}
+						if (recordclass == 'SUMMARY_Hist_Sick') {
+							if (jsonDatas[i].cnt > 0) {
+								$("#histsick").show();
+								$("#histsick1").hide();
+								jkFlag["histSick"]=1
+							}
+						}
+						if(recordclass == 'SUMMARY_Hist_Allergy'){
+							if (jsonDatas[i].cnt>0){
+								$("#histsick").show();
+								$("#histsick1").hide();
+								jkFlag["histAllergy"]=1
+							}
+						}
+						if(recordclass == 'SUMMARY_Hist_Vaccination'){
+							if (jsonDatas[i].cnt>0){
+								$("#histsick").show();
+								$("#histsick1").hide();
+								jkFlag["histVaccination"]=1
+							}
+						}
+						if(recordclass == 'SUMMARY_Hist_Reproductive'){
+							if (jsonDatas[i].cnt>0){
+								$("#histsick").show();
+								$("#histsick1").hide();
+								jkFlag["histReproductive"]=1
+							}
+						}
+						//用药信息
+						if(recordclass=='SUMMARY_Hist_Drug'){
+							if (jsonDatas[i].cnt>0){
+								$("#drug").show();
+								$("#drug1").hide();
+								jkFlag["drug"]=1
+							}
+						}
+						//医学检查
+						if(recordclass=='Pt_ExamReport'){
+							if (jsonDatas[i].cnt>0){
+								$("#exam").show();
+								$("#exam1").hide();
+								jkFlag["exam"]=1
+							}
+						}
+						//老年人随访
+						//if(recordclass=='MDC_OldPeopleVisit'){
+						//老年人档案
+						if(recordclass=='MDC_OldPeopleRecord'){
+							if (jsonDatas[i].cnt>0){
+								$("#oldpeoplevisit").show();
+								$("#oldpeoplevisit1").hide();
+								jkFlag["oldpeoplevisit"]=1
+							}
+						}
+					}
+				}
+			});
+			window.parent.jkFirst=0
+		}else{
+			if(jkFlag["clinic"]==1||jkFlag["hospital"]==1){
+				$("#jzxx").show();
+				$("#jzxx1").hide();
+			}
+			if(jkFlag["clniclab"]==1){
+				$("#clniclab").show();
+				$("#clniclab1").hide();
+			}
+			//孕产期档案
+			if(jkFlag["mhcvisit"]==1){
+				$("#mhcvisit").show();
+				$("#mhcvisit1").hide();
+			}
+			//社区体检 医院体检
+			if(jkFlag["checkup"]==1||jkFlag["checkupH"]==1){
+				$("#checkupType").show();
+				$("#checkupType1").hide();
+			}
+			//高血压档案
+			if(jkFlag["hypertensionvisit"]==1){
+				$("#hypertensionvisit").show();
+				$("#hypertensionvisit1").hide();
+			}
+			//儿童保健档案
+			if(jkFlag["childhealth"]==1){
+				$("#childhealth").show();
+				$("#childhealth1").hide();
+			}
+			//糖尿病档案
+			if(jkFlag["diabetesvisit"]==1){
+				$("#diabetesvisit").show();
+				$("#diabetesvisit1").hide();
+			}
+			//既往史
+			//家族史(个人健康档案)
+			if (jkFlag["histSick"]==1
+					||jkFlag["histAllergy"]==1
+					||jkFlag["histVaccination"]==1
+					||jkFlag["histReproductive"]==1
+					||jkFlag["histFamily"]==1) {
+				$("#histsick").show();
+				$("#histsick1").hide();
+			}
+			//用药信息
+			if(jkFlag["drug"]==1){
+				$("#drug").show();
+				$("#drug1").hide();
+			}
+			//医学检查
+			if(jkFlag["exam"]==1){
+				$("#exam").show();
+				$("#exam1").hide();
+			}
+			//老年人随访
+			if(jkFlag["oldpeoplevisit"]==1){
+				$("#oldpeoplevisit").show();
+				$("#oldpeoplevisit1").hide();
+			}
+		}
+
+		$("img[change]").bind("mouseover", function() {
+			var src = $(this).attr("src").replace("ico1", "ico2");
+			$(this).attr("src", src);
+		}).bind("mouseout", function() {
+			var src = $(this).attr("src").replace("ico2", "ico1");
+			$(this).attr("src", src);
+		});
+
+	});
+</script>
+
+</head>
+<body>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="26" align="center" class="set"><img
+				src="images/ico_set.jpg" width="10" /></td>
+			<td align="left" class="set">您目前所在的位置：<a>健康档案</a>
+			</td>
+		</tr>
+	</table>
+
+	<span class="kong25"><br /></span>
+	<div class="icon-menus">
+		<div class="icon-menu nav">
+			<a href="basic_info.html"><img change="true"
+				src="images/ico1_jbxx.jpg" name="Image15" width="112"
+				height="124" border="0" id="Image15" /></a>
+		</div>
+
+		<div id="jzxx" style="display: none" class="icon-menu nav">
+			<a href="recordType_main.html"><img change="true"
+				src="images/ico1_jzxx.jpg" name="Image16" width="112"
+				height="124" border="0" id="Image16" /></a>
+		</div>
+		<div id="jzxx1" class="icon-menu nav">
+			<img src="images/ico3_jzxx.jpg" width="112" height="124" border="0" />
+		</div>
+
+		<div id="drug" style="display: none" class="icon-menu nav">
+			<a href="Summary_Drug_list.html"><img change="true"
+				src="images/ico1_yyxx.jpg" name="Image17" width="112"
+				height="124" border="0" id="Image17" /></a>
+		</div>
+		<div id="drug1" class="icon-menu nav">
+			<img src="images/ico3_yyxx.jpg" width="112" height="124"
+				border="0" />
+		</div>
+
+		<div id="clniclab" style="display: none" class="icon-menu nav">
+			<a href="Pt_LabReport_List.html"><img change="true"
+				src="images/ico1_yxjy.jpg" name="Image19" width="112"
+				height="124" border="0" id="Image19" /></a>
+		</div>
+		<div id="clniclab1" class="icon-menu nav">
+			<img src="images/ico3_yxjy.jpg" width="112" height="124"
+				border="0" />
+		</div>
+		<!-- 医学检查 -->
+		<!-- TODO 图片 -->
+		<div id="exam" style="display: none" class="icon-menu nav">
+			<a href="Pt_YYJC_List.html"><img change="true"
+				src="images/ico1_yxjc.jpg" name="Image22" width="112"
+				height="124" border="0" id="Image22" /></a>
+		</div>
+		<div id="exam1" class="icon-menu nav">
+			<img src="images/ico3_yxjc.jpg" width="112" height="124"
+				border="0" />
+		</div>
+		<!-- 体检(医院 社区) -->
+		<div id="checkupType" style="display: none" class="icon-menu nav">
+			<a href="checkupType_main.html"><img change="true"
+				src="images/ico1_tjbg.jpg" name="Image20" width="112"
+				height="124" border="0" id="Image20" /></a>
+		</div>
+		<div id="checkupType1" class="icon-menu nav">
+			<img src="images/ico3_tjbg2.jpg" width="112" height="124"
+				border="0" />
+		</div>
+
+		<div id="hypertensionvisit" style="display: none" class="icon-menu nav">
+			<a href="#" onclick="openwin1('MDC_Hypertension_List.html','1350','750')"><img change="true"
+				src="images/ico1_gxyda.jpg" name="Image20" width="112"
+				height="124" border="0" id="Image20" /></a>
+		</div>
+		<div id="hypertensionvisit1" class="icon-menu nav">
+			<img src="images/ico3_gxyda.jpg" width="112"
+				height="124" border="0" />
+		</div>
+
+		<div id="diabetesvisit" style="display: none" class="icon-menu nav">
+			<a href="#" onclick="openwin1('MDC_Diabetes_List.html','1350','750')"><img change="true"
+				src="images/ico1_tnbda.jpg" name="Image20" width="112"
+				height="124" border="0" id="Image20" /></a>
+		</div>
+		<div id="diabetesvisit1" class="icon-menu nav">
+			<img src="images/ico3_tnbda.jpg" width="112"
+				height="124" border="0" />
+		</div>
+
+		<div id="oldpeoplevisit" style="display: none" class="icon-menu nav">
+			<a href="#" onclick="openwin1('MDC_OldPeople_List.html','1350','750')"><img change="true"
+				src="images/ico1_lnrda.jpg" name="Image20" width="112"
+				height="124" border="0" id="Image20" /></a>
+		</div>
+		<div id="oldpeoplevisit1" class="icon-menu nav">
+			<img src="images/ico3_lnrda.jpg" width="112"
+				height="124" border="0" />
+		</div>
+
+		<div id="mhcvisit" style="display: none" class="icon-menu nav">
+			<a href="#" onclick="openwin1('MHC_Pregnant_List.html','1350','750')"><img change="true"
+				src="images/ico1_ycqda.jpg" name="Image22" width="112"
+				height="124" border="0" id="Image22" /></a>
+		</div>
+		<div id="mhcvisit1" class="icon-menu nav">
+			<img src="images/ico3_ycqda.jpg" width="112"
+				height="124" border="0" />
+		</div>
+
+		<div id="childhealth" class="icon-menu nav" style="display: none">
+			<a href="#" onclick="openwin1('CDH_Health_List.html','1350','750')"><img change="true"
+				src="images/ico1_etbjda.jpg" name="Image23" width="112"
+				height="124" border="0" id="Image23" /></a>
+		</div>
+		<div id="childhealth1" class="icon-menu nav">
+			<img src="images/ico3_etbjda.jpg" width="112"
+				height="124" border="0" />
+		</div>
+		
+		<!-- TODO 图片 -->
+		<div id="histsick" style="display: none" class="icon-menu nav">
+			<a href="#" onclick="openwin1('Summary_Hist_List.html','1350','750')"><img change="true"
+				src="images/ico1_jws.jpg" name="Image16" width="112"
+				height="124" border="0" id="Image16" /></a>
+		</div>
+		<div id="histsick1" class="icon-menu nav">
+			<img src="images/ico3_jws.jpg" width="112" height="124" border="0" />
+		</div>
+		
+	</div>
+</body>
+</html>

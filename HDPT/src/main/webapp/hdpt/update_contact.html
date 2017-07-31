@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>健康网</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="js/base/jquery.js"></script>
+		<script type="text/javascript" src="js/base/json2.js"></script>
+		<script type="text/javascript" src="js/base/jquery.form.js"></script>
+		<script type="text/javascript" src="js/jmhd.js"></script>
+		<script type="text/javascript">
+			var target_url = "list_contact.html";
+			var back_url = "../jmhdcontact/updateView.ehr";
+			var data={"tag":"47642d4f-1c99-4e26-8f8d-509e85c76851","success":true};
+			var maxRequest = 5;
+
+			$(document).ready(function(){
+				
+				var id;
+				var locurl = window.location.href; //获得页面的URL
+		        var startplace = locurl.indexOf("?"); //得到网址与参数分隔符的位置，一般都用“？”分隔
+		        if (startplace != -1) { //判断网址中有没有参数
+		            var params = locurl.substr(startplace + 1); //获得参数字符串，从分隔符位置+1处开始获取
+		            id = params.substr(3);
+		        }
+			
+				var cfg = {
+						"back_url" : back_url+"?id="+id,
+						"comeback" :doResult,
+						"data" :data
+					};
+					$.jkw.load(cfg);
+
+
+
+					/*$.jkw.submit({
+						"back_url" : back_url,
+						"formid" : "ajaxForm",
+						"comeback" :function(data){
+							alert(data.message);
+							location.href="list_contact.html";
+						}
+					});**/
+					
+					$("#submit").bind("click",function(){
+						$.ajax({
+							type: "post",
+							url : "../jmhdcontact/updateContact.ehr",
+							dataType:'json',
+							data:{"id":id,"message":$("#message").val()},
+							async:false,
+							success: function(json){
+								alert(json.data.message);
+								location.href="list_contact.html";
+				   				}
+						});
+						
+					})
+
+			});
+
+
+
+
+			function doResult(data){
+				if(data.success){
+					$("#name").html(data.name);
+					$("#manadoctorname").html(data.manadoctorname);
+					$("#doctor").html(data.manadoctorname);
+					$("#message").html(data.contact.message);
+					$("#conid").val(data.contact.id);
+					$("#empiid").val(data.contact.empiid);
+					$("#doctorId").val(data.contact.doctorId);
+					$("#qtime").val(data.contact.qtime);
+					$("#atime").val(data.contact.atime);
+					$("#delStatus").val(data.contact.delStatus);
+					$("#replyStatus").val(data.contact.replyStatus);
+					$("#endStatus").val(data.contact.endStatus);
+				}else{
+					alert(data.message);
+					location.href=target_url;
+				}
+			}
+		</script>
+		<style type="text/css">
+			body {
+				background-color: #FFF;
+			}
+		</style>
+	</head>
+	<body>
+	<form id="ajaxForm" name="ajaxForm" action="../jmhdcontact/updateContact.ehr" method="post">
+	<input type="hidden" id="conid" name="id" />
+	<input type="hidden" id="empiid" name="empiid"/>
+	<input type="hidden" id="doctorId" name="doctorId"/>
+	<input type="hidden" id="qtime" name="qtime"/>
+	<input type="hidden" id="atime" name="atime"/>
+	<input type="hidden" id="delStatus" name="delStatus"/>
+	<input type="hidden" id="replyStatus" name="replyStatus"/>
+	<input type="hidden" id="endStatus" name="endStatus"/>
+
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="20" align="center" class="set">
+					<img src="images/ico_set.jpg" width="10" />
+				</td>
+				<td align="left" class="set">
+					您目前所在的位置：
+					<a href="list_contact.html">医患互动</a> &gt;&gt;
+					更新咨询
+				</td>
+			</tr>
+		</table>
+		<table width="98%" border="0" align="center" cellpadding="0"
+			cellspacing="0" class="box mr10 fleft">
+			<tr>
+				<td class="title">
+					咨询平台
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top" class="border_kong">
+					<table width="100%" border="0" cellpadding="1" cellspacing="1"
+						bgcolor="#5999D6">
+						<tr>
+							<td align="center" valign="top" bgcolor="#FFFFFF">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="15%" height="52" align="center" bgcolor="#eaf5fc">
+											<table width="50%" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td width="21%">
+														<img src="images/pic.jpg" width="16" height="16" />
+													</td>
+													<td width="79%" align="center" id="name">
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="85%" align="center" valign="top">
+											<table width="98%" border="0" align="center" cellpadding="0"
+												cellspacing="0">
+												<tr>
+													<td height="30" align="left" class="bot_bk">
+														我的回复/问题
+													</td>
+												</tr>
+												<tr>
+													<td align="left" class="hg">
+														&nbsp;
+													</td>
+												</tr>
+												<tr>
+													<td align="left">
+														<label>
+															<textarea name="message" id="message" cols="50"  rows="8"></textarea>
+														</label>
+													</td>
+												</tr>
+												<tr>
+													<td height="40" align="left">
+														<label>
+															<input name="submit" id="submit" type="button" class="ico1"
+																value="提 交" />
+														</label>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</body>
+</html>

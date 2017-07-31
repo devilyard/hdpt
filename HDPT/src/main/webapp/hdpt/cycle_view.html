@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <HEAD>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link href="css/Ipt_Leave_style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="js/ztree/css/demo.css" type="text/css">
+  <link rel="stylesheet" href="js/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <script language="javascript"  src="js/base/jquery.js"></script>
+  <script type="text/javascript" src="js/ztree/jquery.ztree.core-3.5.js"></script>
+  <!-- <script type="text/javascript" src="js/ztree/jquery.ztree.exhide-3.5.js"></script> -->
+  <script type="text/javascript" src="js/common.js"></script>
+  <script src="js/base/jquery.nicescroll.min.js" type="text/javascript"></script>	
+  <style type="text/css">
+.ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+.ztree li ul{ margin:0; padding:0}
+.ztree li {line-height:30px;}
+.ztree li a {width:186px;height:30px;padding-top: 0px;}
+.ztree li a:hover {text-decoration:none; background-color: #bdd8f2;}
+.ztree li a span.button.switch {visibility:hidden}
+.ztree.showIcon li a span.button.switch {visibility:visible}
+.ztree li a.curSelectedNode {background-color: #bdd8f2;border:0;height:30px;}
+.ztree li span {line-height:30px;}
+.ztree li span.button {margin-top: -7px;}
+.ztree li span.button.switch {width: 16px;height: 16px;}
+
+.ztree li a.level0 span {font-size: 110%;font-weight: bold;}
+.ztree li span.button {background-image:url("images/left_menuForOutLook.png"); *background-image:url("images/left_menuForOutLook.gif")}
+.ztree li span.button.switch.level0 {width: 20px; height:20px}
+.ztree li span.button.switch.level1 {width: 18px; height:20px}
+.ztree li span.button.noline_open {background-position: 0 0;}
+.ztree li span.button.noline_close {background-position: -18px 0;}
+.ztree li span.button.noline_open.level0 {background-position: 0 -18px;}
+.ztree li span.button.noline_close.level0 {background-position: -18px -18px;}
+	</style>
+  <SCRIPT LANGUAGE="JavaScript">
+   var zTreeObj
+   var MHC_htm
+   var pregnantId
+   var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				},
+				key: {
+					title: "t"
+				}
+			},
+			view: {
+				showLine: false,
+				dblClickExpand: false,
+				nameIsHTML: true,
+				showIcon: false,
+				addDiyDom: addDiyDom
+			},
+			callback: {
+				onClick: onClick
+			}
+   };
+   
+   var zNodes = [
+//         {id:"smzq",name:"生命周期",open:true }, 
+		{id:"lnq",pId:"smzq",name:"老年期",t:"老年期",timeslot:"", sflag:0,cflag:0,open:false,isHidden:true  },
+        {id:"znq",pId:"smzq",name:"中年期",t:"中年期",timeslot:"", sflag:0,cflag:0,open:false,isHidden:true  },
+		{id:"qnq",pId:"smzq",name:"青年期",t:"青年期",timeslot:"", sflag:0,cflag:0,open:false,isHidden:true  },
+        {id:"snq",pId:"smzq",name:"少年期",t:"少年期",timeslot:"", sflag:0,cflag:0,open:false,isHidden:true  },
+        {id:"etq",pId:"smzq",name:"儿童期",t:"儿童期",timeslot:"", sflag:0,cflag:0,open:false,isHidden:true  },
+        {id:"yeq",pId:"smzq",name:"婴儿期",t:"婴儿期",timeslot:"", sflag:0,cflag:0,open:false,isHidden:true  }
+   ];
+	
+	function addDiyDom(treeId, treeNode) {
+		var spaceWidth = 5;
+		var switchObj = $("#" + treeNode.tId + "_switch");
+		icoObj = $("#" + treeNode.tId + "_ico");
+		switchObj.remove();
+		icoObj.before(switchObj);
+
+		if (treeNode.level > 1) {
+			var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level)+ "px'></span>";
+			switchObj.before(spaceStr);
+		}
+	}
+   
+   function onClick(event, treeId, treeNode){
+	    treeObj.expandNode(treeNode);
+	    var timeslot=treeNode.timeslot
+	    var snodes = treeObj.getSelectedNodes();
+		if(treeNode.level==0&&treeNode.cflag==1){
+			if(treeNode.sflag==0){
+				snodes[0].name=snodes[0].name.split("(")[0]+"(-)"
+	 			treeNode.sflag=1
+			}else{
+				snodes[0].name=snodes[0].name.split("(")[0]+"(+)"
+	 			treeNode.sflag=0
+			}
+			treeObj.updateNode(snodes[0])
+		}
+	
+		if(treeNode.level==2){
+			var snode=treeObj.getSelectedNodes()[0];
+			selId=snode.id
+			tname=snode.tname
+			if(tname!=null){
+				if(tname=="Pt_ExamReport"){
+					//检查报告
+					$("#cycledetail").load("jcbg_info.html")
+				}else{
+					if(tname=="Pt_Operation"){
+						tname = "operation"
+					}else if(tname=="Opt_Record"){
+						tname = "medical"
+					}else{
+						tname = "iptRecordHome"
+					}
+					$("#cycledetail").load("cycle_view_info.html")
+				}
+			}
+		}
+		
+   }
+   
+   function getList(timeslot){
+	    var url = host + '/app/getLifecycle?vk=UUID&limit=100&timeSlot='+timeslot
+		var param = {
+			'url' : url
+		};
+		doAjax("getdata.px", param, "json", function(data,textStatus) {
+			var jsonDatas = data.body;
+			console.log("getlist");
+			console.log(timeslot);
+			console.log(jsonDatas);
+			var nodes = treeObj.getNodes();
+			if(jsonDatas.length!=0){
+				for(i=0;i<jsonDatas.length;i++){
+					//if(jsonDatas[i]!=""){
+					    //获取1级结点集合
+						var cnode = treeObj.getNodesByParam("id",timeslot+"-"+jsonDatas[i].KM)
+						console.log(jsonDatas[i]);
+						cnode[0].cflag=1
+						//for(var j=0;j<jsonDatas[i].length;j++){
+							var newNodes=[{id:encodeURI(jsonDatas[i].RecordDCID),name:subName(jsonDatas[i].RecordName),t:jsonDatas[i].RecordName,tname:jsonDatas[i].ContingencyTable}]
+							//添加2级结点
+							treeObj.addNodes(cnode[0],newNodes,true)
+						//}
+					//}
+				}
+				//删除无数据1级结点
+				var cnode = treeObj.getNodesByParam("cflag",0,treeObj.getNodesByParam("timeslot",timeslot)[0])
+				treeObj.removeNode(cnode[0])
+				//首次加载
+			    var curMenu = treeObj.getNodesByParam("timeslot",timeslot)[0].children[0].children[0];
+				treeObj.selectNode(curMenu);
+				if(first==1){
+					selId=curMenu.id
+					tname=curMenu.tname
+					if(tname!=null){
+						if(tname=="Pt_ExamReport"){
+							//检查报告
+							$("#cycledetail").load("jcbg_info.html")
+						}else{
+							if(tname=="Pt_Operation"){
+								tname = "operation"
+							}else if(tname=="Opt_Record"){
+								tname = "medical"
+							}else{
+								tname = "iptRecordHome"
+							}
+							$("#cycledetail").load("cycle_view_info.html")
+						}
+					}
+					first=0
+				}
+			}
+		});
+   }
+   
+   var treeObj,first,cflg,selId,tname
+   $(document).ready(function(){
+	 	first=1
+	 	cflg=0
+	    $.fn.zTree.init($("#tree"), setting, zNodes);
+	    var url = host + '/app/getLifecycle?vk=UUID&limit=100'
+		var param = {
+			'url' : url
+		};
+	    $("#tree").niceScroll({touchbehavior:false,cursoropacitymax:0.7,cursorwidth:6,cursorcolor:"#dddddd", autohidemode : true});
+	    $("#tree").hover(function () {
+			if (!$("#tree").hasClass("showIcon")) {
+				$("#tree").addClass("showIcon");
+			}
+		}, function() {
+			$("#tree").removeClass("showIcon");
+		});
+	    //生命周期
+		doAjax("getdata.px", param, "json", function(data,textStatus) {
+			var jsonDatas = data.body;
+			if (data["code"] == 200) {
+				var html = "";
+				if(jsonDatas.length!=0){
+				    treeObj = $.fn.zTree.getZTreeObj("tree");
+				    var nodes = treeObj.getNodes();
+				    console.log(nodes)
+					for(i=0;i<jsonDatas.length;i++){
+						  // 生命周期类型
+						  var timeslot=jsonDatas[i].TimeSlot
+						  // 报告类型
+						  var km=jsonDatas[i].KM
+						  //老年期
+						  if(timeslot=="gerontic"){
+							  nodes[0].timeslot=timeslot
+							  nodes[0].cflag=1
+		 				      nodes[0].name="老年期(+)"
+			 				  treeObj.updateNode(nodes[0])
+			 				  
+		 				      // 判断是否有过相同的一级节点，有的话就不再新建
+		 				      var cnode = treeObj.getNodesByParam("id",timeslot+"-"+km)
+		 				      if(cnode.length==0){
+	 				    	  // 建立新的节点
+		 				      var newNodes = [{id:timeslot+"-"+km,pId:"lnq",name:km,
+		 				    	  cflag:0,open:false}]
+		 				      // 加入一级节点
+					     	  treeObj.addNodes(nodes[0], newNodes,true);
+		 				      }
+						  }
+						  //中年期
+						  if(timeslot=="middleAge"){
+							  nodes[1].timeslot=timeslot
+							  nodes[1].cflag=1
+		 				      nodes[1].name="中年期(+)"
+				 			  treeObj.updateNode(nodes[1])
+				 			  
+				 			  var cnode = treeObj.getNodesByParam("id",timeslot+"-"+km)
+		 				      if(cnode.length==0){
+		 				      	 var newNodes = [{id:timeslot+"-"+km,pId:"znq",name:km,
+		 				    	  cflag:0,open:false}]
+					     	  	 treeObj.addNodes(nodes[1], newNodes,true);
+		 				      }
+				 			  
+		 				      var newNodes = [{id:timeslot+"-"+km,pId:"znq",name:km,
+		 				    	  cflag:0,open:false}]
+					     	  treeObj.addNodes(nodes[1], newNodes,true);
+							 /*  for(j=1;j<6;j++){
+								  treeObj.showNode(nodes[j]);
+							  } */
+						  }
+						  //青年期
+						  if(timeslot=="adolescence"){
+							  nodes[2].timeslot=timeslot
+							  nodes[2].cflag=1
+		 				      nodes[2].name="青年期(+)"
+		 				      treeObj.updateNode(nodes[2])
+		 				      
+		 				      var cnode = treeObj.getNodesByParam("id",timeslot+"-"+km)
+		 				      if(cnode.length==0){
+		 				      	 var newNodes = [{id:timeslot+"-"+km,pId:"qnq",name:km,
+		 				    	  cflag:0,open:false}]
+					     	  	 treeObj.addNodes(nodes[2], newNodes,true);
+		 				      }
+		 				      
+		 				     
+							  //显示隐藏结点
+							  /* for(j=2;j<6;j++){
+								  treeObj.showNode(nodes[j]);
+							  } */
+						  }
+						  //少年期
+						  if(timeslot=="boyhood"){
+							  nodes[3].timeslot=timeslot
+							  nodes[3].cflag=1
+			 				  nodes[3].name="少年期(+)"
+					 		  treeObj.updateNode(nodes[3])
+					 		  
+					 		  var cnode = treeObj.getNodesByParam("id",timeslot+"-"+km)
+		 				      if(cnode.length==0){
+		 				      	 var newNodes = [{id:timeslot+"-"+km,pId:"snq",name:km,
+		 				    	  cflag:0,open:false}]
+					     	  	 treeObj.addNodes(nodes[3], newNodes,true);
+		 				      }
+					 		  
+		 				      var newNodes = [{id:timeslot+"-"+km,pId:"snq",name:km,cflag:0,open:false}]
+					     	  treeObj.addNodes(nodes[3], newNodes,true);
+							  /* for(j=3;j<6;j++){
+								  treeObj.showNode(nodes[j]);
+							  } */
+						  }
+						  //儿童期
+						  if(timeslot=="childhood"){
+							  nodes[4].timeslot=timeslot
+							  nodes[4].cflag=1
+			 				  nodes[4].name="儿童期(+)"
+						 	  treeObj.updateNode(nodes[4])
+						 	  
+						 	  var cnode = treeObj.getNodesByParam("id",timeslot+"-"+km)
+		 				      if(cnode.length==0){
+		 				      	 var newNodes = [{id:timeslot+"-"+km,pId:"etq",name:km,
+		 				    	  cflag:0,open:false}]
+					     	  	 treeObj.addNodes(nodes[4], newNodes,true);
+		 				      }
+						 	  
+		 				      var newNodes = [{id:timeslot+"-"+km,pId:"etq",name:km,cflag:0,open:false}]
+					     	  treeObj.addNodes(nodes[4], newNodes,true);
+							  /* for(j=4;j<6;j++){
+								  treeObj.showNode(nodes[j]);
+							  } */
+						  }
+						  //婴儿期
+						  if(timeslot=="babyhood"){
+							  nodes[5].timeslot=timeslot
+							  nodes[5].cflag=1
+			 				  nodes[5].name="婴儿期(+)"
+						 	  treeObj.updateNode(nodes[5])
+						 	  
+						 	  var cnode = treeObj.getNodesByParam("id",timeslot+"-"+km)
+		 				      if(cnode.length==0){
+		 				      	 var newNodes = [{id:timeslot+"-"+km,pId:"yeq",name:km,
+		 				    	  cflag:0,open:false}]
+					     	  	 treeObj.addNodes(nodes[5], newNodes,true);
+		 				      }
+						 	  
+		 				      var newNodes = [{id:timeslot+"-"+km,pId:"yeq",name:km,cflag:0,open:false}]
+					     	  treeObj.addNodes(nodes[5], newNodes,true);
+							  /* treeObj.showNode(nodes[5]); */
+						  }  
+					}
+					getList(timeslot)
+				}
+			}else{
+				//无数据
+				$("#cycledetail").load("nodata.htm")
+			}
+		});
+		
+   });
+  </SCRIPT>
+  
+ </HEAD>
+<BODY>
+	   <div class="box fleft" style="margin-left:12px;width:184px; height:500px;">
+	  	 <ul id="tree" class="ztree"></ul>
+	   </div>
+	   <div class="box fleft" id="cycledetail" style="width:830px; height:500px;"></div>
+</BODY>
+</HTML>

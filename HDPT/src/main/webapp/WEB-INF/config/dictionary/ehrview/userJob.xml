@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic> 
+  <item key="02" text="全科医生"  mCode="2"/>
+  <item key="03" text="责任医生" mCode="3"/>
+  <item key="00" text="管理员" mCode="4"/>
+</dic>

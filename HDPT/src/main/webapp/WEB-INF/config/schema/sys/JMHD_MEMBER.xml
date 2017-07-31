@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entry id="JMHD_MEMBER" alias="互动平台用户表">
+  <item id="ID" alias="ID" generator="assigned" pkey="true"/>
+  <item id="MPIID" alias="MPIID" type="string" length="32"/>
+  <item id="USERNAME" alias="USERNAME" type="string" length="32"/>
+  <item id="PASSWORD" alias="PASSWORD" type="string" length="50"/>
+  <item id="NAME" alias="NAME" type="string" length="50"/>
+  <item id="EMAIL" alias="EMAIL" type="string" length="64"/>
+  <item id="PASSQUESTION" alias="PASSQUESTION" type="string" length="64"/>
+  <item id="PASSANSWER" alias="PASSANSWER" type="string" length="64"/>
+  <item id="CARDTYPE" alias="CARDTYPE" type="string" length="2"/>
+  <item id="CARDNUM" alias="CARDNUM" type="string" length="50"/>
+  <item id="CERTIFICATETYPECODE" alias="CERTIFICATETYPECODE" type="string" length="2"/>
+  <item id="CERTIFICATENO" alias="CERTIFICATENO" type="string" length="32"/>
+  <item id="REGDATE" alias="REGDATE" type="date"/>
+  <item id="REGIP" alias="REGIP" type="string" length="15"/>
+  <item id="GENDER" alias="GENDER" type="string"/>
+  <item id="STATUS" alias="STATUS" type="string" length="20"/>
+  <item id="HOMEADDRESS" alias="HOMEADDRESS" type="string" length="500"/>
+  <item id="ZIPCODE" alias="ZIPCODE" type="string" length="6"/>
+  <item id="PHONENUMBER" alias="PHONENUMBER" type="string" length="20"/>
+  <item id="CONTACT" alias="CONTACT" type="string" length="20"/>
+  <item id="CONTACTPHONE" alias="CONTACTPHONE" type="string" length="20"/>
+  <item id="REMARK" alias="REMARK" type="string" length="255"/>
+  <item id="INPUTDATE" alias="INPUTDATE" type="date"/>
+  <item id="LASTMODIFYUSER" alias="LASTMODIFYUSER" type="string" length="32"/>
+  <item id="LASTMODIFYDATE" alias="LASTMODIFYDATE" type="date"/>
+  <item id="LOGINTIME" alias="LOGINTIME" type="date"/>
+  <item id="USERVERSION" alias="USERVERSION" type="string" length="40"/>
+  <item id="SOURCE" alias="SOURCE" type="string"/>
+  <item id="EMPIID" alias="EMPIID" type="string" length="32"/>
+  <item id="INPUTUSER" alias="INPUTUSER" type="string" length="20"/>
+  <item id="OFFDATE" alias="OFFDATE" type="date"/>
+  <item id="OFFDOC" alias="OFFDOC" type="string" length="20"/>
+  <item id="MANADOCTORID" alias="MANADOCTORID" type="string" length="20"/>
+  <item id="MANADOCTOR_TEXT" alias="MANADOCTOR_TEXT" type="string" length="50"/>
+  <item id="MANAUNIT_TEXT" alias="MANAUNIT_TEXT" type="string" length="200"/>
+  <item id="MANAUNITID" alias="MANAUNITID" type="string" length="50"/>
+  <item id="SALT" alias="SALT" type="string" length="20"/>
+</entry>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>角色列表</title>
+   	<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+	<link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+	
+		var back_url = "../../roletoUpdate.ehr?id=";
+
+		var data={"tag":"0d8e5ba2-4617-4bd2-8dc9-12bf4a926dfe","success":true};
+		var maxRequest = 3;
+
+		$(document).ready(function(){
+			var id = Request("id");
+			var cfg = {
+					"type" : 2,
+					"back_url" : back_url+id,
+					"comeback" :doResult,
+					"data" :data
+				};
+				$.jkw.load(cfg);
+
+
+			var cfg2 = {
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doUpdate,
+				"formid" : "ajaxForm"
+			};
+			$.jkw.submit(cfg2);
+		});
+
+		function doResult(data){
+			if (data.success) {
+				$("#roleId").val(data.sysRole.roleId);
+				$("#roleName").val(data.sysRole.roleName);
+				$("#remarks").val(data.sysRole.remarks);
+				$("#sqrole").val(data.sysRole.sqrole);
+				$("[name=roleType][value="+data.sysRole.roleType+"]").attr("checked",true);
+				$("[name=status][value="+data.sysRole.status+"]").attr("checked",true);
+			} else {
+				alert("失败请重试!");
+			}
+		}
+
+		function doUpdate(data){
+			alert(data.message)
+			location.href="role-list.html";
+		}
+	</script>
+
+  </head>
+
+  <body>
+  	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  			<tbody><tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+    			<td class="set" align="left">您目前所在的位置：<a href="role-list.html">角色维护</a> &gt;&gt; 更新角色</td>
+  			</tr>
+		</tbody></table>
+		<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody><tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+		    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+		      <tbody><tr>
+		        <td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+				   <form id="ajaxForm" name="ajaxForm" action="../../addOrUpdate.ehr" method="post">
+				   <input name="roleId" id="roleId" type="hidden">
+
+				   <table style="margin-left: 50px;">
+				   	<tbody>
+				   		<tr><td>角色名称<font color="red">(*)</font>:</td><td>
+				   			<input name="roleName" id="roleName" type="text"></td>
+				   		</tr>
+				   	<tr>
+				   		<td>角色类型:</td>
+				   			<td>
+				   				<input name="roleType" id="ajaxForm_sysRole_roleType2" value="2" type="radio"><label for="ajaxForm_sysRole_roleType2">系统管理员</label>
+								<input name="roleType" id="ajaxForm_sysRole_roleType1" value="1" type="radio"><label for="ajaxForm_sysRole_roleType1">机构</label>
+							</td>
+					</tr>
+				   	<tr>
+				   		<td>社区角色类型:</td>
+				   		<td>
+					   		<select name="sqrole" id="sqrole">
+							    <option value="00">请选择</option>
+							    <option value="01">责任医生</option>
+							    <option value="02">责任护士</option>
+							    <option value="03">公卫医生</option>
+							    <option value="04">中心主任</option>
+							    <option value="05">团队长</option>
+							    <option value="06">网络管理员</option>
+							    <option value="07">儿保医生</option>
+							    <option value="08">妇保医生</option>
+							    <option value="09">市妇幼</option>
+							    <option value="10">区妇幼</option>
+							    <option value="11">市CDC</option>
+							    <option value="12">区CDC</option>
+							    <option value="13">市区卫生局</option>
+							    <option value="14">防保科长</option>
+							</select>
+						</td>
+					</tr>
+				   	<tr>
+				   		<td>角色状态:</td>
+				   		<td>
+				   			<input name="status" id="ajaxForm_sysRole_status0" value="0" type="radio"><label for="ajaxForm_sysRole_status0">启用</label>
+							<input name="status" id="ajaxForm_sysRole_status1" value="1" type="radio"><label for="ajaxForm_sysRole_status1">停用</label>
+						</td>
+					</tr>
+				   	<tr><td>备注</td><td><textarea name="remarks" cols="" rows="" id="remarks"></textarea></td></tr>
+				    <tr>
+				    	<td colspan="2">
+				    		<input class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+							<input class="ui-button ui-widget ui-state-default ui-corner-all" value="重置" role="button" type="reset">
+						</td>
+					</tr>
+				   </tbody></table>
+				   </form>
+				</td></tr>
+			  </tbody>
+			</table>
+		   </td>
+		</tr>
+	</tbody>
+</table>
+</body></html>

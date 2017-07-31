@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<script language="javascript" src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+  </head>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		var dcid=Request("key")
+		var url = host + '/physiqueInspect/getHtmlDocument?vk=UUID&dcId=' +  encodeURI(dcid)
+		param = {
+			'url' : url
+		};
+		doAjax("getdata.px", param, "json", function(data, textStatus) {
+			if(data.body){
+				htmreport(data,"tjbgdetail")
+			}else{
+				$("#tjbgdetail").html("<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><h1 align=\"center\">无记录</h1></body></html>")
+			}
+		});
+		
+  	});
+  
+  </script>
+  <body style="margin: 1px">
+		<iframe id="tjbgdetail" name="tjbgdetail" width="99%" height="400px" style="overflow: scroll;border:0;"></iframe>
+  </body>
+</html>

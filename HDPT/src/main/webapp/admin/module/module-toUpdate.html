@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>角色列表</title>
+    <link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+    <link href="../../hdpt/js/jquery-ui/css/cupertino/jquery-ui-1.8.12.custom.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/jquery.form.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+	<!-- <script type="text/javascript" src="module-moduleTree_data/jquery-ui-1.js"></script> -->
+	<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript" src="../../hdpt/js/common.js"></script>
+	<script type="text/javascript">
+		var back_url = "../../moduletoUpdate.ehr?id=";
+
+		var data={"tag":"52294c4a-c6c5-4c59-9171-4b25ecc51bf7","success":true};
+		var maxRequest = 3;
+
+		$(document).ready(function(){
+		   	var id = Request("id");
+			var cfg = {
+					"type" : 2,
+					"back_url" : back_url+id,
+					"comeback" :doResult,
+					"data" :data
+				};
+				$.jkw.load(cfg);
+
+
+			var cfg2 = {
+				"type" : 2,
+				"back_url" : back_url,
+				"comeback" :doUpdate,
+				"formid" : "ajaxForm"
+			};
+			$.jkw.submit(cfg2); 
+		});
+
+		function doResult(data){
+			var module=data.module;
+			$("#moduleName").val(module.moduleName);
+			$("#actionName").val(module.actionName);
+			$("#actionMethod").val(module.actionMethod);
+			$("#moduleCode").val(module.moduleCode);
+			$("#moduleLev").val(module.moduleLev);
+			$("#mid").val(module.id);
+			$("[name=isleaf][value="+module.isleaf+"]").attr("checked",true);
+		}
+
+		function doUpdate(success){
+			if (data.success) {
+				alert("更新成功");
+				parent.location.reload();
+			} else{
+				alert("出错了");
+			}
+		}
+	</script>
+
+  </head>
+
+<body style="background:#e4f1fa">
+  <br><br>
+   <form id="ajaxForm" name="ajaxForm" action="../../moduleUpdate.ehr" method="post">
+   	<input name="moduleLev" id="moduleLev" type="hidden">
+   	<input name="moduleCode" id="moduleCode" type="hidden">
+   	<input name="id" id="mid" type="hidden">
+
+   	<table style="margin-left: 20px;">
+  		<tbody>
+  		<tr>
+  			<td>模块名称：<font color="red">(*)</font></td>
+  			<td><input name="moduleName" id="moduleName" type="text"></td>
+  		</tr>
+  		<tr>
+  			<td>模板目录：</td>
+  			<td><input name="actionMethod" id="actionMethod" type="text"></td>
+  		</tr>
+  		<tr>
+  			<td>模板html名：</td>
+  			<td><input name="actionName" id="actionName" type="text" style="width: 180px"></td>
+  		</tr>
+  		<tr>
+  			<td>是否显示：</td>
+  			<td><input type="radio" value="0" name="isleaf"/><label>是</label><input type="radio" value="1" name="isleaf"/><label>否</label></td>
+  		</tr>
+  		<tr>
+  			<td colspan="2">
+  				<input class="ui-button ui-widget ui-state-default ui-corner-all" id="ajaxForm_0" value="提交" role="button" type="submit">
+			</td>
+		</tr>
+  	</tbody>
+  	</table>
+   </form>
+</body>
+</html>

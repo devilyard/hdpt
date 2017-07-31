@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dc.domain.diary.JmhdUserIndicator" table="JMHD_USER_INDICATOR">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+             <param name="sequence">JMHD_USER_INDICATOR_SQ</param>
+            </generator>
+        </id>
+        <property name="uuid" type="java.lang.String">
+            <column name="UUID" length="32" />
+        </property>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" precision="12" scale="0" />
+        </property>
+        <property name="indicatorName" type="java.lang.String">
+            <column name="INDICATOR_NAME" length="50" />
+        </property>
+        <property name="indicatorId" type="java.lang.Integer">
+            <column name="INDICATOR_ID" precision="5" scale="0" />
+        </property>
+        <property name="val" type="java.lang.String">
+            <column name="VAL" length="20" />
+        </property>
+        <property name="groupNo" type="java.lang.String">
+            <column name="GROUP_NO" length="2" />
+        </property>
+        <property name="isFactor" type="java.lang.String">
+            <column name="IS_FACTOR" length="1" />
+        </property>
+        <property name="isAbnormity" type="java.lang.String">
+            <column name="IS_ABNORMITY" length="2" />
+        </property>
+        <property name="abnormityLevel2" type="java.lang.String">
+            <column name="ABNORMITY_LEVEL2" length="100" />
+        </property>
+        <property name="abnormityLevelId" type="java.lang.Long">
+            <column name="ABNORMITY_LEVEL_ID" precision="10" scale="0" />
+        </property>
+        <property name="abnormityValue" type="java.lang.String">
+            <column name="ABNORMITY_VALUE" length="100" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATE_DATE" length="7" />
+        </property>
+        <property name="source" type="java.lang.String">
+            <column name="SOURCE" length="50" />
+        </property>
+        <property name="sourceType" type="java.lang.String">
+            <column name="SOURCE_TYPE" length="20" />
+        </property>
+        <property name="pid" type="java.lang.Long">
+            <column name="PID" precision="12" scale="0" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="mpiId" type="java.lang.String">
+            <column name="MPIID" />
+        </property>
+        <property name="newuuid" type="java.lang.String">
+            <column name="NEWUUID" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

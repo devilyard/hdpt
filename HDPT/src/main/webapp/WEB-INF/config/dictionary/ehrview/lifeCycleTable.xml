@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic> 
+  <item key="Ipt_MedicalRecordPage" text="住院就诊记录"/>
+  <item key="Opt_Record" text="门诊就诊记录"/>
+  <item key="Pt_ExamReport" text="检查报告"/>
+  <item key="Pt_Operation" text="手术记录"/>
+</dic>

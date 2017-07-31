@@ -1,0 +1,1050 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>卫生网</title>
+	<link href="css/gxlz_style.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery-1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<script type="text/javascript" src="js/json2.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/j.js"></script>
+	<script type="text/javascript" src="js/j.htm"></script>
+	<script type="text/javascript" src="js/jquery_002.js"></script>
+	<!-- <script type="text/javascript" src="js/jkw.js"></script> -->
+	<script type="text/javascript" src="js/WdatePicker.js"></script><link type="text/css" rel="stylesheet" href="css/WdatePicker.css">
+	<link href="css/pagination.css" type="text/css" rel="stylesheet">
+   	<script type="text/javascript" src="js/jquery_003.js"></script>
+   <script type="text/javascript" src="../hdpt/js/jmhd.js"></script>
+	<script type="text/javascript">
+        //var secod_url = "/jkw/user/secLogin-view.do";
+		var target_url = "../jkzxlist.ehr";
+		var back_url = "../jkzxlist.ehr";
+		//var user_login="/jkw/user/login.do";
+		//var other_login="/jkw/other/login.do";
+		//var target_url5="/jkw/user/welcome-list1.do";
+		var maxRequest = 3;
+		var manaunits=new Array();
+		var manaunitshot=new Array();
+		$(document).ready(function(){
+			var grid = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : target_url,
+			"back_url" :back_url,
+			"tabid":"query",
+			//"pager":"pager",
+			//"pagesize" : 6,
+			"data" : {"type":1,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":["titlefirst"],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zxid);
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});
+			
+			var grid2 = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : target_url,
+			"back_url" :back_url,
+			"tabid":"query2",
+			"data" : {"type":2,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":["titlefirst"],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zxid);						
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});
+			
+			var grid3 = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : target_url,
+			"back_url" :back_url,
+			"tabid":"query3",
+			"data" : {"type":3,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":["titlefirst"],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zxid);						
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});	
+			
+			var grid4 = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : target_url,
+			"back_url" :back_url,
+			"tabid":"query4",			
+			"data" : {"type":4,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":["titlefirst"],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zxid);						
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});	
+			
+			var grid5 = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : target_url,
+			"back_url" :back_url,
+			"tabid":"query5",
+			"data" : {"type":5,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":["titlefirst"],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zxid);						
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});
+				
+			var grid6 = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : "../wszwlist.ehr",
+			"back_url" :"../wszwlist.ehr",
+			"tabid":"wszw",
+			"data" : {"type":2,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":[],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zwid);						
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});
+			
+			var grid7 = $.jkw.loadGrid({
+			"type" : 0,
+			"target_url" : "../wszwlist.ehr",
+			"back_url" :"../wszwlist.ehr",
+			"tabid":"gzdt",
+			"data" : {"type":1,"tag":"6d1835b5-93ad-4cc7-b900-47b13ca2c348","success":true},
+			"query":[],
+			"doGridRow":function(template,o){
+						template = template.replaceAll("{0}",o.titlefirst);
+						template = template.replaceAll("{2}",o.zwid);						
+						return template;
+			},
+			"comeback" : function(){
+				//$("#list").hide();
+			}
+				});
+					
+				//$("#bt_query").bind('click',function(){
+				//	var pg = $('.pager');
+					//pg.trigger('setPage', [-1]);
+				//	grid.query();
+				//});
+			$("#otherUser").click(function(){
+					if($(this).attr("checked")){
+						$("#loginForm").attr("action",other_login);
+					}else{
+						$("#loginForm").attr("action",user_login);
+					}
+			});
+			if (self != top) {
+				top.location.href = location.href;
+				return;
+			};
+			
+			$("#loginName").val("341125196808080955");
+			$("#password").val("mvczox");
+			
+
+			$("#password").focus(function(){
+				$(this).select();
+			});
+
+		
+			var cfg = {
+				"back_url" : back_url,
+				"comeback" :doResult,
+				"formid" : "loginForm"
+			};
+			//$.jkw.submit(cfg);
+						
+		});
+
+		function doResult(data){
+			if (data.success) {
+			    if(data.secod){
+			    	location.href = secod_url;
+			    }else if(data.type=="other"){
+			    	location.href = "/jkw/other/home.do";
+			    }
+			    else{
+			    	location.href = target_url;
+			    }
+			} else {
+				if(data.type!="other"){
+					$("tr[id^='code_tr_']").show();
+					
+					$("#loginForm table tr").show();
+				}
+				alert(data.message);
+			}
+		}
+		
+		
+	var target_url1 = "/jkw/user/selecthos.do";
+	var target_url2 = "/jkw/user/selectkstype.do";
+	//var back_url = "/jkw/response.do";
+	function onSelectChange(obj,toSelId){
+		setSelect(obj.value,toSelId);
+	}
+	function setSelect(fromSelVal,toSelId){
+		document.getElementById(toSelId).innerHTML="";
+		$.jkw.send({
+						"target_url" : target_url1,
+						"back_url" : back_url,
+					    "args" : {
+					    	"qyid" : fromSelVal
+					    },
+					    "comeback" :function(data){
+					    	if(data.success){
+					    		 createSelectObj(data,toSelId);
+					    	}
+					    	
+					    }
+					  });
+		}
+
+		function createSelectObj(data,toSelId){
+			if(data.list!= null && data.list.length>0){
+				var obj = document.getElementById(toSelId);
+				obj.innerHTML="";
+				var nullOp = document.createElement("option");
+				nullOp.setAttribute("value","");
+				nullOp.appendChild(document.createTextNode("请选择"));
+				obj.appendChild(nullOp);
+				for(var i=0;i<data.list.length;i++)
+				{
+					var op = document.createElement("option");
+					op.setAttribute("value",data.list[i].id);
+					op.appendChild(document.createTextNode(data.list[i].name));
+					obj.appendChild(op);
+				}
+			}
+		}
+		
+		function onSelectChange1(obj,toSelId){
+		setSelect1(obj.value,toSelId);
+		}
+		function setSelect1(fromSelVal,toSelId){
+			//alert(document.getElementById("province").selectedIndex);
+			document.getElementById(toSelId).innerHTML="";
+			$.jkw.send({
+							"target_url" : target_url2,
+							"back_url" : back_url,
+						    "args" : {
+						    	"hosid" : fromSelVal
+						    },
+						    "comeback" :function(data){
+						    	if(data.success){
+						    		 createSelectObj(data,toSelId);
+						    	}
+						    	
+						    }
+						  });
+		}
+
+		function createSelectObj(data,toSelId){
+			if(data.list!= null && data.list.length>0){
+				var obj = document.getElementById(toSelId);
+				obj.innerHTML="";
+				var nullOp = document.createElement("option");
+				nullOp.setAttribute("value","");
+				nullOp.appendChild(document.createTextNode("请选择"));
+				obj.appendChild(nullOp);
+				
+				for(var i=0;i<data.list.length;i++)
+				{
+					var op = document.createElement("option");
+					op.setAttribute("value",data.list[i].id);
+					op.appendChild(document.createTextNode(data.list[i].name));
+					obj.appendChild(op);
+				}
+				
+			}
+		}
+	
+	</script>
+	<script type="text/javascript">
+	
+	</script>
+	<script type="text/javascript">
+	/* var docEle = function() {   
+  		return document.getElementById(arguments[0]) || false;   
+	}   
+	function denglu(_id){
+		 var m = "mask";   
+  if (docEle(_id)) document.removeChild(docEle(_id));   
+  if (docEle(m)) document.removeChild(docEle(m));   
+  // 新激活图层   
+  var newDiv = document.createElement("div");   
+  newDiv.id = _id;   
+  newDiv.style.position = "absolute";   
+  newDiv.style.zIndex = "9999";   
+  newDiv.style.width = "600px";   
+  newDiv.style.height = "298px";  
+  newDiv.style.top = "100px";    
+  newDiv.style.left = (parseInt(document.body.scrollWidth) - 600) / 2 + "px"; // 屏幕居中   
+  newDiv.style.border = "0px";   
+  newDiv.style.padding = "5px";   
+  newDiv.innerHTML = "<iframe scrolling='no' style='height:298px;  width:600px;' src='http://smart.jkwj.gov.cn/login.html'>";   
+  document.body.appendChild(newDiv);   
+  // mask图层   
+  var newMask = document.createElement("div");   
+  newMask.id = m;   
+  newMask.style.position = "absolute";   
+  newMask.style.zIndex = "1";   
+  newMask.style.width = document.body.scrollWidth + "px";   
+  newMask.style.height = document.body.scrollHeight + "px";   
+  newMask.style.top = "0px";   
+  newMask.style.left = "0px";   
+  newMask.style.background = "#000";   
+  newMask.style.filter = "alpha(opacity=40)";   
+  newMask.style.opacity = "0.40";   
+  document.body.appendChild(newMask);    
+  // 关闭mask和新图层   
+  var newA = document.createElement("a");   
+  newA.href = "#";   
+  newA.innerHTML = "关闭";   
+  newA.onclick = function() {   
+   document.body.removeChild(docEle(_id));   
+   document.body.removeChild(docEle(m));   
+   return false;   
+  }   
+  newDiv.appendChild(newA);   
+	} */
+	
+	$("#submit3").live("click",function(){
+	window.open("http://smart.jkwj.gov.cn");				
+	});	
+	
+	$("#jkda").live("click",function(){
+	window.open("http://smart.jkwj.gov.cn");				
+	});
+	</script>
+<style type="text/css">
+			body{margin:0;padding:0;font-family:"宋体";font-size:13px;}
+			h1{margin:0;padding:20px 0;font-size:16px;}
+			ol{padding-left:20px;line-height:130%;}
+			#box{width:600px;text-align:left;margin:0 auto;padding-top:80px;}
+			#suggest,#suggest2{width:200px;}
+			.gray{color:gray;}
+			.ac_results {background:#fff;border:1px solid #7f9db9;position: absolute;z-index: 10000;display: none;}
+			.ac_results ul{margin:0;padding:0;list-style:none;}
+			.ac_results li a{white-space: nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+			.ac_results li{border:1px solid #fff;}
+			.ac_over,.ac_results li a:hover {background:#c8e3fc;}
+			.ac_results li a span{float:right;}
+			.ac_result_tip{border-bottom:1px dashed #666;padding:3px;}
+			#oTransContainer img{
+			border: none;}
+			#nav1,#nav2,#nav3{
+			cursor: pointer;
+			}
+
+			#orgs{
+			padding:0;
+			margin:0;
+			text-align: center;
+			}
+			#orgs dd{
+			size:14px;
+			padding:8px 10px 8px 0;  margin:0px;word-break: keep-all;
+				float: left;
+			}
+		</style>
+		
+</head>
+
+<body><a name="top" href="#"></a>
+
+
+<table class="img" align="center" border="0" cellpadding="0" cellspacing="0" width="1121">
+  
+  <tbody><tr valign="bottom">
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center" height="18" width="333"></td>
+    <td class="img02" align="center" width="27"></td>
+    <td align="center" width="68"><span class="STYLE1"><a href="#">设为首页</a></span></td>
+    <td class="img03" align="center" width="30"></td>
+    <td align="center" width="58"><span class="STYLE1"><a href="#">收藏本站</a></span></td>
+    <td align="center" width="37"></td>
+  </tr>
+  <tr valign="bottom">
+    <td align="center" width="28"></td>
+    <td align="center" width="419"></td>
+    <td colspan="6" align="center" height="11"></td>
+  </tr>
+  <tr align="left" valign="bottom">
+    <td></td>
+    <td class="img01"></td>
+    <td colspan="6" height="98"></td>
+  </tr>
+  <tr valign="bottom">
+    <td align="center"></td>
+    <td align="center"></td>
+    <td colspan="6" align="center" height="21"> </td>
+  </tr>
+</tbody></table>
+<!-- <table class="baitiao" align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td class="baitiao" width="24"></td>
+    <td align="left" valign="middle" width="80"><span class="STYLE3">
+   
+2015年12月31日
+</span></td>
+    <td align="left" valign="middle" width="47"><span class="STYLE3">
+星期四</span></td>
+    <td align="left" valign="middle" width="36"><span class="STYLE3"></span></td>
+    <td class="baitiao" width="280"></td>
+    <td align="left" nowrap="nowrap" valign="middle" width="259"><input name="textfield" class="biaodan" id="biaodan" onblur="if(this.value=='')value=' 请输入查询关键字 ';" onfocus="if(this.value==' 请输入查询关键字 ')value='';" value=" 请输入查询关键字 " type="text"></td>
+	<td width="90"><input class="anniu" value="搜 索" type="button"></td>
+  </tr>
+</tbody></table> -->
+<div id="nav">
+	<ul>
+		<li><a href="index.htm"><strong>  首页  </strong></a></li>
+		<li><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid=null&type=1"><strong>医疗资源</strong></a></li>
+		<li><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=1"><strong>健康资讯</strong></a></li>
+	</ul>	
+</div>
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="2" width="1000">
+  <tbody><tr>
+    <td height="5"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td width="15"></td>
+    <td class="yuanjiao01"></td>
+    <td class="pingputiao01"><table border="0" cellpadding="0" cellspacing="0" height="39" width="152">
+      <tbody><tr>
+        <td height="39" width="11"></td>
+        <td valign="middle" width="141"><span class="STYLE10"><a href="#" style="color:#499c07;">用户</a></span></td>
+      </tr>
+    </tbody></table></td>
+    <td class="yuanjiao02"></td>
+    <td width="8"></td>
+    <td class="yuanjiao01"></td>
+    <td class="pingputiao02"><table border="0" cellpadding="0" cellspacing="0" height="39" width="250">
+      <tbody><tr>
+        <td width="16">&nbsp;</td>
+        <td valign="middle" width="234"><span class="STYLE27"><a href="#" style="color:#499c07;">预约挂号</a></span></td>
+      </tr>
+    </tbody></table></td>
+    <td class="yuanjiao02"></td>
+    <td width="8"></td>
+    <td class="xian" align="right" width="1"></td>
+    <td class="tiao"><table border="0" cellpadding="0" cellspacing="0" height="39" width="134">
+      <tbody><tr>
+        <td width="20">&nbsp;</td>
+        <td width="114"><span class="STYLE57"></span><a href="#" class="STYLE40" style="color:#499c07;">通知公告</a><span class="STYLE57"></span> </td>
+      </tr>
+    </tbody></table></td>
+    <td class="xian" width="1"></td>
+    <td width="15"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td height="205" width="16"></td>
+    <td class="xian01" width="1"></td>
+    <td width="276">
+    
+     <div style=" width:276px; height:205px; border:0px;">
+  
+    <iframe frameborder="no" scrolling='no' style='height:205px;  width:276px;' src='http://smart.jkwj.gov.cn/login.html'>
+    </iframe>
+    </div>
+    <!-- <form id="loginForm" name="loginForm" action="/jkw/user/login.do" method="post">
+    <input name="flag" id="flag" value="0" type="hidden">
+    <table border="0" cellpadding="0" cellspacing="0" width="276">
+    
+    
+      <tbody><tr>
+        <td width="98">&nbsp;</td>
+        <td width="166">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" valign="middle"><span class="STYLE15">登录方式</span></td>
+        <td valign="middle" width="166"><select name="select" class="select">
+          <option selected="selected">健康卡登录</option>
+          <option>使用身份证登录</option>
+        </select>        </td>
+      </tr>
+      <tr>
+        <td align="center" valign="middle">&nbsp;</td>
+        <td width="166">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="STYLE15" align="center" valign="middle">登陆账号</td>
+        <td width="166">
+		<input name="loginName" value="341125196808080955" id="loginName" class="input input1" type="text">
+		</td>
+      </tr>
+      <tr>
+        <td align="center" valign="middle">&nbsp;</td>
+        <td width="166">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="STYLE15" align="center" valign="middle">登录密码</td>
+        <td width="166">
+        <input name="password" id="password" class="input" type="password">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" valign="middle">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" valign="middle"><table border="0" cellpadding="0" cellspacing="0" height="29" width="264">
+          <tbody><tr>
+            <td height="29" width="17">&nbsp;</td>
+            <td align="center" valign="middle" width="77"><input name="Submit" class="anniu01" value="登录" type="submit"></td>
+            <td width="9">&nbsp;</td>
+            <td width="77"><a href="http://localhost:8080/HDPT/jkpt/zhuce.htm"><img src="images/zhucexia.jpg" class="anniu02"></a></td>
+            <td width="10">&nbsp;</td>
+            <td valign="middle" width="66"><span class="STYLE9"><a href="#" onclick="denglu(1);" style="color:#5a5b5b;">忘记密码？</a></span></td>
+            <td width="10">&nbsp;</td>
+          </tr>
+        </tbody></table></td>
+        </tr>
+      <tr>
+        <td colspan="2" align="center" valign="middle">&nbsp;</td>
+        </tr>
+     
+    </tbody></table>
+     </form> -->
+
+
+
+
+    </td>
+    <td class="tu01"></td>
+    
+    <td width="301"><table border="0" cellpadding="0" cellspacing="0" height="153" width="302">
+      <tbody><tr>
+        <td height="24" width="98">&nbsp;</td>
+        <!-- <td width="166">&nbsp;</td> -->
+      </tr>
+      <tr>
+       <td align="center">
+      <input id="submit3" class="anniu04" value="快速预约" type="button">
+      </td> 
+        <!-- <td class="STYLE15" align="right" height="24">地区</td>
+        <td width="200">
+        <select id="areaid" name="areaid" class="select01" onchange="onSelectChange(this,'yy');">
+          <option selected="selected" value="">请选择...</option>
+          <option value="1">--城中区--</option>
+          <option value="2">--鱼峰区--</option>
+          <option value="3">--柳北区--</option>
+          <option value="4">--柳南区--</option>
+          <option value="5">--柳江区--</option>
+          <option value="6">--柳城区--</option>
+          <option value="7">--其他地区--</option>
+        </select>        </td> -->
+      </tr>
+      <!-- <tr>
+         <td align="center" valign="middle">&nbsp;</td>
+        <td width="166">&nbsp;</td>
+      </tr> -->
+      <tr>
+      <td  align="left" >&nbsp;&nbsp;预约挂号的一段说明文字预约挂号的一段说明文字预约挂号的一段说明文字</td>
+        <!-- <td class="STYLE15" align="right" height="24">医院</td>
+        <td width="200"><select id="yy" name="yy" class="select" onchange="onSelectChange1(this,'ks');">
+          <option selected="selected" value="">请选择...</option>
+          
+        </select>        </td> -->
+      </tr>
+      <tr>
+         <td align="center" valign="middle">&nbsp;</td>
+        <!-- <td width="166">&nbsp;</td> -->
+      </tr>     
+      <!--  
+      <tr>
+        <td height="12" align="right" class="STYLE15">就诊时间</td>
+        <td width="200">
+        <input id="date" name="date" class="form2"  onClick="WdatePicker()" />
+            </td>
+      </tr>
+      -->  
+    </tbody></table>
+      <!-- <table border="0" cellpadding="0" cellspacing="0" height="28" width="301">
+        <tbody><tr>
+          <td align="center" height="48" width="144"><a href="http://localhost:8080/jkw/user/yydl.do"><img src="images/yydl.jpg" class="anniu02"></a></td>
+          <td width="120"><input id="submit3" name="submit3" class="anniu04" value="快速预约" type="submit"></td>
+          <td width="37">&nbsp;</td>
+        </tr>
+      </tbody></table> -->
+      </td>
+      
+    <td class="xian01" width="1"></td>
+    <td width="8"></td>
+    <td class="xian01" width="1"></td>
+    <td valign="top" width="222"><table id="gzdt" border="0" cellpadding="0" cellspacing="0" width="222">
+    <tbody><tr id="list">
+      </tr>
+      <tr style="display: none;">
+        <td class="tu02" valign="middle"><p class="text01"> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zwid={2}&type=1">{0}</a></p></td>
+      </tr>
+      
+    </tbody></table></td>
+    <td class="xian01" width="1"></td>
+    <td width="15"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td height="18" width="15"></td>
+    <td class="bianjiao01"></td>
+    <td class="xian02"></td>
+    <td class="bianjiao02"></td>
+    <td width="9">&nbsp;</td>
+    <td class="bianjiao01"></td>
+    <td class="xian03"></td>
+    <td class="bianjiao02"></td>
+    <td width="8"></td>
+    <td class="bianjiao03"></td>
+    <td class="xian04"></td>
+    <td class="bianjiao04"></td>
+    <td width="15"></td>
+  </tr>
+</tbody></table>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="6" width="1000">
+  <tbody><tr>
+    <td width="15">&nbsp;</td>
+    <td class="bianjiao03" width="6">&nbsp;</td>
+    <td class="xian06" width="366">&nbsp;</td>
+    <td class="bianjiao04" width="6">&nbsp;</td>
+    <td width="8">&nbsp;</td>
+    <td class="bianjiao03" width="6">&nbsp;</td>
+    <td class="xian07" width="340">&nbsp;</td>
+    <td class="bianjiao04" width="6">&nbsp;</td>
+    <td width="8">&nbsp;</td>
+    <td class="bianjiao03" width="6">&nbsp;</td>
+    <td class="xian04">&nbsp;</td>
+    <td class="bianjiao04" width="6">&nbsp;</td>
+    <td width="15">&nbsp;</td>
+  </tr>
+</tbody></table>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td class="tu04"><table border="0" cellpadding="0" cellspacing="0" height="38" width="204">
+      <tbody><tr>
+        <td width="38">&nbsp;</td>
+        <td width="167"><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid=null&type=1"><span class="text02 STYLE28 STYLE44">医疗资源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</span></a></td>
+      </tr>
+    </tbody></table></td>
+    <td class="tu07"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td width="15"></td>
+    <td class="xian09" height="1" width="738"></td>
+    <td width="247"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="222" width="1000">
+  <tbody><tr>
+    <td height="222" width="15"></td>
+    <td class="xian08" width="1"></td>
+    <td width="354"><table border="0" cellpadding="0" cellspacing="0" height="222" width="354">
+      <tbody><tr>
+        <td class="tu08" height="32"><table border="0" cellpadding="0" cellspacing="0" height="39" width="354">
+          <tbody><tr>
+            <td class="tu06">&nbsp;</td>
+            <td width="321"><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid=null&type=2"><span class="STYLE10">医院介绍</span></a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+      <tr>
+        <td height="7"></td>
+      </tr>
+      <tr>
+        <td height="178" width="354"><table align="center" border="0" cellpadding="0" cellspacing="0" width="320">
+          <tbody><tr>
+            <td height="178"><a href="#"><img src="images/liuzhou-index_45.jpg" border="0" height="178" width="320"></a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+    <td width="10">&nbsp;</td>
+    <td width="344"><table id="wszw" border="0" cellpadding="0" cellspacing="0" height="222" width="344">
+      <tbody><tr>
+        <td height="12"></td>
+      </tr>
+      <tr>
+        <td class="STYLE47" height="14"><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid={2}&type=2" style="margin-left:8px;" class="length"><span class="STYLE55">&gt;&gt;</span>{0}</a></td>
+      </tr>
+      <tr>
+        <td height="8"></td>
+      </tr>
+      
+      <tr>
+        <td height="10"></td>
+      </tr>
+    </tbody></table></td>
+    <td width="26">&nbsp;</td>
+    <td class="xian08" width="1"></td>
+    <td width="8">&nbsp;</td>
+    <td width="224"><table border="0" cellpadding="0" cellspacing="0" height="222" width="224">
+      <tbody><tr>
+        <td><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid=null&type=3"><img src="images/liuzhou-index_46.png" border="0" height="52" width="224"></a></td>
+      </tr>
+      <tr>
+        <td height="5"></td>
+      </tr>
+      <tr>
+        <td><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid=null&type=4"><img src="images/liuzhou-index_47.png" border="0" height="52" width="224"></a></td>
+      </tr>
+      <tr>
+        <td height="5"></td>
+      </tr>
+      <tr>
+        <td><a href="http://localhost:8080/HDPT/jkpt/wszw.htm?zwid=null&type=5"><img src="images/liuzhou-index_48.png" border="0" height="52" width="224"></a></td>
+      </tr>
+      <tr>
+        <td height="5"></td>
+      </tr>
+      <tr>
+        <td><a href="#"><img src="images/liuzhou-index_49.png" border="0" height="52" width="224"></a></td>
+      </tr>
+    </tbody></table></td>
+    <td width="15">&nbsp;</td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td width="15"></td>
+    <td class="xian09" height="1" width="738"></td>
+    <td width="247"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td>&nbsp;</td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td class="tu04"><table border="0" cellpadding="0" cellspacing="0" height="38" width="204">
+      <tbody><tr>
+        <td width="38">&nbsp;</td>
+        <td width="167"><a href="http://localhost:8080/jkw/user/jkzx.do"><span class="text02 STYLE28 STYLE44">健康资讯&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</span></a></td>
+      </tr>
+    </tbody></table></td>
+    <td class="tu07"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="338" width="1000">
+  <tbody><tr>
+    <td height="160" width="15">&nbsp;</td>
+    <td height="160" width="310"><table class="table" border="0" cellpadding="0" cellspacing="0" height="160" width="310">
+      <tbody><tr>
+        <td style="background-color:#f3f3f3;" height="32" width="113"><div class="STYLE36" align="center"><span style=" color:#499c07;">健康小贴士</span></div></td>
+        <td rowspan="2" width="190"><table border="0" cellpadding="0" cellspacing="0" height="160" width="197">
+          <tbody><tr>
+            <td width="20"><p style="font-size:12px; line-height:22px; letter-spacing:0px; white-space: pre;"></p></td>
+            <td width="94"><span style="font-size:12px; line-height:22px; letter-spacing:0px; white-space: pre; color:#5a5b5b;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;柚子味道酸甜，营养丰富，<br>含有大量的维生素，对人体有<br>很大的好处。但是柚子不能随<br>意吃，比如在吃药期间，就不<br>能吃，特别是生病的中老年人<br>更需要注意。</span></td>
+            <td width="15">&nbsp;</td>
+          </tr>
+          
+        </tbody></table></td>
+      </tr>
+      <tr>
+        <td height="128" width="113"><img src="images/liuzhou-index_50.jpg" border="0" height="128" width="113"></td>
+        </tr>
+    </tbody></table></td>
+    <td height="160" width="20">&nbsp;</td>
+    <td height="160" width="310"><table border="0" cellpadding="0" cellspacing="0" height="111" width="310">
+      <tbody><tr>
+        <td colspan="2" height="24"><table border="0" cellpadding="0" cellspacing="0" height="24" width="310">
+          <tbody><tr>
+            <td style="background:url(../jkpt/images/liuzhou-index_52.jpg) no-repeat; background-position:0px 8px;" width="9"></td>
+           <td width="85"><div class="STYLE56" align="center"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=1" class="STYLE40" style="color:#499c07;" a="a">保健预防</a></div></td>
+            <td>&nbsp;</td>
+            <td width="40"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=1" class="STYLE9 STYLE38">更多&gt;&gt;</a></td>
+            </tr>
+        </tbody></table></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="background:url(../jkpt/images/liuzhou-index_13.jpg); width:310px;" height="1"></td>
+      </tr>
+      <tr>
+        <td colspan="2" height="15"></td>
+      </tr>
+      <tr>
+        <td height="120" width="120"><a href="#"><img src="images/liuzhou-index_51.jpg" border="0" height="120" width="120"></a></td>
+        <td width="190"><table id="query" border="0" cellpadding="0" cellspacing="0" height="120" width="190">
+          <tbody><tr>
+            <td height="4"></td>
+          </tr>
+          
+          <tr>
+            <td class="STYLE47" height="14"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid={2}&type=1" style="margin-left:8px;" class="length"><span class="STYLE55">&gt;&gt;</span>{0}</a></td>
+          </tr>
+          <tr>
+            <td height="8"></td>
+          </tr>
+          
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+    <td height="160" width="20">&nbsp;</td>
+	<td height="160" width="310"><table border="0" cellpadding="0" cellspacing="0" height="160" width="310">
+      <tbody><tr>
+        <td colspan="2" height="24"><table border="0" cellpadding="0" cellspacing="0" height="24" width="310">
+          <tbody><tr>
+            <td style="background:url(../jkpt/images/liuzhou-index_52.jpg) no-repeat; background-position:0px 8px;" width="9"></td>
+            <td width="85"><div class="STYLE56" align="center"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=2" class="STYLE40" style="color:#499c07;" a="a">生活百科</a></div></td>
+            <td>&nbsp;</td>
+            <td width="40"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=2" class="STYLE9 STYLE38">更多&gt;&gt;</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+	  <tr>
+	   <td colspan="2" style="background:url(../jkpt/images/liuzhou-index_13.jpg); width:310px;" height="1"></td>
+	   </tr>
+      <tr>
+        <td colspan="2" height="15"></td>
+      </tr>
+      <tr>
+        <td height="120" width="120"><a href="#"><img src="images/liuzhou-index_74.jpg" border="0" height="120" width="120"></a></td>
+        <td height="120" width="190"><table id="query2" border="0" cellpadding="0" cellspacing="0" height="120" width="190">
+          <tbody><tr>
+            <td height="8"></td>
+          </tr>
+            <tr>
+            <td class="STYLE47" height="14"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid={2}&type=2" style="margin-left:8px;" class="length"><span class="STYLE55">&gt;&gt;</span>{0}</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+    <td height="160" width="15">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="7" height="18">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="160" width="15">&nbsp;</td>
+    <td height="160" width="310"><table border="0" cellpadding="0" cellspacing="0" height="160" width="310">
+      <tbody><tr>
+        <td colspan="2" height="24"><table border="0" cellpadding="0" cellspacing="0" height="24" width="310">
+          <tbody><tr>
+            <td style="background:url(../jkpt/images/liuzhou-index_52.jpg) no-repeat; background-position:0px 8px;" width="9"></td>
+            <td width="85"><div class="STYLE56" align="center"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=3" class="STYLE40" style="color:#499c07;" a="a">疾病常识</a></div></td>
+            <td>&nbsp;</td>
+            <td width="40"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=3" class="STYLE9 STYLE38">更多&gt;&gt;</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="background:url(../jkpt/images/liuzhou-index_13.jpg); width:310px;" height="1"></td>
+      </tr>
+      <tr>
+        <td colspan="2" height="15"></td>
+      </tr>
+      <tr>
+        <td height="120" width="120"><a href="#"><img src="images/liuzhou-index_75.jpg" border="0" height="120" width="120"></a></td>
+        <td height="120" width="190"><table id="query3" border="0" cellpadding="0" cellspacing="0" height="120" width="190">
+          <tbody><tr>
+            <td height="20"></td>
+          </tr>
+          <tr>
+            <td class="STYLE47" height="14"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid={2}&type=3" style="margin-left:8px;" class="length"><span class="STYLE55">&gt;&gt;</span>{0}</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+    <td height="160" width="20">&nbsp;</td>
+    <td height="160" width="310"><table border="0" cellpadding="0" cellspacing="0" height="160" width="310">
+      <tbody><tr>
+        <td colspan="2" height="24"><table border="0" cellpadding="0" cellspacing="0" height="24" width="310">
+          <tbody><tr>
+            <td style="background:url(../jkpt/images/liuzhou-index_52.jpg) no-repeat; background-position:0px 8px;" width="9"></td>
+            <td width="85"><div class="STYLE56" align="center"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=4" class="STYLE40" style="color:#499c07;" a="a">心理健康</a></div></td>
+            <td>&nbsp;</td>
+            <td width="40"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=4" class="STYLE9 STYLE38">更多&gt;&gt;</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="background:url(../jkpt/images/liuzhou-index_13.jpg); width:310px;" height="1"></td>
+      </tr>
+      <tr>
+        <td colspan="2" height="15"></td>
+      </tr>
+      <tr>
+        <td height="120" width="120"><a href="#"><img src="images/liuzhou-index_76.jpg" border="0" height="120" width="120"></a></td>
+        <td width="190"><table id="query4" border="0" cellpadding="0" cellspacing="0" height="120" width="190">
+          <tbody><tr>
+            <td height="20"></td>
+          </tr>
+           <tr>
+            <td class="STYLE47" height="14"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid={2}&type=4" style="margin-left:8px;" class="length"><span class="STYLE55">&gt;&gt;</span>{0}</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+    <td height="160" width="20">&nbsp;</td>
+    <td height="160" width="310"><table border="0" cellpadding="0" cellspacing="0" height="160" width="310">
+      <tbody><tr>
+        <td colspan="2" height="24"><table border="0" cellpadding="0" cellspacing="0" height="24" width="310">
+          <tbody><tr>
+            <td style="background:url(../jkpt/images/liuzhou-index_52.jpg) no-repeat; background-position:0px 8px;" width="9"></td>
+            <td width="85"><div class="STYLE56" align="center"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=5" class="STYLE40" style="color:#499c07;" a="a">和谐医患</a></div></td>
+            <td>&nbsp;</td>
+            <td width="40"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid=null&type=5" class="STYLE9 STYLE38">更多&gt;&gt;</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="background:url(../jkpt/images/liuzhou-index_13.jpg); width:310px;" height="1"></td>
+      </tr>
+      <tr>
+        <td colspan="2" height="15">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="120" width="120"><a href="#"><img src="images/liuzhou-index_77.jpg" border="0" height="120" width="120"></a></td>
+        <td height="120" width="190"><table id="query5" border="0" cellpadding="0" cellspacing="0" height="120" width="190">
+          <tbody><tr>
+            <td height="20"></td>
+          </tr>
+          <tr>
+            <td class="STYLE47" height="14"><a href="http://localhost:8080/HDPT/jkpt/jkzx.htm?zxid={2}&type=5" style="margin-left:8px;" class="length"><span class="STYLE55">&gt;&gt;</span>{0}</a></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+    <td height="160">&nbsp;</td>
+  </tr>
+</tbody></table>
+
+
+
+<script type="text/JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="10" width="1000">
+  <tbody><tr>
+    <td></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="32" width="1000">
+  <tbody><tr>
+    <td width="15"></td>
+    <td style="background:url(../jkpt/images/liuzhou-index_54.jpg) no-repeat; width:5px;" width="5"></td>
+    <td style="background:url(../jkpt/images/liuzhou-index_56.jpg) repeat-x; width:960px;" width="960"><table border="0" cellpadding="0" cellspacing="0" height="32" width="960">
+      <tbody><tr>
+        <td valign="middle" width="184"><form name="form1" id="form1" style="width:184px; height:22px;">
+          <select name="menu1" style="width:184px; height:22px;" onchange="MM_jumpMenu('parent',this,0)">
+            <option selected="selected" style="position:relative; margin:auto;">-------卫生信息网-------</option>
+            <option value="http://www.gxws.gov.cn/">广西卫生信息网</option>
+            <option value="http://www.nnws.gov.cn/CL0001/index.html">南宁卫生信息网</option>
+            <option value="http://www.glws.gov.cn/">桂林卫生信息网</option>
+            <option value="http://bhhb.gov.cn/">北海卫生信息网</option>
+            <option value="http://wsj.wuzhou.gov.cn/">梧州市卫生局</option>
+            <option value="http://www.fcgs.gov.cn/wsj/">防城港市卫生局</option>
+            <option value="http://www.lbswsjds.com/">来宾市卫生监督信息网</option>
+           </select>
+        </form>       </td>
+        <td width="10"></td>
+        <td valign="middle" width="184"><form name="form2" id="form2" style=" width:184px; height:22px;">
+          <select name="menu2" style="width:184px; height:22px;" onchange="MM_jumpMenu('parent',this,0)">
+            <option selected="selected">--------医疗机构--------</option>
+            <option value="http://www.lzry.com.cn/">柳州市人民医院</option>
+            <option value="http://www.lzzyy.com/">柳州市中医院</option>
+            <option value="http://www.lzsfy.com/">柳州市妇幼保健院</option>
+            <option value="http://www.gxlqsyy.com/">广西龙泉山医院</option>
+            <option value="http://www.lz3900000.com/">柳州华侨医院</option>
+            <option value="http://www.lzhszhyy.com/">柳州市红十字会医院</option>
+            <option value="http://www.lzgryy.com/">柳州市工人医院</option>
+            <option value="http://www.lzjmnk.com/">柳州健民男科医院</option>
+            <option value="http://www.lzsefy.com/">柳州市第二妇幼保健院</option>
+           </select>
+        </form>
+        </td>
+        <td width="10"></td>
+        <td valign="middle" width="184"><form name="form3" id="form3" style="width:184px; height:22px;">
+          <select name="menu3" onchange="MM_jumpMenu('parent',this,0)" style="width:184px; height:22px;">
+            <option selected="selected">--------监督机构--------</option>
+            <option value="http://www.gxwsjd.com.cn/">广西卫生监督信息网</option>
+            <option value="http://wsjds.liuzhou.gov.cn/">市卫生监督所</option>
+          </select>
+        </form>
+        </td>
+        <td width="10"></td>
+        <td valign="middle" width="184"><form name="form4" id="form4" style="width:184px; height:22px;">
+          <select name="menu4" onchange="MM_jumpMenu('parent',this,0)" style="width:184px; height:22px;">
+             <option selected="selected">--------防病机构--------</option>
+            <option value="http://www.gxlzcdc.com/">疾病控制中心</option>
+            <option value="http://www.sjxcdc.com/">疾病预防控制中心</option>
+          </select>
+        </form>
+        </td>
+        <td width="10"></td>
+        <td valign="middle" width="184"><form name="form5" id="form5" style="width:184px; height:22px;">
+          <select name="menu5" onchange="MM_jumpMenu('parent',this,0)" style="width:184px; height:22px;">
+             <option selected="selected">--------其他机构--------</option>
+            <option value="http://www.liuzhou.gov.cn/">市人民政府门户网站</option>
+            <option value="http://124.226.192.49/">人口网</option>
+            <option value="http://rsj.liuzhou.gov.cn">市人事局</option>
+            <option value="http://www.gxlzfda.gov.cn/">市食品药品监督管理局</option>
+          </select>
+        </form>
+        </td>
+      </tr>
+    </tbody></table></td>
+    <td style="background:url(/jkw/template/default/images/lz_images/liuzhou-index_55.jpg) no-repeat; width:5px;" width="5"></td>
+    <td width="15"></td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td width="392">&nbsp;</td>
+    <td style="background:url(../jkpt/images/liuzhou-index_57.png) no-repeat; width:216px; height:78px;" height="78"></td>
+    <td width="392">&nbsp;</td>
+  </tr>
+</tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1000">
+  <tbody><tr>
+    <td rowspan="2" width="300">&nbsp;</td>
+    <td height="20"><div class="STYLE1" align="center"><a href="#" a="" visited="" style="color:#5a5b5b;">网站声明</a>｜<a href="#" a="" visited="" style="color:#5a5b5b;">网站地图</a>｜<a href="#" a="" visited="" style="color:#5a5b5b;">站间统计</a>｜<a href="#" a="" visited="" style="color:#5a5b5b;">联系我们</a></div></td>
+    <td rowspan="2" width="300">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="20"><div class="STYLE47" align="center">版权所有：卫生网 copyright 2009-2013 </div></td>
+  </tr>
+</tbody></table>
+
+
+<div style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 186px; height: 198px;" src="%E6%9F%B3%E5%B7%9E%E5%8D%AB%E7%94%9F%E7%BD%91_files/My97DatePicker.htm" border="0" scrolling="no" frameborder="0"></iframe></div></body></html>

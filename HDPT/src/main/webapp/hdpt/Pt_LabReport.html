@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>Pt_LabReport</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+<body>
+
+	<div id="W_Pt_ExamReport" style="height: 100%">
+		<div class="widget-content nopadding nicescroll"
+			style="height: 100%;overflow: auto; " id="B_Pt_ExamReport">
+			<div class="main" style="background:#f6f6f6;height:100%">
+				<div id="if_div" style="zoom:1; position:relative;height: 100%;">
+					<div style="margin-top:3px; position:relative;">
+						<div style="height: 500px">
+							<dl class="jiancha" id="jiancha_list">
+								<dd id="content"></dd>
+							</dl>
+						</div>
+						<!--opears end-->
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				var authororganization=""
+				 var StudyUID =""
+				$(document).ready(
+						function() {
+							$("#if_div").niceScroll();
+							$("#if_div").height(function(index, oldheight) {
+								return oldheight - 32;
+							});
+							
+							
+							var url = host + '/examReport/getHtmlDocument?vk=UUID&dcId='+Key
+							var param = {'url' : url};
+							doAjax("getdata.px", param, "json", function(data,textStatus) {
+								var jsonData = data.body;
+								$("#content").html(jsonData);
+								$("#loading").css({
+									'display' : 'none'
+								});
+							});
+							
+						});
+			</script>
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>健康网</title>
+		<link href="../../hdpt/css/style2.css" type="text/css" rel="stylesheet">
+		<!-- <link href="module-moduleTree_data/jquery-ui-1.css" type="text/css" rel="stylesheet"> -->
+		<link href="../../hdpt/js/dtree/dtree.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../../hdpt/js/base/json2.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/base/jquery.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/jmhd.js"></script>
+		<!-- <script type="text/javascript" src="module-moduleTree_data/jquery-ui-1.js"></script> -->
+		<script type="text/javascript" src="../../hdpt/js/dtree/dtree.js"></script>
+		<script type="text/javascript" src="../../hdpt/js/dtree/dtreeclick.js"></script>
+		<script type="text/javascript">
+			var MODEL_IMG_PATH = "../../hdpt";
+			var MODEL_RULE_LENGTH = 3;
+			var back_url = "../../moduleTree.ehr";
+			var data = {"tag":"792282d9-04c3-49a1-ae0c-0f362efb89a2","success":true};
+			var module_update_url = "module-toUpdate.html?id=";
+			var maxRequest = 3;
+			$(document).ready(function() {
+				var cfg = {
+					"type" : 2,
+					"back_url" : back_url,
+					"comeback" : doResult,
+					"data" : data
+				};
+				$.jkw.load(cfg);
+			}); 
+		
+			function doResult(data) {
+				if (data.success) {
+					d = new dTree('d');
+					d.add('0', '-1', '模块管理');
+					for ( var i = 0; i < data.modules.length; i++) {
+						var module = data.modules[i];
+						dTreeAddNode(d, module);
+					}
+					$("#dtree").html(d.toString());
+				}
+			}
+		
+			function dTreeAddNode(tree, module) {
+				if (module.moduleLev == 1) {
+					d.add(module.moduleCode + "|" + module.moduleLev, '0',
+							module.moduleName, module_update_url + module.id, '查看相关信息',
+							'moduleLeft');
+				} else {
+					var code = module.moduleCode.substring(0, (module.moduleLev - 1)
+							* MODEL_RULE_LENGTH);
+					d.add(module.moduleCode + "|" + module.moduleLev, code + "|"
+							+ (module.moduleLev - 1), module.moduleName,
+							module_update_url + module.id, '查看相关信息', 'moduleLeft');
+				}
+			}
+		
+			function Do_addtop() {
+				$("#moduleLeft").attr("src","../module/module-add.html?moduleLev=1");
+			}
+		
+			function Do_add() {
+				// var pid = d.nid;
+				// alert(d.nid)
+				var treeIdArr = d.nid.split("|");
+				var code = treeIdArr[0];
+				var lev = parseInt(treeIdArr[1]) + 1;
+				$("#moduleLeft").attr(
+						"src",
+						"../module/module-add.html?moduleLev="
+						+ lev + "&moduleCode=" + code);
+			}
+		
+			function Do_delete() {
+				var treeIdArr = d.nid.split("|");
+				var code = treeIdArr[0];
+				window.location.href = "../module/module-del.html?moduleCode=" + code;
+			}
+		
+		</script>
+
+</head>
+<body oncontextmenu="return(false)">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	  	<tbody>
+	  		<tr>
+				<td class="set" align="center" width="20"><img src="../../hdpt/images/ico_set.jpg" width="10"></td>
+	    		<td class="set" align="left">您目前所在的位置： 模块管理 </td>
+	  		</tr>
+		</tbody>
+	</table>
+	<table class="border_content" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+		  <tbody>
+		  <tr>
+		    <td colspan="2" class="border_kong" align="left" valign="top">
+				<table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
+			      <tbody>
+			      	<tr>
+			        	<td class="border_text" align="left" valign="top" bgcolor="#e4f1fa">
+	
+							<span class="kong5"><br></span>
+		
+							<table align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+							<tbody>
+								<tr>
+									<td align="center" height="40" bgcolor="#e4f1fa">
+										<script type="text/javascript">
+											var menu = new RightMenu();
+											menu.AddItem("addtop", "创建顶级模块", "rbpm", null);
+											menu.AddItem("add", "创建下级模块", "rbpm", null);
+											menu.AddItem("sperator", "", "rbpm", null);
+											menu.AddItem("delete", "删除模块", "rbpm", null);
+											menu.AddItem("sperator", "", "rbpm", null);
+											menu.AddItem("refresh", "刷新", "rbpm", null);
+											document.writeln(menu.GetMenu());
+										</script>
+						
+							
+										<div id="dtree" style="width: 22%;float: left;overflow: auto;padding: 5px 0 0 10px;">
+										</div>
+										<div style="width:77%;float: left;">
+											<iframe src="../module/module-add.html?moduleLev=1" name="moduleLeft" id="moduleLeft" scrolling="Auto" frameborder="0" height="400px" width="100%"></iframe>
+										</div>
+									</td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

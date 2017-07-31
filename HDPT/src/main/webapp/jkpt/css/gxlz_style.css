@@ -1,0 +1,439 @@
+
+
+body { margin:0 auto; font-family:"����"; font-size:12px; color:#5a5b5b;}
+body,div,ul,li{ margin:0; padding:0;}
+input { margin:0; padding:0;}
+a {text-decoration:none; color:#5a5b5b;}
+a:hover{ color: #FF3333; text-decoration:none;}
+#nav{
+	width:1000px;
+	height:45px;
+	background:url(../images/liuzhou-index_07.jpg) repeat-x;
+	margin:0 auto;
+	margin-top:0px;
+}
+.length{width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    course: hand;
+    display:block;
+}
+#nav ul{
+	width:1000px;
+	height:45px;
+}
+#nav ul li{ 
+	font-size:16px;
+	float:left;
+	list-style:none;
+	line-height:40px;
+	text-align:center;
+	padding:0 20px;
+}
+#nav ul li a{ display:block; height:41px; color:#ffffff; text-decoration:none;  float:left; padding:0 20px; cursor:pointer;}
+#nav ul li a:hover{ color:#ffffff; text-decoration: none; background:#f3ad52;}
+.government { background:#f3ad52;}
+.img{ 
+	background:url(../images/liuzhou-index_01.png);
+	width:1000px;
+	height:205px;
+	margin:auto auto;
+	background-repeat:no-repeat;
+}
+.img01{
+	background: url(../images/liuzhou-index_02.png);
+	background-repeat:no-repeat;
+}
+.img02{
+	background:url(../images/liuzhou-index_03.png);
+	background-repeat:no-repeat;
+}
+.img03{
+	background:url(../images/liuzhou-index_04.png);
+	background-repeat:no-repeat;
+}
+.img04{
+	background:url(../images/liuzhou-index_07.jpg) repeat-x;
+	height:45px;
+	
+}
+.yuanjiao01{
+	background:url(../images/liuzhou-index_09.jpg) no-repeat;
+	width:7px;
+	height:39px;
+}
+.yuanjiao02{
+	background:url(../images/liuzhou-index_11.jpg) no-repeat;
+	width:7px;
+	height:39px;
+}
+.pingputiao01{
+	background:url(../images/liuzhou-index_10.jpg) repeat-x;
+	height:39px;
+	width:337px;
+}
+.pingputiao02{
+	background:url(../images/liuzhou-index_10.jpg) repeat-x;
+	height:39px;
+	width:365px;
+}
+.pingputiao03{
+	background: url(../images/liuzhou-index_10.jpg) repeat-x;
+	height:39px;
+	width:376px;
+}
+.pingputiao04{
+	background:url(../images/liuzhou-index_10.jpg) repeat-x;
+	height:39px;
+	width:350px;
+}
+.tiao{
+	background: url(../images/liuzhou-index_12.jpg) repeat-x;
+	height:39px;
+	width:222px;
+}
+.xian{
+	background:url(../images/liuzhou-index_13.jpg) repeat-y;
+	height:39px;
+}
+.xian01{
+	background:url(../images/liuzhou-index_13.jpg) repeat-y;
+	height:205px;
+}
+.xian02{
+	background:url(../images/liuzhou-index_13.jpg) repeat-x;
+	background-position:0px 5px;
+	width:337px;
+}
+.xian03{
+	background:url(../images/liuzhou-index_13.jpg) repeat-x;
+	background-position:0px 5px;
+	width:364px;
+}
+.xian04{
+	background:url(../images/liuzhou-index_13.jpg) repeat-x;
+	background-position:0px 5px;
+	width:212px;
+}
+.xian05{
+	background:url(../images/liuzhou-index_13.jpg) repeat-y;
+	height:190px;
+}
+.xian06{
+	background:url(../images/liuzhou-index_13.jpg) repeat-x;
+	background-position:0px 5px;
+	width:366px;
+}
+.xian07{
+	background:url(../images/liuzhou-index_13.jpg) repeat-x;
+	background-position:0px 5px;
+	width:340px;
+}
+.xian08{
+	background:url(../images/liuzhou-index_13.jpg) repeat-y;
+	height:222px;
+}
+.xian09{
+	background:url(../images/liuzhou-index_13.jpg) repeat-x;
+	width:738px;
+}
+.tu01{
+	background:url(../images/liuzhou-index_16.jpg) no-repeat;
+	height:205px;
+	width:158px;
+}
+.tu02{
+	background:url(../images/liuzhou-index_22.jpg) no-repeat;
+	background-position:10px 13px;
+}
+.tu03{
+	background:url(../images/liuzhou-index_23.jpg) repeat-x;
+}
+.tu04{
+	background:url(../images/liuzhou-index_25.jpg) no-repeat;
+	width:235px;
+	height:38px;
+}
+.tu05{
+	background:url(../images/liuzhou-index_26.jpg) repeat-x;
+	height:38px;
+	width:518px;
+}
+.tu06{
+	background:url(../images/liuzhou-index_27.png) no-repeat;
+	background-position:10px 10px;
+}
+.tu07{
+	background:url(../images/liuzhou-index_26.jpg) repeat-x;
+	width:765px;
+}
+.tu08{
+	background:url(../images/liuzhou-index_44.jpg) repeat-y;
+	height:39px;
+	width:354px;
+}
+.ditu{
+	background:url(../images/liuzhou-index_36.jpg) no-repeat;
+	background-position:9px 6px;
+	height:184px;
+	width:332px;
+}
+.bianjiao01{
+	background:url(../images/liuzhou-index_14.jpg) no-repeat;
+	height:6px;
+	width:7px;
+}
+.bianjiao02{
+	background:url(../images/liuzhou-index_15.jpg) no-repeat;
+	width:7px;
+	height:6px;
+}
+.bianjiao03{
+	background:url(../images/liuzhou-index_17.jpg) no-repeat;
+	width:6px;
+	height:6px;
+}
+.bianjiao04{
+	background:url(../images/liuzhou-index_18.jpg) no-repeat;
+	width:6px;
+	height:6px;
+}
+.text{
+	font-size:18px;
+	color:#ffffff;
+	top:10px;
+	bottom:11px;
+	right:10px;
+	left:10px;
+}
+.text01{
+	white-space:pre;
+	font-size:12px;
+	color:#5a5b5b;
+	
+}
+.text02{
+	white-space:pre;
+	position:relative;
+	top:-5px;
+	font-weight:bolder;
+	color:#FFFFFF;
+}
+.text03{
+	white-space:pre;
+	font-size:14px;
+	color:#5a5b5b;
+	font-size:12px;
+}
+.text04 a:link{ color:#499c07;}
+.text04 a:visited{ color:#499c07;}
+.baitiao{
+	background:url(../images/liuzhou-index_05.jpg);
+	height:35px;
+	background-repeat:repeat-x;
+}
+.biaodan{
+	height:22px;
+	width:250px;
+	border:1px solid #c2c2c2;
+	color:#c2c2c2;
+	line-height:22px;
+}
+.anniu{
+	background: #79c923;
+	width:75px;
+	height:24px;
+	border:0px;
+	cursor:pointer;
+	color:#FFFFFF;
+	font-size:14px;
+	font-weight: bolder;
+}
+.anniu01{
+	background:url(../images/yydl.jpg) no-repeat;
+	width:77px;
+	height:29px;
+	color:#ffffff;
+	font-size:16px;
+	font-weight:bolder;
+	border:0px;
+	cursor:pointer;
+}
+.anniu02{
+	background:url(../images/liuzhou-index_20.jpg) no-repeat;
+	width:77px;
+	height:29px;
+	color:#ffffff;
+	font-size:16px;
+	font-weight:bolder;
+	border:0px;
+	cursor:pointer;
+}
+.anniu04{
+	background:url(../images/liuzhou-index_21.jpg) no-repeat;
+	width:120px;
+	height:31px;
+	color:#FFFFFF;
+	font-size:16px;
+	cursor:pointer;
+	font-weight:bolder;
+	border:0px;
+}
+.select{
+	color: #999999;
+	width:160px;
+	height:24px;
+	border:1px solid #c2c2c2;
+}
+.select01{
+	color: #999999;
+	width:120px;
+	height:24px;
+	border:1px solid #c2c2c2;
+}
+.textfield{
+	color: #999999;
+	width:160px;
+	height:24px;
+	border:1px solid #c2c2c2;
+}
+.table{
+	border:1px solid #c2c2c2;
+	
+}
+#zuodaohang{ width:180px; height:32px; margin:0 auto; margin-top:0px;}
+#zuodaohang ul{ width:180px; height:32px; background:url(../images/liuzhou-index_71.jpg) no-repeat;}
+#zuodaohang ul li{ list-style:none;font-size:16px; text-indent:35px; line-height:32px; padding:0 0px;}
+#zuodaohang ul li a{height:32px; text-decoration:none; cursor:pointer; display: block; }
+#zuodaohang ul li a:hover{ text-decoration:none; color:#5a5b5b; background:url(../images/liuzhou-index_72.jpg) no-repeat;}
+.work_bg { background:url(../images/liuzhou-index_72.jpg) no-repeat;}
+
+.left_menu { padding-bottom:15px;}
+/*-----medical-----*/
+.medical_kuang { border:1px solid #c2c2c2;}
+.medical_place a { color:#579b0f; text-decoration:none;}
+.medical_place a:hover { color:#579b0f; text-decoration:none; background:#caf2b4; padding:6px 8px;}
+.medical_place { margin:10px 0; line-height:28px; font-size:14px; color:#579b0f;}
+.medical_placekuang { border-bottom:1px dashed #c2c2c2;}
+.medical_placekuang2 { border-bottom:1px dashed #c2c2c2; background:#f6f9fd;}
+.medical_place_t { color:#5a5b5b;}
+.medical_green { background:#79c923; color:#FFFFFF; font-size:14px; font-weight:bold; height:27px; line-height:27px;}
+.medical_name { padding-left:50px;}
+.medical_pic { margin:25px 0;}
+.medical_pic_left { margin-left:33px;}
+.medical_pic_text { padding-left:10px; color:#86887a; line-height:20px;}
+.medical_pic_green { color:#499c07;}
+.medical_pic_m { font-size:14px;}
+.medical_page { margin:30px 0; }
+.medical_page a { color:#4a70c1; text-decoration:none; font-size:14px; padding:5px;}
+/*.medical_page a:hover { background:#d8eaf8; color:#4a70c1; text-decoration:none; font-size:14px; padding:3px 8px;}*/
+.medical_page_b { width:27px; height:27px; background:url(../images/button_right.jpg); border:0; cursor:pointer;}
+.medical_page_qd { width:66px; height:25px; background:#ffffff; border:1px solid #cacfd3; cursor:pointer; }
+.medical_page_kuang { width:35px; height:23px; border:1px solid #cacfd3; padding:0; margin:0;}
+
+/*-----hospital-----*/
+.hospital_pic, .hospital_ks { background:#f9fbfb; border:1px solid #c2c2c2; color:#5a5b5b; font-size:12px;}
+.hospital_img { padding:20px 0;}
+.hospital_name { color:#499c07; font-family:"Microsoft Yahei"; font-size:18px; line-height:30px; padding-left:8px;}
+.hospital_pic a { color:#5e8de5; text-decoration:none; padding-left:10px;}
+.hospital_pic a:hover { color:#FF3300; text-decoration:none;}
+.hospital_ks { margin-top:10px;}
+.hospital_ks_t { background:#79c923; text-align:left; font-size:14px; color:#ffffff; font-weight:bold; height:30px; line-height:30px; text-indent:10px;}
+.hospital_ks_list { padding:10px; font-size:14px; height:28px; line-height:28px;}
+.hospital_ks_list a { color:#333333; text-decoration:none;}
+.hospital_ks_list a:hover { color:#FF3300;}
+
+/*-----doctor-----*/
+.doctor_bg { height:31px; background:url(../images/doctor_bg.jpg) repeat-x; color:#000000; font-size:16px; font-weight:bold; line-height:31px; text-indent:20px;}
+.doctor_pic { border-right:1px solid #c2c2c2;}
+.doctor_kuang {border-top:1px solid #c2c2c2; border-bottom:1px solid #c2c2c2;}
+.doctor_js { margin-left:200px;}
+.doctor_text, .doctor_text2 { color:#499c07; font-size:14px; font-weight:bold; height:32px; line-height:32px; border-bottom:1px solid #c2c2c2; border-right:1px solid #c2c2c2;}
+.doctor_text2 { border-left:1px solid #c2c2c2;}
+.doctor_list { color:#5a5b5b; font-size:14px; border-bottom:1px solid #c2c2c2; text-indent:30px;}
+.doctor_text_r { border-right:1px solid #c2c2c2; background:#e9fadb;color:#499c07; font-size:14px; font-weight:bold;}
+.doctor_list_r { padding:10px; line-height:22px; color:#5a5b5b;}
+.doctor_yy_box { margin-top:20px;}
+.doctor_tab { text-align:center; vertical-align:middle; line-height:20px; color:#5a5b5b; font-size:16px;}
+.doctor_tab_yy { border-left:1px solid #c2c2c2; border-bottom:1px solid #c2c2c2; padding:8px 0; background:#eafadf;}
+.doctor_tab_k {border-bottom:1px solid #c2c2c2; }
+.doctor_tab_s { border-left:1px solid #c2c2c2; border-bottom:1px solid #c2c2c2; height:110px; line-height:110px;}
+.doctor_tab_x { border-left:1px solid #c2c2c2; height:110px; line-height:110px;}
+
+/*-----news-----*/
+.news_list { height: 24px; line-height:34px; border-bottom:1px dashed #c2c2c2; font-size:14px; color:#5a5b5b; text-indent:5px;}
+.news_list a { color:#5a5b5b; text-decoration:none;}
+.news_list a:hover { color:#FF3300; text-decoration:none;}
+.news_list_time { line-height:34px; border-bottom:1px dashed #c2c2c2; font-size:14px; color:#5a5b5b; text-align:center;}
+.news_ico { color:#f3ad52; margin-right:10px;}
+.news_ico_m { margin-top:5px;}
+.news_c_title { text-align:center;font-family:"Microsoft Yahei"; font-size:18px; line-height:25px; padding:5px 0;}
+.news_c_titlesecond { text-align:right;font-family:"Microsoft Yahei"; font-size:10px; line-height:10px; padding:5px 0; border-bottom:2px solid #c2c2c2;}
+.news_c_text { padding:10px; line-height:20px; font-size:12px; color:#5a5b5b;}
+
+/*-----reservation-----*/
+.reservation_doc { padding:38px 5px 0 8px; line-height:22px; text-align:left; border-right:1px solid #c2c2c2; border-bottom:1px solid #c2c2c2;}
+.reservation_doc a { color:#5a5b5b; text-decoration:none;}
+.reservation_doc a:hover { color:#FF3333; text-decoration:none;}
+.reservation_name { font-size:14px;}
+.reservation_name span { color:#5e8de5; font-weight:bold;}
+.reservation_ks { color:#5e8de5; font-weight:bold;}
+.reservation_yy {border-bottom:1px solid #c2c2c2;}
+
+/*-----new add-----*/
+.biankuang1 {background:url(../images/liuzhou-index_63.jpg) no-repeat;}
+.biankuang2 {background:url(../images/liuzhou-index_65.jpg) repeat-x; width:232px; height:40px;}
+.biankuang3 {background:url(../images/liuzhou-index_64.jpg) no-repeat;}
+.biankuang4 {background:url(../images/liuzhou-index_13.jpg) repeat-y;}
+.biankuang5 {background:url(../images/liuzhou-index_13.jpg) repeat-y;}
+.biankuang6 {background:url(../images/liuzhou-index_66.png) no-repeat; height:6px;}
+
+.zhuce1 {background:url(../images/liuzhou-index_58.jpg) no-repeat; width:95px; height:28px; color: #FFFFFF; border:0px; font-size:16px; font-family:'΢���ź�'; cursor:pointer; font-weight:bolder;}
+.zhuce2 {background:url(../images/liuzhou-index_59.jpg) no-repeat;}
+.zhuce3 {background:url(../images/liuzhou-index_13.jpg) repeat-y; height:350px;}
+.zhuce4 {background:url(../images/liuzhou-index_60.jpg) no-repeat;}
+.zhuce5 {width:93px; height:21px; background:url(../images/liuzhou-index_62.jpg) no-repeat; border:1px; font-size:12px; color:#FFFFFF; cursor:pointer;}
+.zhuce6 {background:url(../images/liuzhou-index_61.jpg) no-repeat; width:302px; height:36px; color:#FFFFFF; font-size:18px; border:0px; font-size:18px; font-family:'΢���ź�'; font-weight:bold; cursor: pointer;}
+
+/*------index-------*/
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; color: #499c07; }
+.STYLE9 {font-size: 12px; color: #5a5b5b; }
+.STYLE10 {
+	color: #499c07;
+	font-weight: bold;
+	font-size: 16px;
+}
+.STYLE15 {font-family: "宋体"; font-size: 14px; font-weight: bold; color: #5a5b5b; }
+.STYLE21 {
+	font-size: 14px;
+	color: #499c07;
+	font-weight: bold;
+}
+.STYLE23 {font-size: 12px; font-family: "宋体"; }
+.STYLE27 {color: #499C07; font-weight: bold; font-size: 16px; }
+.STYLE28 {font-size: 16px}
+.STYLE31 {font-size: 14px; font-weight: bold; color: #666666; }
+.STYLE36 {
+	font-family: "微软雅黑";
+	color: #499c07;
+}
+.STYLE37 {
+	font-size: 14px;
+	color: #5a5b5b;
+}
+.STYLE38 {font-family: "宋体"}
+.STYLE39 {font-size: 14px; color: #5a5b5b; font-family: "宋体"; }
+.STYLE40 {color: #499c07; font-weight: bold; font-size: 16px; font-family: "宋体"; }
+.STYLE44 {font-family: "微软雅黑"}
+.STYLE46 {font-size: 14px}
+.STYLE47 {font-size: 12px; color: #5a5b5b; font-family: "宋体"; }
+.STYLE55 {color: #FF8E0E}
+.STYLE56 {font-size: 16px; font-family: "宋体"; color: #499c07;}
+.STYLE57 {color: #f3ad52}
+
+
+
+
+

@@ -1,0 +1,1404 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>健康网</title>
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+}
+
+h1 {
+	margin: 0;
+	padding: 20px 0;
+	font-size: 16px;
+}
+
+ol {
+	padding-left: 20px;
+	line-height: 130%;
+}
+
+#box {
+	width: 600px;
+	text-align: left;
+	margin: 0 auto;
+	padding-top: 80px;
+}
+
+#suggest,#suggest2 {
+	width: 200px;
+}
+
+.gray {
+	color: gray;
+}
+
+.ac_results {
+	background: #fff;
+	border: 1px solid #7f9db9;
+	position: absolute;
+	z-index: 10000;
+	display: none;
+}
+
+.ac_results ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ac_results li a {
+	white-space: nowrap;
+	text-decoration: none;
+	display: block;
+	color: #05a;
+	padding: 1px 3px;
+}
+
+.ac_results li {
+	border: 1px solid #fff;
+}
+
+.ac_over,.ac_results li a:hover {
+	background: #c8e3fc;
+}
+
+.ac_results li a span {
+	float: right;
+}
+
+.ac_result_tip {
+	border-bottom: 1px dashed #666;
+	padding: 3px;
+}
+
+@charset "UTF-8";
+
+body {
+	font-family: "宋体";
+	font-size: 12px;
+	margin: 0;
+}
+
+tr {
+	color: #2e2d2d;
+	font-size: 12px;
+}
+
+td {
+	color: #2e2d2d;
+	font-size: 12px;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #747475;
+	text-decoration: none;
+}
+
+a.a1 {
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+a.a1:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+a.a2 {
+	color: #fff;
+	text-decoration: none;
+}
+
+a.a2:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+a.a3 {
+	color: #5a5a5a;
+	text-decoration: none;
+}
+
+a.a3:hover {
+	color: #5a5a5a;
+	text-decoration: none;
+}
+
+.kong3 {
+	height: 3px;
+}
+
+.kong5 {
+	height: 5px;
+}
+
+.kong15 {
+	height: 15px;
+}
+
+.input {
+	border: 1px solid #b8b8b8;
+	height: 20px;
+	text-align: left;
+	width: 190px;
+}
+
+.input1 {
+	color: #cccccc;
+	line-height: 20px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.dl {
+	background: url("images/login_dl.jpg") repeat scroll 0 0
+		rgba(0, 0, 0, 0);
+	border: 0 none;
+	color: #ffffff;
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	vertical-align: middle;
+	width: 89px;
+}
+
+.hg {
+	height: 22px;
+	line-height: 22px;
+	padding: 3px 0;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.STYLE2 {
+	background-color: #f0f9fd;
+	color: #ff0000;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 5px;
+	vertical-align: middle;
+}
+
+.padding {
+	padding: 0 0 5px;
+}
+
+.nav1 {
+	background-image: url("images/nav1_center.jpg");
+	color: #0364dd;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: left;
+	text-indent: 5px;
+}
+
+.kong25 {
+	height: 25px;
+}
+
+.user {
+	font-size: 12px;
+	line-height: 20px;
+	padding: 0 15px 25px;
+	text-align: left;
+}
+
+.border1 {
+	border-left: 1px solid #bbcadf;
+	border-right: 1px solid #bbcadf;
+}
+
+.nav2 {
+	background-image: url("images/nav2_center.jpg");
+	color: #0364dd;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: left;
+	text-indent: 5px;
+}
+
+.tab_bj {
+	background-image: url("images/tabBJ_center.jpg");
+	height: 46px;
+	padding-bottom: 4px;
+	vertical-align: bottom;
+}
+
+.tab {
+	background-image: url("../images/tab_center.jpg");
+	font-size: 13px;
+	font-weight: bold;
+	height: 32px;
+	line-height: 32px;
+	padding-top: 2px;
+}
+
+.tab a {
+	color: #ffffff;
+}
+
+.tab a:hover {
+	color: #ff6800;
+}
+
+.tab1 {
+	background-image: url("images/tab1_center.jpg");
+	font-size: 13px;
+	font-weight: bold;
+	height: 32px;
+	line-height: 32px;
+	padding-top: 2px;
+}
+
+.tab1 a {
+	color: #0068b5;
+}
+
+.tab1 a:hover {
+	color: #ff6800;
+}
+
+.top_user {
+	color: #0464dd;
+	text-align: left;
+}
+
+.top_qy a {
+	color: #005588;
+	text-decoration: none;
+}
+
+.top_qy a:hover {
+	color: #747475;
+	text-decoration: none;
+}
+
+.set {
+	background-image: url("images/set_bj.jpg");
+	height: 0;
+	line-height: 30px;
+}
+
+.set a {
+	color: #0464dd;
+	text-decoration: none;
+}
+
+.border2 {
+	border-bottom: 1px solid #bbcadf;
+	border-left: 1px solid #bbcadf;
+	border-right: 1px solid #bbcadf;
+	padding-bottom: 5px;
+}
+
+.nav_content {
+	background-image: url("images/nav_content.jpg");
+	color: #006ea6;
+	font-size: 13px;
+	font-weight: bold;
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	text-indent: 4px;
+	vertical-align: middle;
+}
+
+.more {
+	background-image: url("images/nav_content.jpg");
+	color: #222;
+	height: 24px;
+	line-height: 24px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.border_content {
+	background-color: #d9e9fe;
+	border: 1px solid #a7d7f5;
+}
+
+.border_kong {
+	padding: 5px;
+}
+
+.border_text {
+	border: 1px solid #569cd2;
+	padding: 7px 5px 5px;
+}
+
+.text {
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.text a {
+	color: #323435;
+	height: 24px;
+	line-height: 24px;
+	text-decoration: none;
+}
+
+.text a:hover {
+	color: #f8862f;
+	text-decoration: none;
+}
+
+.text span {
+	background-position: center center;
+	background-repeat: no-repeat;
+	margin: 0 6px 0 4px;
+	vertical-align: middle;
+	width: 3px;
+}
+
+.jkzb {
+	height: 22px;
+	line-height: 22px;
+	padding-left: 2px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.STYLE1 {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.mmxg {
+	font-size: 14px;
+	height: 40px;
+	line-height: 40px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.mmxg_form {
+	border: 1px solid #5487c6;
+	height: 25px;
+	width: 220px;
+}
+
+#page {
+	clear: both;
+	height: 28px;
+	line-height: 28px;
+	margin-right: 5px;
+}
+
+#page span {
+	border: 1px solid #9aafe5;
+	padding: 2px 0;
+}
+
+#page span a {
+	color: #296cb3;
+	padding: 2px 5px;
+	text-decoration: none;
+}
+
+#page span a:hover {
+	background: none repeat scroll 0 0 #296cb3;
+	color: #fff;
+	padding: 2px 5px;
+	text-decoration: none;
+}
+
+#jktx {
+	border-bottom: 1px solid #c8e9ff;
+	font-size: 12px;
+	line-height: 28px;
+	text-align: left;
+	text-decoration: none;
+}
+
+#jktx a {
+	color: #333333;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+#jktx a:hover {
+	color: #0583c7;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.tgjc {
+	font-size: 13px;
+	font-weight: bold;
+	text-indent: 4px;
+}
+
+.form {
+	border-bottom: 1px solid #000000;
+	border-width: 0 0 1px;
+}
+
+.form1 {
+	border: 1px solid #1893b6;
+	height: 17px;
+	width: 90px;
+}
+
+.form2 {
+	border: 1px solid #1787ca;
+	height: 17px;
+	width: 90px;
+}
+
+.form3 {
+	border: 1px solid #c6c6c6;
+	height: 20px;
+	width: 154px;
+}
+
+.jkpg_title {
+	background-color: #91d1ff;
+	font-size: 13px;
+	font-weight: bold;
+	height: 28px;
+	line-height: 28px;
+	text-align: left;
+	text-indent: 5px;
+	vertical-align: middle;
+}
+
+.jkpg_title1 {
+	background-color: #ffffff;
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+	text-indent: 5px;
+	vertical-align: middle;
+}
+
+.jkpg_text {
+	float: left;
+	height: 25px;
+	width: 105px;
+}
+
+.jkpg_text1 {
+	float: left;
+	height: 25px;
+	width: 105px;
+}
+
+.ico {
+	background-image: url("images/ico_bj.jpg");
+	border-width: 0;
+	color: #ffffff;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	width: 81px;
+}
+
+.jz_title {
+	background-color: #cdecff;
+	color: #0376e7;
+	font-weight: bold;
+	height: 28px;
+	line-height: 28px;
+	text-align: left;
+	text-indent: 4px;
+	vertical-align: middle;
+}
+
+.bot_bk {
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.ico1 {
+	background-image: url("../images/ico_bj1.jpg");
+	border-width: 0;
+	color: #000;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	vertical-align: middle;
+	width: 56px;
+}
+
+#fk {
+	color: #000000;
+	font-size: 13px;
+}
+
+#fk a {
+	color: #000000;
+}
+
+#fk a:hover {
+	color: #0071cc;
+	text-decoration: underline;
+}
+
+.xx {
+	border-bottom: 1px dashed #dbdbdb;
+}
+
+.fk_pic {
+	background-image: url("images/l50_bg_s.gif");
+	height: 70px;
+	vertical-align: top;
+	width: 71px;
+}
+
+.fk_pic img {
+	margin-left: 9px;
+	margin-top: 3px;
+}
+
+a.a4 {
+	color: #005588;
+	text-decoration: none;
+}
+
+a.a4:hover {
+	color: #0071f0;
+	text-decoration: underline;
+}
+
+ul,li {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+
+#list {
+	width: 500px;
+}
+
+#list ul li {
+	clear: both;
+	height: 22px;
+	line-height: 22px;
+	width: 500px;
+}
+
+#list1 {
+	text-indent: 3px;
+	width: 500px;
+}
+
+#list1 ul li {
+	clear: both;
+	height: 22px;
+	line-height: 22px;
+	width: 500px;
+}
+
+.d_over td {
+	background-color: #ffffd7;
+	cursor: pointer;
+}
+
+.d_click td {
+	background-color: #f5f5f5;
+	cursor: pointer;
+}
+
+.xp_bk {
+	background-color: #e9f7fe;
+	height: 121px;
+	line-height: 121px;
+	text-align: center;
+	vertical-align: middle;
+	width: 103px;
+}
+
+.bt2 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.top_bot1 {
+	border-bottom: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
+}
+
+.bk2 {
+	border-color: #e4e4e4 #f0f0f0 #f0f0f0;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.title1 {
+	color: #0078ff;
+	font-size: 14px;
+	line-height: 25px;
+	text-align: left;
+	text-decoration: none;
+}
+
+.title1 a {
+	color: #0078ff;
+	line-height: 25px;
+	text-decoration: none;
+}
+
+.title1:hover {
+	color: #0078ff;
+	line-height: 25px;
+	text-decoration: none;
+}
+
+.hg1 {
+	color: #282828;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: left;
+}
+
+.biaoti {
+	font-size: 18px;
+	font-weight: bold;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.bt2 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+a.a6 {
+	color: #666666;
+	text-decoration: none;
+}
+
+a.a6:hover {
+	color: #f8862f;
+	text-decoration: none;
+}
+
+.bk_bot {
+	border-bottom: 1px solid #cccccc;
+}
+
+.STYLE11 {
+	color: #737373;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 28px;
+}
+
+.STYLE13 {
+	color: #12a0de;
+}
+
+.bot {
+	background-image: url("images/bottom.jpg");
+	color: #005588;
+	height: 29px;
+	line-height: 29px;
+	text-indent: 5px;
+	vertical-align: middle;
+}
+
+#loading {
+	background: none repeat scroll 0 0 #a0db0e;
+	color: #ffffff;
+	font-weight: bold;
+	height: 20px;
+	padding: 5px;
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 100px;
+}
+
+#loading div {
+	background: none repeat scroll 0 0 #f1ff4d;
+	height: 20px;
+	width: 1px;
+}
+
+.tab_menu {
+	list-style: none outside none;
+	overflow: hidden;
+	width: 210px;
+}
+
+.tab_menu li {
+	background: none repeat scroll 0 0 #093;
+	color: #fff;
+	cursor: pointer;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	width: 70px;
+}
+
+.tab_menu li.current {
+	background: none repeat scroll 0 0 #fff;
+	color: #333;
+}
+
+.tab_box {
+	height: 120px;
+	padding: 20px;
+}
+
+.tab_box .hide {
+	display: none;
+}
+
+.ui-tabs .ui-tabs-panel {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-width: 0;
+	display: block;
+	padding: 0;
+}
+
+.ui-tabs {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 0 none #fff;
+}
+
+.ui-tabs-nav {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 0 none #fff;
+}
+
+.ui-tabs .ui-tabs-panel {
+	background-color: #fff;
+	border: 1px solid #dddddd;
+}
+
+.ui-tabs .ui-tabs-nav li {
+	margin-bottom: 0;
+}
+
+.row {
+	background: none repeat scroll 0 0 #ffffff;
+}
+
+.row-odd {
+	background: none repeat scroll 0 0 #ffffd2;
+}
+
+.row-clk {
+	background: none repeat scroll 0 0 #efefef;
+}
+
+.icon-menus {
+	text-align: center;
+}
+
+.icon-menu {
+	float: left;
+	margin: 20px auto;
+}
+
+.icon-menus .nav {
+	width: 150px;
+}
+
+.icon-menus .family {
+	width: 350px;
+}
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.gray {
+	color: #798699;
+}
+
+.red {
+	color: #ff0000;
+}
+
+.pic_bj {
+	background-image: url("../images/cycle/pic_bj.jpg");
+	color: #333333;
+	font-size: 12px;
+	line-height: 20px;
+	padding: 18px 15px;
+	text-align: left;
+}
+
+.padding {
+	padding: 3px 0;
+}
+
+.years {
+	color: #aaaaaa;
+	font-size: 14px;
+	height: 25px;
+	padding: 3px 5px 0;
+	text-align: left;
+}
+
+.something {
+	background-color: #668cd9;
+	color: #ffffff;
+	line-height: 18px;
+	padding: 5px 0 5px 5px;
+	text-align: left;
+}
+
+.text14px {
+	font-size: 14px;
+}
+
+.xq {
+	color: #aaaaaa;
+	font-size: 14px;
+	height: 20px;
+	padding: 3px 5px 0 10px;
+	text-align: left;
+}
+</style>
+</head>
+<body>
+	<div id="loading" style="display: block;">加载中...</div>
+	<table width="1004" align="center" cellspacing="0" cellpadding="0"
+		border="0">
+		<tbody>
+			<tr>
+				<td background="images/banner_bj.jpg"><table width="992"
+						align="center" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td valign="middle" height="90" background="images/banner.jpg"
+									align="right"><table width="63%" cellspacing="0"
+										cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td width="71%" height="65" align="right"></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="63%" cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td width="68%" height="25" class="top_user"></td>
+												<td class="top_user" colspan="4"></td>
+											</tr>
+										</tbody>
+									</table></td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+			<tr>
+				<td height="6" bgcolor="eaf7ff"></td>
+			</tr>
+			<tr>
+				<td valign="top" align="center" bgcolor="eaf7ff" class="padding"><table
+						width="992" align="center" cellspacing="0" cellpadding="0"
+						border="0">
+						<tbody>
+							<tr>
+								<td valign="top" align="center" bgcolor="#FFFFFF"
+									class="border2">
+									<table width="100%" cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td width="20" align="center" class="set"><img
+													width="10" src="images/ico_set.jpg"></td>
+												<td align="left" class="set">您目前所在的位置：自助建档</td>
+											</tr>
+										</tbody>
+									</table> <span class="kong15"><br> </span>
+									<table width="95%" cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td valign="middle" height="40" class="STYLE1">个人基本信息</td>
+											</tr>
+											<tr>
+												<td valign="middle" height="1" bgcolor="#9cc0e4"
+													class="STYLE1"></td>
+											</tr>
+										</tbody>
+									</table> <span class="kong5"><br></span>
+									<form method="post" action="" name="creatForm"
+										id="creatForm">
+										<table width="95%" height="40" cellspacing="0" cellpadding="0"
+											border="0">
+											<tbody>
+												<tr>
+													<td width="8%" height="28" align="right">身份证：</td>
+													<td width="26%" align="left"><input name="idcard"
+														id="idcard" maxlength="18"><span id="idcardvar"><font
+															color="red">*</font></span></td>
+													<td width="8%" align="right">姓名：</td>
+													<td width="25%" align="left"><input
+														name="personname" id="personname"><font
+														color="red">*</font></td>
+													<td width="15%" align="right">选择归属社区医院:</td>
+													<td align="left"><input type="text"
+														id="manaunitName" name="manaunitName"
+														autocomplete="off" style="color: rgb(0, 0, 0);">
+														<input type="text"
+														id="manaunitid" name="manaunitid" autocomplete="off" style="display: none"><font
+														color="red">*</font>
+														<div class="ac_results" id="suggest"
+															style="top: 224px; left: 950.75px; display: none;">
+															<div class="gray ac_result_tip">请输入中文/拼音或者↑↓选择</div>
+															<ul></ul>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td height="28" align="right">市民卡：</td>
+													<td align="left"><input name="cardno"
+														id="cardno"><font color="red">*</font></td>
+													<td align="right">性别：</td>
+													<td align="left"><input type="radio" value="1"
+														checked="checked" id="sexcode1" name="sexcode"><label
+														for="sexcode1">男</label> <input type="radio" value="2"
+														id="sexcode2" name="sexcode"><label
+														for="sexcode2">女</label></td>
+													<td align="right">&nbsp;</td>
+													<td align="left">&nbsp;</td>
+												</tr>
+												<tr>
+													<td height="28" align="right">出生日期：</td>
+													<td align="left"><input type="text" id="birthday"
+														onclick="WdatePicker()" readonly="readonly" value=""
+														name="birthday"><font color="red">*</font></td>
+													<!-- cssStyle="width:150px" onClick="WdatePicker()" -->
+													<td align="right">工作单位：</td>
+													<td align="left"><input name="workplace"
+														id="workplace"></td>
+													<td align="right">&nbsp;</td>
+													<td align="left">&nbsp;</td>
+												</tr>
+												<tr>
+													<td height="28" align="right">本人电话：</td>
+													<td align="left"><input name="mobilenumber"
+														id="mobilenumber"><font color="red">*</font></td>
+													<td align="right">家庭电话：</td>
+													<td align="left"><input name="phonenumber"
+														id="phonenumber"></td>
+													<td align="right">&nbsp;</td>
+													<td align="left">&nbsp;</td>
+												</tr>
+												<tr>
+													<td height="28" align="right">联系人：</td>
+													<td align="left"><input name="contact"
+														id="contact"><font color="red">*</font></td>
+													<td align="right">联系电话：</td>
+													<td align="left" colspan="3"><input
+														name="contactphone" id="contactphone"><font
+														color="red">*</font></td>
+												</tr>
+												<tr>
+													<td align="right">联系地址：</td>
+													<td align="left"><input name="address"
+														id="address"><font color="red">*</font></td>
+													<td align="right">职业类别：</td>
+													<td align="left" colspan="3"><select id="workcode"
+														name="workcode">
+															<option value="0">国家机关、党群组织、企业、事业单位负责人</option>
+															<option value="1">专业技术人员</option>
+															<option value="3">办事人员和有关人员</option>
+															<option value="4">商业、服务业人员</option>
+															<option value="5">农、林、牧、渔、水利业生产人员</option>
+															<option value="7">生产、运输设备操作人员及有关人员</option>
+															<option value="X">军人</option>
+															<option value="Y">不便分类的其他从业人员</option>
+
+
+													</select></td>
+												</tr>
+												<tr>
+													<td height="28" align="right">国籍：</td>
+													<td align="left"><select
+														id="creatForm_ehr_nationalitycode"
+														name="nationalitycode">
+															<option value="CN">中国</option>
+															<option value="0">其它</option>
+
+
+													</select></td>
+													<td align="right">民族：</td>
+													<td align="left"><select id="nationcode"
+														name="nationcode">
+															<option value="01">汉族</option>
+															<option value="02">蒙古族</option>
+															<option value="03">回族</option>
+															<option value="04">藏族</option>
+															<option value="05">维吾尔族</option>
+															<option value="06">苗族</option>
+															<option value="07">彝族</option>
+															<option value="08">壮族</option>
+															<option value="09">布依族</option>
+															<option value="10">朝鲜族</option>
+															<option value="11">满族</option>
+															<option value="12">侗族</option>
+															<option value="13">瑶族</option>
+															<option value="14">白族</option>
+															<option value="15">土家族</option>
+															<option value="16">哈尼族</option>
+															<option value="17">哈萨克族</option>
+															<option value="18">傣族</option>
+															<option value="19">黎族</option>
+															<option value="20">傈僳族</option>
+															<option value="21">佤族</option>
+															<option value="22">畲族</option>
+															<option value="23">高山族</option>
+															<option value="24">拉祜族</option>
+															<option value="25">水族</option>
+															<option value="26">东乡族</option>
+															<option value="27">纳西族</option>
+															<option value="28">景颇族</option>
+															<option value="29">柯尔克孜族</option>
+															<option value="30">土族</option>
+															<option value="31">达斡尔族</option>
+															<option value="32">仫佬族</option>
+															<option value="33">羌族</option>
+															<option value="34">布朗族</option>
+															<option value="35">撒拉族</option>
+															<option value="36">毛南族</option>
+															<option value="37">仡佬族</option>
+															<option value="38">锡伯族</option>
+															<option value="39">阿昌族</option>
+															<option value="40">普米族</option>
+															<option value="41">塔吉克族</option>
+															<option value="42">怒族</option>
+															<option value="43">乌孜别克族</option>
+															<option value="44">俄罗斯族</option>
+															<option value="45">鄂温克族</option>
+															<option value="46">德昂族</option>
+															<option value="47">保安族</option>
+															<option value="48">裕固族</option>
+															<option value="49">京族</option>
+															<option value="50">塔塔尔族</option>
+															<option value="51">独龙族</option>
+															<option value="52">鄂伦春族</option>
+															<option value="53">赫哲族</option>
+															<option value="54">门巴族</option>
+															<option value="55">珞巴族</option>
+															<option value="56">基诺族</option>
+
+
+													</select></td>
+													<td align="right">血型：</td>
+													<td align="left"><select id="bloodtypecode"
+														name="bloodtypecode">
+															<option value="1">A型</option>
+															<option value="2">B型</option>
+															<option value="0">O型</option>
+															<option value="3">AB型</option>
+															<option value="5">不详</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td height="28" align="right">RH血型：</td>
+													<td align="left"><select id="rhbloodcode"
+														name="rhbloodcode">
+															<option value="2">RH阳性</option>
+															<option value="1">RH阴性</option>
+															<option value="3">不详</option>
+													</select></td>
+													<td align="right">文化程度：</td>
+													<td align="left"><select id="educationcode"
+														name="educationcode">
+															<option value="10">研究生</option>
+															<option value="11">研究生毕业</option>
+															<option value="19">研究生肄业</option>
+															<option value="20">大学本科</option>
+															<option value="21">大学毕业</option>
+															<option value="28">相当大学毕业</option>
+															<option value="29">大学肄业</option>
+															<option value="30">大学专科和专科学校</option>
+															<option value="31">专科毕业</option>
+															<option value="38">相当专科毕业</option>
+															<option value="39">专科肄业</option>
+															<option value="40">中等专业学校或中等技术学校</option>
+															<option value="41">中专毕业</option>
+															<option value="42">中技毕业</option>
+															<option value="48">相当中专或中技毕业</option>
+															<option value="49">中专或中技肄业</option>
+															<option value="50">技工学校</option>
+															<option value="51">技工学校毕业</option>
+															<option value="59">技工学校肄业</option>
+															<option value="60">高中</option>
+															<option value="61">高中毕业</option>
+															<option value="62">职业高中毕业</option>
+															<option value="63">农业高中毕业</option>
+															<option value="68">相当高中毕业</option>
+															<option value="69">高中肄业</option>
+															<option value="70">初中</option>
+															<option value="71">初中毕业</option>
+															<option value="72">职业初中毕业</option>
+															<option value="73">农业初中毕业</option>
+															<option value="78">相当初中毕业</option>
+															<option value="79">初中肄业</option>
+															<option value="80">小学</option>
+															<option value="81">小学毕业</option>
+															<option value="88">相当小学毕业</option>
+															<option value="89">小学肄业</option>
+															<option value="90">文盲或半文盲</option>
+															<option value="91">未分类</option>
+													</select></td>
+													<td height="28" align="right">邮政编码：</td>
+													<td align="left"><input name="zipcode"
+														id="zipcode"></td>
+												</tr>
+												<tr>
+													<td height="28" align="right">婚姻状况：</td>
+													<td align="left"><select id="maritalstatuscode"
+														name="maritalstatuscode">
+															<option value="1">未婚</option>
+															<option value="2">已婚</option>
+															<option value="4">丧偶</option>
+															<option value="3">离婚</option>
+															<option value="9">未说明的婚姻状况</option>
+													</select></td>
+													<td align="right">保险类别：</td>
+													<td align="left"><select id="insurancecode"
+														name="insurancecode">
+															<option value="1">市级医保</option>
+															<option value="2">省级医保</option>
+															<option value="3">县市医保</option>
+															<option value="4">商业医疗保险</option>
+															<option value="5">贫困救助</option>
+															<option value="6">全自费</option>
+															<option value="7">其他</option>
+													</select></td>
+													<td align="right">医保类别：</td>
+													<td align="left"><select id="insurancetype"
+														name="insurancetype">
+															<option value="1">离休医保险种</option>
+															<option value="2">子女统筹医保险种</option>
+															<option value="3">老居民医保险种</option>
+															<option value="4">大学生医保险种</option>
+															<option value="5">少儿医保险种</option>
+															<option value="6">非从业医保险种</option>
+															<option value="7">新农合医保险种</option>
+															<option value="8">普通职工医保险种</option>
+															<option value="9">双低医保(主要指农民工，低缴费低保障)</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td height="28" align="right">电子邮件：</td>
+													<td align="left"><input name="email"
+														id="email"></td>
+													<td align="right">户籍标志：</td>
+													<td align="left"><select id="registeredpermanent"
+														name="registeredpermanent">
+															<option value="11">户籍（本区）</option>
+															<option value="12">户籍（非本区）</option>
+															<option value="21">非户籍（本市流动）</option>
+															<option value="22">非户籍（本省流动）</option>
+															<option value="23">非户籍（外省流动）</option>
+													</select></td>
+													<td align="right">参加工作日期：</td>
+													<td align="left"><input type="text"
+														onclick="WdatePicker()" style="width:150px"
+														id="startworkdate" value="" name="startworkdate"></td>
+												</tr>
+												<tr>
+													<td height="50" align="right">&nbsp;</td>
+													<td align="center" colspan="5"><label> <input
+															type="submit" value="确 定" class="ico" name="Submit" id="Submit" onclick="return checkForm()">
+													</label></td>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="1004" align="center" cellspacing="0" cellpadding="0"
+		border="0">
+		<tbody>
+			<tr>
+				<td align="center"><!-- 主管单位：中山市卫生局<br>
+					&#12288;主办及维护单位：中山市卫生信息中心 <br> 地址：中山市长江路70号&#12288;邮编：528400 <br>
+					承办单位：创业软件 <br> 备案证编号：浙ICP备 05079099 -->
+				</td>
+			</tr>
+			<tr>
+				<td align="center" class="bot">技术支持：杭州创业软件</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript" src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/ChinaIDCard.js"></script>
+	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/base/j.suggest.js" ></script>
+	<script type="text/javascript" src="js/base/jquery.form.js" ></script>
+	<script type="text/javascript" src="js/base/jquery.validate.js"></script>
+	<script type="text/javascript">
+
+		var manaunits = new Array();
+		var manaunitshot = new Array();
+		var exist = false;
+		
+		function checkForm() {
+			return true
+		}
+		
+		//检查是否申请
+		function regcheckIDCardREG() {
+			var v = $("#idcard").val()
+			
+		}
+		$("#idcard").blur(function (){regcheckIDCardREG()});
+
+	
+		//存在的处理
+		function doMouseoutResult(data) {
+			if (data.success) {
+				$("#idcardvar").empty();
+			} else {
+				$("#idcardvar").html(
+						"&lt;span class='red'&gt;该身份证号码已被申请&lt;/span&gt;");
+				exist= true
+			}
+		}
+		//填充机构
+		function manaunitResult(data) {
+			var list = data.body;
+			$.each(list, function(i, o) {
+				manaunits[i] = new Array(o.MANAUNITID, o.MANAUNITNAME, o.PYCODE);
+			});
+			//自动内容提示
+			$("input[id='manaunitName']").suggest(manaunits, {
+				hot_list : manaunitshot,
+				attachObject : "#suggest",
+				dataContainer:"#manaunitid"
+			});
+			$("#loading").hide();
+		}
+		
+		function submitResult(data) {
+			if (data.success) {
+				alert(data.message);
+				location.href = target_url;
+			} else {
+				alert(data.message);
+			}
+		}
+		function birthday() {
+			if($("input[id='idcard']").val()==null){
+				return
+			}
+			$("input[id='birthday']").val(
+					$("input[id='idcard']").val().substring(6, 10)
+							+ "-"
+							+ $("input[id='idcard']").val().substring(10,
+									12)
+							+ "-"
+							+ $("input[id='idcard']").val().substring(12,
+									14));
+		}
+
+		//绑定提交事件
+		function ajaxSubmit() {
+			$("#creatForm").ajaxSubmit({  
+	            type: 'post',  
+	            url: "../create.ehr" ,  
+	            dataType : "json", 
+	            success: function(data){  
+	            	if (data["code"] == 200) {
+	            		alert( "提交成功!!");  
+	            		return;
+	            	}
+	            	else{
+	            		alert(data["x-response-msg"] );  
+	            		return;
+	            	}
+	            },  
+	            cache : "false", 
+	            error: function(XmlHttpRequest, textStatus, errorThrown){  
+	                alert( "提交失败!!");  
+	            }  
+	        }); 
+		}
+		
+		//初始处理
+		$(document).ready(function() {
+			//回车事件
+			/* document.onkeydown = function(e) {
+				var ev = document.all ? window.event : e;
+				if (ev.keyCode == 13) {
+					$("#Submit").click(); 
+				}
+			} */
+				//身份证验证插件
+			   jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+			        return this.optional(element) || isChinaIDCard(value);
+			    }, "请正确输入您的身份证号码");
+
+			//页面校验
+			$("#creatForm").validate({
+				rules : {
+					"idcard" : {required : true,	minlength: 18,maxlength: 18,isIdCardNo:true},
+					"zipcode":{minlength: 6,maxlength:6,digits: true},
+					"email":{email : true},
+					"birthday":{date : true},
+					"startworkdate":{date : true},
+					"personname" : "required",
+					"manaunitid" : "required",
+					"manaunitName" : "required",
+					"cardno" : "required",
+					"birthday" : "required",
+					"mobilenumber" : {
+						required : true,
+						digits : true
+					},
+					"contact" : "required",
+					"contactphone" : {
+						required : true,
+						digits : true
+					},
+					"address" : "required"
+				},
+				messages : {},
+				// specifying a submitHandler prevents the default submit, good for the demo  
+                submitHandler: function() {  
+                	ajaxSubmit();  
+               		return false;  
+                },  
+                errorElement: "em",  
+                success: function(label) { 
+                }
+			});
+			//请求机构字典
+			var url = "../getManunit.ehr"
+			doAjax(url, null, "json", function(data, textStatus) {
+				manaunitResult(data)
+			});
+		})
+	</script>
+</body>
+</html>

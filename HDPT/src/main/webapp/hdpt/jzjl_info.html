@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script language="javascript" src="js/base/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<link href="css/Ipt_Leave_style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+		var dcid=selId
+		$(".opears").css({"width":"78%","margin-left": "2px"});
+		var url = host + '/medical/ClinicRecordByDCID?vk=UUID&DCID='+dcid
+		var param = {
+			'url' : url
+		};
+
+		doAjax("getdata.px", param, "json", function(data, textStatus) {
+			if (data["code"] == 200) {
+				var jsonData = data.body;
+				$("#VisitID").html(jsonData.VisitID);
+				$("#JZRQ").html(jsonData.JZRQ);
+				$("#KH").html(jsonData.KH);
+				$("#KLX").html(jsonData.KLX);
+				$("#JZKSBM").html(jsonData.JZKSBM);
+				$("#JZKSMC").html(jsonData.JZKSMC);
+				$("#ZDBM").html(jsonData.ZDBM);
+				$("#ZDMC").html(jsonData.ZDMC);
+				$("#ZS").html(jsonData.ZS);
+				$("#ZZMS").html(jsonData.ZZMS);
+			}else {
+				alert(data["x-response-msg"])
+			}
+		});
+		
+  	});
+  
+  </script>
+  <body>
+	<p style="height:28px; line-height:28px; font-size:14px; text-indent:5px; font-weight:bold;"></p>
+		<div class="opears">
+			<dl class="jiancha">
+				<dd style="display:block;">
+					<table width="98%" border="0" cellspacing="0" cellpadding="0"
+						class="table03">
+						<tbody>
+							<tr>
+								<td width="10%"><strong>就诊流水号：</strong>
+								</td>
+								<td width="35%" id="VisitID"></td>
+								<td width="10%"><strong>就诊日期：</strong>
+								</td>
+								<td id="JZRQ"></td>
+							</tr>
+							<tr>
+								<td><strong>卡号：</strong>
+								</td>
+								<td id="KH"></td>
+								<td><strong>卡类型：</strong>
+								</td>
+								<td id="KLX"></td>
+							</tr>
+							<tr>
+								<td><strong>就诊机构：</strong>
+								</td>
+								<td id="JZKSBM"></td>
+								<td><strong>就诊科室：</strong>
+								</td>
+								<td id="JZKSMC"></td>
+							</tr>
+							<tr>
+								<td><strong>诊断编码：</strong>
+								</td>
+								<td id="ZDBM"></td>
+								<td><strong>诊断名称：</strong>
+								</td>
+								<td id="ZDMC"></td>
+							</tr>
+							<tr>
+								<td><strong>主诉：</strong>
+								</td>
+								<td id="ZS"></td>
+								<td><strong>症状描述：</strong>
+								</td>
+								<td id="ZZMS"></td>
+							</tr>
+						</tbody>
+					</table>
+				</dd>
+			</dl>
+
+		</div>
+  </body>
+</html>

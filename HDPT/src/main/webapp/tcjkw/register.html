@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>注册信息</title>
+    <link href="style/styel.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../hdpt/js/base/jquery.js"></script>
+    <script type="text/javascript" src="../hdpt/js/common.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/ChinaIDCard.js"></script>
+    <script type="text/javascript" src="../hdpt/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../hdpt/js/base/j.suggest.js" ></script>
+    <script type="text/javascript" src="../hdpt/js/base/jquery.form.js" ></script>
+    <script type="text/javascript" src="../hdpt/js/base/jquery.validate.js"></script>
+    <script type="text/javascript" src="../hdpt/js/jmhd.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //身份证验证插件
+            jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+                return this.optional(element) || isChinaIDCard(value);
+            }, "请正确输入您的身份证号码");
+
+            jQuery.validator.addMethod("regexPassword", function(value, element) {
+                return this.optional(element) || /^(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-z]).*$/.test(value);
+            }, "密码由6-20个字母、数字组成");
+
+            jQuery.validator.addMethod("userExist", function(value, element) {
+                if(value.length != 11){
+                    return false;
+                }
+                var args = {"phoneno": value};
+                var result = false;
+                $.jkw.query({
+                    "target_url" : "../checkuser.ehr",
+                    "args" : args,
+                    "type" : 0,
+                    "comeback" :function (data) {
+                        if (data.code == 200) {
+                            result = true;
+                        } else {
+                            result= false;
+                        }
+                    }
+                });
+                return result;
+            }, "该手机号码已被申请");
+
+            jQuery.validator.addMethod("birthdayChk", function(value, element) {
+                if ($("#cardtype").val() == '01') {
+                    var iIdNo = $("#idcard").val();
+                    var tmpStr = "";
+                    tmpStr = iIdNo.substring(6, 14);
+                    tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6);
+                    return tmpStr == value;
+                }
+                return true;
+            }, "出生日期与身份证不符");
+
+            //页面校验
+            $("#registForm").validate({
+                rules : {
+                    "idcard" : {required : true,	minlength: 18,maxlength: 18,isIdCardNo:true},
+                    "verify" : {required : true,	minlength: 6,maxlength: 6},
+                    "birthday":{date : true, required : true, birthdayChk: true},
+                    "username" : "required",
+                    "password": {required: true,regexPassword: true},
+                    "password_again": {
+                        equalTo: "#password"
+                    },
+                    "phoneno" : {
+                        minlength: 11,
+                        maxlength: 11,
+                        required : true,
+                        digits : true,
+                        userExist: true
+                    }
+                },
+                messages : {
+                    "password":
+                    {
+                        required: '请输入密码',
+                        regexPassword: '请输入6-20个字母、数字、下划线'
+                    }
+
+                },
+                // specifying a submitHandler prevents the default submit, good for the demo
+                submitHandler: function() {
+                    ajaxSubmit();
+                    return false;
+                },
+                errorElement: "span",
+                success: function(label) {
+                }
+            });
+        });
+
+        //绑定提交事件
+        function ajaxSubmit() {
+            $("#registForm").ajaxSubmit({
+                type: 'post',
+                url: "../register.ehr" ,
+                dataType : "json",
+                success: function(data){
+                    if (data["code"] == 200) {
+                        alert( "注册成功!!");
+                        location.href = "index.html";
+                        return;
+                    }
+                    else{
+                        alert(data["x-response-msg"] );
+                        return;
+                    }
+                },
+                cache : "false",
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+                    alert( "提交失败!!");
+                }
+            });
+        }
+    </script>
+</head>
+
+<body style="padding-bottom: 50px;">
+<div class="member-box">
+    <div class="menber">
+        <div class="top"><a href="index.html">返回首页</a></div>
+        <div class="top_logo"></div>
+    </div>
+</div>
+<div class="main-box">
+    <form action="../register.ehr" id="registForm" name="registForm" method="post">
+    <div class="reg-title"><a href="#" class="reg-t">注册信息</a></div>
+    <ul class="reg-box">
+        <li><label class="reglab-ico">手机号码：</label><input name="phoneno" id="phoneno" type="text" class="reginfo"/>
+        </li>
+        <li><label>短信验证：</label><input name="" type="text" class="reginfo"/><span><a href="javascript:void(0)">获取短信</a></span></li>
+        <li><label>姓名：</label><input name="username" id="username" type="text" class="reginfo"/>
+        </li>
+        <li><label>性别：</label>
+            <select id="sex" name="sex" class="reginfo">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </li>
+        <li><label>证件类型：</label>
+            <select id="cardtype" name="cardtype" class="reginfo">
+                <option value="01">身份证</option>
+                <option value="03">护照</option>
+                <option value="06">港澳通行证</option>
+                <option value="07">台湾通行证</option>
+            </select>
+        </li>
+        <li><label>证件号码：</label><input name="idcard" id="idcard" type="text" class="reginfo"/></li>
+        <li><label>出生日期：</label>
+            <input type="text" id="birthday" onclick="WdatePicker()" readonly="readonly" value="" name="birthday" class="reginfo">
+        </li>
+        <li><label class="reglab-ico">登录密码：</label><input name="password" id="password" type="password" class="reginfo"/></li>
+        <li><label class="reglab-ico">再次输入：</label><input name="password_again" id="password_again" type="password" class="reginfo"/></li>
+        <li><label>国籍：</label>
+            <select id="nationality" name="nationality" class="reginfo">
+                <option value="1">中国大陆</option>
+                <option value="2">中国港澳</option>
+                <option value="3">中国台湾</option>
+                <option value="9">海外同胞</option>
+            </select>
+        </li>
+        <!--<li><label>输入验证码：</label><input name="" type="text" class="reginfo-yzm"/><a href="javascript:void(0)" class="a-yzm"><img
+                src='../validateCode.ehr'title='看不清楚，换一张'onclick="this.src='../validateCode.ehr?'+new Date()" width="94" height="30"/></a></li>-->
+    </ul>
+
+    <div class="reg-under">
+        <!--<div class="reg-che"><input name="" type="checkbox" value="" class="reg-check"/><span>已阅读同意</span></div>-->
+        <div><input name="submitBtn" id="submitBtn" type="submit" value="注册" class="reg-btn"/></div>
+    </div>
+    </form>
+</div>
+</body>
+</html>
